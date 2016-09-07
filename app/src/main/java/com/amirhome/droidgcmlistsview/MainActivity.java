@@ -1,5 +1,6 @@
 package com.amirhome.droidgcmlistsview;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Can you help me please..", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -136,9 +137,16 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View viewClicked, int pos, long id) {
                 TextView textView = (TextView) viewClicked;
                 String message = textView.getText().toString() + " " + pos;
-                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+                detailOrder(pos);
             }
 
         });
+    }
+
+    private void detailOrder(int pos) {
+        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+        intent.putExtra("param ", pos);
+        startActivity(intent);
     }
 }
