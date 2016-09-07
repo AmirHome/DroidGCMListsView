@@ -8,8 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amirhome.droidgcmlistsview.Data.Cart;
@@ -121,8 +123,22 @@ public class MainActivity extends AppCompatActivity {
         if (names.size() > 0) {
             ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, names);
             lv.setAdapter(adapter);
-        }else {
+
+            itemClick();
+        } else {
             Toast.makeText(MainActivity.this, "No data", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void itemClick() {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View viewClicked, int pos, long id) {
+                TextView textView = (TextView) viewClicked;
+                String message = textView.getText().toString() + " " + pos;
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+
+        });
     }
 }
