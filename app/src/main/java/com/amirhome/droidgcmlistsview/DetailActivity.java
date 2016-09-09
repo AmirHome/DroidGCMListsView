@@ -13,8 +13,8 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         Intent intent = getIntent();
-        int position = intent.getIntExtra("No",0);
+        String id = intent.getStringExtra("id");
         TextView displayNumber = (TextView) findViewById(R.id.textViewOrderNo);
-        displayNumber.setText("" + position);
+        displayNumber.setText("Order:  " + id);
     }
 }
