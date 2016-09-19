@@ -33,13 +33,14 @@ public class MainActivity extends AppCompatActivity {
 
     final static String DB_URL = "https://droidgcmlistsview.firebaseio.com/";
 
+    static String rCode;
+
     private static final int PERMISSIONS_REQUEST_READ_PHONE_STATE = 777;
     private TelephonyManager mTelephonyManager;
 
     Firebase fire;
     ListView lv;
     ArrayList<String> names = new ArrayList<>();
-    private String rCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -212,7 +213,6 @@ public class MainActivity extends AppCompatActivity {
         mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         String deviceid = mTelephonyManager.getDeviceId();
         deviceid = "imei0000012";
-//        deviceid = "";
         return deviceid;
     }
 

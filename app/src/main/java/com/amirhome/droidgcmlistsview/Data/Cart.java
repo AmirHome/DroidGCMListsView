@@ -8,8 +8,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Cart {
     private String name;
+    private String address;
+    private String customer;
+    private String delivery_date;
     private String description;
-
+    private String foods;
+    private String order_date;
+    private String status_delivery;
+    private String status_order;
     public Cart() {
 
     }
