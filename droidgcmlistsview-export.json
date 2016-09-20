@@ -41,8 +41,8 @@
         "title" : "Chunky Monkey"
       } ],
       "order_date" : "09/08/2016 17:52",
-      "status_delivery" : "Reject",
-      "status_order" : "Reject"
+      "status_delivery" : "0",
+      "status_order" : "0"
     },
     "OrderNo011" : {
       "address" : "Mecidiyeköy Mah. Dereboyu Cad. No:67/B, Mecidiyeköy Istanbul/Şişli",
@@ -68,8 +68,8 @@
         "title" : "Chunky Monkey"
       } ],
       "order_date" : "09/08/2016 17:51",
-      "status_delivery" : "Reject",
-      "status_order" : "Reject"
+      "status_delivery" : "0",
+      "status_order" : "0"
     },
     "OrderNo022" : {
       "address" : "Mecidiyeköy Mah. Dereboyu Cad. No:67/B, Mecidiyeköy Istanbul/Şişli",
@@ -95,7 +95,7 @@
         "title" : "Chunky Monkey"
       } ],
       "order_date" : "09/08/2016 17:50",
-      "status_delivery" : "Reject",
+      "status_delivery" : "0",
       "status_order" : "Reject"
     },
     "OrderNo033" : {
@@ -123,7 +123,34 @@
       } ],
       "order_date" : "09/08/2016 17:49",
       "status_delivery" : "Reject",
-      "status_order" : "Reject"
+      "status_order" : "accept_15"
+    },
+    "OrderNo044" : {
+      "address" : "Mecidiyeköy Mah. Dereboyu Cad. No:67/B, Mecidiyeköy Istanbul/Şişli",
+      "customer" : "Shaahin",
+      "delivery_date" : "",
+      "description" : "description",
+      "foods" : [ {
+        "cat" : "pitza",
+        "contents" : {
+          "Caption Contents" : [ "Tomaten", "Käse", "Schinken", "Salami" ]
+        },
+        "info" : "Köstlich cremiges Schokoladeneis mit saftigen Schokobrownies",
+        "options" : {
+          "Caption Options" : [ "Ananas", "Artischocken" ]
+        },
+        "quantity" : 2,
+        "radios" : [ {
+          "group1" : [ "normal" ]
+        }, {
+          "group2" : [ "Spaghetti" ]
+        } ],
+        "size" : "150ml",
+        "title" : "Chunky Monkey"
+      } ],
+      "order_date" : "09/19/2016 15:50",
+      "status_delivery" : "0",
+      "status_order" : "accept_45"
     }
   },
   "imei1111112" : {

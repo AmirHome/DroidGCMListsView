@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +26,6 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void addData(String name, String desc) {
         Cart c = new Cart();
-        c.setName(name);
+        c.setOrderId(name);
         c.setDescription(desc);
 
         fire.child("Cart").push().setValue(c);
@@ -115,31 +115,39 @@ public class MainActivity extends AppCompatActivity {
     private void retrieveData() {
 
 
-        fire.addListenerForSingleValueEvent(new ValueEventListener() {
+/*        fire.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                /*for (DataSnapshot child: dataSnapshot.getChildren()) {
+                *//*for (DataSnapshot child: dataSnapshot.getChildren()) {
                     Log.i("MainActivity", child.getKey());
-                }*/
-                getUpdates(dataSnapshot);
+                }*//*
+                //getUpdates(dataSnapshot);
             }
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 Log.e("MainActivity", "onCancelled", firebaseError.toException());
             }
-        });
+        });*/
 
 
-/*        fire.addChildEventListener(new ChildEventListener() {
+        fire.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                getUpdates(dataSnapshot);
+                //Log.d("MainActivity", "onChildAdded "+ s);
+
+
+
+                getUpdates(dataSnapshot ,"A");
+                Log.d("MainActivity", "onChildAdded");
+
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                getUpdates(dataSnapshot);
+                Log.d("MainActivity", "onChildChanged "+ dataSnapshot.getKey());
+
+                //getUpdates(dataSnapshot, "C");
             }
 
             @Override
@@ -156,20 +164,41 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(FirebaseError firebaseError) {
 
             }
-        });*/
+        });
     }
 
-    private void getUpdates(DataSnapshot ds) {
-        names.clear();
+    private void getUpdates(DataSnapshot ds, String status) {
 
-        for (DataSnapshot data : ds.getChildren()) {
-            Cart c = new Cart();
+        Cart cartDetails = ds.getValue(Cart.class);
+        String orderId = ds.getKey();
+        //String description = cartDetails.getDescription();
 
-//            c.setName(data.getValue(Cart.class).getName());
-            c.setName(data.getKey());
-            names.add(c.getName());
 
+
+/*        Cart c = new Cart();
+        c.setName(ds.getKey());
+        c.setDescription(ds.getKey());
+
+        Log.d("MainActivity", c.getName());*/
+
+        names.add(orderId);
+
+        if ( cartDetails.status_order.equals( "0" ) )
+        {
+            // order_date
+            Log.d("MainActivity", cartDetails.status_order);
+            Handler handler = new Handler();
+
+            final Runnable r = new Runnable() {
+                public void run() {
+                    Log.d("MainActivity", "onChildAdded Handler");
+                    //handler.postDelayed(this, 1000);
+                }
+            };
+
+            handler.postDelayed(r, 10000);
         }
+
         if (names.size() > 0) {
             ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, names);
             lv.setAdapter(adapter);
