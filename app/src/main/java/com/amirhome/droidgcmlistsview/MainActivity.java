@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         Firebase.setAndroidContext(this);
 //        fire = new Firebase(DB_URL);
         fire = new Firebase(DB_URL + rCode);
-
+        names.clear();
         this.retrieveData();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -118,10 +118,24 @@ public class MainActivity extends AppCompatActivity {
         fire.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                /*for (DataSnapshot child: dataSnapshot.getChildren()) {
-                    Log.i("MainActivity", child.getKey());
+/*                names.clear();
+
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Cart c = new Cart();
+
+                    c.setName(data.getKey());
+                    names.add(c.getName());
+
+                }
+                if (names.size() > 0) {
+                    ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, names);
+                    lv.setAdapter(adapter);
+
+                    itemClick();
+                } else {
+                    Toast.makeText(MainActivity.this, "No data", Toast.LENGTH_SHORT).show();
                 }*/
-                getUpdates(dataSnapshot);
+//                getUpdates(dataSnapshot);
             }
 
             @Override
@@ -131,20 +145,45 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-/*        fire.addChildEventListener(new ChildEventListener() {
+        fire.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                getUpdates(dataSnapshot);
+//                getUpdates(dataSnapshot);
+                Log.d("MainActivity","onChildAdded-getKey " + dataSnapshot.getKey());
+
+//                Cart test = dataSnapshot.getValue(Cart.class);
+                //Log.d("MainActivity","onChildAdded " + test.title);
+
+//                names.clear();
+
+                //for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Cart c = new Cart();
+
+                    c.setName(dataSnapshot.getKey());
+                    names.add(c.getName());
+
+                //}
+                if (names.size() > 0) {
+                    ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, names);
+                    lv.setAdapter(adapter);
+
+                    itemClick();
+                } else {
+                    Toast.makeText(MainActivity.this, "No data", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                getUpdates(dataSnapshot);
+//                getUpdates(dataSnapshot);
+//                Log.d("MainActivity","onChildChanged " + dataSnapshot.getKey());
+                //Log.d("MainActivity","onChildChanged s " + s);
             }
+
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                //Log.d("MainActivity","onChildAdded " + dataSnapshot.getKey());
             }
 
             @Override
@@ -156,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(FirebaseError firebaseError) {
 
             }
-        });*/
+        });
     }
 
     private void getUpdates(DataSnapshot ds) {
