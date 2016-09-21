@@ -1,6 +1,10 @@
 package com.amirhome.droidgcmlistsview;
 
 import android.Manifest;
+import android.app.ActivityManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -54,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
         lv = (ListView) findViewById(R.id.lv);
         Firebase.setAndroidContext(this);
-//        fire = new Firebase(DB_URL);
         fire = new Firebase(DB_URL + rCode);
 
         this.retrieveData();
@@ -63,13 +66,19 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 
+
+               /* for (ActivityManager.RunningAppProcessInfo service : manager.getRunningAppProcesses()) {
+                    Log.d("MainActivity" , service.processName);
+                }*/
                 String msg = "Can you help me please..";
                 Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
     }
+
 
     private void SetImeiCode() {
         if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
@@ -115,32 +124,10 @@ public class MainActivity extends AppCompatActivity {
     private void retrieveData() {
 
 
-/*        fire.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                *//*for (DataSnapshot child: dataSnapshot.getChildren()) {
-                    Log.i("MainActivity", child.getKey());
-                }*//*
-                //getUpdates(dataSnapshot);
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                Log.e("MainActivity", "onCancelled", firebaseError.toException());
-            }
-        });*/
-
-
         fire.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                //Log.d("MainActivity", "onChildAdded "+ s);
-
-
-
                 getUpdates(dataSnapshot ,"A");
-                Log.d("MainActivity", "onChildAdded");
-
             }
 
             @Override
@@ -183,20 +170,16 @@ public class MainActivity extends AppCompatActivity {
 
         names.add(orderId);
 
+
         if ( cartDetails.status_order.equals( "0" ) )
         {
+            Intent service = new Intent(getBaseContext(), ServiceOrderControl.class);
+            service.putExtra("ServiceOrderControl.data", orderId);
+
+            startService(service);
             // order_date
-            Log.d("MainActivity", cartDetails.status_order);
-            Handler handler = new Handler();
+            Log.d("MainActivity", orderId + " " + cartDetails.status_order);
 
-            final Runnable r = new Runnable() {
-                public void run() {
-                    Log.d("MainActivity", "onChildAdded Handler");
-                    //handler.postDelayed(this, 1000);
-                }
-            };
-
-            handler.postDelayed(r, 10000);
         }
 
         if (names.size() > 0) {

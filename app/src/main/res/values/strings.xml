@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">DroidGCMListsView</string>
     <string name="action_settings">Settings</string>
+    <string name="notificationtitle">Note Title</string>
+    <string name="notificationtext">Note Text</string>
+    <string name="notificationticker">Notification Ticker</string>
 </resources>
