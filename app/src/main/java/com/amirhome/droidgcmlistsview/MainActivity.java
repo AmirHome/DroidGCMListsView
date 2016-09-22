@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //get and set imei code = restaurant code
-        this.SetImeiCode();
+        this.setImeiCode();
 
         lv = (ListView) findViewById(R.id.lv);
         Firebase.setAndroidContext(this);
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void SetImeiCode() {
+    private void setImeiCode() {
         if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
@@ -157,7 +157,8 @@ public class MainActivity extends AppCompatActivity {
         if ( cartDetails.status_order.equals( "0" ) )
         {
             Intent service = new Intent(getBaseContext(), ServiceOrderControl.class);
-            service.putExtra("ServiceOrderControl.data", orderId);
+            service.putExtra("ServiceOrderControl.orderId", orderId);
+            service.putExtra("ServiceOrderControl.order_date", cartDetails.order_date);
 
             startService(service);
 

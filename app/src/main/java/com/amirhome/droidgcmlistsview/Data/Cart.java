@@ -13,7 +13,7 @@ public class Cart {
     private String delivery_date;
     private String description;
     private String foods;
-    private String order_date;
+    public String order_date;
     private String status_delivery;
     public String status_order;
 

@@ -31,57 +31,61 @@ public class ServiceOrderControl extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-//        return super.onStartCommand(intent, flags, startId);
+        Firebase.setAndroidContext(this);
 
-        final String orderId = intent.getStringExtra("ServiceOrderControl.data");
+        final String orderId = intent.getStringExtra("ServiceOrderControl.orderId");
+        final String orderDate = intent.getStringExtra("ServiceOrderControl.order_date");
+        // The new order came
+        setNotification();
+        // Set Timer if status == 0
+        setTimerStatusCtrl(orderId,orderDate);
 
         Toast.makeText(this, "Service Started" + Integer.toString(startId) + " " + orderId, Toast.LENGTH_LONG).show();
-        Handler handler = new Handler();
-        final Runnable r = new Runnable() {
-            public void run() {
-                addData(orderId);
-
-                //stopService(new Intent(getBaseContext(), ServiceOrderControl.class));
-                //handler.postDelayed(this, 1000);
-            }
-        };
-
-        handler.postDelayed(r, 10000);
         return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Firebase.setAndroidContext(this);
-
         Toast.makeText(this, "Service Stopped", Toast.LENGTH_LONG).show();
     }
 
-    private void addData(final String orderId) {
-        Firebase.setAndroidContext(this);
-        fire = new Firebase(MainActivity.DB_URL + "imei0000012/" + orderId + "/");
-        fire.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot ds) {
-                if (ds.child("status_order").getValue().equals("0"))
-                Log.d( "MainActivity", orderId + ds.child("status_order").getValue() );
-            }
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-            }
-        });
-//        Cart c = new Cart();
-//        c.setOrderId("test");
-//        c.setStatusOrder("0");
+    private void setTimerStatusCtrl(final String orderId, final String orderDate) {
+        final Handler handler = new Handler();
+        final Runnable r = new Runnable() {
+            public void run() {
 
+                fire = new Firebase(MainActivity.DB_URL + "imei0000012/" + orderId + "/");
+                fire.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot ds) {
+                        if (ds.child("status_order").getValue().equals("0")) {
+                            Log.d("MainActivity", orderId + ds.child("status_order").getValue());
+                            fire.child("status_order").setValue("Reject");
+                        }
+                    }
 
-        //fire.child("status_order").setValue("2");
-        Notification();
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
+                    }
+                });
+                //        Cart c = new Cart();
+                //        c.setOrderId("test");
+                //        c.setStatusOrder("0");
+                //stopService(new Intent(getBaseContext(), ServiceOrderControl.class));
+                //handler.postDelayed(this, 1000);
+
+                // Order is reject and service status is off
+                setNotification();
+            }
+        };
+
+        // orderDate
+        handler.postDelayed(r, 20000);
     }
 
 
-    public void Notification() {
+    public void setNotification() {
         try {
             Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
