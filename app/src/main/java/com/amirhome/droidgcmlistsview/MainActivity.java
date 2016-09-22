@@ -112,14 +112,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void addData(String name, String desc) {
-        Cart c = new Cart();
-        c.setOrderId(name);
-        c.setDescription(desc);
-
-        fire.child("Cart").push().setValue(c);
-    }
-
     //Retrieve
     private void retrieveData() {
 
@@ -159,15 +151,6 @@ public class MainActivity extends AppCompatActivity {
         Cart cartDetails = ds.getValue(Cart.class);
         String orderId = ds.getKey();
         //String description = cartDetails.getDescription();
-
-
-
-/*        Cart c = new Cart();
-        c.setName(ds.getKey());
-        c.setDescription(ds.getKey());
-
-        Log.d("MainActivity", c.getName());*/
-
         names.add(orderId);
 
 
@@ -177,8 +160,6 @@ public class MainActivity extends AppCompatActivity {
             service.putExtra("ServiceOrderControl.data", orderId);
 
             startService(service);
-            // order_date
-            Log.d("MainActivity", orderId + " " + cartDetails.status_order);
 
         }
 
