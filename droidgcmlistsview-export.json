@@ -40,7 +40,7 @@
         "size" : "150ml",
         "title" : "Chunky Monkey"
       } ],
-      "order_date" : "09/08/2016 17:52",
+      "order_date" : "09/23/2016 15:33:00",
       "status_delivery" : "0",
       "status_order" : "0"
     },
@@ -67,7 +67,7 @@
         "size" : "150ml",
         "title" : "Chunky Monkey"
       } ],
-      "order_date" : "09/08/2016 17:51",
+      "order_date" : "09/23/2016 15:33:00",
       "status_delivery" : "0",
       "status_order" : "0"
     },
@@ -94,9 +94,9 @@
         "size" : "150ml",
         "title" : "Chunky Monkey"
       } ],
-      "order_date" : "09/08/2016 17:50",
+      "order_date" : "09/23/2016 15:33:00",
       "status_delivery" : "0",
-      "status_order" : "Reject"
+      "status_order" : "0"
     },
     "OrderNo033" : {
       "address" : "Mecidiyeköy Mah. Dereboyu Cad. No:67/B, Mecidiyeköy Istanbul/Şişli",
@@ -121,9 +121,9 @@
         "size" : "150ml",
         "title" : "Chunky Monkey"
       } ],
-      "order_date" : "09/08/2016 17:49",
+      "order_date" : "09/23/2016 15:33:00",
       "status_delivery" : "Reject",
-      "status_order" : "accept_15"
+      "status_order" : "0"
     },
     "OrderNo044" : {
       "address" : "Mecidiyeköy Mah. Dereboyu Cad. No:67/B, Mecidiyeköy Istanbul/Şişli",
@@ -148,9 +148,9 @@
         "size" : "150ml",
         "title" : "Chunky Monkey"
       } ],
-      "order_date" : "09/19/2016 15:50",
+      "order_date" : "09/23/2016 15:33:00",
       "status_delivery" : "0",
-      "status_order" : "accept_45"
+      "status_order" : "0"
     }
   },
   "imei1111112" : {
@@ -194,9 +194,9 @@
         "size" : "150ml",
         "title" : "Chunky Monkey"
       } ],
-      "order_date" : "09/08/2016 17:52",
+      "order_date" : "09/23/2016 15:33:00",
       "status_delivery" : "Reject",
-      "status_order" : "Reject"
+      "status_order" : "0"
     },
     "OrderNo055" : {
       "address" : "Mecidiyeköy Mah. Dereboyu Cad. No:67/B, Mecidiyeköy Istanbul/Şişli",
@@ -221,9 +221,9 @@
         "size" : "150ml",
         "title" : "Chunky Monkey"
       } ],
-      "order_date" : "09/08/2016 17:51",
+      "order_date" : "09/23/2016 15:33:00",
       "status_delivery" : "Reject",
-      "status_order" : "Reject"
+      "status_order" : "0"
     },
     "OrderNo066" : {
       "address" : "Mecidiyeköy Mah. Dereboyu Cad. No:67/B, Mecidiyeköy Istanbul/Şişli",
@@ -248,9 +248,9 @@
         "size" : "150ml",
         "title" : "Chunky Monkey"
       } ],
-      "order_date" : "09/08/2016 17:50",
+      "order_date" : "09/23/2016 15:33:00",
       "status_delivery" : "Reject",
-      "status_order" : "Reject"
+      "status_order" : "0"
     },
     "OrderNo077" : {
       "address" : "Mecidiyeköy Mah. Dereboyu Cad. No:67/B, Mecidiyeköy Istanbul/Şişli",
@@ -275,9 +275,9 @@
         "size" : "150ml",
         "title" : "Chunky Monkey"
       } ],
-      "order_date" : "09/08/2016 17:49",
+      "order_date" : "09/23/2016 15:33:00",
       "status_delivery" : "Reject",
-      "status_order" : "Reject"
+      "status_order" : "0"
     }
   }
 }

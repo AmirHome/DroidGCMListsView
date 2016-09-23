@@ -2,20 +2,15 @@ package com.amirhome.droidgcmlistsview;
 
 import android.Manifest;
 import android.app.ActivityManager;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,16 +63,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 
-
                /* for (ActivityManager.RunningAppProcessInfo service : manager.getRunningAppProcesses()) {
                     Log.d("MainActivity" , service.processName);
                 }*/
-                String msg = "Can you help me please..";
+                String msg = "Can you help me please.." ;
                 Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
     }
+
+
 
 
     private void setImeiCode() {
@@ -119,12 +115,12 @@ public class MainActivity extends AppCompatActivity {
         fire.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                getUpdates(dataSnapshot ,"A");
+                getUpdates(dataSnapshot, "A");
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Log.d("MainActivity", "onChildChanged "+ dataSnapshot.getKey());
+                //Log.d("MainActivity", "onChildChanged " + dataSnapshot.getKey());
 
                 //getUpdates(dataSnapshot, "C");
             }
@@ -154,8 +150,7 @@ public class MainActivity extends AppCompatActivity {
         names.add(orderId);
 
 
-        if ( cartDetails.status_order.equals( "0" ) )
-        {
+        if (cartDetails.status_order.equals("0")) {
             Intent service = new Intent(getBaseContext(), ServiceOrderControl.class);
             service.putExtra("ServiceOrderControl.orderId", orderId);
             service.putExtra("ServiceOrderControl.order_date", cartDetails.order_date);
@@ -187,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void detailOrder(String  id) {
+    private void detailOrder(String id) {
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra("id", id);
         startActivity(intent);
