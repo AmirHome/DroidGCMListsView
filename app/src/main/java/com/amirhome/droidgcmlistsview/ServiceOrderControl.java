@@ -122,7 +122,7 @@ public class ServiceOrderControl extends Service {
             public void onCancelled(FirebaseError firebaseError) {
             }
         });
-        Log.d("MainActivity", "return "+res);
+
         return res;
     }
 
