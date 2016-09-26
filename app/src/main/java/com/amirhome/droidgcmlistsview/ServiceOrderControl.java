@@ -113,7 +113,6 @@ public class ServiceOrderControl extends Service {
                     // Order is reject
                     fire.child("status_order").setValue("Reject");
                     res = true;
-                    Log.d("MainActivity", "inside "+res);
                 }else {
                     res = false;
                 }

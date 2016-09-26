@@ -24,6 +24,7 @@ public class DetailActivity extends AppCompatActivity {
     Firebase fire;
     Spinner spinner;
     List<String> listStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,17 +41,13 @@ public class DetailActivity extends AppCompatActivity {
         this.retrieveData();
 
 
-
     }
 
     private void setStatusAction(String statusOrder, String statusDelivery) {
-        Log.d("MainActivity", statusDelivery+" " + statusOrder);
         spinner = (Spinner) findViewById(R.id.spinnerStatus);
 
         listStatus = new ArrayList<String>();
-        if (statusOrder.equals("0"))
-        {
-            Log.d("MainActivity", statusDelivery+" " + statusOrder);
+        if (statusOrder.equals("0")) {
 
             listStatus.add("Nothing");
             listStatus.add("Accept15");
@@ -59,22 +56,22 @@ public class DetailActivity extends AppCompatActivity {
             listStatus.add("Accept60");
             listStatus.add("Reject");
 
-        }else if (statusOrder.equals("Reject")){
-            listStatus.add("Rejected.");
-        }else{//statusOrder is Accept
-            if (statusDelivery.equals("0")){
-                listStatus.add("Accepted");
-                listStatus.add("reject_reason1");
-                listStatus.add("reject_reason2");
-                listStatus.add("reject_reason3");
-            }else if (statusDelivery.equals("Accepted")){
-
-            }else {
-
+        } else {
+            if (statusOrder.equals("Reject")) {
+                listStatus.add(statusOrder);
+            } else {
+                //statusOrder is Accept
+                if (statusDelivery.equals("0")) {
+                    listStatus.add(statusOrder);
+                    listStatus.add("Accepted");
+                    listStatus.add("reject_reason1");
+                    listStatus.add("Reject_reason2");
+                    listStatus.add("reject_reason3");
+                } else {
+                    listStatus.add(statusDelivery);
+                }
             }
         }
-
-
 
 
         ArrayAdapter<String> adp = new ArrayAdapter<String>
@@ -89,25 +86,34 @@ public class DetailActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int arg2, long arg3) {
                 // TODO Auto-generated method stub
+                String selectStatusAction = arg0.getItemAtPosition(arg2).toString();
 
-                switch(arg2) {
+                if (arg2 != 0)
+                switch (selectStatusAction) {
 
-                    case 0 :
+                    case "Accept15":
+                    case "Accept30":
+                    case "Accept45":
+                    case "Accept60":
+                        Toast.makeText(DetailActivity.this, "set status order, "+selectStatusAction, Toast.LENGTH_SHORT).show();
+                        fire.child("status_order").setValue(selectStatusAction);
+
                         break;
-                    case 1 :
-                        Toast.makeText(DetailActivity.this, "21", Toast.LENGTH_SHORT).show();
+                    case "Reject":
+                        Toast.makeText(DetailActivity.this, "set status order, "+selectStatusAction, Toast.LENGTH_SHORT).show();
+                        fire.child("status_order").setValue(selectStatusAction);
+
                         break;
-                    case 2 :
-                        Toast.makeText(DetailActivity.this, "31", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 3 :
-                        Toast.makeText(DetailActivity.this, "41", Toast.LENGTH_SHORT).show();
-                        break;
-                    default :
-                        //Toast.makeText(DetailActivity.this, "51", Toast.LENGTH_SHORT).show();
+                    case "Accepted":
+                    case "Reject_reason1":
+                    case "Reject_reason2":
+                    case "Reject_reason3":
+                        Toast.makeText(DetailActivity.this, "set status_delivery, "+selectStatusAction, Toast.LENGTH_SHORT).show();
+                        fire.child("status_delivery").setValue(selectStatusAction);
                         break;
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
                 // TODO Auto-generated method stub
