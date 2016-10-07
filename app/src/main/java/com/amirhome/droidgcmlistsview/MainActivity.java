@@ -30,7 +30,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    final static String DB_URL = "https://droidgcmlistsview.firebaseio.com/";
+    ///final static String DB_URL = "https://droidgcmlistsview.firebaseio.com/";
+    final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
 
     static String rCode;
 
