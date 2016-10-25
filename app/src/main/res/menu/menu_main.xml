@@ -2,9 +2,67 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.amirhome.droidgcmlistsview.MainActivity">
+
+    <item android:id="@+id/logo"
+
+        android:icon="@drawable/logo"
+        android:title="Lorem ipsum"
+        app:showAsAction="always"
+
+        /><!--logo-->
+
+
+    <item
+        android:id="@+id/space"
+        android:title="                                 "
+        app:showAsAction="always"
+        /><!--space -->
+
+    <item
+        android:id="@+id/ipnumber"
+        android:title="ip number"
+        app:showAsAction="always"
+      /><!--ip number-->
+    <item
+        android:id="@+id/imeinumber"
+        android:title="imei number"
+        app:showAsAction="always"
+        /><!--imei number-->
+    <item
+        android:id="@+id/version"
+        android:title="version"
+        app:showAsAction="always"
+        /><!--version number-->
+
     <item
         android:id="@+id/action_settings"
+        android:orderInCategory="80"
+        android:title="restourant no"
+        app:showAsAction="always" /><!--restourant number-->
+
+    <item android:id="@+id/btn2"
+
+        android:icon="@drawable/ic_action_name2"
+        android:title=""
+        app:showAsAction="always"
+        android:orderInCategory="90"
+
+        /><!--system button-->
+
+    <item
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:icon="@drawable/ic_action_name"
+        android:title="switch"
+        android:id="@+id/simpleToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:textOff="Off"
+        android:textOn="On"
+
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold|italic"
+
+        app:showAsAction="always"/><!--toogle button on off -->
+
 </menu>

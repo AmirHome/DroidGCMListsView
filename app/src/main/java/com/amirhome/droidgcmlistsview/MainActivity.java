@@ -1,6 +1,7 @@
 package com.amirhome.droidgcmlistsview;
 
 import android.Manifest;
+
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
 import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    /*  getSupportActionBar().setDisplayUseLogoEnabled(true);
+       getSupportActionBar().setDisplayShowHomeEnabled(true);
+      getSupportActionBar().setLogo(R.drawable.ic_action_name2);*/
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

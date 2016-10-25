@@ -1,42 +1,409 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.amirhome.droidgcmlistsview.MainActivity"
-    tools:showIn="@layout/activity_main">
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
 
-    <ListView
+app:layout_behavior="@string/appbar_scrolling_view_behavior"
+tools:context="com.amirhome.droidgcmlistsview.MainActivity"
+tools:showIn="@layout/activity_main"
+   >
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/lv"
-        android:divider="#ffffff"
-        android:dividerHeight="@dimen/abc_control_inset_material"
-        android:longClickable="false"
-        android:nestedScrollingEnabled="false"
-        android:transitionGroup="false"
-        android:touchscreenBlocksFocus="false"
-        android:textFilterEnabled="false"
-        android:headerDividersEnabled="false"
-        android:footerDividersEnabled="false"
-        android:focusableInTouchMode="false"
-        android:focusable="false"
-        android:fastScrollEnabled="false"
-        android:fastScrollAlwaysVisible="false"
-        android:drawSelectorOnTop="false"
-        android:contextClickable="true"
-        android:clickable="true"
-        android:contentDescription="@string/abc_font_family_menu_material"
-        android:background="#f1dbdb"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentStart="false"
-        android:backgroundTintMode="multiply" />
+
+
+        android:id="@+id/loginButtonLayout"
+        android:weightSum="1.0"
+        android:orientation="horizontal"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+
+
+            android:id="@+id/loginButtonLayout1"
+            android:layout_weight="0.8"
+            android:orientation="vertical">
+
+
+
+            <RelativeLayout
+                android:background="@color/half_red"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="100dp"
+                    android:text=""
+                    android:background="@color/half_red"
+
+                    android:id="@+id/textView4"
+                    android:layout_weight="0.8"
+                    android:layout_alignParentTop="true"/>
+
+                <Button
+                    android:layout_marginBottom="2dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="all orders"
+                    android:textColor="@color/white"
+                    android:layout_below="@+id/textView4"
+                    android:background="@color/half_red"
+                    android:id="@+id/button6"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.8"
+                    android:clickable="true"
+
+                    android:layout_alignParentStart="true"
+                    android:longClickable="true" />  <!--all orders button-->
+                <Button
+                    android:layout_marginBottom="2dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="preparing orders"
+                    android:background="@color/half_red"
+                    android:textColor="@color/white"
+                    android:id="@+id/button7"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.8"
+                    android:clickable="true"
+                    android:layout_below="@+id/button6"
+                    android:layout_alignParentStart="true"
+                    android:longClickable="true" /> <!--preparing orders button-->
+                <Button
+                    android:layout_marginBottom="2dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="penalty"
+                    android:background="@color/half_red"
+                    android:textColor="@color/white"
+                    android:id="@+id/button8"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.8"
+                    android:clickable="true"
+                   android:layout_below="@+id/button7"
+                    android:layout_alignParentStart="true"
+                    android:longClickable="true" /> <!--penalty button-->
+                <Button
+                    android:layout_marginBottom="2dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="reject"
+                    android:background="@color/half_red"
+                    android:textColor="@color/white"
+                    android:id="@+id/button9"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.8"
+                    android:clickable="true"
+                   android:layout_below="@+id/button8"
+                    android:layout_alignParentStart="true"
+                    android:longClickable="true" /> <!--rejectorders button-->
+                <Button
+                    android:layout_marginBottom="2dp"
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="delivered"
+                    android:background="@color/half_red"
+                    android:textColor="@color/white"
+                    android:id="@+id/button10"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.8"
+                    android:clickable="true"
+                    android:longClickable="true"
+                    android:layout_below="@+id/button9"
+                    android:layout_alignParentStart="true" /> <!--delivered orders button-->
+                <Button
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="rejected from customer"
+                    android:background="@color/half_red"
+                    android:textColor="@color/white"
+                    android:id="@+id/button11"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.8"
+                    android:clickable="true"
+
+                    android:layout_below="@+id/button10"
+                    android:layout_alignParentStart="true"
+                    android:longClickable="true" /> <!--reject orders from customer button-->
+
+                <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:background="@color/half_red"
+                android:layout_below="@+id/button11"
+                android:id="@+id/textView9"
+                android:layout_weight="0.8"
+                    android:minHeight="100dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>  <!--left side -->
+
+
+
+
+
+        </LinearLayout><!--left side vertical-->
+
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+
+
+            android:id="@+id/loginButtonLayout2"
+            android:layout_weight="0.2"
+            android:orientation="vertical">
+
+
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+
+
+                    android:id="@+id/loginButtonLayouthek2"
+
+                    android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:orientation="vertical">
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="order  number"
+                    android:background="@color/half_red"
+                    android:textColor="@color/white"
+                    android:id="@+id/button2"
+                    />
+
+
+            </LinearLayout><!--ordernumber vertical-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:orientation="vertical">
+                <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="date"
+                    android:background="@color/half_red"
+                    android:textColor="@color/white"
+                android:id="@+id/button3"
+                />
+
+
+
+            </LinearLayout><!--date vertical-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:orientation="vertical">
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="cost"
+                    android:background="@color/half_red"
+                    android:textColor="@color/white"
+                    android:id="@+id/button4"
+                    />
+
+
+
+            </LinearLayout><!--cost vertical-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:orientation="vertical">
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="status"
+                    android:background="@color/half_red"
+                    android:textColor="@color/white"
+                    android:id="@+id/button5"
+                    />
+
+            </LinearLayout> <!--status vertical-->
+                </LinearLayout><!--titles horizontal-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                >
+                <TextView
+                    android:text=""
+
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+
+                    android:id="@+id/xxx"
+
+
+
+
+
+                    />
+                <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/xxx"
+                    android:id="@+id/sv2"
+                    >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/vek3"
+                    android:layout_weight="0.2"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/hek4"
+
+                        android:orientation="horizontal">
+
+
+
+                            <ListView
+
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:id="@+id/lv"
+                                android:layout_weight="0.2"
+
+
+                                android:divider="#ffffff"
+                                android:dividerHeight="@dimen/abc_control_inset_material"
+                                android:contextClickable="true"
+                                android:clickable="true"
+                                android:contentDescription="@string/abc_font_family_menu_material"
+                                android:backgroundTintMode="multiply"
+
+
+                                />
+
+                            <ListView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:id="@+id/lv2"
+                                android:layout_weight="0.2"
+
+                                android:divider="#ffffff"
+                                android:dividerHeight="@dimen/abc_control_inset_material"
+                                android:contextClickable="true"
+                                android:clickable="true"
+                                android:contentDescription="@string/abc_font_family_menu_material"
+                                android:backgroundTintMode="multiply"
+                                android:layout_alignParentTop="true"
+
+                                />
+
+                            <ListView
+                                android:layout_width="match_parent"
+                                android:layout_height="fill_parent"
+                                android:id="@+id/listView3"
+                                android:divider="#ffffff"
+                                android:dividerHeight="@dimen/abc_control_inset_material"
+                                android:contextClickable="true"
+                                android:clickable="true"
+                                android:contentDescription="@string/abc_font_family_menu_material"
+                                android:backgroundTintMode="multiply"
+                                android:layout_alignParentTop="true"
+                                android:layout_weight="0.2" />
+                        <ListView
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:id="@+id/listView4"
+                            android:divider="#ffffff"
+                            android:dividerHeight="@dimen/abc_control_inset_material"
+                            android:contextClickable="true"
+                            android:clickable="true"
+                            android:contentDescription="@string/abc_font_family_menu_material"
+                            android:backgroundTintMode="multiply"
+                            android:layout_alignParentTop="true"
+                            android:layout_weight="0.2" />
+
+                        <TextView
+                            android:text="
+
+"
+
+
+
+
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+
+
+                            android:id="@+id/xxx2"
+
+
+                            android:minHeight="1060dp" />
+
+
+
+                    </LinearLayout>
+                </LinearLayout>
+                </ScrollView><!--scroll right side -->
+               <TextView
+
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@+id/sv2"
+                    android:id="@+id/xxx3"
+
+
+
+
+
+                    />
+            </RelativeLayout><!--right side -->
+
+
+        </LinearLayout><!--right side vertical-->
+
+    </LinearLayout>  <!--collapse horizontal -->
+
+
+
+
 
 </RelativeLayout>

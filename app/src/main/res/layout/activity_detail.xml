@@ -3,90 +3,1294 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/grey"
+
     tools:context="com.amirhome.droidgcmlistsview.DetailActivity">
 
-    <TextView
-        android:id="@+id/tvOrderNo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="OrderNo"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/tvAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvOrderNo"
-        android:text="Address"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/tvDescription"
-        android:layout_width="wrap_content"
+    <LinearLayout
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvDeliveryDate"
-        android:text="Description"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:layout_width="match_parent"
 
-    <TextView
-        android:id="@+id/tvCustomer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/tvOrderDate"
-        android:text="customer"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/tvDeliveryDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvOrderDate"
-        android:text="Delivery Date"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:id="@+id/loginButtonLayout2"
+        android:weightSum="1.0"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tvOrderDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvAddress"
-        android:text="Order Date"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/tvStatusOrder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/tvCustomer"
-        android:layout_alignParentTop="true"
-        android:text="status_order"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+            <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            >
 
-    <TextView
-        android:id="@+id/tvStatusDelivery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/tvCustomer"
-        android:layout_below="@+id/tvStatusOrder"
-        android:text="status_delivery"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+            <TextView
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:id="@+id/tvStatusOrder"
+                android:layout_width="fill_parent"
+                android:background="@color/half_red"
+                android:layout_alignParentTop="true"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
 
-    <Spinner
-        android:id="@+id/spinnerStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:spinnerMode="dialog"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/tvCustomer" />
+                android:layout_gravity="center_horizontal"
+                android:text="status_order"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:padding="20dp"
+                android:textAlignment="center" /><!--status order-->
+                <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvStatusOrder"
+                    android:id="@+id/sv2"
+                    android:layout_marginBottom="70dp"
+                    >
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/tvStatusOrder"
+                    android:id="@+id/ln6"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:text="order no"
+                        android:textColor="@color/colorPrimary"
+                        android:minWidth="130dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/textleftcorner"
+                        android:gravity="center_vertical"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+
+                        android:id="@+id/dateordernotext"
+
+
+
+
+
+                        /><!--customer-->
+
+
+                    <TextView
+                        android:gravity="center_vertical"
+
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="4dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="5dp"
+                        android:background="@drawable/textrightcorner"
+
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="33333"
+
+                        android:id="@+id/tvOrderNo"
+                        android:layout_alignRight="@+id/dateordernotext"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/ln6"
+                    android:id="@+id/ln5"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:text="order time"
+                        android:textColor="@color/colorPrimary"
+                        android:minWidth="130dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/textleftcorner"
+                        android:gravity="center_vertical"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+
+                        android:id="@+id/dateordertext"
+
+
+
+
+
+                        /><!--customer-->
+
+
+                    <TextView
+                        android:gravity="center_vertical"
+
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="4dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="5dp"
+                        android:background="@drawable/textrightcorner"
+
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="09/11/2016 18:50"
+
+                        android:id="@+id/tvOrderDate"
+                        android:layout_alignRight="@+id/dateordertext"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/ln5"
+                    android:id="@+id/ln4"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:text="delivery time"
+                        android:textColor="@color/colorPrimary"
+                        android:minWidth="130dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/textleftcorner"
+                        android:gravity="center_vertical"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+
+                        android:id="@+id/datetext"
+
+
+
+
+
+                        /><!--customer-->
+
+
+                    <TextView
+                        android:gravity="center_vertical"
+
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="4dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="5dp"
+                        android:background="@drawable/textrightcorner"
+
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="09/11/2016 19:20"
+
+                        android:id="@+id/tvDeliveryDate"
+                        android:layout_alignRight="@+id/datetext"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/ln4"
+                    android:id="@+id/ln3"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:text="order cost"
+                        android:textColor="@color/colorPrimary"
+                        android:minWidth="130dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/textleftcorner"
+                        android:gravity="center_vertical"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+
+                        android:id="@+id/tvtutartext"
+
+
+
+
+
+                        /><!--customer-->
+
+
+                    <TextView
+                        android:gravity="center_vertical"
+
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="4dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="5dp"
+                        android:background="@drawable/textrightcorner"
+
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="50$"
+
+                        android:id="@+id/textView7"
+                        android:layout_alignRight="@+id/tvtutartext"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/ln3"
+                    android:id="@+id/ln2"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:text="payment type"
+                        android:textColor="@color/colorPrimary"
+                        android:minWidth="130dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/textleftcorner"
+                 android:gravity="center_vertical"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+
+                        android:id="@+id/tvPaymenttype"
+
+
+
+
+
+                        /><!--customer-->
+
+
+                    <TextView
+                        android:gravity="center_vertical"
+
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="4dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="5dp"
+                        android:background="@drawable/textrightcorner"
+
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="online"
+
+                        android:id="@+id/textView6"
+                        android:layout_alignRight="@+id/tvPaymenttype"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/ln2"
+                    android:id="@+id/ln1"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+                <TextView
+                    android:minWidth="130dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/textleftcorner"
+                 android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:id="@+id/nametext"
+                    android:text="Name"
+                    android:textColor="@color/colorPrimary"
+
+
+
+
+                    /><!--customer-->
+
+
+                <TextView
+
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="4dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="5dp"
+                    android:background="@drawable/textrightcorner"
+                  android:gravity="center_vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Erkan As"
+
+                    android:id="@+id/tvCustomer"
+                    android:layout_alignRight="@+id/nametext"
+                   />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/ln1"
+                    android:id="@+id/lntlphn"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:minWidth="130dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/textleftcorner"
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:id="@+id/telephonetext"
+                        android:text="Phone"
+                        android:textColor="@color/colorPrimary"
+
+
+
+
+                        /><!--customer-->
+
+
+                    <TextView
+
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="4dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="5dp"
+                        android:background="@drawable/textrightcorner"
+                        android:gravity="center_vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="05437778676"
+
+                        android:id="@+id/tvtelephone"
+                        android:layout_alignRight="@+id/telephonetext"
+                        />
+                </LinearLayout>
+
+              <!--  <TextView
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@drawable/rounded_corner"
+                    android:layout_marginBottom="4dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+
+                    android:id="@+id/tvAddress"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Address"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_above="@+id/tvDescription"
+                    android:layout_below="@+id/ln1"
+                    android:layout_alignParentStart="true"
+                    android:minHeight="170dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp" />-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lntlphn"
+                    android:id="@+id/ln7"
+
+                    android:orientation="horizontal">
+                    <TextView
+
+                        android:layout_marginRight="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/rounded_corner"
+
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="5dp"
+                        android:id="@+id/addresstext"
+                        android:text="address"
+                        android:textColor="@color/colorPrimary"
+
+
+
+
+                        /></LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/lntlphn"
+                        android:id="@+id/ln20"
+
+                        android:orientation="horizontal"><!--customer-->
+
+
+                    <TextView
+
+                        android:layout_marginTop="0dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:background="@drawable/topright"
+                        android:gravity="center_vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+
+
+                        android:id="@+id/tvAddress"
+                        android:layout_alignRight="@+id/addresstext"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ln7"
+                    android:id="@+id/ln8"
+
+                    android:orientation="horizontal">
+                    <TextView
+
+                        android:minWidth="130dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/bottomleft"
+                        android:gravity="center_vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:id="@+id/addressnotetext"
+                        android:text="address note"
+                        android:textColor="@color/colorPrimary"
+
+
+
+
+                        /><!--customer--></LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/lntlphn"
+                        android:id="@+id/ln21"
+
+                        android:orientation="horizontal">
+
+                    <TextView
+
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla posuere "
+                        android:layout_marginTop="0dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="20dp"
+                        android:background="@drawable/bottomright"
+                        android:gravity="center_vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+
+
+                        android:id="@+id/tvDescription"
+                        android:layout_alignRight="@+id/addressnotetext"
+                        />
+                </LinearLayout>
+                </LinearLayout></ScrollView><!--left csrollview-->
+
+                <Button
+                  android:layout_margin="20dp"
+                    android:background="@drawable/button_corner"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:text="accept"
+                    android:id="@+id/button"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:textAlignment="center"
+                    android:singleLine="true" /><!--accept button-->
+
+                <!--address-->
+        </RelativeLayout><!--left side-->
+        </LinearLayout><!--left side vertical-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+               >
+
+                <TextView
+                    android:layout_alignParentTop="true"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:id="@+id/tvStatusDelivery"
+                    android:layout_width="fill_parent"
+
+                    android:background="@color/half_red"
+                    android:textColor="@color/white"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="status_delivery"
+                    android:layout_gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:padding="20dp"
+                    android:textAlignment="center" /><!--status delivery 0-->
+               <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                       android:layout_below="@+id/tvStatusDelivery"
+                   android:layout_marginBottom="70dp"
+
+                   android:id="@+id/sv"
+                    >
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:id="@+id/ln22"
+
+                    android:orientation="horizontal">
+                    <TextView
+                        android:minHeight="20dp"
+                        android:minWidth="140dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/textleftcorner"
+                        android:gravity="right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:paddingLeft="5dp"
+
+                        android:id="@+id/howmany1"
+                        android:text="2 x"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"
+
+
+
+
+                        /><!--howmany-->
+
+
+                    <TextView
+                        android:minHeight="20dp"
+                        android:text="salad with chicken "
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="4dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="5dp"
+                        android:background="@drawable/textrightcorner"
+                        android:gravity="center_vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+
+                        android:id="@+id/tvmealName1"
+
+                        /><!--mealname -->
+                </LinearLayout><!--mealcaption and howmany -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:id="@+id/ln23"
+
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_marginRight="4dp"
+
+                        android:layout_marginLeft="4dp"
+                        android:background="@drawable/textleftcorner"
+                        android:gravity="center_vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="2dp"
+                        android:id="@+id/optionstext1"
+                        android:text="options"
+                        android:textColor="@color/colorPrimary"
+
+
+                        /><!--option -->
+                </LinearLayout><!--option capiton-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:id="@+id/ln24"
+
+                    android:orientation="horizontal">
+
+                    <TextView
+
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus quis tellus ornare auctor finibus ut dolor. Nunc vestibulum arcu at a eu suscipit."
+                        android:layout_marginRight="4dp"
+                        android:paddingLeft="5dp"
+
+
+                        android:layout_marginLeft="4dp"
+
+                        android:background="@drawable/rounded_corner"
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+
+                        android:id="@+id/options1"
+
+                        />   <!--option content-->
+
+
+                </LinearLayout><!--option content-->
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:id="@+id/ln25"
+
+                    android:orientation="horizontal">
+                    <TextView
+
+
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/textleftcorner"
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:paddingLeft="5dp"
+
+                        android:id="@+id/notwantedtext"
+                        android:text="Not wanted"
+                        android:textColor="@color/colorPrimary"
+
+
+
+
+                        /><!--notwantedcaption-->
+
+
+                    <TextView
+
+                        android:text="Lorem ipsum dolor sit amet"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="4dp"
+                        android:paddingLeft="5dp"
+
+                        android:background="@drawable/textrightcorner"
+                        android:gravity="center_vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+
+                        android:id="@+id/notwanted1"
+
+                        /><!--notwantedconted-->
+                </LinearLayout><!--notwanted caption and content-->
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:id="@+id/ln26"
+
+                    android:orientation="horizontal">
+                    <TextView
+
+
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/textleftcorner"
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="2dp"
+                        android:id="@+id/extratext1"
+                        android:text="Extra"
+                        android:textColor="@color/colorPrimary"
+
+
+
+
+                        /><!--extra caption-->
+
+
+                    <TextView
+
+                        android:text="Lorem ipsum dolor sit amet, consectetur "
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="4dp"
+                        android:paddingLeft="5dp"
+
+                        android:background="@drawable/textrightcorner"
+                        android:gravity="center_vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:id="@+id/Extra1"
+
+                        /><!--extra content-->
+                </LinearLayout><!--extra caption and  content-->
+               <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:id="@+id/ln29"
+
+                        android:orientation="horizontal">
+                        <TextView
+
+
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginTop="0dp"
+                            android:background="@drawable/bottomleft"
+                            android:gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="2dp"
+                            android:id="@+id/sizetext1"
+                            android:text="Size"
+                            android:textColor="@color/colorPrimary"
+
+
+
+
+                            /><!--size caption-->
+
+
+                        <TextView
+
+                            android:text="Lorem ipsum dolor sit amet, consectetur"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginRight="4dp"
+                            android:paddingLeft="5dp"
+
+                            android:background="@drawable/bottomleft"
+                            android:gravity="center_vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+
+                            android:id="@+id/size1"
+
+                            /><!--size content-->
+                    </LinearLayout><!--size caption and  content-->
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:id="@+id/ln27"
+
+                    android:orientation="horizontal">
+                    <TextView
+
+
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/bottomleft"
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="2dp"
+                        android:id="@+id/commenttext1"
+                        android:text="Note"
+                        android:textColor="@color/colorPrimary"
+
+
+
+
+                        /><!--Note caption-->
+
+
+                    <TextView
+
+                        android:text="Lorem ipsum dolor sit amet, consectetur "
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="4dp"
+                        android:paddingLeft="5dp"
+
+                        android:background="@drawable/bottomleft"
+                        android:gravity="center_vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+
+                        android:id="@+id/Comment1"
+
+                        /><!--note content-->
+                </LinearLayout><!--note caption and  content-->
+
+
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:id="@+id/ln14"
+
+                        android:orientation="horizontal">
+                        <TextView
+                            android:minHeight="20dp"
+                            android:minWidth="140dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginTop="0dp"
+                            android:background="@drawable/textleftcorner"
+                            android:gravity="right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:paddingLeft="5dp"
+
+                            android:id="@+id/howmany2"
+                            android:text="3 x"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+
+
+
+
+                            /><!--customer-->
+
+
+                        <TextView
+                            android:minHeight="20dp"
+                            android:text="pizza with cheese "
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginRight="4dp"
+                            android:paddingLeft="15dp"
+                            android:paddingRight="5dp"
+                            android:background="@drawable/textrightcorner"
+                            android:gravity="center_vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+
+                            android:id="@+id/mealName2"
+
+                            />
+                    </LinearLayout><!--mealcaption and howmany 2-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:id="@+id/ln9"
+
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_marginRight="4dp"
+
+                            android:layout_marginLeft="4dp"
+                            android:background="@drawable/textleftcorner"
+                            android:gravity="center_vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="2dp"
+                            android:id="@+id/optionstext2"
+                            android:text="options"
+                            android:textColor="@color/colorPrimary"
+
+
+                            /></LinearLayout><!--option capiton2-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:id="@+id/ln18"
+
+                        android:orientation="horizontal">
+
+                        <TextView
+
+                            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus quis tellus ornare auctor finibus ut dolor. Nunc vestibulum arcu at a eu suscipit."
+                            android:layout_marginRight="4dp"
+                            android:paddingLeft="5dp"
+
+
+                            android:layout_marginLeft="4dp"
+
+                            android:background="@drawable/rounded_corner"
+                            android:gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+
+                            android:id="@+id/options2"
+
+                            />
+                        <!--customer-->
+
+                    </LinearLayout><!--option content2-->
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:id="@+id/ln10"
+
+                        android:orientation="horizontal">
+                        <TextView
+
+
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginTop="0dp"
+                            android:background="@drawable/textleftcorner"
+                            android:gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:paddingLeft="5dp"
+
+                            android:id="@+id/notwantedtext2"
+                            android:text="not wanted"
+                            android:textColor="@color/colorPrimary"
+
+
+
+
+                            /><!--customer-->
+
+
+                        <TextView
+
+                            android:text="Lorem ipsum dolor sit amet"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginRight="4dp"
+                            android:paddingLeft="5dp"
+
+                            android:background="@drawable/textrightcorner"
+                            android:gravity="center_vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+
+                            android:id="@+id/notwanted2"
+
+                            />
+                    </LinearLayout><!--notwanted caption and content2-->
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:id="@+id/ln11"
+
+                        android:orientation="horizontal">
+                        <TextView
+
+
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginTop="0dp"
+                            android:background="@drawable/textleftcorner"
+                            android:gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="2dp"
+                            android:id="@+id/extratext2"
+                            android:text="Extra"
+                            android:textColor="@color/colorPrimary"
+
+
+
+
+                            /><!--customer-->
+
+
+                        <TextView
+
+                            android:text="Lorem ipsum dolor sit amet, consectetur"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginRight="4dp"
+                            android:paddingLeft="5dp"
+
+                            android:background="@drawable/textrightcorner"
+                            android:gravity="center_vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:id="@+id/Extra2"
+
+                            />
+                    </LinearLayout><!--extra caption and  content2-->
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:id="@+id/ln28"
+
+                        android:orientation="horizontal">
+                        <TextView
+
+
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginTop="0dp"
+                            android:background="@drawable/bottomleft"
+                            android:gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="2dp"
+                            android:id="@+id/sizetext2"
+                            android:text="Size"
+                            android:textColor="@color/colorPrimary"
+
+
+
+
+                            /><!--customer-->
+
+
+                        <TextView
+
+                            android:text="Lorem ipsum dolor sit amet, consectetur"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginRight="4dp"
+                            android:paddingLeft="5dp"
+
+                            android:background="@drawable/bottomleft"
+                            android:gravity="center_vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+
+                            android:id="@+id/size2"
+
+                            />
+                    </LinearLayout><!--size caption and  content2-->
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:id="@+id/ln12"
+
+                        android:orientation="horizontal">
+                        <TextView
+
+
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginTop="0dp"
+                            android:background="@drawable/bottomleft"
+                            android:gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="2dp"
+                            android:id="@+id/commenttext2"
+                            android:text="Note"
+                            android:textColor="@color/colorPrimary"
+
+
+
+
+                            /><!--customer-->
+
+
+                        <TextView
+
+                            android:text="Lorem ipsum dolor sit amet, consectetur"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginRight="4dp"
+                            android:paddingLeft="5dp"
+
+                            android:background="@drawable/bottomleft"
+                            android:gravity="center_vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+
+                            android:id="@+id/Comment2"
+
+                            />
+                    </LinearLayout><!--note caption and  content2-->
+
+
+
+
+                    <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+
+                    android:id="@+id/ln13"
+
+                    android:orientation="horizontal">
+
+                    <TextView
+
+                        android:layout_marginRight="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/rounded_corner"
+                        android:gravity="center_vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:id="@+id/costtext"
+                        android:text="order note"
+                        android:textColor="@color/colorPrimary"
+
+
+
+
+                        /><!--order caption-->   </LinearLayout><!--ordernote caption -->
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+
+                    android:id="@+id/ln19"
+
+                    android:orientation="horizontal">
+
+
+                    <TextView
+
+
+                        android:minHeight="70dp"
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non dui vitae eros rhoncus pulvinar. Duis "
+                         android:layout_marginTop="0dp"
+
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_marginRight="4dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:background="@drawable/rounded_corner"
+
+                        android:gravity="center_vertical"
+
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="4dp"
+
+                        android:id="@+id/Cost"
+
+                        /><!--order note content-->
+                </LinearLayout><!--note   content-->
+
+
+            </LinearLayout> </ScrollView><!--rightsidescroll -->
+
+                <Spinner
+
+                    android:layout_margin="20dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/spinner_corner"
+                    android:id="@+id/spinnerStatus"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog"
+
+
+                    android:paddingLeft="20dp"
+                    android:textAlignment="center"
+                    android:layout_marginTop="10dp"
+                  android:layout_alignParentBottom="true"
+                /> <!--spinner reject-->
+
+
+
+
+            </RelativeLayout><!--rightside-->
+
+
+
+
+
+
+
+
+
+        </LinearLayout><!--right side vertical -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </LinearLayout><!--collapse horizontal-->
+
+
+
+
+
 
 
 </RelativeLayout>
