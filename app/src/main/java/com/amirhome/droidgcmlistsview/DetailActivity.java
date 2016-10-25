@@ -3,6 +3,7 @@ package com.amirhome.droidgcmlistsview;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -171,5 +172,7 @@ public class DetailActivity extends AppCompatActivity {
         TextView strDescription = (TextView) findViewById(R.id.tvDescription);
         strDescription.setText((String) ds.child("description").getValue());
 
+        TextView foo = (TextView)findViewById(R.id.textView2);
+        foo.setText(Html.fromHtml("teststs <b>Amir</b> atasgtd"));
     }
 }
