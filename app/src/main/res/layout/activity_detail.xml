@@ -578,25 +578,38 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:orientation="vertical">
+                   <LinearLayout
+
+                       android:layout_marginTop="10dp"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:gravity="center"
+                       android:layout_gravity="center"
+android:background="@color/white"
+
+                       android:id="@+id/ln28"
+
+                       android:orientation="horizontal">
                 <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
+
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
+                    android:layout_gravity="center"
                     android:id="@+id/ln22"
 
                     android:orientation="horizontal">
                     <TextView
                         android:minHeight="20dp"
-                        android:minWidth="140dp"
+
                         android:layout_marginLeft="4dp"
                         android:layout_marginTop="0dp"
                         android:background="@drawable/textleftcorner"
-                        android:gravity="right"
+                     android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
 
                         android:id="@+id/howmany1"
                         android:text="2 x"
@@ -608,26 +621,43 @@
 
                         /><!--howmany-->
 
-
                     <TextView
                         android:minHeight="20dp"
-                        android:text="salad with chicken "
+                        android:text="salad with chicken in garniture "
                         android:textColor="@color/colorPrimary"
                         android:textStyle="bold"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="4dp"
-                        android:paddingLeft="15dp"
+
+                        android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:background="@drawable/textrightcorner"
+                      android:background="@color/white"
                         android:gravity="center_vertical"
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:textAppearance="?android:attr/textAppearanceMedium"
 
                         android:id="@+id/tvmealName1"
 
                         /><!--mealname -->
-                </LinearLayout><!--mealcaption and howmany -->
+                    <TextView
+                    android:minHeight="20dp"
+                    android:text="{ medium } "
+                    android:textColor="@color/colorPrimary"
+
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="4dp"
+
+                    android:background="@drawable/textrightcorner"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+
+                    android:id="@+id/tvsize1"
+
+                    /><!--size-->
+                </LinearLayout><!--mealcaption and howmany and size-->
+                       </LinearLayout><!--caption size name-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -777,53 +807,7 @@
 
                         /><!--extra content-->
                 </LinearLayout><!--extra caption and  content-->
-               <LinearLayout
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:id="@+id/ln29"
-
-                        android:orientation="horizontal">
-                        <TextView
-
-
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginTop="0dp"
-                            android:background="@drawable/bottomleft"
-                            android:gravity="center_vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:paddingLeft="5dp"
-                            android:paddingRight="2dp"
-                            android:id="@+id/sizetext1"
-                            android:text="Size"
-                            android:textColor="@color/colorPrimary"
-
-
-
-
-                            /><!--size caption-->
-
-
-                        <TextView
-
-                            android:text="Lorem ipsum dolor sit amet, consectetur"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginRight="4dp"
-                            android:paddingLeft="5dp"
-
-                            android:background="@drawable/bottomleft"
-                            android:gravity="center_vertical"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-
-                            android:id="@+id/size1"
-
-                            /><!--size content-->
-                    </LinearLayout><!--size caption and  content-->
                 <LinearLayout
 
                     android:layout_width="match_parent"
@@ -874,8 +858,20 @@
 
 
                     <LinearLayout
+
                         android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+
+                        android:id="@+id/ln29"
+
+                        android:orientation="horizontal">
+                    <LinearLayout
+
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
                         android:id="@+id/ln14"
@@ -883,15 +879,15 @@
                         android:orientation="horizontal">
                         <TextView
                             android:minHeight="20dp"
-                            android:minWidth="140dp"
+
                             android:layout_marginLeft="4dp"
                             android:layout_marginTop="0dp"
                             android:background="@drawable/textleftcorner"
-                            android:gravity="right"
+                            android:gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
 
                             android:id="@+id/howmany2"
                             android:text="3 x"
@@ -901,7 +897,7 @@
 
 
 
-                            /><!--customer-->
+                            /><!--howmNY-->
 
 
                         <TextView
@@ -910,19 +906,38 @@
                             android:textColor="@color/colorPrimary"
                             android:textStyle="bold"
                             android:layout_marginTop="0dp"
-                            android:layout_marginRight="4dp"
-                            android:paddingLeft="15dp"
+
+                            android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:background="@drawable/textrightcorner"
-                            android:gravity="center_vertical"
-                            android:layout_width="fill_parent"
+                            android:background="@color/white"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:textAppearance="?android:attr/textAppearanceMedium"
 
                             android:id="@+id/mealName2"
 
                             />
-                    </LinearLayout><!--mealcaption and howmany 2-->
+                        <TextView
+                            android:minHeight="20dp"
+                            android:text="{ small } "
+                            android:textColor="@color/colorPrimary"
+
+                            android:layout_marginTop="0dp"
+                            android:layout_marginRight="4dp"
+
+                            android:background="@drawable/textrightcorner"
+                            android:gravity="center"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+
+                            android:id="@+id/tvsize2"
+
+                            /><!--size-->
+                    </LinearLayout><!--mealcaption and howmany  and size 2-->
+                       </LinearLayout><!--mealcaption and howmany  and size 2-->
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -943,7 +958,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="2dp"
                             android:id="@+id/optionstext2"
-                            android:text="options"
+                            android:text="optionss"
                             android:textColor="@color/colorPrimary"
 
 
@@ -1072,53 +1087,7 @@
                             />
                     </LinearLayout><!--extra caption and  content2-->
 
-                    <LinearLayout
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:id="@+id/ln28"
-
-                        android:orientation="horizontal">
-                        <TextView
-
-
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginTop="0dp"
-                            android:background="@drawable/bottomleft"
-                            android:gravity="center_vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:paddingLeft="5dp"
-                            android:paddingRight="2dp"
-                            android:id="@+id/sizetext2"
-                            android:text="Size"
-                            android:textColor="@color/colorPrimary"
-
-
-
-
-                            /><!--customer-->
-
-
-                        <TextView
-
-                            android:text="Lorem ipsum dolor sit amet, consectetur"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginRight="4dp"
-                            android:paddingLeft="5dp"
-
-                            android:background="@drawable/bottomleft"
-                            android:gravity="center_vertical"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-
-                            android:id="@+id/size2"
-
-                            />
-                    </LinearLayout><!--size caption and  content2-->
                     <LinearLayout
 
                         android:layout_width="match_parent"
@@ -1292,23 +1261,13 @@
 
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/textView"
-        android:layout_below="@+id/tvDescription"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="31dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/textView2"
-        android:layout_alignTop="@+id/textView"
-        android:layout_toEndOf="@+id/textView" />
+       />
 
 
 </RelativeLayout>
