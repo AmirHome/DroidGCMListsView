@@ -68,7 +68,7 @@
                     android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
                     <TextView
-                        android:text="order no"
+                        android:text="Bestell-ID"
                         android:textColor="@color/colorPrimary"
                         android:minWidth="130dp"
                         android:layout_marginLeft="4dp"
@@ -116,7 +116,7 @@
                     android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
                     <TextView
-                        android:text="order time"
+                        android:text="Bestellzeit"
                         android:textColor="@color/colorPrimary"
                         android:minWidth="130dp"
                         android:layout_marginLeft="4dp"
@@ -164,7 +164,7 @@
                     android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
                     <TextView
-                        android:text="delivery time"
+                        android:text="Lieferzeit"
                         android:textColor="@color/colorPrimary"
                         android:minWidth="130dp"
                         android:layout_marginLeft="4dp"
@@ -212,7 +212,7 @@
                     android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
                     <TextView
-                        android:text="order cost"
+                        android:text="Endsumme"
                         android:textColor="@color/colorPrimary"
                         android:minWidth="130dp"
                         android:layout_marginLeft="4dp"
@@ -261,7 +261,7 @@
                     android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
                     <TextView
-                        android:text="payment type"
+                        android:text="Zahlungsart"
                         android:textColor="@color/colorPrimary"
                         android:minWidth="130dp"
                         android:layout_marginLeft="4dp"
@@ -364,7 +364,7 @@
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:id="@+id/telephonetext"
-                        android:text="Phone"
+                        android:text="Telefonnummer"
                         android:textColor="@color/colorPrimary"
 
 
@@ -430,7 +430,7 @@
                         android:paddingRight="5dp"
                         android:paddingBottom="5dp"
                         android:id="@+id/addresstext"
-                        android:text="address"
+                        android:text="Adresse"
                         android:textColor="@color/colorPrimary"
 
 
@@ -485,7 +485,7 @@
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:id="@+id/addressnotetext"
-                        android:text="address note"
+                        android:text="Wegbeschreibung"
                         android:textColor="@color/colorPrimary"
 
 
@@ -527,7 +527,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="fill_parent"
                     android:layout_height="60dp"
-                    android:text="accept"
+                    android:text="akzeptieren"
                     android:id="@+id/button"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
@@ -559,7 +559,7 @@
                     android:textColor="@color/white"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="status_delivery"
+                    android:text="Bestellstatus"
                     android:layout_gravity="center_horizontal"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:padding="20dp"
@@ -579,14 +579,15 @@
                 android:layout_weight="0.5"
                 android:orientation="vertical">
                    <LinearLayout
-
+                       android:layout_marginLeft="3dp"
+                       android:layout_marginRight="3dp"
                        android:layout_marginTop="10dp"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
                        android:gravity="center"
                        android:layout_gravity="center"
-android:background="@color/white"
 
+                       android:background="@drawable/rounded_corner"
                        android:id="@+id/ln28"
 
                        android:orientation="horizontal">
@@ -602,9 +603,9 @@ android:background="@color/white"
                     <TextView
                         android:minHeight="20dp"
 
-                        android:layout_marginLeft="4dp"
+
                         android:layout_marginTop="0dp"
-                        android:background="@drawable/textleftcorner"
+
                      android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
@@ -623,7 +624,7 @@ android:background="@color/white"
 
                     <TextView
                         android:minHeight="20dp"
-                        android:text="salad with chicken in garniture "
+                        android:text="Pizza Margherita"
                         android:textColor="@color/colorPrimary"
                         android:textStyle="bold"
                         android:layout_marginTop="0dp"
@@ -678,7 +679,7 @@ android:background="@color/white"
                         android:paddingLeft="5dp"
                         android:paddingRight="2dp"
                         android:id="@+id/optionstext1"
-                        android:text="options"
+                        android:text="Wahl"
                         android:textColor="@color/colorPrimary"
 
 
@@ -694,7 +695,7 @@ android:background="@color/white"
 
                     <TextView
 
-                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus quis tellus ornare auctor finibus ut dolor. Nunc vestibulum arcu at a eu suscipit."
+                        android:text="Tomaten und Mozzarella"
                         android:layout_marginRight="4dp"
                         android:paddingLeft="5dp"
 
@@ -703,7 +704,7 @@ android:background="@color/white"
 
                         android:background="@drawable/rounded_corner"
                         android:gravity="center_vertical"
-                        android:layout_width="wrap_content"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
 
@@ -734,7 +735,7 @@ android:background="@color/white"
                         android:paddingLeft="5dp"
 
                         android:id="@+id/notwantedtext"
-                        android:text="Not wanted"
+                        android:text="nicht gewünschte Zutat"
                         android:textColor="@color/colorPrimary"
 
 
@@ -745,7 +746,7 @@ android:background="@color/white"
 
                     <TextView
 
-                        android:text="Lorem ipsum dolor sit amet"
+                        android:text="mayonnaise"
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="4dp"
                         android:paddingLeft="5dp"
@@ -781,7 +782,7 @@ android:background="@color/white"
                         android:paddingLeft="5dp"
                         android:paddingRight="2dp"
                         android:id="@+id/extratext1"
-                        android:text="Extra"
+                        android:text="Extras"
                         android:textColor="@color/colorPrimary"
 
 
@@ -792,7 +793,7 @@ android:background="@color/white"
 
                     <TextView
 
-                        android:text="Lorem ipsum dolor sit amet, consectetur "
+                        android:text="Büffelmozzarella"
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="4dp"
                         android:paddingLeft="5dp"
@@ -829,7 +830,7 @@ android:background="@color/white"
                         android:paddingLeft="5dp"
                         android:paddingRight="2dp"
                         android:id="@+id/commenttext1"
-                        android:text="Note"
+                        android:text="Anmerkung"
                         android:textColor="@color/colorPrimary"
 
 
@@ -840,7 +841,7 @@ android:background="@color/white"
 
                     <TextView
 
-                        android:text="Lorem ipsum dolor sit amet, consectetur "
+                        android:text="Ich hätte es gerne blutig"
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="4dp"
                         android:paddingLeft="5dp"
@@ -858,13 +859,14 @@ android:background="@color/white"
 
 
                     <LinearLayout
-
+android:layout_marginLeft="3dp"
+                        android:layout_marginRight="3dp"
                         android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:layout_gravity="center"
-                        android:background="@color/white"
+                        android:background="@drawable/rounded_corner"
 
                         android:id="@+id/ln29"
 
@@ -902,7 +904,7 @@ android:background="@color/white"
 
                         <TextView
                             android:minHeight="20dp"
-                            android:text="pizza with cheese "
+                            android:text="Pad Med Mamuong "
                             android:textColor="@color/colorPrimary"
                             android:textStyle="bold"
                             android:layout_marginTop="0dp"
@@ -958,7 +960,7 @@ android:background="@color/white"
                             android:paddingLeft="5dp"
                             android:paddingRight="2dp"
                             android:id="@+id/optionstext2"
-                            android:text="optionss"
+                            android:text="Wahl"
                             android:textColor="@color/colorPrimary"
 
 
@@ -973,7 +975,7 @@ android:background="@color/white"
 
                         <TextView
 
-                            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus quis tellus ornare auctor finibus ut dolor. Nunc vestibulum arcu at a eu suscipit."
+                            android:text="Cashewnüsse, Thaiwokgemüse, Tamarinden Chili-Sauce und wahlweise Tofu, Chicken, Beef, Honigente, Lachs, SurfTurf oder Shrimps"
                             android:layout_marginRight="4dp"
                             android:paddingLeft="5dp"
 
@@ -982,7 +984,7 @@ android:background="@color/white"
 
                             android:background="@drawable/rounded_corner"
                             android:gravity="center_vertical"
-                            android:layout_width="wrap_content"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
 
@@ -1013,7 +1015,7 @@ android:background="@color/white"
                             android:paddingLeft="5dp"
 
                             android:id="@+id/notwantedtext2"
-                            android:text="not wanted"
+                            android:text="nicht gewünschte Zutat"
                             android:textColor="@color/colorPrimary"
 
 
@@ -1024,7 +1026,7 @@ android:background="@color/white"
 
                         <TextView
 
-                            android:text="Lorem ipsum dolor sit amet"
+                            android:text="zwiebein "
                             android:layout_marginTop="0dp"
                             android:layout_marginRight="4dp"
                             android:paddingLeft="5dp"
@@ -1060,7 +1062,7 @@ android:background="@color/white"
                             android:paddingLeft="5dp"
                             android:paddingRight="2dp"
                             android:id="@+id/extratext2"
-                            android:text="Extra"
+                            android:text="Extras"
                             android:textColor="@color/colorPrimary"
 
 
@@ -1071,7 +1073,7 @@ android:background="@color/white"
 
                         <TextView
 
-                            android:text="Lorem ipsum dolor sit amet, consectetur"
+                            android:text="Mit Lachs"
                             android:layout_marginTop="0dp"
                             android:layout_marginRight="4dp"
                             android:paddingLeft="5dp"
@@ -1109,7 +1111,7 @@ android:background="@color/white"
                             android:paddingLeft="5dp"
                             android:paddingRight="2dp"
                             android:id="@+id/commenttext2"
-                            android:text="Note"
+                            android:text="Anmerkung"
                             android:textColor="@color/colorPrimary"
 
 
@@ -1120,7 +1122,7 @@ android:background="@color/white"
 
                         <TextView
 
-                            android:text="Lorem ipsum dolor sit amet, consectetur"
+                            android:text="Ich hätte es gerne halb durch"
                             android:layout_marginTop="0dp"
                             android:layout_marginRight="4dp"
                             android:paddingLeft="5dp"
@@ -1162,7 +1164,7 @@ android:background="@color/white"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:id="@+id/costtext"
-                        android:text="order note"
+                        android:text="Anmerkung"
                         android:textColor="@color/colorPrimary"
 
 
@@ -1184,8 +1186,8 @@ android:background="@color/white"
 
 
                         android:minHeight="70dp"
-                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non dui vitae eros rhoncus pulvinar. Duis "
-                         android:layout_marginTop="0dp"
+                        android:text="dankeschön"
+                        android:layout_marginTop="0dp"
 
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:layout_marginRight="4dp"
