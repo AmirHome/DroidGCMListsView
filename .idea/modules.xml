@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DroidGCMListsView.iml" filepath="$PROJECT_DIR$/DroidGCMListsView.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eat2donate-tablet.iml" filepath="$PROJECT_DIR$/eat2donate-tablet.iml" />
     </modules>
   </component>
 </project>
