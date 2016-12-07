@@ -1,7 +1,6 @@
 package com.amirhome.droidgcmlistsview;
 
 import android.Manifest;
-
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +10,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -208,7 +207,8 @@ public class MainActivity extends AppCompatActivity {
 
         mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         String deviceid = mTelephonyManager.getDeviceId();
-        deviceid = "imei0000012";
+//        Log.d("MainActivity", deviceid);
+//        deviceid = "imei0000012";
         return deviceid;
     }
 

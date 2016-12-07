@@ -37,7 +37,10 @@ public class DetailActivity extends AppCompatActivity {
         strOrderNo.setText("Order:  " + id);
 
         Firebase.setAndroidContext(this);
-        fire = new Firebase(MainActivity.DB_URL + "imei0000012/" + id);
+
+        Log.d("MainActivity", MainActivity.DB_URL + MainActivity.rCode + "/" + id);
+
+        fire = new Firebase(MainActivity.DB_URL + MainActivity.rCode + "/" + id);
 
         this.retrieveData();
 
