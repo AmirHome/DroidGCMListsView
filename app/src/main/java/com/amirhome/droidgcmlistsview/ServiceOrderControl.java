@@ -24,10 +24,10 @@ import java.util.Locale;
 
 public class ServiceOrderControl extends Service {
     public static final int DelayedMili = 180000;// 3 x 60 x 1000
+    public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     Firebase fire;
     String orderId;
     String orderDate;
-    public static final String DateTimeFormat = "MM/dd/yyyy HH:mm:ss";
     public boolean res;
 
     public ServiceOrderControl() {
@@ -104,7 +104,8 @@ public class ServiceOrderControl extends Service {
     private boolean setStatusReject(String orderId) {
 
         Firebase.setAndroidContext(this);
-        fire = new Firebase(MainActivity.DB_URL + "imei0000012/" + orderId + "/");
+
+        fire = new Firebase(MainActivity.DB_URL + MainActivity.rCode + "/" + orderId + "/");
         fire.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot ds)  {

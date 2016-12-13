@@ -272,21 +272,7 @@ tools:showIn="@layout/activity_main"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
                 >
-                <TextView
-                    android:text=""
 
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-
-                    android:id="@+id/xxx"
-
-
-
-
-
-                    />
                 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -328,7 +314,7 @@ tools:showIn="@layout/activity_main"
 
                                 />
 
-                            <ListView
+                            <!--<ListView
 
                                 android:layout_width="wrap_content"
                                 android:layout_height="fill_parent"
@@ -368,7 +354,7 @@ tools:showIn="@layout/activity_main"
                             android:contentDescription="@string/abc_font_family_menu_material"
                             android:backgroundTintMode="multiply"
                             android:layout_alignParentTop="true"
-                            android:layout_weight="0.2" />
+                            android:layout_weight="0.2" />-->
 
                         <TextView
                             android:text="

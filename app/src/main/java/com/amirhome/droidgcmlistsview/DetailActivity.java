@@ -38,8 +38,6 @@ public class DetailActivity extends AppCompatActivity {
 
         Firebase.setAndroidContext(this);
 
-        Log.d("MainActivity", MainActivity.DB_URL + MainActivity.rCode + "/" + id);
-
         fire = new Firebase(MainActivity.DB_URL + MainActivity.rCode + "/" + id);
 
         this.retrieveData();
@@ -93,29 +91,29 @@ public class DetailActivity extends AppCompatActivity {
                 String selectStatusAction = arg0.getItemAtPosition(arg2).toString();
 
                 if (arg2 != 0)
-                switch (selectStatusAction) {
+                    switch (selectStatusAction) {
 
-                    case "Accept15":
-                    case "Accept30":
-                    case "Accept45":
-                    case "Accept60":
-                        Toast.makeText(DetailActivity.this, "set status order, "+selectStatusAction, Toast.LENGTH_SHORT).show();
-                        fire.child("status_order").setValue(selectStatusAction);
+                        case "Accept15":
+                        case "Accept30":
+                        case "Accept45":
+                        case "Accept60":
+                            Toast.makeText(DetailActivity.this, "set status order, " + selectStatusAction, Toast.LENGTH_SHORT).show();
+                            fire.child("status_order").setValue(selectStatusAction);
 
-                        break;
-                    case "Reject":
-                        Toast.makeText(DetailActivity.this, "set status order, "+selectStatusAction, Toast.LENGTH_SHORT).show();
-                        fire.child("status_order").setValue(selectStatusAction);
+                            break;
+                        case "Reject":
+                            Toast.makeText(DetailActivity.this, "set status order, " + selectStatusAction, Toast.LENGTH_SHORT).show();
+                            fire.child("status_order").setValue(selectStatusAction);
 
-                        break;
-                    case "Accepted":
-                    case "Reject_reason1":
-                    case "Reject_reason2":
-                    case "Reject_reason3":
-                        Toast.makeText(DetailActivity.this, "set status_delivery, "+selectStatusAction, Toast.LENGTH_SHORT).show();
-                        fire.child("status_delivery").setValue(selectStatusAction);
-                        break;
-                }
+                            break;
+                        case "Accepted":
+                        case "Reject_reason1":
+                        case "Reject_reason2":
+                        case "Reject_reason3":
+                            Toast.makeText(DetailActivity.this, "set status_delivery, " + selectStatusAction, Toast.LENGTH_SHORT).show();
+                            fire.child("status_delivery").setValue(selectStatusAction);
+                            break;
+                    }
             }
 
             @Override
@@ -153,15 +151,16 @@ public class DetailActivity extends AppCompatActivity {
 
     private void getUpdates(DataSnapshot ds) {
 
-
-        TextView strAddress = (TextView) findViewById(R.id.tvAddress);
-        strAddress.setText((String) ds.child("address").getValue());
-
         TextView strCustomer = (TextView) findViewById(R.id.tvCustomer);
         strCustomer.setText((String) ds.child("customer").getValue());
 
         TextView tvDeliveryDate = (TextView) findViewById(R.id.tvDeliveryDate);
-        tvDeliveryDate.setText((String) ds.child("delivery_date").getValue());
+
+        if ("0" == (String) ds.child("delivery_date").getValue()) {
+            tvDeliveryDate.setText("Onayli Bekliyor");
+        } else {
+            tvDeliveryDate.setText((String) ds.child("delivery_date").getValue());
+        }
 
         TextView tvOrderDate = (TextView) findViewById(R.id.tvOrderDate);
         tvOrderDate.setText((String) ds.child("order_date").getValue());
@@ -172,10 +171,23 @@ public class DetailActivity extends AppCompatActivity {
         TextView tvStatusDelivery = (TextView) findViewById(R.id.tvStatusDelivery);
         tvStatusDelivery.setText((String) ds.child("status_delivery").getValue());
 
-        TextView strDescription = (TextView) findViewById(R.id.tvDescription);
-        strDescription.setText((String) ds.child("description").getValue());
+        TextView tvOrderCost = (TextView) findViewById(R.id.tvOrderCost);
+        tvOrderCost.setText((String) ds.child("order_cost").getValue());
 
-        TextView foo = (TextView)findViewById(R.id.textView2);
+        TextView tvPaymentType = (TextView) findViewById(R.id.tvPaymentType);
+        tvPaymentType.setText((String) ds.child("payment_type").getValue());
+
+        TextView tvAddress = (TextView) findViewById(R.id.tvAddress);
+        tvAddress.setText((String) ds.child("address_full").getValue());
+
+        TextView tvAddressDescription = (TextView) findViewById(R.id.tvAddressDescription);
+        tvAddressDescription.setText((String) ds.child("address_description").getValue());
+
+        TextView tvFoodDescriotion = (TextView) findViewById(R.id.tvFoodDescriotion);
+        tvFoodDescriotion.setText((String) ds.child("description").getValue());
+
+
+        TextView foo = (TextView) findViewById(R.id.tvFoodDescriotion);
         foo.setText(Html.fromHtml("teststs <b>Amir</b> atasgtd"));
     }
 }

@@ -69,9 +69,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 
-               /* for (ActivityManager.RunningAppProcessInfo service : manager.getRunningAppProcesses()) {
+                for (ActivityManager.RunningAppProcessInfo service : manager.getRunningAppProcesses()) {
                     Log.d("MainActivity" , service.processName);
-                }*/
+                }
                 String msg = "Can you help me please.." ;
                 Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -126,14 +126,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                //Log.d("MainActivity", "onChildChanged " + dataSnapshot.getKey());
+                Log.d("MainActivity", "onChildChanged " + dataSnapshot.getKey());
 
                 //getUpdates(dataSnapshot, "C");
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                Log.d("MainActivity", "onChildRemoved " + dataSnapshot.getKey());
             }
 
             @Override
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
             Intent service = new Intent(getBaseContext(), ServiceOrderControl.class);
             service.putExtra("ServiceOrderControl.orderId", orderId);
             service.putExtra("ServiceOrderControl.order_date", cartDetails.order_date);
-
+            Log.d("MainActivity", "onChildChanged " + orderId +" "+cartDetails.order_date);
             startService(service);
 
         }
@@ -207,8 +207,6 @@ public class MainActivity extends AppCompatActivity {
 
         mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         String deviceid = mTelephonyManager.getDeviceId();
-//        Log.d("MainActivity", deviceid);
-//        deviceid = "imei0000012";
         return deviceid;
     }
 
