@@ -16,13 +16,15 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
     private List<Order> moviesList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, year, genre;
+        public TextView order_no, time, cost, status;
 
         public MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.title);
-            genre = (TextView) view.findViewById(R.id.genre);
-            year = (TextView) view.findViewById(R.id.year);
+            order_no = (TextView) view.findViewById(R.id.order_no);
+            time = (TextView) view.findViewById(R.id.time);
+            cost = (TextView) view.findViewById(R.id.cost);
+            cost = (TextView) view.findViewById(R.id.cost);
+            status = (TextView) view.findViewById(R.id.status);
         }
     }
 
@@ -42,9 +44,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Order order = moviesList.get(position);
-        holder.title.setText(order.getTitle());
-        holder.genre.setText(order.getGenre());
-        holder.year.setText(order.getYear());
+        holder.order_no.setText(order.getOrderNo());
+        holder.time.setText(order.getOrderTime());
+        holder.cost.setText(order.getCost());
+        holder.status.setText(order.getStatus());
     }
 
     @Override

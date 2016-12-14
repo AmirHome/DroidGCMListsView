@@ -4,38 +4,47 @@ package com.amirhome.droidgcmlistsview;
  * Created by www.AmirHome.com on 12/14/2016.
  */
 public class Order {
-    private String title, genre, year;
+    private String order_no, time, cost, status;
 
     public Order() {
     }
 
-    public Order(String title, String genre, String year) {
-        this.title = title;
-        this.genre = genre;
-        this.year = year;
+    public Order(String order_no, String time, String cost, String status) {
+        this.order_no = order_no;
+        this.time = time;
+        this.cost = cost;
+        this.status = status;
     }
 
-    public String getTitle() {
-        return title;
+    public String getStatus() {
+        return status;
     }
 
-    public void setTitle(String name) {
-        this.title = name;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getYear() {
-        return year;
+    public String getOrderNo() {
+        return order_no;
     }
 
-    public void setYear(String year) {
-        this.year = year;
+    public void setOrderNo(String order_no) {
+        this.order_no = order_no;
     }
 
-    public String getGenre() {
-        return genre;
+    public String getCost() {
+        return cost;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setCost(String cost) {
+        this.cost = cost;
+    }
+
+    public String getOrderTime() {
+        return time;
+    }
+
+    public void setOrderTime(String time) {
+        this.time = time;
     }
 }

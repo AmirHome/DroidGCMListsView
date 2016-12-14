@@ -65,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
         this.setImeiCode();
 
 //        lv = (ListView) findViewById(R.id.lv);
-//        Firebase.setAndroidContext(this);
-//        fire = new Firebase(DB_URL + rCode);
+        Firebase.setAndroidContext(this);
+        fire = new Firebase(DB_URL + rCode);
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view, int position) {
                 Order order = orderList.get(position);
-                Toast.makeText(getApplicationContext(), order.getTitle() + " is selected!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), order.getOrderNo() + " is selected!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -93,12 +93,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }));
 
-        prepareMovieData();
+//        prepareOrderData();
 
-
-
-
-//        this.retrieveData();
+        retrieveData();
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -118,67 +115,27 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void prepareMovieData() {
-        Order order = new Order("Mad Max: Fury Road", "Action & Adventure", "2015");
+    private void prepareOrderData() {
+        Order order = new Order("order number",  "15:05:54","1,245.5 LR","Reject");
         orderList.add(order);
+//
+//        order = new Order("1024",  "15:05:54","1,245.5 LR","Reject");
+//        orderList.add(order);
+//
+//        order = new Order("1023",  "15:04:54","1,245.5 LR","Accept15");
+//        orderList.add(order);
+//
+//        order = new Order("1022",  "15:03:34","1,245.5 LR","Accept45");
+//        orderList.add(order);
+//
+//        order = new Order("1021",  "15:01:34","145.5 LR","Accept15");
+//        orderList.add(order);
+//
+//        order = new Order("1020",  "15:00:34","15.5 LR","Reject");
+//        orderList.add(order);
 
-        order = new Order("Inside Out", "Animation, Kids & Family", "2015");
-        orderList.add(order);
 
-        order = new Order("Star Wars: Episode VII - The Force Awakens", "Action", "2015");
-        orderList.add(order);
 
-        order = new Order("Shaun the Sheep", "Animation", "2015");
-        orderList.add(order);
-
-        order = new Order("The Martian", "Science Fiction & Fantasy", "2015");
-        orderList.add(order);
-
-        order = new Order("Mission: Impossible Rogue Nation", "Action", "2015");
-        orderList.add(order);
-
-        order = new Order("Up", "Animation", "2009");
-        orderList.add(order);
-
-        order = new Order("Star Trek", "Science Fiction", "2009");
-        orderList.add(order);
-
-        order = new Order("The LEGO Novie", "Animation", "2014");
-        orderList.add(order);
-
-        order = new Order("Iron Man", "Action & Adventure", "2008");
-        orderList.add(order);
-
-        order = new Order("Aliens", "Science Fiction", "1986");
-        orderList.add(order);
-
-        order = new Order("Chicken Run", "Animation", "2000");
-        orderList.add(order);
-
-        order = new Order("Back to the Future", "Science Fiction", "1985");
-        orderList.add(order);
-
-        order = new Order("Raiders of the Lost Ark", "Action & Adventure", "1981");
-        orderList.add(order);
-
-        order = new Order("Goldfinger", "Action & Adventure", "1965");
-        orderList.add(order);
-
-        order = new Order("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
-        orderList.add(order);
-
-        order = new Order("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
-        orderList.add(order);
-        order = new Order("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
-        orderList.add(order);
-        order = new Order("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
-        orderList.add(order);
-        order = new Order("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
-        orderList.add(order);
-        order = new Order("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
-        orderList.add(order);
-        order = new Order("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
-        orderList.add(order);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -217,11 +174,13 @@ public class MainActivity extends AppCompatActivity {
     //Retrieve
     private void retrieveData() {
 
+        final Order order = new Order("order number",  "15:05:54","1,245.5 LR","Reject");
+        orderList.add(order);
 
         fire.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                getUpdates(dataSnapshot, "A");
+                getUpdates(dataSnapshot, "A", order);
             }
 
             @Override
@@ -248,14 +207,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void getUpdates(DataSnapshot ds, String status) {
+    private void getUpdates(DataSnapshot ds, String status, Order order) {
 
         Cart cartDetails = ds.getValue(Cart.class);
         String orderId = ds.getKey();
-        //String description = cartDetails.getDescription();
+//        String description = cartDetails.getDescription();
         names.add(orderId);
 
-
+/*
         if (cartDetails.status_order.equals("0")) {
             Intent service = new Intent(getBaseContext(), ServiceOrderControl.class);
             service.putExtra("ServiceOrderControl.orderId", orderId);
@@ -263,13 +222,22 @@ public class MainActivity extends AppCompatActivity {
             Log.d("MainActivity", "onChildChanged " + orderId +" "+cartDetails.order_date);
             startService(service);
 
-        }
+        }*/
 
         if (names.size() > 0) {
-            ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, names);
+            Toast.makeText(MainActivity.this, "salam", Toast.LENGTH_SHORT).show();
+
+            order = new Order( ds.getKey(),  "15:05:54","1,245.5 LR","Reject");
+//            String order_no = ds.getKey();
+//            String time = cartDetails.order_date;
+//            String cost = cartDetails.order_cost;
+//            String order_status = cartDetails.status_order;
+//            order = new Order(order_no,  time,cost,order_status);
+            orderList.add(order);
+           /* ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, names);
             lv.setAdapter(adapter);
 
-            itemClick();
+            itemClick();*/
         } else {
             Toast.makeText(MainActivity.this, "No data", Toast.LENGTH_SHORT).show();
         }
