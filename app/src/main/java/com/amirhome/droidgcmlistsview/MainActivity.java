@@ -174,13 +174,12 @@ public class MainActivity extends AppCompatActivity {
     //Retrieve
     private void retrieveData() {
 
-        final Order order = new Order("order number",  "15:05:54","1,245.5 LR","Reject");
-        orderList.add(order);
+
 
         fire.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                getUpdates(dataSnapshot, "A", order);
+                getUpdates(dataSnapshot, "A");
             }
 
             @Override
@@ -207,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void getUpdates(DataSnapshot ds, String status, Order order) {
+    private void getUpdates(DataSnapshot ds, String status) {
 
         Cart cartDetails = ds.getValue(Cart.class);
         String orderId = ds.getKey();
@@ -225,15 +224,12 @@ public class MainActivity extends AppCompatActivity {
         }*/
 
         if (names.size() > 0) {
-            Toast.makeText(MainActivity.this, "salam", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MainActivity.this, "salam", Toast.LENGTH_SHORT).show();
+//            order = new Order( ds.getKey(),  "15:05:54","1,245.5 LR","Reject");
 
-            order = new Order( ds.getKey(),  "15:05:54","1,245.5 LR","Reject");
-//            String order_no = ds.getKey();
-//            String time = cartDetails.order_date;
-//            String cost = cartDetails.order_cost;
-//            String order_status = cartDetails.status_order;
-//            order = new Order(order_no,  time,cost,order_status);
+            Order order = new Order(  orderId,  cartDetails.order_date,cartDetails.order_cost,cartDetails.status_order);
             orderList.add(order);
+
            /* ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, names);
             lv.setAdapter(adapter);
 

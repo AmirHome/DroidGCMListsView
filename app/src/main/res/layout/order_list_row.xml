@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="150dp"
+        android:layout_marginRight="320dp"
         android:text="time" />
 
     <TextView
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="75dp"
+        android:layout_marginRight="220dp"
         android:text="cost" />
 
     <TextView
@@ -58,6 +58,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="status"
-        android:textColor="@color/year" />
+        android:textColor="@color/year"
+        android:layout_marginRight="50dp" />
 
 </RelativeLayout>

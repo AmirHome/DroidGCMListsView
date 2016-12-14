@@ -16,6 +16,7 @@ public class Cart {
     public String order_date;
     private String status_delivery;
     public String status_order;
+    public String order_cost;
 
     public Cart() {
 
