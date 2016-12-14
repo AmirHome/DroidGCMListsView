@@ -3,7 +3,7 @@ package com.amirhome.droidgcmlistsview.Data;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * Created by o9125 on 9/6/2016.
+ * Created by www.AmirHome.com on 9/6/2016.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Cart {

@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -28,8 +31,12 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private List<Order> orderList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private OrdersAdapter mAdapter;
 
     ///final static String DB_URL = "https://droidgcmlistsview.firebaseio.com/";
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
@@ -61,6 +68,36 @@ public class MainActivity extends AppCompatActivity {
         Firebase.setAndroidContext(this);
         fire = new Firebase(DB_URL + rCode);
 
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+        mAdapter = new OrdersAdapter(orderList);
+
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Order order = orderList.get(position);
+                Toast.makeText(getApplicationContext(), order.getTitle() + " is selected!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+
+        prepareMovieData();
+
+
+
+
         this.retrieveData();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -81,6 +118,57 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    private void prepareMovieData() {
+        Order order = new Order("Mad Max: Fury Road", "Action & Adventure", "2015");
+        orderList.add(order);
+
+        order = new Order("Inside Out", "Animation, Kids & Family", "2015");
+        orderList.add(order);
+
+        order = new Order("Star Wars: Episode VII - The Force Awakens", "Action", "2015");
+        orderList.add(order);
+
+        order = new Order("Shaun the Sheep", "Animation", "2015");
+        orderList.add(order);
+
+        order = new Order("The Martian", "Science Fiction & Fantasy", "2015");
+        orderList.add(order);
+
+        order = new Order("Mission: Impossible Rogue Nation", "Action", "2015");
+        orderList.add(order);
+
+        order = new Order("Up", "Animation", "2009");
+        orderList.add(order);
+
+        order = new Order("Star Trek", "Science Fiction", "2009");
+        orderList.add(order);
+
+        order = new Order("The LEGO Novie", "Animation", "2014");
+        orderList.add(order);
+
+        order = new Order("Iron Man", "Action & Adventure", "2008");
+        orderList.add(order);
+
+        order = new Order("Aliens", "Science Fiction", "1986");
+        orderList.add(order);
+
+        order = new Order("Chicken Run", "Animation", "2000");
+        orderList.add(order);
+
+        order = new Order("Back to the Future", "Science Fiction", "1985");
+        orderList.add(order);
+
+        order = new Order("Raiders of the Lost Ark", "Action & Adventure", "1981");
+        orderList.add(order);
+
+        order = new Order("Goldfinger", "Action & Adventure", "1965");
+        orderList.add(order);
+
+        order = new Order("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
+        orderList.add(order);
+
+        mAdapter.notifyDataSetChanged();
+    }
 
     private void setImeiCode() {
         if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
