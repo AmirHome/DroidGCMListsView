@@ -1,415 +1,305 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="fill_parent"
-android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
 
-app:layout_behavior="@string/appbar_scrolling_view_behavior"
-tools:context="com.amirhome.droidgcmlistsview.MainActivity"
-tools:showIn="@layout/activity_main"
-   >
-
-
-
-
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.amirhome.droidgcmlistsview.MainActivity"
+    tools:showIn="@layout/activity_main">
 
 
     <LinearLayout
-        android:layout_height="wrap_content"
+        android:id="@+id/loginButtonLayout"
         android:layout_width="match_parent"
 
 
-        android:id="@+id/loginButtonLayout"
-        android:weightSum="1.0"
-        android:orientation="horizontal"
-
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+
+        android:orientation="horizontal"
+        android:weightSum="1.0">
 
         <LinearLayout
-            android:layout_height="wrap_content"
+            android:id="@+id/loginButtonLayout1"
             android:layout_width="match_parent"
 
 
-            android:id="@+id/loginButtonLayout1"
+            android:layout_height="wrap_content"
             android:layout_weight="0.8"
             android:orientation="vertical">
 
 
-
             <RelativeLayout
-                android:background="@color/half_red"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/half_red"
 
                 android:orientation="vertical">
 
 
                 <TextView
+                    android:id="@+id/textView4"
                     android:layout_width="fill_parent"
                     android:layout_height="100dp"
-                    android:text=""
-                    android:background="@color/half_red"
+                    android:layout_alignParentTop="true"
 
-                    android:id="@+id/textView4"
                     android:layout_weight="0.8"
-                    android:layout_alignParentTop="true"/>
+                    android:background="@color/half_red"
+                    android:text="" />
 
                 <Button
-                    android:layout_marginBottom="2dp"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="alle Bestellungen"
-                    android:textColor="@color/white"
-                    android:layout_below="@+id/textView4"
-                    android:background="@color/half_red"
                     android:id="@+id/button6"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/textView4"
                     android:layout_gravity="center"
-                    android:layout_weight="0.8"
-                    android:clickable="true"
-
-                    android:layout_alignParentStart="true"
-                    android:longClickable="true" />  <!--all orders button-->
-                <Button
                     android:layout_marginBottom="2dp"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="neue Bestellungen"
-                    android:background="@color/half_red"
-                    android:textColor="@color/white"
-                    android:id="@+id/button12"
-                    android:layout_gravity="center_vertical"
                     android:layout_weight="0.8"
-                    android:clickable="true"
-                    android:layout_below="@+id/button6"
-                    android:layout_alignParentStart="true"
-                    android:longClickable="true" />
-                <Button
-                    android:layout_marginBottom="2dp"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Bestellung wird vorbereitet"
                     android:background="@color/half_red"
-                    android:textColor="@color/white"
-                    android:id="@+id/button7"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="0.8"
-                    android:clickable="true"
-                    android:layout_below="@+id/button12"
-                    android:layout_alignParentStart="true"
-                    android:longClickable="true" /> <!--preparing orders button-->
-                <Button
-                    android:layout_marginBottom="2dp"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Strafe"
-                    android:background="@color/half_red"
-                    android:textColor="@color/white"
-                    android:id="@+id/button8"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="0.8"
-                    android:clickable="true"
-                   android:layout_below="@+id/button7"
-                    android:layout_alignParentStart="true"
-                    android:longClickable="true" /> <!--penalty button-->
-                <Button
-                    android:layout_marginBottom="2dp"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="abgelehnt"
-                    android:background="@color/half_red"
-                    android:textColor="@color/white"
-                    android:id="@+id/button9"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="0.8"
-                    android:clickable="true"
-                   android:layout_below="@+id/button8"
-                    android:layout_alignParentStart="true"
-                    android:longClickable="true" /> <!--rejectorders button-->
-                <Button
-                    android:layout_marginBottom="2dp"
-
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="geliefert"
-                    android:background="@color/half_red"
-                    android:textColor="@color/white"
-                    android:id="@+id/button10"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="0.8"
                     android:clickable="true"
                     android:longClickable="true"
-                    android:layout_below="@+id/button9"
-                    android:layout_alignParentStart="true" /> <!--delivered orders button-->
+
+                    android:text="alle Bestellungen"
+                    android:textColor="@color/white" />  <!--all orders button-->
                 <Button
+                    android:id="@+id/button12"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/button6"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="2dp"
+                    android:layout_weight="0.8"
+                    android:background="@color/half_red"
+                    android:clickable="true"
+                    android:longClickable="true"
+                    android:text="neue Bestellungen"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/button7"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/button12"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="2dp"
+                    android:layout_weight="0.8"
+                    android:background="@color/half_red"
+                    android:clickable="true"
+                    android:longClickable="true"
+                    android:text="Bestellung wird vorbereitet"
+                    android:textColor="@color/white" /> <!--preparing orders button-->
+                <Button
+                    android:id="@+id/button8"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/button7"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="2dp"
+                    android:layout_weight="0.8"
+                    android:background="@color/half_red"
+                    android:clickable="true"
+                    android:longClickable="true"
+                    android:text="Strafe"
+                    android:textColor="@color/white" /> <!--penalty button-->
+                <Button
+                    android:id="@+id/button9"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/button8"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="2dp"
+                    android:layout_weight="0.8"
+                    android:background="@color/half_red"
+                    android:clickable="true"
+                    android:longClickable="true"
+                    android:text="abgelehnt"
+                    android:textColor="@color/white" /> <!--rejectorders button-->
+                <Button
+                    android:id="@+id/button10"
 
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="abgelehnt vom Kunden"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/button9"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="2dp"
+                    android:layout_weight="0.8"
                     android:background="@color/half_red"
-                    android:textColor="@color/white"
+                    android:clickable="true"
+                    android:longClickable="true"
+                    android:text="geliefert"
+                    android:textColor="@color/white" /> <!--delivered orders button-->
+                <Button
+
                     android:id="@+id/button11"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/button10"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="0.8"
+                    android:background="@color/half_red"
                     android:clickable="true"
 
-                    android:layout_below="@+id/button10"
-                    android:layout_alignParentStart="true"
-                    android:longClickable="true" /> <!--reject orders from customer button-->
+                    android:longClickable="true"
+                    android:text="abgelehnt vom Kunden"
+                    android:textColor="@color/white" /> <!--reject orders from customer button-->
 
                 <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:background="@color/half_red"
-                android:layout_below="@+id/button11"
-                android:id="@+id/textView9"
-                android:layout_weight="0.8"
-                    android:minHeight="100dp"
+                    android:id="@+id/textView9"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/button11"
+                    android:layout_weight="0.8"
+                    android:background="@color/half_red"
+                    android:minHeight="100dp"
+                    android:text="" />
             </RelativeLayout>  <!--left side -->
-
-
-
 
 
         </LinearLayout><!--left side vertical-->
 
 
         <LinearLayout
-            android:layout_height="wrap_content"
+            android:id="@+id/loginButtonLayout2"
             android:layout_width="match_parent"
 
 
-            android:id="@+id/loginButtonLayout2"
+            android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:orientation="vertical">
 
 
-
-                <LinearLayout
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-
-
-                    android:id="@+id/loginButtonLayouthek2"
-
-                    android:orientation="horizontal">
             <LinearLayout
+                android:id="@+id/loginButtonLayouthek2"
                 android:layout_width="match_parent"
+
+
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                android:orientation="vertical">
-                <Button
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Bestell-ID"
-                    android:background="@color/half_red"
-                    android:textColor="@color/white"
-                    android:id="@+id/button2"
-                    />
 
+                android:orientation="horizontal">
 
-            </LinearLayout><!--ordernumber vertical-->
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                android:orientation="vertical">
-                <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Datum"
-                    android:background="@color/half_red"
-                    android:textColor="@color/white"
-                android:id="@+id/button3"
-                />
-
-
-
-            </LinearLayout><!--date vertical-->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                android:orientation="vertical">
-                <Button
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Endsumme"
-                    android:background="@color/half_red"
-                    android:textColor="@color/white"
-                    android:id="@+id/button4"
-                    />
-
-
-
-            </LinearLayout><!--cost vertical-->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                android:orientation="vertical">
-                <Button
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Bestellstatus"
-                    android:background="@color/half_red"
-                    android:textColor="@color/white"
-                    android:id="@+id/button5"
-                    />
-
-            </LinearLayout> <!--status vertical-->
-                </LinearLayout><!--titles horizontal-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                >
-
-                <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-
-                    android:layout_marginTop="5dp"
-                    android:layout_below="@+id/xxx"
-                    android:id="@+id/sv2"
-                    >
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/vek3"
                     android:layout_weight="0.2"
                     android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/button2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/half_red"
+                        android:text="Bestell-ID"
+                        android:textColor="@color/white" />
+
+
+                </LinearLayout><!--ordernumber vertical-->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/button3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/half_red"
+                        android:text="Datum"
+                        android:textColor="@color/white" />
+
+
+                </LinearLayout><!--date vertical-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/button4"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/half_red"
+                        android:text="Endsumme"
+                        android:textColor="@color/white" />
+
+
+                </LinearLayout><!--cost vertical-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/button5"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/half_red"
+                        android:text="Bestellstatus"
+                        android:textColor="@color/white" />
+
+                </LinearLayout> <!--status vertical-->
+            </LinearLayout><!--titles horizontal-->
+
+
                     <LinearLayout
+                        android:id="@+id/vek3"
                         android:layout_width="match_parent"
-                        android:layout_height="fill_parent"
-                        android:id="@+id/hek4"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:orientation="vertical">
 
-                        android:orientation="horizontal">
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/recycler_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbars="vertical" />
 
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recycler_view"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:scrollbars="vertical" />
-
-
-                            <ListView
-
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:id="@+id/lv"
-                                android:layout_weight="0.2"
-
-
-                                android:divider="#ffffff"
-                                android:dividerHeight="@dimen/abc_control_inset_material"
-                                android:contextClickable="true"
-                                android:clickable="true"
-                                android:contentDescription="@string/abc_font_family_menu_material"
-                                android:backgroundTintMode="multiply"
-
-
-                                />
 
                             <!--<ListView
 
-                                android:layout_width="wrap_content"
+                                android:id="@+id/lv"
+                                android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
-                                android:id="@+id/lv2"
                                 android:layout_weight="0.2"
 
-                                android:divider="#ffffff"
-                                android:dividerHeight="@dimen/abc_control_inset_material"
-                                android:contextClickable="true"
+
+                                android:backgroundTintMode="multiply"
                                 android:clickable="true"
                                 android:contentDescription="@string/abc_font_family_menu_material"
-                                android:backgroundTintMode="multiply"
-                                android:layout_alignParentTop="true"
-
-                                />
-
-                            <ListView
-                                android:layout_width="match_parent"
-                                android:layout_height="fill_parent"
-                                android:id="@+id/listView3"
+                                android:contextClickable="true"
                                 android:divider="#ffffff"
                                 android:dividerHeight="@dimen/abc_control_inset_material"
-                                android:contextClickable="true"
-                                android:clickable="true"
-                                android:contentDescription="@string/abc_font_family_menu_material"
-                                android:backgroundTintMode="multiply"
-                                android:layout_alignParentTop="true"
-                                android:layout_weight="0.2" />
-                        <ListView
-                            android:layout_width="match_parent"
-                            android:layout_height="fill_parent"
-                            android:id="@+id/listView4"
-                            android:divider="#ffffff"
-                            android:dividerHeight="@dimen/abc_control_inset_material"
-                            android:contextClickable="true"
-                            android:clickable="true"
-                            android:contentDescription="@string/abc_font_family_menu_material"
-                            android:backgroundTintMode="multiply"
-                            android:layout_alignParentTop="true"
-                            android:layout_weight="0.2" />-->
-
-                        <TextView
-                            android:text="
-
-"
 
 
-
-
-
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-
-
-                            android:id="@+id/xxx2"
-
-
-                            android:minHeight="1060dp" />
-
+                                />-->
 
 
                     </LinearLayout>
-                </LinearLayout>
-                </ScrollView><!--scroll right side -->
-               <TextView
 
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_alignParentBottom="true"
-                    android:layout_below="@+id/sv2"
-                    android:id="@+id/xxx3"
-
-
-
-
-
-                    />
-            </RelativeLayout><!--right side -->
+            <!--right side -->
 
 
         </LinearLayout><!--right side vertical-->
 
     </LinearLayout>  <!--collapse horizontal -->
-
-
-
 
 
 </RelativeLayout>

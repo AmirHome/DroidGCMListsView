@@ -64,9 +64,9 @@ public class MainActivity extends AppCompatActivity {
         //get and set imei code = restaurant code
         this.setImeiCode();
 
-        lv = (ListView) findViewById(R.id.lv);
-        Firebase.setAndroidContext(this);
-        fire = new Firebase(DB_URL + rCode);
+//        lv = (ListView) findViewById(R.id.lv);
+//        Firebase.setAndroidContext(this);
+//        fire = new Firebase(DB_URL + rCode);
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -98,22 +98,22 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        this.retrieveData();
+//        this.retrieveData();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-
-                for (ActivityManager.RunningAppProcessInfo service : manager.getRunningAppProcesses()) {
-                    Log.d("MainActivity" , service.processName);
-                }
-                String msg = "Can you help me please.." ;
-                Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+//
+//                for (ActivityManager.RunningAppProcessInfo service : manager.getRunningAppProcesses()) {
+//                    Log.d("MainActivity" , service.processName);
+//                }
+//                String msg = "Can you help me please.." ;
+//                Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
     }
 
 
@@ -167,6 +167,18 @@ public class MainActivity extends AppCompatActivity {
         order = new Order("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
         orderList.add(order);
 
+        order = new Order("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
+        orderList.add(order);
+        order = new Order("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
+        orderList.add(order);
+        order = new Order("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
+        orderList.add(order);
+        order = new Order("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
+        orderList.add(order);
+        order = new Order("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
+        orderList.add(order);
+        order = new Order("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
+        orderList.add(order);
         mAdapter.notifyDataSetChanged();
     }
 
