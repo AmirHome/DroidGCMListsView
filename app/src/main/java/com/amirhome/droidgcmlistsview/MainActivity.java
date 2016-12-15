@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                         cartDetails.setCost(cartDetails.order_cost);
                         cartDetails.setOrderTime(cartDetails.order_date);
                         cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
-                        
+
                         orderList.add(cartDetails);
                         recyclerView.scrollToPosition(orderList.size() - 1);
                         mAdapter.notifyItemInserted(orderList.size() - 1);
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                             Intent service = new Intent(getBaseContext(), ServiceOrderControl.class);
                             service.putExtra("ServiceOrderControl.orderId", dataSnapshot.getKey());
                             service.putExtra("ServiceOrderControl.order_date", cartDetails.order_date);
-                            Log.d("MainActivity", "onChildChanged " + dataSnapshot.getKey() + " " + cartDetails.order_date);
+//                            Log.d("MainActivity", "onChildChanged " + dataSnapshot.getKey() + " " + cartDetails.order_date);
                             startService(service);
                         }
 
@@ -184,14 +184,36 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Log.d("MainActivity", "onChildChanged " + dataSnapshot.getKey());
+                Log.d("MainActivity", "onChildChanged getOrderNo=" + dataSnapshot.getKey());
+                int pos = 0;
+                for (int i = 0; i < orderList.size(); i++) {
+                    orderList.get(i).getOrderNo();
+                    if (dataSnapshot.getKey().equals(orderList.get(i).getOrderNo())) {
+                        pos = i;
+                        break;
+                    }
 
-                //getUpdates(dataSnapshot, "C");
+                }
+                Log.d("MainActivity", "position " + pos);
+                orderList.remove(pos);
+                mAdapter.notifyItemRemoved(pos);
+                mAdapter.notifyItemRangeChanged(pos, orderList.size());
+
+                Order cartDetails = dataSnapshot.getValue(Order.class);
+                cartDetails.setOrderNo(dataSnapshot.getKey());
+                cartDetails.setCost(cartDetails.order_cost);
+                cartDetails.setOrderTime(cartDetails.order_date);
+                cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
+
+                orderList.add(pos, cartDetails);
+                mAdapter.notifyItemInserted(pos);
+                mAdapter.notifyItemRangeChanged(pos, orderList.size());
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 Log.d("MainActivity", "onChildRemoved " + dataSnapshot.getKey());
+
             }
 
             @Override
