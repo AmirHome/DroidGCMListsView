@@ -19,7 +19,6 @@ public class Cart {
     public String order_cost;
 
     public Cart() {
-
     }
 
     public String getOrderId() {

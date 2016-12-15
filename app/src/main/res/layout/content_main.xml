@@ -273,7 +273,7 @@
                                 android:scrollbars="vertical" />
 
 
-                            <!--<ListView
+                            <ListView
 
                                 android:id="@+id/lv"
                                 android:layout_width="fill_parent"
@@ -289,7 +289,7 @@
                                 android:dividerHeight="@dimen/abc_control_inset_material"
 
 
-                                />-->
+                                />
 
 
                     </LinearLayout>

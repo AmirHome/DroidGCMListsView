@@ -1,7 +1,6 @@
 package com.amirhome.droidgcmlistsview;
 
 import android.Manifest;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -34,11 +33,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private List<Order> orderList = new ArrayList<>();
+    final List<Order> orderList = new ArrayList<>();
     private RecyclerView recyclerView;
     private OrdersAdapter mAdapter;
 
-    ///final static String DB_URL = "https://droidgcmlistsview.firebaseio.com/";
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
 
     static String rCode;
@@ -64,9 +62,7 @@ public class MainActivity extends AppCompatActivity {
         //get and set imei code = restaurant code
         this.setImeiCode();
 
-//        lv = (ListView) findViewById(R.id.lv);
-        Firebase.setAndroidContext(this);
-        fire = new Firebase(DB_URL + rCode);
+        lv = (ListView) findViewById(R.id.lv);
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -82,9 +78,9 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
-            public void onClick(View view, int position) {
+            public void onClick(View viewClicked, int position) {
                 Order order = orderList.get(position);
-                Toast.makeText(getApplicationContext(), order.getOrderNo() + " is selected!", Toast.LENGTH_SHORT).show();
+                detailOrder(order.getOrderNo());
             }
 
             @Override
@@ -92,52 +88,30 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }));
-
+        Firebase.setAndroidContext(this);
+        fire = new Firebase(DB_URL + rCode);
 //        prepareOrderData();
 
         retrieveData();
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-//
-//                for (ActivityManager.RunningAppProcessInfo service : manager.getRunningAppProcesses()) {
-//                    Log.d("MainActivity" , service.processName);
-//                }
-//                String msg = "Can you help me please.." ;
-//                Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+/*                ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+
+                for (ActivityManager.RunningAppProcessInfo service : manager.getRunningAppProcesses()) {
+                    Log.d("MainActivity" , service.processName);
+                }*/
+
+
+                String msg = "Can you help me please..";
+                Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
     }
 
-
-
-    private void prepareOrderData() {
-        Order order = new Order("order number",  "15:05:54","1,245.5 LR","Reject");
-        orderList.add(order);
-//
-//        order = new Order("1024",  "15:05:54","1,245.5 LR","Reject");
-//        orderList.add(order);
-//
-//        order = new Order("1023",  "15:04:54","1,245.5 LR","Accept15");
-//        orderList.add(order);
-//
-//        order = new Order("1022",  "15:03:34","1,245.5 LR","Accept45");
-//        orderList.add(order);
-//
-//        order = new Order("1021",  "15:01:34","145.5 LR","Accept15");
-//        orderList.add(order);
-//
-//        order = new Order("1020",  "15:00:34","15.5 LR","Reject");
-//        orderList.add(order);
-
-
-
-        mAdapter.notifyDataSetChanged();
-    }
 
     private void setImeiCode() {
         if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
@@ -174,12 +148,38 @@ public class MainActivity extends AppCompatActivity {
     //Retrieve
     private void retrieveData() {
 
-
-
         fire.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                getUpdates(dataSnapshot, "A");
+
+
+                if (dataSnapshot != null && dataSnapshot.getValue() != null) {
+                    try {
+                        Order cartDetails = dataSnapshot.getValue(Order.class);
+                        cartDetails.setOrderNo(dataSnapshot.getKey());
+                        cartDetails.setCost(cartDetails.order_cost);
+                        cartDetails.setOrderTime(cartDetails.order_date);
+                        cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
+                        
+                        orderList.add(cartDetails);
+                        recyclerView.scrollToPosition(orderList.size() - 1);
+                        mAdapter.notifyItemInserted(orderList.size() - 1);
+
+
+                        if (cartDetails.status_order.equals("0")) {
+                            Intent service = new Intent(getBaseContext(), ServiceOrderControl.class);
+                            service.putExtra("ServiceOrderControl.orderId", dataSnapshot.getKey());
+                            service.putExtra("ServiceOrderControl.order_date", cartDetails.order_date);
+                            Log.d("MainActivity", "onChildChanged " + dataSnapshot.getKey() + " " + cartDetails.order_date);
+                            startService(service);
+                        }
+
+                    } catch (Exception ex) {
+                        Log.d("MainActivity", ex.getMessage());
+                    }
+                }
+
+//                getUpdates(dataSnapshot, "A");
             }
 
             @Override
@@ -224,16 +224,16 @@ public class MainActivity extends AppCompatActivity {
         }*/
 
         if (names.size() > 0) {
-//            Toast.makeText(MainActivity.this, "salam", Toast.LENGTH_SHORT).show();
-//            order = new Order( ds.getKey(),  "15:05:54","1,245.5 LR","Reject");
+            Toast.makeText(MainActivity.this, orderId, Toast.LENGTH_SHORT).show();
+//            Order order = new Order( ds.getKey(),  "15:05:54","1,245.5 LR","Reject");
 
-            Order order = new Order(  orderId,  cartDetails.order_date,cartDetails.order_cost,cartDetails.status_order);
-            orderList.add(order);
+//            Order order = new Order(  orderId,  cartDetails.order_date,cartDetails.order_cost,cartDetails.status_order);
+//            orderList.add(order);
 
-           /* ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, names);
+            ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, names);
             lv.setAdapter(adapter);
 
-            itemClick();*/
+            itemClick();
         } else {
             Toast.makeText(MainActivity.this, "No data", Toast.LENGTH_SHORT).show();
         }
@@ -244,8 +244,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View viewClicked, int pos, long id) {
                 TextView textView = (TextView) viewClicked;
-//                String message = textView.getText().toString() + " " + pos;
-//                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
                 detailOrder(textView.getText().toString());
             }
 
