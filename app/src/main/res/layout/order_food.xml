@@ -25,17 +25,29 @@
         android:textStyle="bold" />
 
     <TextView
+
+
+        android:id="@+id/caption_menu_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/menu_options"
+
+        android:text="caption_menu_description"
+        android:textColor="@color/colorPrimary"
+ />
+    <TextView
         android:id="@+id/menu_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginRight="50dp"
         android:text="menu_description"
         android:textColor="@color/title"
         android:textSize="16dp"
-        android:layout_below="@+id/menu_options"
 
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_toEndOf="@+id/caption_menu_description"
+        android:layout_alignTop="@+id/caption_menu_description"
+        android:layout_marginLeft="5dp" />
 
     <TextView
         android:id="@+id/order_no"
@@ -46,7 +58,8 @@
         android:text="order_no"
         android:textColor="@color/title"
         android:textSize="16dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="gone" />
 
 
     <TextView
@@ -57,7 +70,8 @@
 
         android:layout_alignParentStart="true"
         android:layout_marginRight="320dp"
-        android:text="time" />
+        android:text="time"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/cost"
@@ -65,7 +79,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/menu_description"
         android:layout_marginRight="50dp"
-        android:text="cost" />
+        android:text="cost"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/status"
@@ -74,16 +89,15 @@
         android:layout_below="@+id/menu_description"
 
         android:text="status"
-        android:textColor="@color/year" />
+        android:textColor="@color/year"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/caption_menu_radios"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
 
         android:layout_height="wrap_content"
         android:layout_below="@+id/menu_title"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
         android:background="@drawable/textleftcorner"
         android:gravity="center_vertical"
         android:paddingLeft="5dp"
@@ -96,10 +110,8 @@
     <TextView
 
         android:id="@+id/menu_radios"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
         android:background="@drawable/rounded_corner"
         android:gravity="center_vertical"
         android:paddingLeft="5dp"

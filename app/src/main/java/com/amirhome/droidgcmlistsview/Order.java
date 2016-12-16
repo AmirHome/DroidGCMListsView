@@ -24,7 +24,7 @@ public class Order {
     }
 
     public Order(String order_no, String time, String order_cost, String status) {
-        Log.d("MainActivity", "public order " + order_cost);
+//        Log.d("DetailActivity", "public order " + order_cost);
 
         this.order_no = order_no;
         this.time = time;
@@ -48,11 +48,11 @@ public class Order {
             for (DataSnapshot menu_options : food.child("menu_options").getChildren()) {
                 if (menu_options.getKey() != null) sb.append(menu_options.getKey() + " ");
 
-               /* Map<String, String> td = (HashMap<String, String>) menu_options.getValue();
-                if (menu_options.getValue() != null) sb.append(" " + td.keySet().toArray());
-                Log.d("MainActivity", "public order " + td.keySet().toString());*/
-
-//                sb.append(Html.fromHtml("teststs <b>Amir</b> atasgtd"));
+                Map<String, Object> td = (HashMap<String, Object>) menu_options.getValue();
+                for (Object menu_options_items : td.keySet().toArray()) {
+                    if (menu_options.getKey() != null) sb.append(menu_options_items + " ");
+                    Log.d("DetailActivity", "getChildrenCount " + menu_options_items);
+                }
             }
             this.menu_options = sb.toString();
 
@@ -116,8 +116,6 @@ public class Order {
     }
 
     public void setOrderNo(String order_no) {
-//        Log.d("DetailActivity", "setOrderNo: " + order_no);
-
         this.order_no = order_no;
     }
 

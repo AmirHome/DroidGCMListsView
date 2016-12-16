@@ -541,7 +541,7 @@
                         android:layout_weight="0.5"
                         android:orientation="vertical">
 
-                        <LinearLayout
+                        <!--<LinearLayout
                             android:id="@+id/ln28"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -583,7 +583,7 @@
                                     android:textStyle="bold"
 
 
-                                    /><!--howmany-->
+                                    />&lt;!&ndash;howmany&ndash;&gt;
 
                                 <TextView
                                     android:id="@+id/tvmealName1"
@@ -602,7 +602,7 @@
 
                                     android:textStyle="bold"
 
-                                    /><!--mealname -->
+                                    />&lt;!&ndash;mealname &ndash;&gt;
                                 <TextView
                                     android:id="@+id/tvsize1"
                                     android:layout_width="wrap_content"
@@ -619,9 +619,9 @@
 
                                     android:textColor="@color/colorPrimary"
 
-                                    /><!--size-->
-                            </LinearLayout><!--mealcaption and howmany and size-->
-                        </LinearLayout><!--caption size name-->
+                                    />&lt;!&ndash;size&ndash;&gt;
+                            </LinearLayout>&lt;!&ndash;mealcaption and howmany and size&ndash;&gt;
+                        </LinearLayout>&lt;!&ndash;caption size name&ndash;&gt;
                         <LinearLayout
                             android:id="@+id/ln23"
                             android:layout_width="match_parent"
@@ -646,8 +646,8 @@
                                 android:textColor="@color/colorPrimary"
 
 
-                                /><!--option -->
-                        </LinearLayout><!--option capiton-->
+                                />&lt;!&ndash;option &ndash;&gt;
+                        </LinearLayout>&lt;!&ndash;option capiton&ndash;&gt;
                         <LinearLayout
                             android:id="@+id/ln24"
                             android:layout_width="match_parent"
@@ -673,10 +673,10 @@
 
                                 android:textAppearance="?android:attr/textAppearanceMedium"
 
-                                />   <!--option content-->
+                                />   &lt;!&ndash;option content&ndash;&gt;
 
 
-                        </LinearLayout><!--option content-->
+                        </LinearLayout>&lt;!&ndash;option content&ndash;&gt;
                         <LinearLayout
 
                             android:id="@+id/ln25"
@@ -703,7 +703,7 @@
                                 android:textColor="@color/colorPrimary"
 
 
-                                /><!--notwantedcaption-->
+                                />&lt;!&ndash;notwantedcaption&ndash;&gt;
 
 
                             <TextView
@@ -721,8 +721,8 @@
 
                                 android:textAppearance="?android:attr/textAppearanceMedium"
 
-                                /><!--notwantedconted-->
-                        </LinearLayout><!--notwanted caption and content-->
+                                />&lt;!&ndash;notwantedconted&ndash;&gt;
+                        </LinearLayout>&lt;!&ndash;notwanted caption and content&ndash;&gt;
                         <LinearLayout
 
                             android:id="@+id/ln26"
@@ -749,7 +749,7 @@
                                 android:textColor="@color/colorPrimary"
 
 
-                                /><!--extra caption-->
+                                />&lt;!&ndash;extra caption&ndash;&gt;
 
 
                             <TextView
@@ -767,8 +767,8 @@
                                 android:text="Büffelmozzarella"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
 
-                                /><!--extra content-->
-                        </LinearLayout><!--extra caption and  content-->
+                                />&lt;!&ndash;extra content&ndash;&gt;
+                        </LinearLayout>&lt;!&ndash;extra caption and  content&ndash;&gt;
                         <LinearLayout
 
                             android:id="@+id/ln27"
@@ -795,7 +795,7 @@
                                 android:textColor="@color/colorPrimary"
 
 
-                                /><!--Note caption-->
+                                />&lt;!&ndash;Note caption&ndash;&gt;
 
 
                             <TextView
@@ -813,8 +813,8 @@
 
                                 android:textAppearance="?android:attr/textAppearanceMedium"
 
-                                /><!--note content-->
-                        </LinearLayout><!--note caption and  content-->
+                                />&lt;!&ndash;note content&ndash;&gt;
+                        </LinearLayout>&lt;!&ndash;note caption and  content&ndash;&gt;
 
 
                         <LinearLayout
@@ -858,7 +858,7 @@
                                     android:textStyle="bold"
 
 
-                                    /><!--howmNY-->
+                                    />&lt;!&ndash;howmNY&ndash;&gt;
 
 
                                 <TextView
@@ -896,9 +896,9 @@
 
                                     android:textColor="@color/colorPrimary"
 
-                                    /><!--size-->
-                            </LinearLayout><!--mealcaption and howmany  and size 2-->
-                        </LinearLayout><!--mealcaption and howmany  and size 2-->
+                                    />&lt;!&ndash;size&ndash;&gt;
+                            </LinearLayout>&lt;!&ndash;mealcaption and howmany  and size 2&ndash;&gt;
+                        </LinearLayout>&lt;!&ndash;mealcaption and howmany  and size 2&ndash;&gt;
                         <LinearLayout
                             android:id="@+id/ln9"
                             android:layout_width="match_parent"
@@ -924,7 +924,7 @@
 
 
                                 />
-                        </LinearLayout><!--option capiton2-->
+                        </LinearLayout>&lt;!&ndash;option capiton2&ndash;&gt;
                         <LinearLayout
                             android:id="@+id/ln18"
                             android:layout_width="match_parent"
@@ -951,9 +951,9 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium"
 
                                 />
-                            <!--customer-->
+                            &lt;!&ndash;customer&ndash;&gt;
 
-                        </LinearLayout><!--option content2-->
+                        </LinearLayout>&lt;!&ndash;option content2&ndash;&gt;
                         <LinearLayout
 
                             android:id="@+id/ln10"
@@ -980,7 +980,7 @@
                                 android:textColor="@color/colorPrimary"
 
 
-                                /><!--customer-->
+                                />&lt;!&ndash;customer&ndash;&gt;
 
 
                             <TextView
@@ -999,7 +999,7 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium"
 
                                 />
-                        </LinearLayout><!--notwanted caption and content2-->
+                        </LinearLayout>&lt;!&ndash;notwanted caption and content2&ndash;&gt;
                         <LinearLayout
 
                             android:id="@+id/ln11"
@@ -1026,7 +1026,7 @@
                                 android:textColor="@color/colorPrimary"
 
 
-                                /><!--customer-->
+                                />&lt;!&ndash;customer&ndash;&gt;
 
 
                             <TextView
@@ -1045,7 +1045,7 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium"
 
                                 />
-                        </LinearLayout><!--extra caption and  content2-->
+                        </LinearLayout>&lt;!&ndash;extra caption and  content2&ndash;&gt;
                         <LinearLayout
 
                             android:id="@+id/ln12"
@@ -1072,7 +1072,7 @@
                                 android:textColor="@color/colorPrimary"
 
 
-                                /><!--customer-->
+                                />&lt;!&ndash;customer&ndash;&gt;
 
 
                             <TextView
@@ -1091,13 +1091,14 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium"
 
                                 />
-                        </LinearLayout><!--note caption and  content2-->
+                        </LinearLayout>&lt;!&ndash;note caption and  content2&ndash;&gt;-->
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/dRecyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:scrollbars="vertical" />
+                            android:scrollbars="vertical"
+                            android:background="@drawable/rounded_corner" />
 
                         <LinearLayout
 
@@ -1142,7 +1143,7 @@
                             <TextView
 
 
-                                android:id="@+id/Cost"
+                                android:id="@+id/description"
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
 
@@ -1156,7 +1157,7 @@
 
                                 android:paddingLeft="5dp"
                                 android:paddingRight="5dp"
-                                android:text="dankeschön"
+                                android:text="description"
 
                                 android:textAppearance="?android:attr/textAppearanceMedium"
 
