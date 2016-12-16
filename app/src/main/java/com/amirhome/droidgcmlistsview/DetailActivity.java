@@ -29,9 +29,9 @@ public class DetailActivity extends AppCompatActivity {
     Spinner spinner;
     List<String> listStatus;
 
-    final List<Order> orderList = new ArrayList<>();
-    private RecyclerView recyclerView;
-    private OrdersAdapter mAdapter;
+    final List<Order> dOrderList = new ArrayList<>();
+    private RecyclerView dRecyclerView;
+    private MenuAdapter dAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +43,6 @@ public class DetailActivity extends AppCompatActivity {
         TextView strOrderNo = (TextView) findViewById(R.id.tvOrderNo);
         strOrderNo.setText("Order:  " + id);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        mAdapter = new OrdersAdapter(orderList, R.layout.order_food);
-        recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
-        prepareOrderData();
-
         Firebase.setAndroidContext(this);
         fire = new Firebase(MainActivity.DB_URL + MainActivity.rCode + "/" + id);
 
@@ -61,22 +51,14 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
-    private void prepareOrderData() {
+/*    private void prepareOrderData() {
         Order order = new Order("menu_count", "Action & Adventure", "2015", "2015");
         orderList.add(order);
 
         order = new Order("Inside Out", "Animation, Kids & Family", "2015", "asdfasdf");
         orderList.add(order);
-        /*Order cartDetails = dataSnapshot.getValue(Order.class);
-        cartDetails.setOrderNo(dataSnapshot.getKey());
-        cartDetails.setCost(cartDetails.order_cost);
-        cartDetails.setOrderTime(cartDetails.order_date);
-        cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
 
-        orderList.add(cartDetails);
-        recyclerView.scrollToPosition(orderList.size() - 1);
-        mAdapter.notifyItemInserted(orderList.size() - 1);*/
-    }
+    }*/
 
     private void setStatusAction(String statusOrder, String statusDelivery) {
         spinner = (Spinner) findViewById(R.id.spinnerStatus);
@@ -160,14 +142,32 @@ public class DetailActivity extends AppCompatActivity {
     //Retrieve
     private void retrieveData() {
 
-
+        dRecyclerView = (RecyclerView) findViewById(R.id.dRecyclerView);
+        dAdapter = new MenuAdapter(dOrderList);
+        dRecyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        dRecyclerView.setLayoutManager(mLayoutManager);
+        dRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        dRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        dRecyclerView.setAdapter(dAdapter);
+//        prepareOrderData();
         fire.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //for (DataSnapshot child: dataSnapshot.getChildren()) {
-//                String newCondition = (String) dataSnapshot.child("title").getValue();
-//                    Log.i("DetailActivity", (String) dataSnapshot.child("address").getValue());
-                //}
+
+                Order cartDetails = dataSnapshot.getValue(Order.class);
+                cartDetails.setOrderNo(dataSnapshot.getKey());
+                cartDetails.setCost(cartDetails.order_cost);
+                cartDetails.setOrderTime(cartDetails.order_date);
+                cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
+
+//                cartDetails.setTest(cartDetails.order_date);
+                cartDetails.setFood(dataSnapshot);
+
+                dOrderList.add(cartDetails);
+                dRecyclerView.scrollToPosition(dOrderList.size() - 1);
+                dAdapter.notifyItemInserted(dOrderList.size() - 1);
+
 
                 setStatusAction((String) dataSnapshot.child("status_order").getValue(), (String) dataSnapshot.child("status_delivery").getValue());
                 getUpdates(dataSnapshot);
@@ -224,3 +224,4 @@ public class DetailActivity extends AppCompatActivity {
         foo.setText(Html.fromHtml("teststs <b>Amir</b> atasgtd"));
     }
 }
+
