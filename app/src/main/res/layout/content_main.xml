@@ -273,25 +273,6 @@
                                 android:scrollbars="vertical" />
 
 
-                            <ListView
-
-                                android:id="@+id/lv"
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:layout_weight="0.2"
-
-
-                                android:backgroundTintMode="multiply"
-                                android:clickable="true"
-                                android:contentDescription="@string/abc_font_family_menu_material"
-                                android:contextClickable="true"
-                                android:divider="#ffffff"
-                                android:dividerHeight="@dimen/abc_control_inset_material"
-
-
-                                />
-
-
                     </LinearLayout>
 
             <!--right side -->

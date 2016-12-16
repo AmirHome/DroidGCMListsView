@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
     private TelephonyManager mTelephonyManager;
 
     Firebase fire;
-    ListView lv;
-    ArrayList<String> names = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +60,9 @@ public class MainActivity extends AppCompatActivity {
         //get and set imei code = restaurant code
         this.setImeiCode();
 
-        lv = (ListView) findViewById(R.id.lv);
-
-
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        mAdapter = new OrdersAdapter(orderList);
+        mAdapter = new OrdersAdapter(orderList, R.layout.order_list_row);
 
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -178,8 +173,6 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("MainActivity", ex.getMessage());
                     }
                 }
-
-//                getUpdates(dataSnapshot, "A");
             }
 
             @Override
@@ -231,49 +224,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void getUpdates(DataSnapshot ds, String status) {
-
-        Cart cartDetails = ds.getValue(Cart.class);
-        String orderId = ds.getKey();
-//        String description = cartDetails.getDescription();
-        names.add(orderId);
-
-/*
-        if (cartDetails.status_order.equals("0")) {
-            Intent service = new Intent(getBaseContext(), ServiceOrderControl.class);
-            service.putExtra("ServiceOrderControl.orderId", orderId);
-            service.putExtra("ServiceOrderControl.order_date", cartDetails.order_date);
-            Log.d("MainActivity", "onChildChanged " + orderId +" "+cartDetails.order_date);
-            startService(service);
-
-        }*/
-
-        if (names.size() > 0) {
-            Toast.makeText(MainActivity.this, orderId, Toast.LENGTH_SHORT).show();
-//            Order order = new Order( ds.getKey(),  "15:05:54","1,245.5 LR","Reject");
-
-//            Order order = new Order(  orderId,  cartDetails.order_date,cartDetails.order_cost,cartDetails.status_order);
-//            orderList.add(order);
-
-            ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, names);
-            lv.setAdapter(adapter);
-
-            itemClick();
-        } else {
-            Toast.makeText(MainActivity.this, "No data", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void itemClick() {
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View viewClicked, int pos, long id) {
-                TextView textView = (TextView) viewClicked;
-                detailOrder(textView.getText().toString());
-            }
-
-        });
-    }
 
     private void detailOrder(String id) {
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);

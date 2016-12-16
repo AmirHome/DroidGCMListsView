@@ -3,6 +3,9 @@ package com.amirhome.droidgcmlistsview;
 /**
  * Created by www.AmirHome.com on 12/14/2016.
  */
+
+import android.util.Log;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 
@@ -14,14 +17,14 @@ public class Order {
 
     }
 
-/*    public Order(String order_no, String time, String order_cost, String status) {
+    public Order(String order_no, String time, String order_cost, String status) {
         Log.d("MainActivity", "public order " + order_cost);
 
         this.order_no = order_no;
         this.time = time;
         this.cost = order_cost;
         this.status = status;
-    }*/
+    }
 
     public String getStatus() {
         return status;

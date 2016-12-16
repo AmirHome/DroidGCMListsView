@@ -3,6 +3,9 @@ package com.amirhome.droidgcmlistsview;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +29,10 @@ public class DetailActivity extends AppCompatActivity {
     Spinner spinner;
     List<String> listStatus;
 
+    final List<Order> orderList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private OrdersAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,13 +43,39 @@ public class DetailActivity extends AppCompatActivity {
         TextView strOrderNo = (TextView) findViewById(R.id.tvOrderNo);
         strOrderNo.setText("Order:  " + id);
 
-        Firebase.setAndroidContext(this);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mAdapter = new OrdersAdapter(orderList, R.layout.order_food);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+        prepareOrderData();
 
+        Firebase.setAndroidContext(this);
         fire = new Firebase(MainActivity.DB_URL + MainActivity.rCode + "/" + id);
 
         this.retrieveData();
 
 
+    }
+
+    private void prepareOrderData() {
+        Order order = new Order("menu_count", "Action & Adventure", "2015", "2015");
+        orderList.add(order);
+
+        order = new Order("Inside Out", "Animation, Kids & Family", "2015", "asdfasdf");
+        orderList.add(order);
+        /*Order cartDetails = dataSnapshot.getValue(Order.class);
+        cartDetails.setOrderNo(dataSnapshot.getKey());
+        cartDetails.setCost(cartDetails.order_cost);
+        cartDetails.setOrderTime(cartDetails.order_date);
+        cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
+
+        orderList.add(cartDetails);
+        recyclerView.scrollToPosition(orderList.size() - 1);
+        mAdapter.notifyItemInserted(orderList.size() - 1);*/
     }
 
     private void setStatusAction(String statusOrder, String statusDelivery) {

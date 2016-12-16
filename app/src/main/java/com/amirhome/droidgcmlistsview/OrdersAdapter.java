@@ -14,6 +14,7 @@ import java.util.List;
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHolder> {
 
     private List<Order> moviesList;
+    private int tmpLayout;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView order_no, time, cost, status;
@@ -29,14 +30,15 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
     }
 
 
-    public OrdersAdapter(List<Order> moviesList) {
+    public OrdersAdapter(List<Order> moviesList, int tmpLayout) {
         this.moviesList = moviesList;
+        this.tmpLayout = tmpLayout;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.order_list_row, parent, false);
+                .inflate(tmpLayout, parent, false);
 
         return new MyViewHolder(itemView);
     }
