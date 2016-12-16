@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 Log.d("MainActivity", "onChildChanged getOrderNo=" + dataSnapshot.getKey());
-                int pos = 0;
+                int pos = -1;
                 for (int i = 0; i < orderList.size(); i++) {
                     orderList.get(i).getOrderNo();
                     if (dataSnapshot.getKey().equals(orderList.get(i).getOrderNo())) {
@@ -195,19 +195,22 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 Log.d("MainActivity", "position " + pos);
-                orderList.remove(pos);
-                mAdapter.notifyItemRemoved(pos);
-                mAdapter.notifyItemRangeChanged(pos, orderList.size());
+                if(pos >= 0){
 
-                Order cartDetails = dataSnapshot.getValue(Order.class);
-                cartDetails.setOrderNo(dataSnapshot.getKey());
-                cartDetails.setCost(cartDetails.order_cost);
-                cartDetails.setOrderTime(cartDetails.order_date);
-                cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
+                    orderList.remove(pos);
+                    mAdapter.notifyItemRemoved(pos);
+                    mAdapter.notifyItemRangeChanged(pos, orderList.size());
 
-                orderList.add(pos, cartDetails);
-                mAdapter.notifyItemInserted(pos);
-                mAdapter.notifyItemRangeChanged(pos, orderList.size());
+                    Order cartDetails = dataSnapshot.getValue(Order.class);
+                    cartDetails.setOrderNo(dataSnapshot.getKey());
+                    cartDetails.setCost(cartDetails.order_cost);
+                    cartDetails.setOrderTime(cartDetails.order_date);
+                    cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
+
+                    orderList.add(pos, cartDetails);
+                    mAdapter.notifyItemInserted(pos);
+                    mAdapter.notifyItemRangeChanged(pos, orderList.size());
+                }
             }
 
             @Override
