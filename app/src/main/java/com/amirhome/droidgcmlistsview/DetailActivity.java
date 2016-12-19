@@ -160,7 +160,6 @@ public class DetailActivity extends AppCompatActivity {
                 cartDetails.setOrderTime(cartDetails.order_date);
                 cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
 
-//                cartDetails.setTest(cartDetails.order_date);
                 cartDetails.setFood(dataSnapshot);
 
                 dOrderList.add(cartDetails);
@@ -187,21 +186,37 @@ public class DetailActivity extends AppCompatActivity {
         strCustomer.setText((String) ds.child("customer").getValue());
 
         TextView tvDeliveryDate = (TextView) findViewById(R.id.tvDeliveryDate);
+        tvDeliveryDate.setText((String) ds.child("delivery_date").getValue());
 
-        if (ds.child("delivery_date").getValue().equals("0")) {
+/*        if (ds.child("delivery_date").getValue().equals("0")) {
             tvDeliveryDate.setText("Onayli Bekliyor");
         } else {
-            tvDeliveryDate.setText((String) ds.child("delivery_date").getValue());
-        }
+        }*/
 
         TextView tvOrderDate = (TextView) findViewById(R.id.tvOrderDate);
         tvOrderDate.setText((String) ds.child("order_date").getValue());
 
         TextView tvStatusOrder = (TextView) findViewById(R.id.tvStatusOrder);
-        tvStatusOrder.setText((String) ds.child("status_order").getValue());
+        if (ds.child("status_order").getValue().equals("0")) {
+            tvStatusOrder.setText("Onayli Bekliyor");
+        } else {
+            tvStatusOrder.setText((String) ds.child("status_order").getValue());
+        }
 
         TextView tvStatusDelivery = (TextView) findViewById(R.id.tvStatusDelivery);
-        tvStatusDelivery.setText((String) ds.child("status_delivery").getValue());
+        String status_order = (String) ds.child("status_order").getValue();
+        if (status_order.equals("Reject") || status_order.equals("RejectAuto")){
+            if (ds.child("status_delivery").getValue().equals("0")) {
+                tvStatusDelivery.setText("");
+            }
+        }else{
+            if (ds.child("status_delivery").getValue().equals("0")) {
+                tvStatusDelivery.setText("Teslim Bekliyor");
+            }else{
+                tvStatusDelivery.setText((String) ds.child("status_delivery").getValue());
+            }
+        }
+
 
         TextView tvOrderCost = (TextView) findViewById(R.id.tvOrderCost);
         tvOrderCost.setText((String) ds.child("order_cost").getValue());
