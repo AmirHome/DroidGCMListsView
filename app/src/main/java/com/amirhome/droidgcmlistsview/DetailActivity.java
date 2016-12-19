@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -189,7 +188,7 @@ public class DetailActivity extends AppCompatActivity {
 
         TextView tvDeliveryDate = (TextView) findViewById(R.id.tvDeliveryDate);
 
-        if ("0" == (String) ds.child("delivery_date").getValue()) {
+        if (ds.child("delivery_date").getValue().equals("0")) {
             tvDeliveryDate.setText("Onayli Bekliyor");
         } else {
             tvDeliveryDate.setText((String) ds.child("delivery_date").getValue());
@@ -216,12 +215,9 @@ public class DetailActivity extends AppCompatActivity {
         TextView tvAddressDescription = (TextView) findViewById(R.id.tvAddressDescription);
         tvAddressDescription.setText((String) ds.child("address_description").getValue());
 
-        TextView tvFoodDescriotion = (TextView) findViewById(R.id.tvFoodDescriotion);
-        tvFoodDescriotion.setText((String) ds.child("description").getValue());
+        TextView descriptionOrder = (TextView) findViewById(R.id.descriptionOrder);
+        descriptionOrder.setText((String) ds.child("description").getValue());
 
-
-        TextView foo = (TextView) findViewById(R.id.tvFoodDescriotion);
-        foo.setText(Html.fromHtml("teststs <b>Amir</b> atasgtd"));
     }
 }
 

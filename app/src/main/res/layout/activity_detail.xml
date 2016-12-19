@@ -1112,7 +1112,7 @@
 
                             <TextView
 
-                                android:id="@+id/costtext"
+                                android:id="@+id/descriptionOrderCaption"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="4dp"
@@ -1141,9 +1141,7 @@
 
 
                             <TextView
-
-
-                                android:id="@+id/description"
+                                android:id="@+id/descriptionOrder"
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
 
@@ -1154,11 +1152,9 @@
                                 android:gravity="center_vertical"
 
                                 android:minHeight="70dp"
-
                                 android:paddingLeft="5dp"
                                 android:paddingRight="5dp"
-                                android:text="description"
-
+                                android:text="descriptionOrder"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
 
                                 /><!--order note content-->
@@ -1193,13 +1189,6 @@
 
 
     </LinearLayout><!--collapse horizontal-->
-
-
-    <TextView
-        android:id="@+id/tvFoodDescriotion"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
 </RelativeLayout>
