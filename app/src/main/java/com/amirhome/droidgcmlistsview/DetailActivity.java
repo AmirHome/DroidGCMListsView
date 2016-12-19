@@ -149,10 +149,17 @@ public class DetailActivity extends AppCompatActivity {
         dRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         dRecyclerView.setItemAnimator(new DefaultItemAnimator());
         dRecyclerView.setAdapter(dAdapter);
-//        prepareOrderData();
+
         fire.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                int size = dOrderList.size();
+                if (size > 0) {
+                    for (int i = 0; i < size; i++) {
+                        dOrderList.remove(0);
+                    }
+                    dAdapter.notifyItemRangeRemoved(0, size);
+                }
 
                 Order cartDetails = dataSnapshot.getValue(Order.class);
                 cartDetails.setOrderNo(dataSnapshot.getKey());
