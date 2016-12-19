@@ -18,13 +18,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     final List<Order> orderList = new ArrayList<>();
@@ -79,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
         }));
         Firebase.setAndroidContext(this);
         fire = new Firebase(DB_URL + rCode);
-//        prepareOrderData();
 
         retrieveData();
 
@@ -93,6 +109,15 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("MainActivity" , service.processName);
                 }*/
 
+//                var messageListRef = new Firebase('https://samplechat.firebaseio-demo.com/message_list');
+//                var newMessageRef = fire.push();
+
+
+                Firebase alanRef = fire.child("users").child("alanisawesome");
+
+                alanRef.child("fullName").setValue("Alan Turing");
+
+
 
                 String msg = "Can you help me please..";
                 Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
@@ -101,6 +126,61 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void http_request(String param1) {
+
+        String request_url = "http://www.google.com/";
+
+        JSONObject parameters = new JSONObject();
+
+        try {
+            parameters.put("param1" ,param1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, request_url, parameters,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+                            String message = response.getString("message");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("VolleyError",error.toString());
+            }
+        }) {
+/*            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQ3LCJpc3MiOiJodHRwOlwvXC9lYXQyZG9uYXRlMy50a1wvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTQ4MjE2MDQwMywiZXhwIjoxNDgzMDI0NDAzLCJuYmYiOjE0ODIxNjA0MDMsImp0aSI6ImUyNTA2MjAzZGU0NzI3MTI0ZTE3MDk4NzRiMzMyYTc5In0.rORWETjYea5FvmP50tHvs-QN_ElLlwGplmezieB6f30");
+                return params;
+            }*/
+
+            @Override
+            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                int mStatusCode = response.statusCode;
+                Log.i("VolleyError",mStatusCode + "");
+                return super.parseNetworkResponse(response);
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                4000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        App.getInstance().addToRequestQueue(request);
+
+    }
 
     private void setImeiCode() {
         if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
@@ -154,6 +234,7 @@ public class MainActivity extends AppCompatActivity {
                         recyclerView.scrollToPosition(orderList.size() - 1);
                         mAdapter.notifyItemInserted(orderList.size() - 1);
 
+//                        mAdapter.notifyDataSetChanged();
 
                         if (cartDetails.status_order.equals("0")) {
                             Intent service = new Intent(getBaseContext(), ServiceOrderControl.class);
@@ -182,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 Log.d("MainActivity", "position " + pos);
-                if(pos >= 0){
+                if (pos >= 0) {
 
                     orderList.remove(pos);
                     mAdapter.notifyItemRemoved(pos);

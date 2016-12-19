@@ -68,9 +68,9 @@ public class ServiceOrderControl extends Service {
             public void run() {
 
                 res = setStatusReject(orderId);
-                Log.d("MainActivity", "outside res "+res+orderId);
+                Log.d("MainActivity", "outside res " + res + orderId);
 
-                if(res) {
+                if (res) {
 
                     //TODO: service status is off
                     //TODO: set penalty
@@ -92,10 +92,9 @@ public class ServiceOrderControl extends Service {
         // Control orderDate
         String diff = getDiff(orderDate);
 
-        if (Integer.parseInt(diff) < DelayedMili){
+        if (Integer.parseInt(diff) < DelayedMili) {
             handler.postDelayed(r, DelayedMili - Integer.parseInt(diff));
-        }
-        else{
+        } else {
             handler.postDelayed(r, 1000);
         }
 
@@ -108,16 +107,17 @@ public class ServiceOrderControl extends Service {
         fire = new Firebase(MainActivity.DB_URL + MainActivity.rCode + "/" + orderId + "/");
         fire.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot ds)  {
+            public void onDataChange(DataSnapshot ds) {
 
                 if (ds.child("status_order").getValue().equals("0")) {
                     // Order is reject
                     fire.child("status_order").setValue("Reject");
                     res = true;
-                }else {
+                } else {
                     res = false;
                 }
             }
+
             @Override
             public void onCancelled(FirebaseError firebaseError) {
             }
