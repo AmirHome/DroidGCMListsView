@@ -4,8 +4,6 @@ package com.amirhome.droidgcmlistsview;
  * Created by www.AmirHome.com on 12/14/2016.
  */
 
-import android.util.Log;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.firebase.client.DataSnapshot;
 
@@ -24,7 +22,7 @@ public class Order {
     }
 
     public Order(String order_no, String time, String order_cost, String status) {
-//        Log.d("DetailActivity", "public order " + order_cost);
+//        Log.d("AmirHomeLog", "public order " + order_cost);
 
         this.order_no = order_no;
         this.time = time;
@@ -51,7 +49,7 @@ public class Order {
                 Map<String, Object> td = (HashMap<String, Object>) menu_options.getValue();
                 for (Object menu_options_items : td.keySet().toArray()) {
                     if (menu_options.getKey() != null) sb.append(menu_options_items + " ");
-                    Log.d("DetailActivity", "getChildrenCount " + menu_options_items);
+//                    Log.d("AmirHomeLog", "getChildrenCount " + menu_options_items);
                 }
             }
             this.menu_options = sb.toString();

@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
@@ -23,7 +22,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class ServiceOrderControl extends Service {
-    public static final int DelayedMili = 180000;// 3 x 60 x 1000
+    public static final int DelayedMili = 1000;// 3 x 60 x 1000 = 180000
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     Firebase fire;
     String orderId;
@@ -68,8 +67,6 @@ public class ServiceOrderControl extends Service {
             public void run() {
 
                 res = setStatusReject(orderId);
-                Log.d("MainActivity", "outside res " + res + orderId);
-
                 if (res) {
 
                     //TODO: service status is off
@@ -111,7 +108,9 @@ public class ServiceOrderControl extends Service {
 
                 if (ds.child("status_order").getValue().equals("0")) {
                     // Order is reject
-                    fire.child("status_order").setValue("Reject");
+                    fire.child("status_order").setValue("RejectAuto");
+
+                    DetailActivity.httpRequest(fire.getKey());
                     res = true;
                 } else {
                     res = false;
@@ -145,7 +144,7 @@ public class ServiceOrderControl extends Service {
 
             notificationManager.notify(0, notif);
         } catch (Exception e) {
-            Log.d("MainActivity", e.toString());
+//            Log.d("AmirHomeLog", e.toString());
         }
     }
 

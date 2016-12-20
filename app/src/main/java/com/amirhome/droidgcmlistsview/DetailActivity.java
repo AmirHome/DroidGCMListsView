@@ -14,10 +14,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,16 +82,16 @@ public class DetailActivity extends AppCompatActivity {
             listStatus.add("Reject");
 
         } else {
-            if (statusOrder.equals("Reject")) {
+            if (statusOrder.equals("Reject") || statusOrder.equals("RejectAuto")) {
                 listStatus.add(statusOrder);
             } else {
                 //statusOrder is Accept
                 if (statusDelivery.equals("0")) {
                     listStatus.add(statusOrder);
-                    listStatus.add("Accepted");
-                    listStatus.add("reject_reason1");
+                    listStatus.add("Delivered");
+                    listStatus.add("Reject_reason1");
                     listStatus.add("Reject_reason2");
-                    listStatus.add("reject_reason3");
+                    listStatus.add("Reject_reason3");
                 } else {
                     listStatus.add(statusDelivery);
                 }
@@ -104,7 +113,7 @@ public class DetailActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 String selectStatusAction = arg0.getItemAtPosition(arg2).toString();
 
-                if (arg2 != 0)
+                if (arg2 != 0){
                     switch (selectStatusAction) {
 
                         case "Accept15":
@@ -120,7 +129,7 @@ public class DetailActivity extends AppCompatActivity {
                             fire.child("status_order").setValue(selectStatusAction);
 
                             break;
-                        case "Accepted":
+                        case "Delivered":
                         case "Reject_reason1":
                         case "Reject_reason2":
                         case "Reject_reason3":
@@ -128,6 +137,8 @@ public class DetailActivity extends AppCompatActivity {
                             fire.child("status_delivery").setValue(selectStatusAction);
                             break;
                     }
+                    httpRequest(fire.getKey());
+                }
             }
 
             @Override
@@ -153,8 +164,7 @@ public class DetailActivity extends AppCompatActivity {
         fire.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("DetailActivity", "onDataChange " + dataSnapshot.getKey());
-//                httpRequest(dataSnapshot.getKey());
+
                 int size = dOrderList.size();
                 if (size > 0) {
                     for (int i = 0; i < size; i++) {
@@ -189,6 +199,61 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
+    static public void httpRequest(String param1) {
+
+        String request_url = "http://192.168.1.109/eat2donate/api/v1/info";
+        request_url = "http://192.168.1.109/eat2donate/api/v1/sync-cart-db/" + MainActivity.rCode;
+
+        JSONObject parameters = new JSONObject();
+
+        try {
+            parameters.put("cart_id", param1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, request_url, parameters,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String cart_id = response.getString("cart_id");
+                            Log.d("AmirHomeLog","onResponse "+cart_id);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.d("AmirHomeLog",error.toString());
+            }
+        }) {
+/*            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQ3LCJpc3MiOiJodHRwOlwvXC9lYXQyZG9uYXRlMy50a1wvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTQ4MjE2MDQwMywiZXhwIjoxNDgzMDI0NDAzLCJuYmYiOjE0ODIxNjA0MDMsImp0aSI6ImUyNTA2MjAzZGU0NzI3MTI0ZTE3MDk4NzRiMzMyYTc5In0.rORWETjYea5FvmP50tHvs-QN_ElLlwGplmezieB6f30");
+                return params;
+            }*/
+
+            @Override
+            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                int mStatusCode = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                4000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        App.getInstance().addToRequestQueue(request);
+
+    }
+
     private void getUpdates(DataSnapshot ds) {
 
         TextView strCustomer = (TextView) findViewById(R.id.tvCustomer);
@@ -214,14 +279,14 @@ public class DetailActivity extends AppCompatActivity {
 
         TextView tvStatusDelivery = (TextView) findViewById(R.id.tvStatusDelivery);
         String status_order = (String) ds.child("status_order").getValue();
-        if (status_order.equals("Reject") || status_order.equals("RejectAuto")){
+        if (status_order.equals("Reject") || status_order.equals("RejectAuto")) {
             if (ds.child("status_delivery").getValue().equals("0")) {
                 tvStatusDelivery.setText("");
             }
-        }else{
+        } else {
             if (ds.child("status_delivery").getValue().equals("0")) {
                 tvStatusDelivery.setText("Teslim Bekliyor");
-            }else{
+            } else {
                 tvStatusDelivery.setText((String) ds.child("status_delivery").getValue());
             }
         }

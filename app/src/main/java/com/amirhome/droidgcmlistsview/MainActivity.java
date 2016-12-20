@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 //                Firebase alanRef = fire.child("users").child("alanisawesome");
 //                alanRef.child("fullName").setValue("Alan Turing");
 
-                httpRequest("23");
+//                httpRequest("23");
 
                 String msg = "Can you help me please..";
                 Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
@@ -125,64 +125,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void httpRequest(String param1) {
 
-        String request_url = "http://192.168.1.109/eat2donate/api/v1/info";
-        request_url = "http://192.168.1.109/eat2donate/api/v1/sync-cart-db/" + this.rCode;
-
-        JSONObject parameters = new JSONObject();
-
-        try {
-            parameters.put("cart_id" ,param1);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, request_url, parameters,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-//                        Log.d("VolleyError",response.toString());
-
-                     try {
-                         String cart_id = response.getString("cart_id");
-                         Log.d("MainActivity",cart_id);
-                     } catch (JSONException e) {
-                         e.printStackTrace();
-                     }
-                    }
-
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-//                Log.i("VolleyError1",error.toString());
-                Log.i("VolleyError",error.toString());
-            }
-        }) {
-/*            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Authorization", "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQ3LCJpc3MiOiJodHRwOlwvXC9lYXQyZG9uYXRlMy50a1wvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTQ4MjE2MDQwMywiZXhwIjoxNDgzMDI0NDAzLCJuYmYiOjE0ODIxNjA0MDMsImp0aSI6ImUyNTA2MjAzZGU0NzI3MTI0ZTE3MDk4NzRiMzMyYTc5In0.rORWETjYea5FvmP50tHvs-QN_ElLlwGplmezieB6f30");
-                return params;
-            }*/
-
-            @Override
-            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-                int mStatusCode = response.statusCode;
-                Log.i("VolleyError",mStatusCode + "");
-                return super.parseNetworkResponse(response);
-            }
-        };
-
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                4000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        App.getInstance().addToRequestQueue(request);
-
-    }
 
     private void setImeiCode() {
         if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
@@ -242,19 +185,19 @@ public class MainActivity extends AppCompatActivity {
                             Intent service = new Intent(getBaseContext(), ServiceOrderControl.class);
                             service.putExtra("ServiceOrderControl.orderId", dataSnapshot.getKey());
                             service.putExtra("ServiceOrderControl.order_date", cartDetails.order_date);
-//                            Log.d("MainActivity", "onChildChanged " + dataSnapshot.getKey() + " " + cartDetails.order_date);
+//                            Log.d("AmirHomeLog", "onChildChanged " + dataSnapshot.getKey() + " " + cartDetails.order_date);
                             startService(service);
                         }
 
                     } catch (Exception ex) {
-                        Log.d("MainActivity", ex.getMessage());
+                        Log.d("AmirHomeLog", ex.getMessage());
                     }
                 }
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Log.d("MainActivity", "onChildChanged getOrderNo=" + dataSnapshot.getKey());
+//                Log.d("AmirHomeLog", "onChildChanged getOrderNo=" + dataSnapshot.getKey());
 
 
                 int pos = -1;
@@ -266,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 }
-//                Log.d("MainActivity", "position " + pos);
+//                Log.d("AmirHomeLog", "position " + pos);
                 if (pos >= 0) {
 
                     orderList.remove(pos);
@@ -287,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                Log.d("MainActivity", "onChildRemoved " + dataSnapshot.getKey());
+//                Log.d("AmirHomeLog", "onChildRemoved " + dataSnapshot.getKey());
 
             }
 
