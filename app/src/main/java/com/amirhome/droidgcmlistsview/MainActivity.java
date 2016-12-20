@@ -113,11 +113,10 @@ public class MainActivity extends AppCompatActivity {
 //                var newMessageRef = fire.push();
 
 
-                Firebase alanRef = fire.child("users").child("alanisawesome");
+//                Firebase alanRef = fire.child("users").child("alanisawesome");
+//                alanRef.child("fullName").setValue("Alan Turing");
 
-                alanRef.child("fullName").setValue("Alan Turing");
-
-
+                httpRequest("23");
 
                 String msg = "Can you help me please..";
                 Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
@@ -126,14 +125,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void http_request(String param1) {
+    private void httpRequest(String param1) {
 
-        String request_url = "http://www.google.com/";
+        String request_url = "http://192.168.1.109/eat2donate/api/v1/info";
+        request_url = "http://192.168.1.109/eat2donate/api/v1/sync-cart-db/" + this.rCode;
 
         JSONObject parameters = new JSONObject();
 
         try {
-            parameters.put("param1" ,param1);
+            parameters.put("cart_id" ,param1);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -142,19 +142,21 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+//                        Log.d("VolleyError",response.toString());
 
-                        try {
-                            String message = response.getString("message");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
+                     try {
+                         String cart_id = response.getString("cart_id");
+                         Log.d("MainActivity",cart_id);
+                     } catch (JSONException e) {
+                         e.printStackTrace();
+                     }
                     }
 
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
+//                Log.i("VolleyError1",error.toString());
                 Log.i("VolleyError",error.toString());
             }
         }) {
@@ -253,6 +255,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 Log.d("MainActivity", "onChildChanged getOrderNo=" + dataSnapshot.getKey());
+
+
                 int pos = -1;
                 for (int i = 0; i < orderList.size(); i++) {
                     orderList.get(i).getOrderNo();
@@ -262,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 }
-                Log.d("MainActivity", "position " + pos);
+//                Log.d("MainActivity", "position " + pos);
                 if (pos >= 0) {
 
                     orderList.remove(pos);

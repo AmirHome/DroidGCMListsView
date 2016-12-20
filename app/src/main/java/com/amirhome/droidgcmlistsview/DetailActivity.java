@@ -153,6 +153,8 @@ public class DetailActivity extends AppCompatActivity {
         fire.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("DetailActivity", "onDataChange " + dataSnapshot.getKey());
+//                httpRequest(dataSnapshot.getKey());
                 int size = dOrderList.size();
                 if (size > 0) {
                     for (int i = 0; i < size; i++) {
