@@ -18,30 +18,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.NetworkError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.NoConnectionError;
-import com.android.volley.ParseError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Enumeration;
 import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     final List<Order> orderList = new ArrayList<>();
@@ -141,22 +128,59 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem imeinumber = menu.findItem(R.id.imeinumber);
+        imeinumber.setTitle( this.rCode);
+
+        MenuItem ipnumber = menu.findItem(R.id.ipnumber);
+//        getLocalIpAddress()
+        ipnumber.setTitle( getLocalIpAddress() );
+
+        MenuItem version = menu.findItem(R.id.version);
+        version.setTitle( "0.0.2.09");
+
+        MenuItem restourantn_no = menu.findItem(R.id.restourantn_no);
+        restourantn_no.setTitle( "2");
         return true;
     }
+    public String getLocalIpAddress() {
+        StringBuilder IFCONFIG=new StringBuilder();
+        try {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+                NetworkInterface intf = en.nextElement();
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    if (!inetAddress.isLoopbackAddress() && !inetAddress.isLinkLocalAddress() && inetAddress.isSiteLocalAddress()) {
+                        IFCONFIG.append(inetAddress.getHostAddress().toString()+"");
+                    }
 
+                }
+            }
+        } catch (SocketException ex) {
+            Log.e("LOG_TAG", ex.toString());
+        }
+        return (IFCONFIG.toString());
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.service_status:
+                // User chose the "Settings" item, show the app settings UI...
+                Log.d("AmirHomeLog", "service_status");
+                return true;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            case R.id.open_status:
+                // User chose the "Favorite" action, mark the current item
+                // as a favorite...
+                Log.d("AmirHomeLog", "open_status");
+
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     //Retrieve
