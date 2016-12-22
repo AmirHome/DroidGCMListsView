@@ -178,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
                         orderList.add(cartDetails);
                         recyclerView.scrollToPosition(orderList.size() - 1);
                         mAdapter.notifyItemInserted(orderList.size() - 1);
+//                        Log.d("AmirHomeLog", "onChildAdded"+ orderList.size());
 
 //                        mAdapter.notifyDataSetChanged();
 

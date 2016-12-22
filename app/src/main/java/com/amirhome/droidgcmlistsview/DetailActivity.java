@@ -165,6 +165,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+
                 int size = dOrderList.size();
                 if (size > 0) {
                     for (int i = 0; i < size; i++) {
@@ -173,17 +174,20 @@ public class DetailActivity extends AppCompatActivity {
                     dAdapter.notifyItemRangeRemoved(0, size);
                 }
 
-                Order cartDetails = dataSnapshot.getValue(Order.class);
-                cartDetails.setOrderNo(dataSnapshot.getKey());
-                cartDetails.setCost(cartDetails.order_cost);
-                cartDetails.setOrderTime(cartDetails.order_date);
-                cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
+                for (DataSnapshot food : dataSnapshot.child("foods").getChildren()) {
 
-                cartDetails.setFood(dataSnapshot);
+                    Order cartDetails = dataSnapshot.getValue(Order.class);
+                    cartDetails.setOrderNo(dataSnapshot.getKey());
+                    cartDetails.setCost(cartDetails.order_cost);
+                    cartDetails.setOrderTime(cartDetails.order_date);
+                    cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
 
-                dOrderList.add(cartDetails);
-                dRecyclerView.scrollToPosition(dOrderList.size() - 1);
-                dAdapter.notifyItemInserted(dOrderList.size() - 1);
+                    cartDetails.setFood(food);
+                    dOrderList.add(cartDetails);
+                    dRecyclerView.scrollToPosition( dOrderList.size() - 1);
+                    dAdapter.notifyItemInserted( dOrderList.size() - 1);
+
+                }
 
 
                 setStatusAction((String) dataSnapshot.child("status_order").getValue(), (String) dataSnapshot.child("status_delivery").getValue());
@@ -201,8 +205,7 @@ public class DetailActivity extends AppCompatActivity {
 
     static public void httpRequest(String param1) {
 
-        String request_url = "http://192.168.1.109/eat2donate/api/v1/info";
-        request_url = "http://192.168.1.109/eat2donate/api/v1/sync-cart-db/" + MainActivity.rCode;
+        String request_url = "http://192.168.1.109/eat2donate/api/v1/sync-cart-db/" + MainActivity.rCode;
 
         JSONObject parameters = new JSONObject();
 
@@ -228,7 +231,7 @@ public class DetailActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                //Log.d("AmirHomeLog",error.toString());
+                Log.d("AmirHomeLog",error.toString());
             }
         }) {
 /*            @Override
@@ -261,11 +264,6 @@ public class DetailActivity extends AppCompatActivity {
 
         TextView tvDeliveryDate = (TextView) findViewById(R.id.tvDeliveryDate);
         tvDeliveryDate.setText((String) ds.child("delivery_date").getValue());
-
-/*        if (ds.child("delivery_date").getValue().equals("0")) {
-            tvDeliveryDate.setText("Onayli Bekliyor");
-        } else {
-        }*/
 
         TextView tvOrderDate = (TextView) findViewById(R.id.tvOrderDate);
         tvOrderDate.setText((String) ds.child("order_date").getValue());

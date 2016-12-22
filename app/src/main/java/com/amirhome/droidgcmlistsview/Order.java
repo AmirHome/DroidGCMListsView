@@ -30,8 +30,8 @@ public class Order {
         this.status = status;
     }
 
-    public void setFood(DataSnapshot dataSnapshot) {
-        for (DataSnapshot food : dataSnapshot.child("foods").getChildren()) {
+    public void setFood(DataSnapshot food) {
+
             StringBuilder sb = new StringBuilder();
             for (DataSnapshot menu_radios : food.child("menu_radios").getChildren()) {
                 if (menu_radios.getKey() != null) sb.append(menu_radios.getKey() + " ");
@@ -65,7 +65,8 @@ public class Order {
             this.menu_description = food.child("menu_description").getValue().toString();
 
         }
-    }
+
+//    }
 
     public String getMenuTitle() {
         return menu_title;
