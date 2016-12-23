@@ -314,7 +314,6 @@ public class DetailActivity extends AppCompatActivity {
 
 
     /*test*/
-
     private void showRadioButtonDialog() {
 
         // custom dialog
@@ -351,7 +350,6 @@ public class DetailActivity extends AppCompatActivity {
         dialog.show();
 
     }
-
     /*test end.*/
 
 }
