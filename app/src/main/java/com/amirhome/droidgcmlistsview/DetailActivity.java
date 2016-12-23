@@ -69,7 +69,7 @@ public class DetailActivity extends AppCompatActivity {
         btnAccept.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showRadioButtonDialog();
+                showRadioButtonDialog(v.getId());
             }
         });
 
@@ -78,10 +78,9 @@ public class DetailActivity extends AppCompatActivity {
         btnReject.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showRadioButtonDialog();
+                showRadioButtonDialog(v.getId());
             }
         });
-
 
 
 //        showRadioButtonDialog();
@@ -332,9 +331,8 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 
-
     /*test*/
-    private void showRadioButtonDialog() {
+    private void showRadioButtonDialog(int btnID) {
         // custom dialog
         final Dialog dialog = new Dialog(DetailActivity.this);
         dialog.setContentView(R.layout.detail_dialog);
@@ -342,7 +340,7 @@ public class DetailActivity extends AppCompatActivity {
 
         // set the custom dialog components - text, image and button
         TextView text = (TextView) dialog.findViewById(R.id.text);
-        text.setText("Android custom dialog example!");
+//        text.setText("Android custom dialog example!");
         ImageView image = (ImageView) dialog.findViewById(R.id.image);
         image.setImageResource(R.drawable.logo);
 
@@ -355,17 +353,21 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        List<String> stringList=new ArrayList<>();  // here is list
-        for(int i=0;i<5;i++) {
+        List<String> stringList = new ArrayList<>();  // here is list
+        for (int i = 0; i < 5; i++) {
             stringList.add("RadioButton " + (i + 1));
         }
         rg = (RadioGroup) dialog.findViewById(R.id.radio_group);
 
-        for(int i=0;i<stringList.size();i++){
-            RadioButton rb=new RadioButton(DetailActivity.this); // dynamically creating RadioButton and adding to RadioGroup.
+        for (int i = 0; i < stringList.size(); i++) {
+            RadioButton rb = new RadioButton(DetailActivity.this); // dynamically creating RadioButton and adding to RadioGroup.
             rb.setText(stringList.get(i));
             rg.addView(rb);
         }
+
+        /*RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(DetailActivity.this, null);
+        params.setMargins(10, 0, 10, 0);
+        rg.setLayoutParams(params);*/
 
         Button dialogButtonOk = (Button) dialog.findViewById(R.id.dialogButtonOK);
         dialogButtonOk.setOnClickListener(new Button.OnClickListener() {
@@ -390,6 +392,14 @@ public class DetailActivity extends AppCompatActivity {
                 }
             }
         });*/
+        switch (btnID) {
+            case R.id.btnAccept:
+                // it was the first button
+                break;
+            case R.id.btnReject:
+                // it was the second button
+                break;
+        }
         dialog.show();
 
     }
