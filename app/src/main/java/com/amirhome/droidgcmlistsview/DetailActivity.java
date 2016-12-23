@@ -9,9 +9,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -37,7 +38,7 @@ import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
     /*test*/
-
+    RadioGroup rg;
     /*test end.*/
 
     Firebase fire;
@@ -65,6 +66,11 @@ public class DetailActivity extends AppCompatActivity {
 
 
         /*test */
+
+
+
+
+
 
         showRadioButtonDialog();
         /*test end.*/
@@ -315,16 +321,31 @@ public class DetailActivity extends AppCompatActivity {
 
     /*test*/
     private void showRadioButtonDialog() {
-
         // custom dialog
         final Dialog dialog = new Dialog(DetailActivity.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.detail_dialog);
+        dialog.setTitle("Title...");
+
+        // set the custom dialog components - text, image and button
+        TextView text = (TextView) dialog.findViewById(R.id.text);
+        text.setText("Android custom dialog example!");
+        ImageView image = (ImageView) dialog.findViewById(R.id.image);
+        image.setImageResource(R.drawable.logo);
+
+        Button dialogButtonCancel = (Button) dialog.findViewById(R.id.dialogButtonCancel);
+        // if button is clicked, close the custom dialog
+        dialogButtonCancel.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
         List<String> stringList=new ArrayList<>();  // here is list
         for(int i=0;i<5;i++) {
             stringList.add("RadioButton " + (i + 1));
         }
-        RadioGroup rg = (RadioGroup) dialog.findViewById(R.id.radio_group);
+        rg = (RadioGroup) dialog.findViewById(R.id.radio_group);
 
         for(int i=0;i<stringList.size();i++){
             RadioButton rb=new RadioButton(DetailActivity.this); // dynamically creating RadioButton and adding to RadioGroup.
@@ -332,24 +353,34 @@ public class DetailActivity extends AppCompatActivity {
             rg.addView(rb);
         }
 
-        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        Button dialogButtonOk = (Button) dialog.findViewById(R.id.dialogButtonOK);
+        dialogButtonOk.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // get selected radio button from radioGroup
+                int selectedId = rg.getCheckedRadioButtonId();
 
+                // find the radiobutton by returned id
+                Log.d("AmirHomeLog", String.valueOf(selectedId));
+            }
+        });
+/*        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int childCount = group.getChildCount();
                 for (int x = 0; x < childCount; x++) {
                     RadioButton btn = (RadioButton) group.getChildAt(x);
                     if (btn.getId() == checkedId) {
-//                        Log.e("selected RadioButton->",btn.getText().toString());
                         Log.d("AmirHomeLog", btn.getText().toString());
                     }
                 }
             }
-        });
-
+        });*/
         dialog.show();
 
     }
+
+
     /*test end.*/
 
 }
