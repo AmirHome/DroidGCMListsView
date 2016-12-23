@@ -1,5 +1,6 @@
 package com.amirhome.droidgcmlistsview;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +9,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +36,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
+    /*test*/
+
+    /*test end.*/
 
     Firebase fire;
     Spinner spinner;
@@ -57,16 +64,13 @@ public class DetailActivity extends AppCompatActivity {
         this.retrieveData();
 
 
+        /*test */
+
+        showRadioButtonDialog();
+        /*test end.*/
+
     }
 
-/*    private void prepareOrderData() {
-        Order order = new Order("menu_count", "Action & Adventure", "2015", "2015");
-        orderList.add(order);
-
-        order = new Order("Inside Out", "Animation, Kids & Family", "2015", "asdfasdf");
-        orderList.add(order);
-
-    }*/
 
     private void setStatusAction(String statusOrder, String statusDelivery) {
         spinner = (Spinner) findViewById(R.id.spinnerStatus);
@@ -113,7 +117,7 @@ public class DetailActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 String selectStatusAction = arg0.getItemAtPosition(arg2).toString();
 
-                if (arg2 != 0){
+                if (arg2 != 0) {
                     switch (selectStatusAction) {
 
                         case "Accept15":
@@ -184,8 +188,8 @@ public class DetailActivity extends AppCompatActivity {
 
                     cartDetails.setFood(food);
                     dOrderList.add(cartDetails);
-                    dRecyclerView.scrollToPosition( dOrderList.size() - 1);
-                    dAdapter.notifyItemInserted( dOrderList.size() - 1);
+                    dRecyclerView.scrollToPosition(dOrderList.size() - 1);
+                    dAdapter.notifyItemInserted(dOrderList.size() - 1);
 
                 }
 
@@ -221,7 +225,7 @@ public class DetailActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             String cart_id = response.getString("cart_id");
-                            Log.d("AmirHomeLog","onResponse "+cart_id);
+                            Log.d("AmirHomeLog", "onResponse " + cart_id);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -231,7 +235,7 @@ public class DetailActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("AmirHomeLog",error.toString());
+                Log.d("AmirHomeLog", error.toString());
             }
         }) {
 /*            @Override
@@ -306,5 +310,49 @@ public class DetailActivity extends AppCompatActivity {
         descriptionOrder.setText((String) ds.child("description").getValue());
 
     }
+
+
+
+    /*test*/
+
+    private void showRadioButtonDialog() {
+
+        // custom dialog
+        final Dialog dialog = new Dialog(DetailActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.detail_dialog);
+        List<String> stringList=new ArrayList<>();  // here is list
+        for(int i=0;i<5;i++) {
+            stringList.add("RadioButton " + (i + 1));
+        }
+        RadioGroup rg = (RadioGroup) dialog.findViewById(R.id.radio_group);
+
+        for(int i=0;i<stringList.size();i++){
+            RadioButton rb=new RadioButton(DetailActivity.this); // dynamically creating RadioButton and adding to RadioGroup.
+            rb.setText(stringList.get(i));
+            rg.addView(rb);
+        }
+
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int childCount = group.getChildCount();
+                for (int x = 0; x < childCount; x++) {
+                    RadioButton btn = (RadioButton) group.getChildAt(x);
+                    if (btn.getId() == checkedId) {
+//                        Log.e("selected RadioButton->",btn.getText().toString());
+                        Log.d("AmirHomeLog", btn.getText().toString());
+                    }
+                }
+            }
+        });
+
+        dialog.show();
+
+    }
+
+    /*test end.*/
+
 }
 
