@@ -23,16 +23,68 @@
         android:foregroundGravity="center_vertical"
         android:layout_below="@+id/text"
         android:layout_centerHorizontal="true" />
-
     <RadioGroup
-        android:id="@+id/radio_group"
+        android:id="@+id/radio_group_customer"
         android:layout_width="fill_parent"
         android:layout_height="350dp"
         android:layout_gravity="center_vertical"
         android:layout_below="@+id/image"
         android:layout_alignParentStart="true"
-        android:padding="25dp" />
 
+        android:padding="25dp" >
+        <RadioButton
+            android:text="Reject_reason1"
+            android:id="@+id/Reject_reason1"
+            />
+        <RadioButton
+            android:text="Reject_reason2"
+            android:id="@+id/Reject_reason2"
+            />
+        <RadioButton
+            android:text="Reject_reason3"
+            android:id="@+id/Reject_reason3"
+            />
+
+
+    </RadioGroup>
+    <RadioGroup
+        android:id="@+id/radio_group_restaurant"
+        android:layout_width="fill_parent"
+        android:layout_height="350dp"
+        android:layout_gravity="center_vertical"
+        android:layout_below="@+id/image"
+        android:layout_alignParentStart="true"
+
+        android:padding="25dp" >
+        <RadioButton
+            android:text="Accept15"
+            android:id="@+id/Accept15"
+            />
+        <RadioButton
+            android:text="Accept30"
+            android:id="@+id/Accept30"
+            />
+        <RadioButton
+            android:text="Accept45"
+            android:id="@+id/Accept45"
+            />
+        <RadioButton
+            android:text="Accept60"
+            android:id="@+id/Accept60"
+            />
+
+
+    </RadioGroup>
+
+<TextView
+    android:id="@+id/textWarning"
+    android:layout_width="fill_parent"
+    android:layout_below="@+id/image"
+    android:layout_centerHorizontal="true"
+
+
+    android:text="asdfasdf asdf asdf asdf asdfkasdf asdfa?"
+    android:layout_height="350dp" />
 
     <Button
         android:id="@+id/dialogButtonOK"
@@ -41,7 +93,7 @@
         android:text=" Ok "
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
-        android:layout_below="@+id/radio_group"
+        android:layout_below="@+id/radio_group_restaurant"
         />
     <Button
         android:id="@+id/dialogButtonCancel"
@@ -49,7 +101,7 @@
         android:layout_height="wrap_content"
         android:text=" Cancle "
         android:layout_marginRight="5dp"
-        android:layout_below="@+id/radio_group"
+        android:layout_below="@+id/radio_group_restaurant"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="5dp" />
 </RelativeLayout>

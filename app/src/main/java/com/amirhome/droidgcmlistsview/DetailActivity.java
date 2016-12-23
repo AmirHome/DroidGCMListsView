@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,8 +33,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
+    public static final String ONAYLI_BEKLIYOR = "Onayli Bekliyor";
+    public static final String TESLIM_BEKLIYOR = "Teslim Bekliyor";
     /*test*/
-    RadioGroup rg;
+    public int btnID;
+    RadioGroup rg_restaurant;
+    RadioGroup rg_customer;
+    Button btnAccept;
+    Button btnReject;
+
     /*test end.*/
 
     Firebase fire;
@@ -48,6 +54,7 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
@@ -63,114 +70,34 @@ public class DetailActivity extends AppCompatActivity {
 
 
         /*test */
+        btnAccept = (Button) findViewById(R.id.btnAccept);
+        btnReject = (Button) findViewById(R.id.btnReject);
 
-        Button btnAccept = (Button) findViewById(R.id.btnAccept);
+        TextView tvStatusDelivery = (TextView) findViewById(R.id.tvStatusDelivery);
+        TextView tvStatusOrder = (TextView) findViewById(R.id.tvStatusOrder);
+
         // if button is clicked, close the custom dialog
         btnAccept.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showRadioButtonDialog(v.getId());
+                btnID = v.getId();
+                showRadioButtonDialog();
             }
         });
 
-        Button btnReject = (Button) findViewById(R.id.btnReject);
         // if button is clicked, close the custom dialog
         btnReject.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showRadioButtonDialog(v.getId());
+                btnID = v.getId();
+                showRadioButtonDialog();
             }
         });
 
 
-//        showRadioButtonDialog();
         /*test end.*/
 
     }
-
-
-/*
-    private void setStatusAction(String statusOrder, String statusDelivery) {
-        spinner = (Spinner) findViewById(R.id.spinnerStatus);
-
-        listStatus = new ArrayList<String>();
-        if (statusOrder.equals("0")) {
-
-            listStatus.add("Nothing");
-            listStatus.add("Accept15");
-            listStatus.add("Accept30");
-            listStatus.add("Accept45");
-            listStatus.add("Accept60");
-            listStatus.add("Reject");
-
-        } else {
-            if (statusOrder.equals("Reject") || statusOrder.equals("RejectAuto")) {
-                listStatus.add(statusOrder);
-            } else {
-                //statusOrder is Accept
-                if (statusDelivery.equals("0")) {
-                    listStatus.add(statusOrder);
-                    listStatus.add("Delivered");
-                    listStatus.add("Reject_reason1");
-                    listStatus.add("Reject_reason2");
-                    listStatus.add("Reject_reason3");
-                } else {
-                    listStatus.add(statusDelivery);
-                }
-            }
-        }
-
-
-        ArrayAdapter<String> adp = new ArrayAdapter<String>
-                (this, android.R.layout.simple_dropdown_item_1line, listStatus);
-        adp.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-
-        spinner.setAdapter(adp);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                       int arg2, long arg3) {
-                // TODO Auto-generated method stub
-                String selectStatusAction = arg0.getItemAtPosition(arg2).toString();
-
-                if (arg2 != 0) {
-                    switch (selectStatusAction) {
-
-                        case "Accept15":
-                        case "Accept30":
-                        case "Accept45":
-                        case "Accept60":
-                            Toast.makeText(DetailActivity.this, "set status order, " + selectStatusAction, Toast.LENGTH_SHORT).show();
-                            fire.child("status_order").setValue(selectStatusAction);
-
-                            break;
-                        case "Reject":
-                            Toast.makeText(DetailActivity.this, "set status order, " + selectStatusAction, Toast.LENGTH_SHORT).show();
-                            fire.child("status_order").setValue(selectStatusAction);
-
-                            break;
-                        case "Delivered":
-                        case "Reject_reason1":
-                        case "Reject_reason2":
-                        case "Reject_reason3":
-                            Toast.makeText(DetailActivity.this, "set status_delivery, " + selectStatusAction, Toast.LENGTH_SHORT).show();
-                            fire.child("status_delivery").setValue(selectStatusAction);
-                            break;
-                    }
-                    httpRequest(fire.getKey());
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-    }
-*/
 
     //Retrieve
     private void retrieveData() {
@@ -212,8 +139,6 @@ public class DetailActivity extends AppCompatActivity {
 
                 }
 
-
-//                setStatusAction((String) dataSnapshot.child("status_order").getValue(), (String) dataSnapshot.child("status_delivery").getValue());
                 getUpdates(dataSnapshot);
             }
 
@@ -291,9 +216,14 @@ public class DetailActivity extends AppCompatActivity {
         TextView tvOrderDate = (TextView) findViewById(R.id.tvOrderDate);
         tvOrderDate.setText((String) ds.child("order_date").getValue());
 
+        btnAccept.setEnabled(false);
+        btnReject.setEnabled(false);
+
         TextView tvStatusOrder = (TextView) findViewById(R.id.tvStatusOrder);
         if (ds.child("status_order").getValue().equals("0")) {
-            tvStatusOrder.setText("Onayli Bekliyor");
+            tvStatusOrder.setText(ONAYLI_BEKLIYOR);
+            btnAccept.setEnabled(true);
+            btnReject.setEnabled(true);
         } else {
             tvStatusOrder.setText((String) ds.child("status_order").getValue());
         }
@@ -306,7 +236,9 @@ public class DetailActivity extends AppCompatActivity {
             }
         } else {
             if (ds.child("status_delivery").getValue().equals("0")) {
-                tvStatusDelivery.setText("Teslim Bekliyor");
+                tvStatusDelivery.setText(TESLIM_BEKLIYOR);
+                btnAccept.setEnabled(true);
+                btnReject.setEnabled(true);
             } else {
                 tvStatusDelivery.setText((String) ds.child("status_delivery").getValue());
             }
@@ -332,15 +264,13 @@ public class DetailActivity extends AppCompatActivity {
 
 
     /*test*/
-    private void showRadioButtonDialog(int btnID) {
-        // custom dialog
+    private void showRadioButtonDialog() {
         final Dialog dialog = new Dialog(DetailActivity.this);
         dialog.setContentView(R.layout.detail_dialog);
         dialog.setTitle("Title...");
 
-        // set the custom dialog components - text, image and button
+        // set the custom dialog components, image and button
         TextView text = (TextView) dialog.findViewById(R.id.text);
-//        text.setText("Android custom dialog example!");
         ImageView image = (ImageView) dialog.findViewById(R.id.image);
         image.setImageResource(R.drawable.logo);
 
@@ -352,54 +282,99 @@ public class DetailActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-
-        List<String> stringList = new ArrayList<>();  // here is list
-        for (int i = 0; i < 5; i++) {
-            stringList.add("RadioButton " + (i + 1));
-        }
-        rg = (RadioGroup) dialog.findViewById(R.id.radio_group);
-
-        for (int i = 0; i < stringList.size(); i++) {
-            RadioButton rb = new RadioButton(DetailActivity.this); // dynamically creating RadioButton and adding to RadioGroup.
-            rb.setText(stringList.get(i));
-            rg.addView(rb);
-        }
-
-        /*RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(DetailActivity.this, null);
-        params.setMargins(10, 0, 10, 0);
-        rg.setLayoutParams(params);*/
-
         Button dialogButtonOk = (Button) dialog.findViewById(R.id.dialogButtonOK);
         dialogButtonOk.setOnClickListener(new Button.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                // get selected radio button from radioGroup
-                int selectedId = rg.getCheckedRadioButtonId();
 
-                // find the radiobutton by returned id
-                Log.d("AmirHomeLog", String.valueOf(selectedId));
+                int selectedRadioButtonIdR = rg_restaurant.getCheckedRadioButtonId();
+                int selectedRadioButtonIdC = rg_customer.getCheckedRadioButtonId();
+
+                TextView tvStatusDelivery = (TextView) findViewById(R.id.tvStatusDelivery);
+                TextView tvStatusOrder = (TextView) findViewById(R.id.tvStatusOrder);
+
+                /*if (R.id.btnReject == btnID && tvStatusOrder.getText().equals(ONAYLI_BEKLIYOR)) {
+                    fire.child("status_order").setValue("Reject");
+                }else
+                if (R.id.btnAccept == btnID && tvStatusDelivery.getText().equals(TESLIM_BEKLIYOR)) {
+                    fire.child("status_delivery").setValue("Delivered");
+                }*/
+
+                switch (selectedRadioButtonIdR) {
+                    case R.id.Accept15:
+                        fire.child("status_order").setValue("Accept15");
+                        break;
+                    case R.id.Accept30:
+                        fire.child("status_order").setValue("Accept30");
+                        break;
+                    case R.id.Accept45:
+                        fire.child("status_order").setValue("Accept45");
+                        break;
+                    case R.id.Accept60:
+                        fire.child("status_order").setValue("Accept60");
+                        break;
+                    default:
+                        if (R.id.btnReject == btnID && tvStatusOrder.getText().equals(ONAYLI_BEKLIYOR)) {
+                            fire.child("status_order").setValue("Reject");}
+                            break;
+                }
+                switch (selectedRadioButtonIdC) {
+                    case R.id.Reject_reason1:
+                        fire.child("status_delivery").setValue("Reject_reason1");
+                        break;
+                    case R.id.Reject_reason2:
+                        fire.child("status_delivery").setValue("Reject_reason2");
+                        break;
+                    case R.id.Reject_reason3:
+                        fire.child("status_delivery").setValue("Reject_reason3");
+                        break;
+                    default:
+                        if (R.id.btnAccept == btnID && tvStatusDelivery.getText().equals(TESLIM_BEKLIYOR) && !tvStatusOrder.getText().equals(ONAYLI_BEKLIYOR)) {
+                            fire.child("status_delivery").setValue("Delivered");
+                        }
+                        break;
+                }
+                dialog.dismiss();
+                httpRequest(fire.getKey());
+
             }
         });
-/*        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                int childCount = group.getChildCount();
-                for (int x = 0; x < childCount; x++) {
-                    RadioButton btn = (RadioButton) group.getChildAt(x);
-                    if (btn.getId() == checkedId) {
-                        Log.d("AmirHomeLog", btn.getText().toString());
-                    }
-                }
-            }
-        });*/
+
+        TextView textWarning = (TextView) dialog.findViewById(R.id.textWarning);
+        rg_restaurant = (RadioGroup) dialog.findViewById(R.id.radio_group_restaurant);
+        rg_customer = (RadioGroup) dialog.findViewById(R.id.radio_group_customer);
+
+        TextView tvStatusDelivery = (TextView) findViewById(R.id.tvStatusDelivery);
+        TextView tvStatusOrder = (TextView) findViewById(R.id.tvStatusOrder);
+
+        textWarning.setVisibility(View.INVISIBLE);
+        rg_restaurant.setVisibility(View.INVISIBLE);
+        rg_customer.setVisibility(View.INVISIBLE);
+
+        // get selected radio button from radioGroup
+
         switch (btnID) {
             case R.id.btnAccept:
-                // it was the first button
+                if (tvStatusOrder.getText().equals(ONAYLI_BEKLIYOR)) {
+                    rg_restaurant.setVisibility(View.VISIBLE);
+                } else if (tvStatusDelivery.getText().equals(TESLIM_BEKLIYOR)) {
+
+                    textWarning.setVisibility(View.VISIBLE);
+                    rg_customer.setVisibility(View.INVISIBLE);
+                }
                 break;
+
             case R.id.btnReject:
-                // it was the second button
+                if (tvStatusOrder.getText().equals(ONAYLI_BEKLIYOR)) {
+                    textWarning.setVisibility(View.VISIBLE);
+                } else if (tvStatusDelivery.getText().equals(TESLIM_BEKLIYOR)) {
+                    textWarning.setVisibility(View.INVISIBLE);
+                    rg_customer.setVisibility(View.VISIBLE);
+                }
                 break;
         }
+
         dialog.show();
 
     }
