@@ -482,7 +482,7 @@
                 </ScrollView><!--left csrollview-->
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/btnAccept"
                     android:layout_width="fill_parent"
                     android:layout_height="60dp"
                     android:layout_alignParentBottom="true"
@@ -1164,11 +1164,10 @@
                     </LinearLayout>
                 </ScrollView><!--rightsidescroll -->
 
-                <Spinner
+                <Button
 
-                    android:id="@+id/spinnerStatus"
+                    android:id="@+id/btnReject"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="20dp"
@@ -1179,7 +1178,12 @@
                     android:paddingLeft="20dp"
                     android:spinnerMode="dialog"
                     android:textAlignment="center"
-                    android:textColor="@color/white" /> <!--spinner reject-->
+
+                    android:layout_height="60dp"
+                    android:layout_centerHorizontal="true"
+                    android:singleLine="true"
+                    android:text="Reject"
+                    /> <!--spinner reject-->
 
 
             </RelativeLayout><!--rightside-->

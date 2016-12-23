@@ -9,15 +9,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
@@ -67,17 +64,33 @@ public class DetailActivity extends AppCompatActivity {
 
         /*test */
 
+        Button btnAccept = (Button) findViewById(R.id.btnAccept);
+        // if button is clicked, close the custom dialog
+        btnAccept.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showRadioButtonDialog();
+            }
+        });
+
+        Button btnReject = (Button) findViewById(R.id.btnReject);
+        // if button is clicked, close the custom dialog
+        btnReject.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showRadioButtonDialog();
+            }
+        });
 
 
 
-
-
-        showRadioButtonDialog();
+//        showRadioButtonDialog();
         /*test end.*/
 
     }
 
 
+/*
     private void setStatusAction(String statusOrder, String statusDelivery) {
         spinner = (Spinner) findViewById(R.id.spinnerStatus);
 
@@ -158,6 +171,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
     }
+*/
 
     //Retrieve
     private void retrieveData() {
@@ -200,7 +214,7 @@ public class DetailActivity extends AppCompatActivity {
                 }
 
 
-                setStatusAction((String) dataSnapshot.child("status_order").getValue(), (String) dataSnapshot.child("status_delivery").getValue());
+//                setStatusAction((String) dataSnapshot.child("status_order").getValue(), (String) dataSnapshot.child("status_delivery").getValue());
                 getUpdates(dataSnapshot);
             }
 
