@@ -13,7 +13,7 @@ import java.util.List;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHolder> {
 
-    private List<Order> moviesList;
+    private List<Order> orderList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView order_no, time, cost, status;
@@ -28,8 +28,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
     }
 
 
-    public OrdersAdapter(List<Order> moviesList) {
-        this.moviesList = moviesList;
+    public OrdersAdapter(List<Order> orderList) {
+        this.orderList = orderList;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Order order = moviesList.get(position);
+        Order order = orderList.get(position);
         holder.order_no.setText(order.getOrderNo());
         holder.time.setText(order.getOrderTime());
         holder.cost.setText(order.getCost());
@@ -51,7 +51,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return moviesList.size();
+        return orderList.size();
     }
 }
 

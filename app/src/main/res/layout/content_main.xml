@@ -51,7 +51,7 @@
                     android:text="" />
 
                 <Button
-                    android:id="@+id/button6"
+                    android:id="@+id/btnAll"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -66,11 +66,11 @@
                     android:text="alle Bestellungen"
                     android:textColor="@color/white" />  <!--all orders button-->
                 <Button
-                    android:id="@+id/button12"
+                    android:id="@+id/btnNew"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/button6"
+                    android:layout_below="@+id/btnAll"
                     android:layout_gravity="center_vertical"
                     android:layout_marginBottom="2dp"
                     android:layout_weight="0.8"
@@ -81,11 +81,11 @@
                     android:textColor="@color/white" />
 
                 <Button
-                    android:id="@+id/button7"
+                    android:id="@+id/btnDeliveryWating"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/button12"
+                    android:layout_below="@+id/btnNew"
                     android:layout_gravity="center_vertical"
                     android:layout_marginBottom="2dp"
                     android:layout_weight="0.8"
@@ -95,11 +95,11 @@
                     android:text="Bestellung wird vorbereitet"
                     android:textColor="@color/white" /> <!--preparing orders button-->
                 <Button
-                    android:id="@+id/button8"
+                    android:id="@+id/btnPenalty"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/button7"
+                    android:layout_below="@+id/btnDeliveryWating"
                     android:layout_gravity="center_vertical"
                     android:layout_marginBottom="2dp"
                     android:layout_weight="0.8"
@@ -109,11 +109,11 @@
                     android:text="Strafe"
                     android:textColor="@color/white" /> <!--penalty button-->
                 <Button
-                    android:id="@+id/button9"
+                    android:id="@+id/btnRejected"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/button8"
+                    android:layout_below="@+id/btnPenalty"
                     android:layout_gravity="center_vertical"
                     android:layout_marginBottom="2dp"
                     android:layout_weight="0.8"
@@ -123,12 +123,12 @@
                     android:text="abgelehnt"
                     android:textColor="@color/white" /> <!--rejectorders button-->
                 <Button
-                    android:id="@+id/button10"
+                    android:id="@+id/btnDelivered"
 
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/button9"
+                    android:layout_below="@+id/btnRejected"
                     android:layout_gravity="center_vertical"
                     android:layout_marginBottom="2dp"
                     android:layout_weight="0.8"
@@ -139,11 +139,11 @@
                     android:textColor="@color/white" /> <!--delivered orders button-->
                 <Button
 
-                    android:id="@+id/button11"
+                    android:id="@+id/btnCustomerRejected"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/button10"
+                    android:layout_below="@+id/btnDelivered"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="0.8"
                     android:background="@color/half_red"
@@ -159,7 +159,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/button11"
+                    android:layout_below="@+id/btnCustomerRejected"
                     android:layout_weight="0.8"
                     android:background="@color/half_red"
                     android:minHeight="100dp"

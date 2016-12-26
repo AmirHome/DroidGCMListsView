@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -81,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }));
+
+        setFilters();
+
         Firebase.setAndroidContext(this);
         fire = new Firebase(DB_URL + rCode);
 
@@ -106,12 +111,63 @@ public class MainActivity extends AppCompatActivity {
 //                httpRequest("23");
 
                 String msg = "Can you help me please..";
-                Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
     }
 
+    private void setFilters() {
+        final Button btnAllFilter = (Button) findViewById(R.id.btnAll);
+        btnAllFilter.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                Toast.makeText(MainActivity.this, "Filter btnAll", Toast.LENGTH_LONG).show();
+            }
+        });
+        final Button btnNew = (Button) findViewById(R.id.btnNew);
+        btnNew.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                Toast.makeText(MainActivity.this, "Filter btnNew", Toast.LENGTH_LONG).show();
+            }
+        });
+        final Button btnDeliveryWating = (Button) findViewById(R.id.btnDeliveryWating);
+        btnDeliveryWating.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                Toast.makeText(MainActivity.this, "Filter btnDeliveryWating", Toast.LENGTH_LONG).show();
+            }
+        });
+        final Button btnPenalty = (Button) findViewById(R.id.btnPenalty);
+        btnPenalty.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                Toast.makeText(MainActivity.this, "Filter btnPenalty", Toast.LENGTH_LONG).show();
+            }
+        });
+        final Button btnRejected = (Button) findViewById(R.id.btnRejected);
+        btnRejected.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                Toast.makeText(MainActivity.this, "Filter btnRejected", Toast.LENGTH_LONG).show();
+            }
+        });
+        final Button btnDelivered = (Button) findViewById(R.id.btnDelivered);
+        btnDelivered.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                Toast.makeText(MainActivity.this, "Filter btnDelivered", Toast.LENGTH_LONG).show();
+            }
+        });
+        final Button btnCustomerRejected = (Button) findViewById(R.id.btnCustomerRejected);
+        btnCustomerRejected.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                Toast.makeText(MainActivity.this, "Filter btnCustomerRejected", Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
 
 
     private void setImeiCode() {
@@ -129,28 +185,29 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem imeinumber = menu.findItem(R.id.imeinumber);
-        imeinumber.setTitle( this.rCode);
+        imeinumber.setTitle(this.rCode);
 
         MenuItem ipnumber = menu.findItem(R.id.ipnumber);
 //        getLocalIpAddress()
-        ipnumber.setTitle( getLocalIpAddress() );
+        ipnumber.setTitle(getLocalIpAddress());
 
         MenuItem version = menu.findItem(R.id.version);
-        version.setTitle( "0.0.2.09");
+        version.setTitle("0.0.2.09");
 
         MenuItem restourantn_no = menu.findItem(R.id.restourantn_no);
-        restourantn_no.setTitle( "2");
+        restourantn_no.setTitle("2");
         return true;
     }
+
     public String getLocalIpAddress() {
-        StringBuilder IFCONFIG=new StringBuilder();
+        StringBuilder IFCONFIG = new StringBuilder();
         try {
-            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
                 NetworkInterface intf = en.nextElement();
-                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
                     InetAddress inetAddress = enumIpAddr.nextElement();
                     if (!inetAddress.isLoopbackAddress() && !inetAddress.isLinkLocalAddress() && inetAddress.isSiteLocalAddress()) {
-                        IFCONFIG.append(inetAddress.getHostAddress().toString()+"");
+                        IFCONFIG.append(inetAddress.getHostAddress().toString() + "");
                     }
 
                 }
@@ -160,6 +217,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return (IFCONFIG.toString());
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
