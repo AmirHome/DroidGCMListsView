@@ -96,7 +96,7 @@ public class Order {
 
     public void setStatus(String status_order, String status_delivery) {
         if (status_order.equals("0")) {
-            this.status = "Onayli Bekliyor";
+            this.status = DetailActivity.ONAYLI_BEKLIYOR;
         } else {
             if (status_order.equals("Reject")) {
                 this.status = status_order;

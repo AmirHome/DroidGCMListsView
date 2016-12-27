@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
+//        Log.d("AmirHomeLog", "main0 " + mAdapter.getItemCount() + orderList.size() );
+
         mAdapter = new OrdersAdapter(orderList);
 
         recyclerView.setHasFixedSize(true);
@@ -84,32 +86,32 @@ public class MainActivity extends AppCompatActivity {
             }
         }));
 
-        setFilters();
 
+//init firebase
         Firebase.setAndroidContext(this);
         fire = new Firebase(DB_URL + rCode);
 
+// get Data
         retrieveData();
 
+//        test data
+//        Order order = new Order("Mad Max: Fury Road", "Action & Adventure", "2015", "Reject");
+//        orderList.add(order);
+//
+//        order = new Order("Inside Out", "Animation, Kids & Family", "2015", "Onayli Bekliyor");
+//        orderList.add(order);
+
+// set filters
+//        mAdapter.filter("");
+//        mAdapter.notifyDataSetChanged();
+//        mAdapter.filter("Reject");
+        setFilters();
+        Log.d("AmirHomeLog", "main " + mAdapter.getItemCount() + orderList.size() );
+// float button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-/*                ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-
-                for (ActivityManager.RunningAppProcessInfo service : manager.getRunningAppProcesses()) {
-                    Log.d("MainActivity" , service.processName);
-                }*/
-
-//                var messageListRef = new Firebase('https://samplechat.firebaseio-demo.com/message_list');
-//                var newMessageRef = fire.push();
-
-
-//                Firebase alanRef = fire.child("users").child("alanisawesome");
-//                alanRef.child("fullName").setValue("Alan Turing");
-
-//                httpRequest("23");
-
                 String msg = "Can you help me please..";
                 Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
@@ -121,14 +123,18 @@ public class MainActivity extends AppCompatActivity {
         btnAllFilter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Toast.makeText(MainActivity.this, "Filter btnAll", Toast.LENGTH_LONG).show();
+                mAdapter.filter("");
+                mAdapter.notifyDataSetChanged();
+                Toast.makeText(MainActivity.this, "Filter btnAll "+mAdapter.getItemCount(), Toast.LENGTH_LONG).show();
             }
         });
         final Button btnNew = (Button) findViewById(R.id.btnNew);
         btnNew.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                mAdapter.filter("Reject");
+                mAdapter.notifyDataSetChanged();
                 // Perform action on click
-                Toast.makeText(MainActivity.this, "Filter btnNew", Toast.LENGTH_LONG).show();
+//                Toast.makeText(MainActivity.this, "Filter btnNew", Toast.LENGTH_LONG).show();
             }
         });
         final Button btnDeliveryWating = (Button) findViewById(R.id.btnDeliveryWating);
@@ -248,7 +254,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-
                 if (dataSnapshot != null && dataSnapshot.getValue() != null) {
                     try {
                         Order cartDetails = dataSnapshot.getValue(Order.class);
@@ -260,15 +265,11 @@ public class MainActivity extends AppCompatActivity {
                         orderList.add(cartDetails);
                         recyclerView.scrollToPosition(orderList.size() - 1);
                         mAdapter.notifyItemInserted(orderList.size() - 1);
-//                        Log.d("AmirHomeLog", "onChildAdded"+ orderList.size());
-
-//                        mAdapter.notifyDataSetChanged();
 
                         if (cartDetails.status_order.equals("0")) {
                             Intent service = new Intent(getBaseContext(), ServiceOrderControl.class);
                             service.putExtra("ServiceOrderControl.orderId", dataSnapshot.getKey());
                             service.putExtra("ServiceOrderControl.order_date", cartDetails.order_date);
-//                            Log.d("AmirHomeLog", "onChildChanged " + dataSnapshot.getKey() + " " + cartDetails.order_date);
                             startService(service);
                         }
 
@@ -327,6 +328,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
 
@@ -351,5 +353,4 @@ public class MainActivity extends AppCompatActivity {
         String deviceid = mTelephonyManager.getDeviceId();
         return deviceid;
     }
-
 }
