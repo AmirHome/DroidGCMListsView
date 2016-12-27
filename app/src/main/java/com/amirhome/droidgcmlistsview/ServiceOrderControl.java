@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class ServiceOrderControl extends Service {
-    public static final int DelayedMili = 1000;// 3 x 60 x 1000 = 180000
+    public static final int DelayedMili = 6000;// 3 x 60 x 1000 = 180000
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     Firebase fire;
     String orderId;
@@ -47,6 +47,7 @@ public class ServiceOrderControl extends Service {
 
         // The new order came
         setNotification();
+
         // Set Timer if status == 0
         setTimerStatusCtrl(orderId, orderDate);
 
@@ -71,7 +72,7 @@ public class ServiceOrderControl extends Service {
 
                     //TODO: service status is off
                     //TODO: set penalty
-                    setNotification();
+//                    setNotification();
                 }
 
                 //        Cart c = new Cart();
@@ -131,6 +132,8 @@ public class ServiceOrderControl extends Service {
             Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
             NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            // Sets an ID for the notification, so it can be updated
+            int notifyID = 1;
             Intent intent = new Intent(this, DetailActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
 
@@ -139,7 +142,7 @@ public class ServiceOrderControl extends Service {
                     .setContentTitle("title")
                     .setContentText("text")
                     .setSound(uri)
-                    .build();
+                  .build();
 
 
             notificationManager.notify(0, notif);

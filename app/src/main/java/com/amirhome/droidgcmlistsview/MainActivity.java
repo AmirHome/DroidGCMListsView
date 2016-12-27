@@ -2,11 +2,13 @@ package com.amirhome.droidgcmlistsview;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import com.firebase.client.ChildEventListener;
@@ -97,10 +100,29 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String msg = "Can you help me please..";
-                Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+/* test */
+                newOrderAlert();
+
+/* test end. */
+//                String msg = "Can you help me please..";
+//                Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
+    }
+
+    private void newOrderAlert() {
+        AlertDialog.Builder builderInner = new AlertDialog.Builder(MainActivity.this);
+        builderInner.setIcon(R.drawable.logo);
+        builderInner.setMessage("strName");
+        builderInner.setTitle("Your Selected Item is");
+        builderInner.setCancelable(false);
+        builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog,int which) {
+                dialog.dismiss();
+            }
+        });
+        builderInner.show();
     }
 
     private void setFilters() {
@@ -117,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 // Perform action on click
                 mAdapter.filter("");
                 mAdapter.notifyDataSetChanged();
-                btnBackColorReset(btnAllFilter,btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
                 btnAllFilter.setBackgroundResource(R.color.colorPrimaryDark);
             }
         });
@@ -125,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mAdapter.filter("btnNew");
                 mAdapter.notifyDataSetChanged();
-                btnBackColorReset(btnAllFilter,btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
                 btnNew.setBackgroundResource(R.color.colorPrimaryDark);
 
                 // Perform action on click
@@ -136,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                 // Perform action on click
                 mAdapter.filter("btnDeliveryWating");
                 mAdapter.notifyDataSetChanged();
-                btnBackColorReset(btnAllFilter,btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
 
                 btnDeliveryWating.setBackgroundResource(R.color.colorPrimaryDark);
 
@@ -147,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                 // Perform action on click
                 mAdapter.filter("btnPenalty");
                 mAdapter.notifyDataSetChanged();
-                btnBackColorReset(btnAllFilter,btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
 
                 btnPenalty.setBackgroundResource(R.color.colorPrimaryDark);
 
@@ -158,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
                 // Perform action on click
                 mAdapter.filter("btnRejected");
                 mAdapter.notifyDataSetChanged();
-                btnBackColorReset(btnAllFilter,btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
 
                 btnRejected.setBackgroundResource(R.color.colorPrimaryDark);
 
@@ -169,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                 // Perform action on click
                 mAdapter.filter("btnDelivered");
                 mAdapter.notifyDataSetChanged();
-                btnBackColorReset(btnAllFilter,btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
 
                 btnDelivered.setBackgroundResource(R.color.colorPrimaryDark);
 
@@ -180,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                 // Perform action on click
                 mAdapter.filter("btnCustomerRejected");
                 mAdapter.notifyDataSetChanged();
-                btnBackColorReset(btnAllFilter,btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
 
                 btnCustomerRejected.setBackgroundResource(R.color.colorPrimaryDark);
 
@@ -189,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void btnBackColorReset(Button btnAllFilter,Button btnDelivered, Button btnNew, Button btnDeliveryWating, Button btnPenalty, Button btnRejected, Button btnCustomerRejected) {
+    private void btnBackColorReset(Button btnAllFilter, Button btnDelivered, Button btnNew, Button btnDeliveryWating, Button btnPenalty, Button btnRejected, Button btnCustomerRejected) {
         btnAllFilter.setBackgroundResource(R.color.half_red);
         btnNew.setBackgroundResource(R.color.half_red);
         btnDeliveryWating.setBackgroundResource(R.color.half_red);
@@ -296,6 +318,7 @@ public class MainActivity extends AppCompatActivity {
                             service.putExtra("ServiceOrderControl.orderId", dataSnapshot.getKey());
                             service.putExtra("ServiceOrderControl.order_date", cartDetails.order_date);
                             startService(service);
+                            newOrderAlert();
                         }
 
                     } catch (Exception ex) {
