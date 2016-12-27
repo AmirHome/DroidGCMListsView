@@ -98,11 +98,12 @@ public class Order {
         if (status_order.equals("0")) {
             this.status = DetailActivity.ONAYLI_BEKLIYOR;
         } else {
-            if (status_order.equals("Reject")) {
+            if (status_order.equals("Reject") || status_order.equals("RejectAuto")) {
                 this.status = status_order;
             } else {
                 if (status_delivery.equals("0")) {
-                    this.status = status_order;
+//                    this.status = status_order;
+                    this.status = DetailActivity.TESLIM_BEKLIYOR;
                 } else {
                     this.status = status_delivery;
                 }

@@ -16,7 +16,7 @@ import java.util.List;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHolder> {
 
-    private List<Order> oaOrderList, oafilterList;
+    private List<Order> oaOrderList, oaFilterList;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView order_no, time, cost, status;
 
@@ -32,9 +32,9 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
 
     public OrdersAdapter(List<Order> orderList) {
         oaOrderList = orderList;
-        oafilterList = new ArrayList<Order>();
+        oaFilterList = new ArrayList<Order>();
         // we copy the original list to the filter list and use it for setting row values
-        oafilterList.addAll(oaOrderList);
+        oaFilterList.addAll(oaOrderList);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 //        Order order = oaOrderList.get(position);
-        Order order = oafilterList.get(position);
+        Order order = oaFilterList.get(position);
         holder.order_no.setText(order.getOrderNo());
         holder.time.setText(order.getOrderTime());
         holder.cost.setText(order.getCost());
@@ -57,7 +57,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return (null != oafilterList ? oafilterList.size() : 0);
+        return (null != oaFilterList ? oaFilterList.size() : 0);
 //        return oaOrderList.size();
     }
     // Do Search...
@@ -69,19 +69,45 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
             public void run() {
 
                 // Clear the filter list
-                oafilterList.clear();
+                oaFilterList.clear();
 
                 // If there is no search value, then add all original list items to filter list
                 if (TextUtils.isEmpty(text)) {
-                    oafilterList.addAll(oaOrderList);
-
+                    oaFilterList.addAll(oaOrderList);
                 } else {
                     // Iterate in the original List and add it to filter list...
                     for (Order item : oaOrderList) {
-                        if (item.status.toLowerCase().equals(text.toLowerCase()) ) {
-                            // Adding Matched items
-                            oafilterList.add(item);
+                        switch (text){
+                            case "btnNew":
+                                if (item.status.toLowerCase().equals(DetailActivity.ONAYLI_BEKLIYOR.toLowerCase()))
+                                    oaFilterList.add(item);
+                                break;
+
+                                case "btnDeliveryWating":
+                                    if (item.status.toLowerCase().equals(DetailActivity.TESLIM_BEKLIYOR.toLowerCase()))
+                                        oaFilterList.add(item);
+                                    break;
+                                case "btnPenalty":
+                                    if (item.status.toLowerCase().contains("Reject".toLowerCase()))
+                                        oaFilterList.add(item);
+                                    break;
+                                case "btnRejected":
+                                    if (item.status.toLowerCase().equals("Reject".toLowerCase()))
+                                        oaFilterList.add(item);
+                                    break;
+                                 case "btnDelivered":
+                                    if (item.status.toLowerCase().equals("Delivered".toLowerCase()))
+                                        oaFilterList.add(item);
+                                    break;
+                                 case "btnCustomerRejected":
+                                    if (item.status.toLowerCase().contains("Reject_".toLowerCase()))
+                                        oaFilterList.add(item);
+                                    break;
                         }
+                      /*  if (item.status.toLowerCase().equals(text.toLowerCase()) ) {
+                            // Adding Matched items
+                            oaFilterList.add(item);
+                        }*/
                     }
                 }
                 // Set on UI Thread
@@ -92,8 +118,6 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
                         notifyDataSetChanged();
                     }
                 });*/
-//                Log.d("AmirHomeLog", "filter " + filterList.size() + orderList.size() );
-//                notifyDataSetChanged();
             }
         }).start();
 

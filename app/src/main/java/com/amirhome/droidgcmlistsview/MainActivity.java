@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     final List<Order> orderList = new ArrayList<>();
     private RecyclerView recyclerView;
     private OrdersAdapter mAdapter;
-
+    private String filterText ="";
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
 
     static String rCode;
@@ -61,11 +61,7 @@ public class MainActivity extends AppCompatActivity {
         this.setImeiCode();
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
-//        Log.d("AmirHomeLog", "main0 " + mAdapter.getItemCount() + orderList.size() );
-
         mAdapter = new OrdersAdapter(orderList);
-
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -94,19 +90,9 @@ public class MainActivity extends AppCompatActivity {
 // get Data
         retrieveData();
 
-//        test data
-//        Order order = new Order("Mad Max: Fury Road", "Action & Adventure", "2015", "Reject");
-//        orderList.add(order);
-//
-//        order = new Order("Inside Out", "Animation, Kids & Family", "2015", "Onayli Bekliyor");
-//        orderList.add(order);
-
 // set filters
-//        mAdapter.filter("");
-//        mAdapter.notifyDataSetChanged();
-//        mAdapter.filter("Reject");
         setFilters();
-        Log.d("AmirHomeLog", "main " + mAdapter.getItemCount() + orderList.size() );
+
 // float button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Perform action on click
                 mAdapter.filter("");
+//                btnAllFilter.setEnabled(false);
                 mAdapter.notifyDataSetChanged();
                 Toast.makeText(MainActivity.this, "Filter btnAll "+mAdapter.getItemCount(), Toast.LENGTH_LONG).show();
             }
@@ -131,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         final Button btnNew = (Button) findViewById(R.id.btnNew);
         btnNew.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mAdapter.filter("Reject");
+                mAdapter.filter("btnNew");
                 mAdapter.notifyDataSetChanged();
                 // Perform action on click
 //                Toast.makeText(MainActivity.this, "Filter btnNew", Toast.LENGTH_LONG).show();
@@ -141,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
         btnDeliveryWating.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
+                mAdapter.filter("btnDeliveryWating");
+                mAdapter.notifyDataSetChanged();
                 Toast.makeText(MainActivity.this, "Filter btnDeliveryWating", Toast.LENGTH_LONG).show();
             }
         });
@@ -148,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
         btnPenalty.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
+                mAdapter.filter("btnPenalty");
+                mAdapter.notifyDataSetChanged();
                 Toast.makeText(MainActivity.this, "Filter btnPenalty", Toast.LENGTH_LONG).show();
             }
         });
@@ -155,6 +146,8 @@ public class MainActivity extends AppCompatActivity {
         btnRejected.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
+                mAdapter.filter("btnRejected");
+                mAdapter.notifyDataSetChanged();
                 Toast.makeText(MainActivity.this, "Filter btnRejected", Toast.LENGTH_LONG).show();
             }
         });
@@ -162,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
         btnDelivered.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
+                mAdapter.filter("btnDelivered");
+                mAdapter.notifyDataSetChanged();
                 Toast.makeText(MainActivity.this, "Filter btnDelivered", Toast.LENGTH_LONG).show();
             }
         });
@@ -169,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
         btnCustomerRejected.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
+                mAdapter.filter("btnCustomerRejected");
+                mAdapter.notifyDataSetChanged();
                 Toast.makeText(MainActivity.this, "Filter btnCustomerRejected", Toast.LENGTH_LONG).show();
             }
         });
@@ -265,6 +262,7 @@ public class MainActivity extends AppCompatActivity {
                         orderList.add(cartDetails);
                         recyclerView.scrollToPosition(orderList.size() - 1);
                         mAdapter.notifyItemInserted(orderList.size() - 1);
+                        mAdapter.filter("");
 
                         if (cartDetails.status_order.equals("0")) {
                             Intent service = new Intent(getBaseContext(), ServiceOrderControl.class);
@@ -281,9 +279,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//                Log.d("AmirHomeLog", "onChildChanged getOrderNo=" + dataSnapshot.getKey());
-
-
                 int pos = -1;
                 for (int i = 0; i < orderList.size(); i++) {
                     orderList.get(i).getOrderNo();
@@ -291,9 +286,7 @@ public class MainActivity extends AppCompatActivity {
                         pos = i;
                         break;
                     }
-
                 }
-//                Log.d("AmirHomeLog", "position " + pos);
                 if (pos >= 0) {
 
                     orderList.remove(pos);
@@ -309,12 +302,12 @@ public class MainActivity extends AppCompatActivity {
                     orderList.add(pos, cartDetails);
                     mAdapter.notifyItemInserted(pos);
                     mAdapter.notifyItemRangeChanged(pos, orderList.size());
+                    mAdapter.filter("");
                 }
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-//                Log.d("AmirHomeLog", "onChildRemoved " + dataSnapshot.getKey());
 
             }
 
