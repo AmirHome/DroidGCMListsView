@@ -13,6 +13,7 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public class Order {
+
     public String order_no, time, cost, status, foodTitle;
     public String menu_count, menu_title, menu_size, menu_description, menu_radios, menu_options, menu_contents;
     public String address, customer, delivery_date, description, order_cost, order_date, status_delivery, status_order;
@@ -98,7 +99,7 @@ public class Order {
         if (status_order.equals("0")) {
             this.status = DetailActivity.ONAYLI_BEKLIYOR;
         } else {
-            if (status_order.equals("Reject") || status_order.equals("RejectAuto")) {
+            if (status_order.equals(DetailActivity.CONST_REJECT) || status_order.equals(DetailActivity.CONST_REJECT_AUTO)) {
                 this.status = status_order;
             } else {
                 if (status_delivery.equals("0")) {

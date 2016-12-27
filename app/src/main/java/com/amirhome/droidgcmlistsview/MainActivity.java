@@ -18,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     final List<Order> orderList = new ArrayList<>();
     private RecyclerView recyclerView;
     private OrdersAdapter mAdapter;
-    private String filterText ="";
+    private String filterText = "";
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
 
     static String rCode;
@@ -106,70 +105,98 @@ public class MainActivity extends AppCompatActivity {
 
     private void setFilters() {
         final Button btnAllFilter = (Button) findViewById(R.id.btnAll);
+        final Button btnNew = (Button) findViewById(R.id.btnNew);
+        final Button btnDeliveryWating = (Button) findViewById(R.id.btnDeliveryWating);
+        final Button btnPenalty = (Button) findViewById(R.id.btnPenalty);
+        final Button btnRejected = (Button) findViewById(R.id.btnRejected);
+        final Button btnCustomerRejected = (Button) findViewById(R.id.btnCustomerRejected);
+        final Button btnDelivered = (Button) findViewById(R.id.btnDelivered);
+
         btnAllFilter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
                 mAdapter.filter("");
-//                btnAllFilter.setEnabled(false);
                 mAdapter.notifyDataSetChanged();
-                Toast.makeText(MainActivity.this, "Filter btnAll "+mAdapter.getItemCount(), Toast.LENGTH_LONG).show();
+                btnBackColorReset(btnAllFilter,btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+                btnAllFilter.setBackgroundResource(R.color.colorPrimaryDark);
             }
         });
-        final Button btnNew = (Button) findViewById(R.id.btnNew);
         btnNew.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mAdapter.filter("btnNew");
                 mAdapter.notifyDataSetChanged();
+                btnBackColorReset(btnAllFilter,btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+                btnNew.setBackgroundResource(R.color.colorPrimaryDark);
+
                 // Perform action on click
-//                Toast.makeText(MainActivity.this, "Filter btnNew", Toast.LENGTH_LONG).show();
             }
         });
-        final Button btnDeliveryWating = (Button) findViewById(R.id.btnDeliveryWating);
         btnDeliveryWating.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
                 mAdapter.filter("btnDeliveryWating");
                 mAdapter.notifyDataSetChanged();
-                Toast.makeText(MainActivity.this, "Filter btnDeliveryWating", Toast.LENGTH_LONG).show();
+                btnBackColorReset(btnAllFilter,btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+
+                btnDeliveryWating.setBackgroundResource(R.color.colorPrimaryDark);
+
             }
         });
-        final Button btnPenalty = (Button) findViewById(R.id.btnPenalty);
         btnPenalty.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
                 mAdapter.filter("btnPenalty");
                 mAdapter.notifyDataSetChanged();
-                Toast.makeText(MainActivity.this, "Filter btnPenalty", Toast.LENGTH_LONG).show();
+                btnBackColorReset(btnAllFilter,btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+
+                btnPenalty.setBackgroundResource(R.color.colorPrimaryDark);
+
             }
         });
-        final Button btnRejected = (Button) findViewById(R.id.btnRejected);
         btnRejected.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
                 mAdapter.filter("btnRejected");
                 mAdapter.notifyDataSetChanged();
-                Toast.makeText(MainActivity.this, "Filter btnRejected", Toast.LENGTH_LONG).show();
+                btnBackColorReset(btnAllFilter,btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+
+                btnRejected.setBackgroundResource(R.color.colorPrimaryDark);
+
             }
         });
-        final Button btnDelivered = (Button) findViewById(R.id.btnDelivered);
         btnDelivered.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
                 mAdapter.filter("btnDelivered");
                 mAdapter.notifyDataSetChanged();
-                Toast.makeText(MainActivity.this, "Filter btnDelivered", Toast.LENGTH_LONG).show();
+                btnBackColorReset(btnAllFilter,btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+
+                btnDelivered.setBackgroundResource(R.color.colorPrimaryDark);
+
             }
         });
-        final Button btnCustomerRejected = (Button) findViewById(R.id.btnCustomerRejected);
         btnCustomerRejected.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
                 mAdapter.filter("btnCustomerRejected");
                 mAdapter.notifyDataSetChanged();
-                Toast.makeText(MainActivity.this, "Filter btnCustomerRejected", Toast.LENGTH_LONG).show();
+                btnBackColorReset(btnAllFilter,btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+
+                btnCustomerRejected.setBackgroundResource(R.color.colorPrimaryDark);
+
             }
         });
 
+    }
+
+    private void btnBackColorReset(Button btnAllFilter,Button btnDelivered, Button btnNew, Button btnDeliveryWating, Button btnPenalty, Button btnRejected, Button btnCustomerRejected) {
+        btnAllFilter.setBackgroundResource(R.color.half_red);
+        btnNew.setBackgroundResource(R.color.half_red);
+        btnDeliveryWating.setBackgroundResource(R.color.half_red);
+        btnPenalty.setBackgroundResource(R.color.half_red);
+        btnRejected.setBackgroundResource(R.color.half_red);
+        btnCustomerRejected.setBackgroundResource(R.color.half_red);
+        btnDelivered.setBackgroundResource(R.color.half_red);
     }
 
 

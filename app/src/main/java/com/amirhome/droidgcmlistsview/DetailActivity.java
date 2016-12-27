@@ -35,6 +35,8 @@ import java.util.List;
 public class DetailActivity extends AppCompatActivity {
     public static final String ONAYLI_BEKLIYOR = "Onayli Bekliyor";
     public static final String TESLIM_BEKLIYOR = "Teslim Bekliyor";
+    public static final String CONST_REJECT_AUTO = "RejectAuto";
+    public static final String CONST_REJECT = "Reject";
     /*test*/
     public int btnID;
     RadioGroup rg_restaurant;
