@@ -37,6 +37,7 @@ public class DetailActivity extends AppCompatActivity {
     public static final String TESLIM_BEKLIYOR = "Teslim Bekliyor";
     public static final String CONST_REJECT_AUTO = "RejectAuto";
     public static final String CONST_REJECT = "Reject";
+    public static final String URL_EAT2DONATE_API_SYNC_CART_DB = "http://192.168.1.109/eat2donate/api/v1/sync-cart-db/";
     /*test*/
     public int btnID;
     RadioGroup rg_restaurant;
@@ -155,7 +156,7 @@ public class DetailActivity extends AppCompatActivity {
 
     static public void httpRequest(String param1) {
 
-        String request_url = "http://192.168.1.109/eat2donate/api/v1/sync-cart-db/" + MainActivity.rCode;
+        String request_url = URL_EAT2DONATE_API_SYNC_CART_DB + MainActivity.rCode;
 
         JSONObject parameters = new JSONObject();
 
