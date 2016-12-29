@@ -3,36 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.amirhome.droidgcmlistsview.MainActivity">
 
-    <item android:id="@+id/logo"
-
-        android:icon="@drawable/logo"
-        android:title="Lorem ipsum"
-        app:showAsAction="always"
-
-        /><!--logo-->
-
-
-    <item
-        android:id="@+id/space"
-        android:title="                                 "
-        app:showAsAction="always"
-        /><!--space -->
-
     <item
         android:id="@+id/ipnumber"
         android:title="ip number"
-        app:showAsAction="always"
-      /><!--ip number-->
+        app:showAsAction="always" /><!--ip number-->
     <item
         android:id="@+id/imeinumber"
         android:title="imei number"
-        app:showAsAction="always"
-        /><!--imei number-->
+        app:showAsAction="always" /><!--imei number-->
     <item
         android:id="@+id/version"
         android:title="version"
-        app:showAsAction="always"
-        /><!--version number-->
+        app:showAsAction="always" /><!--version number-->
 
     <item
         android:id="@+id/restourantn_no"
@@ -40,29 +22,30 @@
         android:title="restourant no"
         app:showAsAction="always" /><!--restourant number-->
 
-    <item android:id="@+id/open_status"
+    <item
+        android:id="@+id/open_status"
 
         android:icon="@drawable/ic_action_name2"
+        android:orderInCategory="90"
         android:title=""
         app:showAsAction="always"
-        android:orderInCategory="90"
 
         /><!--system button-->
 
     <item
-        android:orderInCategory="100"
-        android:icon="@drawable/ic_action_name"
-        android:title="switch"
         android:id="@+id/service_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:checked="true"
+        android:icon="@drawable/ic_action_name"
+        android:orderInCategory="100"
         android:textOff="Off"
         android:textOn="On"
 
-        android:layout_centerHorizontal="true"
         android:textStyle="bold|italic"
+        android:title="switch"
 
-        app:showAsAction="always"/><!--toogle button on off -->
+        app:showAsAction="always" /><!--toogle button on off -->
 
 </menu>

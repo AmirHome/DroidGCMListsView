@@ -1,13 +1,15 @@
 package com.amirhome.droidgcmlistsview;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -19,7 +21,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import com.firebase.client.ChildEventListener;
@@ -38,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
     final List<Order> orderList = new ArrayList<>();
     private RecyclerView recyclerView;
     private OrdersAdapter mAdapter;
-    private String filterText = "";
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
+    static MediaPlayer mPlayer;
 
     static String rCode;
 
@@ -47,17 +48,22 @@ public class MainActivity extends AppCompatActivity {
     private TelephonyManager mTelephonyManager;
 
     Firebase fire;
+    /* Dailog */
+    private int countNewOrder = 0;
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    /*  getSupportActionBar().setDisplayUseLogoEnabled(true);
-       getSupportActionBar().setDisplayShowHomeEnabled(true);
-      getSupportActionBar().setLogo(R.drawable.ic_action_name2);*/
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setLogo(R.drawable.e2d_full_quality);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logo);
+
 
         //get and set imei code = restaurant code
         this.setImeiCode();
@@ -102,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 /* test */
                 newOrderAlert();
-
 /* test end. */
 //                String msg = "Can you help me please..";
 //                Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
@@ -110,19 +115,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void newOrderAlert() {
-        AlertDialog.Builder builderInner = new AlertDialog.Builder(MainActivity.this);
-        builderInner.setIcon(R.drawable.logo);
-        builderInner.setMessage("strName");
-        builderInner.setTitle("Your Selected Item is");
-        builderInner.setCancelable(false);
-        builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog,int which) {
-                dialog.dismiss();
-            }
-        });
-        builderInner.show();
+    public void startAlarm() {
+        mPlayer = MediaPlayer.create(MainActivity.this, R.raw.bleepsoundbible);
+        mPlayer.setLooping(true);
+        mPlayer.start();
+    }
+
+    public void stopAlarm() {
+        mPlayer.stop();
     }
 
     private void setFilters() {
@@ -293,6 +293,32 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void newOrderAlert() {
+        countNewOrder++;
+        if (1 == countNewOrder) {
+            AlertDialog.Builder builderInner = new AlertDialog.Builder(MainActivity.this);
+            builderInner.setIcon(R.drawable.logo);
+            builderInner.setMessage("New order come now..");
+            builderInner.setTitle("Please click OK and go to the list. Count: "+ countNewOrder);
+            builderInner.setCancelable(false);
+            builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    stopAlarm();
+                    countNewOrder = 0;
+                    dialog.dismiss();
+                }
+            });
+            dialog = builderInner.create();
+            dialog.show();
+            startAlarm();
+        }
+        else
+        {
+            dialog.setTitle("Please click OK and go to the list. Count: "+ countNewOrder);
+        }
+    }
+
     //Retrieve
     private void retrieveData() {
 
@@ -314,11 +340,14 @@ public class MainActivity extends AppCompatActivity {
                         mAdapter.filter("");
 
                         if (cartDetails.status_order.equals("0")) {
-                            Intent service = new Intent(getBaseContext(), ServiceOrderControl.class);
-                            service.putExtra("ServiceOrderControl.orderId", dataSnapshot.getKey());
-                            service.putExtra("ServiceOrderControl.order_date", cartDetails.order_date);
-                            startService(service);
+                            Intent myService = new Intent(getBaseContext(), ServiceOrderControl.class);
+                            myService.putExtra("ServiceOrderControl.orderId", dataSnapshot.getKey());
+                            myService.putExtra("ServiceOrderControl.order_date", cartDetails.order_date);
+
+                            startService(myService);
                             newOrderAlert();
+
+
                         }
 
                     } catch (Exception ex) {

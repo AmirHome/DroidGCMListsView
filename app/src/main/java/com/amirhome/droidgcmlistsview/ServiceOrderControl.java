@@ -22,12 +22,13 @@ import java.util.Date;
 import java.util.Locale;
 
 public class ServiceOrderControl extends Service {
-    public static final int DelayedMili = 6000;// 3 x 60 x 1000 = 180000
+    public static final int DelayedMili = 18000;// 3 x 60 x 1000 = 180000
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     Firebase fire;
     String orderId;
     String orderDate;
     public boolean res;
+    int notifyID = 0;
 
     public ServiceOrderControl() {
     }
@@ -46,7 +47,9 @@ public class ServiceOrderControl extends Service {
         orderDate = intent.getStringExtra("ServiceOrderControl.order_date");
 
         // The new order came
-        setNotification();
+        setNotification(orderId);
+
+        /* Open Dailog */
 
         // Set Timer if status == 0
         setTimerStatusCtrl(orderId, orderDate);
@@ -126,30 +129,30 @@ public class ServiceOrderControl extends Service {
         return res;
     }
 
-
-    public void setNotification() {
+    public void setNotification(String id) {
         try {
             Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-
             NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
             // Sets an ID for the notification, so it can be updated
-            int notifyID = 1;
             Intent intent = new Intent(this, DetailActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
 
             android.app.Notification notif = new Notification.Builder(this)
-                    .setSmallIcon(R.drawable.ic_stat_name)
-                    .setContentTitle("title")
-                    .setContentText("text")
+                    .setSmallIcon(R.drawable.donation_white)
+                    .setContentTitle("Order #"+ id+ " is waiting..")
+                    .setContentText("New order come now..")
                     .setSound(uri)
                   .build();
 
 
-            notificationManager.notify(0, notif);
+
+            notificationManager.notify(notifyID++, notif);
         } catch (Exception e) {
 //            Log.d("AmirHomeLog", e.toString());
         }
     }
+
 
 
     @NonNull
