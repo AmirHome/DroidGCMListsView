@@ -111,28 +111,19 @@ public class MainActivity extends AppCompatActivity {
                         rv.setAdapter(adapter);
                         adapter.getFilter().filter("");
 
-                        Log.d("AmirHomeLog", String.valueOf(dataSnapshot.child("order_cost").getValue()));
-//                        Order cartDetails = dataSnapshot.getValue(Order.class);
-//                        cartDetails.setOrderNo(dataSnapshot.getKey());
-//                        cartDetails.setCost(cartDetails.order_cost);
-//                        cartDetails.setOrderTime(cartDetails.order_date);
-//                        cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
-//
-//                        orderList.add(cartDetails);
-//                        recyclerView.scrollToPosition(orderList.size() - 1);
-//                        mAdapter.notifyItemInserted(orderList.size() - 1);
-//                        mAdapter.filter("");
+                        rv.scrollToPosition(players.size() - 1);
+                        adapter.notifyItemInserted(orderList.size() - 1);
 
-//                        if (cartDetails.status_order.equals("0")) {
-//                            Intent myService = new Intent(getBaseContext(), ServiceOrderControl.class);
-//                            myService.putExtra("ServiceOrderControl.orderId", dataSnapshot.getKey());
-//                            myService.putExtra("ServiceOrderControl.order_date", cartDetails.order_date);
-//
-//                            startService(myService);
-//                            newOrderAlert();
-//
-//
-//                        }
+                        if (dataSnapshot.child("status_order").getValue().toString().equals("0")) {
+                            Intent myService = new Intent(getBaseContext(), ServiceOrderControl.class);
+                            myService.putExtra("ServiceOrderControl.orderId", p.getOrder_no());
+                            myService.putExtra("ServiceOrderControl.order_date", p.getOrder_date());
+
+                            startService(myService);
+                            newOrderAlert();
+
+
+                        }
 
                     } catch (Exception ex) {
                         Log.d("AmirHomeLog", ex.getMessage());
@@ -428,41 +419,4 @@ public class MainActivity extends AppCompatActivity {
         return deviceid;
     }
 
-    //ADD PLAYERS TO ARRAYLIST
-/*    private ArrayList<Player> getPlayers()
-    {
-        ArrayList<Player> players=new ArrayList<>();
-        Player p=new Player();
-        p.setName("Ander Herera");
-        p.setPos("Midfielder");
-        players.add(p);
-
-        p=new Player();
-        p.setName("David De Geaa");
-        p.setPos("Goalkeeper");
-        players.add(p);
-
-        p=new Player();
-        p.setName("Michael Carrick");
-        p.setPos("Midfielder");
-        players.add(p);
-
-        p=new Player();
-        p.setName("Juan Mata");
-        p.setPos("Playmaker");
-        players.add(p);
-
-        p=new Player();
-        p.setName("Diego Costa");
-        p.setPos("Striker");
-        players.add(p);
-
-        p=new Player();
-        p.setName("Oscar");
-        p.setPos("Playmaker");
-        players.add(p);
-
-
-        return players;
-    }*/
 }
