@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -21,6 +20,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 
 import com.firebase.client.ChildEventListener;
@@ -34,6 +34,7 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
     final List<Order> orderList = new ArrayList<>();
@@ -52,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
     private int countNewOrder = 0;
     private Dialog dialog;
 
+    private Player p;
+    ArrayList<Player> players=new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,42 +68,204 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setLogo(R.drawable.logo);
 
-
         //get and set imei code = restaurant code
         this.setImeiCode();
-
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        mAdapter = new OrdersAdapter(orderList);
-        recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
-            @Override
-            public void onClick(View viewClicked, int position) {
-                Order order = orderList.get(position);
-                detailOrder(order.getOrderNo());
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
 
 
 //init firebase
         Firebase.setAndroidContext(this);
         fire = new Firebase(DB_URL + rCode);
 
+        RecyclerView rv= (RecyclerView) findViewById(R.id.recycler_view);
+        //SET ITS PROPETRIES
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setItemAnimator(new DefaultItemAnimator());
+
+        //ADAPTER
+        final MyAdapter adapter=new MyAdapter(this,players);
+        rv.setAdapter(adapter);
+
+//        rv.OnClickListener(new ItemClickListener()
+//        {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapter, View v, int position,
+//                                    long arg3)
+//            {
+//                //do your work here
+//            }
+//        });
 // get Data
-        retrieveData();
+        fire.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
+                if (dataSnapshot != null && dataSnapshot.getValue() != null) {
+                    try {
+                        p=new Player();
+                        p.setOrder_no(dataSnapshot.getKey());
+                        p.setStatus(dataSnapshot.child("status_order").getValue().toString(), dataSnapshot.child("status_delivery").getValue().toString());
+                        p.setOrder_cost(dataSnapshot.child("order_cost").getValue().toString());
+                        p.setOrder_date(dataSnapshot.child("order_date").getValue().toString());
+                        players.add(p);
+                        rv.setAdapter(adapter);
+                        adapter.getFilter().filter("");
+
+                        Log.d("AmirHomeLog", String.valueOf(dataSnapshot.child("order_cost").getValue()));
+//                        Order cartDetails = dataSnapshot.getValue(Order.class);
+//                        cartDetails.setOrderNo(dataSnapshot.getKey());
+//                        cartDetails.setCost(cartDetails.order_cost);
+//                        cartDetails.setOrderTime(cartDetails.order_date);
+//                        cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
+//
+//                        orderList.add(cartDetails);
+//                        recyclerView.scrollToPosition(orderList.size() - 1);
+//                        mAdapter.notifyItemInserted(orderList.size() - 1);
+//                        mAdapter.filter("");
+
+//                        if (cartDetails.status_order.equals("0")) {
+//                            Intent myService = new Intent(getBaseContext(), ServiceOrderControl.class);
+//                            myService.putExtra("ServiceOrderControl.orderId", dataSnapshot.getKey());
+//                            myService.putExtra("ServiceOrderControl.order_date", cartDetails.order_date);
+//
+//                            startService(myService);
+//                            newOrderAlert();
+//
+//
+//                        }
+
+                    } catch (Exception ex) {
+                        Log.d("AmirHomeLog", ex.getMessage());
+                    }
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                int pos = -1;
+                for (int i = 0; i < orderList.size(); i++) {
+                    orderList.get(i).getOrderNo();
+                    if (dataSnapshot.getKey().equals(orderList.get(i).getOrderNo())) {
+                        pos = i;
+                        break;
+                    }
+                }
+                if (pos >= 0) {
+
+                    orderList.remove(pos);
+                    mAdapter.notifyItemRemoved(pos);
+                    mAdapter.notifyItemRangeChanged(pos, orderList.size());
+
+                    Order cartDetails = dataSnapshot.getValue(Order.class);
+                    cartDetails.setOrderNo(dataSnapshot.getKey());
+                    cartDetails.setCost(cartDetails.order_cost);
+                    cartDetails.setOrderTime(cartDetails.order_date);
+                    cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
+
+                    orderList.add(pos, cartDetails);
+                    mAdapter.notifyItemInserted(pos);
+                    mAdapter.notifyItemRangeChanged(pos, orderList.size());
+                    mAdapter.filter("");
+                }
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
 
 // set filters
-        setFilters();
+        final Button btnAllFilter = (Button) findViewById(R.id.btnAll);
+        final Button btnNew = (Button) findViewById(R.id.btnNew);
+         final Button btnDeliveryWating = (Button) findViewById(R.id.btnDeliveryWating);
+         final Button btnPenalty = (Button) findViewById(R.id.btnPenalty);
+         final Button btnRejected = (Button) findViewById(R.id.btnRejected);
+         final Button btnCustomerRejected = (Button) findViewById(R.id.btnCustomerRejected);
+         final Button btnDelivered = (Button) findViewById(R.id.btnDelivered);
+
+        btnAllFilter.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //FILTER AS YOU TYPE
+                adapter.getFilter().filter("");
+                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+                btnAllFilter.setBackgroundResource(R.color.colorPrimaryDark);
+
+            }
+        });
+
+        btnNew.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //FILTER AS YOU TYPE
+                adapter.getFilter().filter("Reject");
+                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+                btnNew.setBackgroundResource(R.color.colorPrimaryDark);
+            }
+        });
+        btnDeliveryWating.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                adapter.getFilter().filter("btnDeliveryWating");
+                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+
+                btnDeliveryWating.setBackgroundResource(R.color.colorPrimaryDark);
+
+            }
+        });
+        btnPenalty.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                adapter.getFilter().filter("btnPenalty");
+//                mAdapter.notifyDataSetChanged();
+                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+
+                btnPenalty.setBackgroundResource(R.color.colorPrimaryDark);
+
+            }
+        });
+        btnRejected.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                adapter.getFilter().filter("btnRejected");
+                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+
+                btnRejected.setBackgroundResource(R.color.colorPrimaryDark);
+
+            }
+        });
+        btnDelivered.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                adapter.getFilter().filter("btnDelivered");
+                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+
+                btnDelivered.setBackgroundResource(R.color.colorPrimaryDark);
+
+            }
+        });
+        btnCustomerRejected.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                adapter.getFilter().filter("btnCustomerRejected");
+                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
+
+                btnCustomerRejected.setBackgroundResource(R.color.colorPrimaryDark);
+
+            }
+        });
+
+
+
 
 // float button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -107,7 +273,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 /* test */
-                newOrderAlert();
+//                p=new Player();
+//                p.setName("Ander Herera");
+//                p.setPos("Midfielder");
+//                players.add(p);
+//                final MyAdapter adapter=new MyAdapter(MainActivity.this,players);
+                //rv.setAdapter(adapter);
 /* test end. */
 //                String msg = "Can you help me please..";
 //                Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
@@ -125,91 +296,6 @@ public class MainActivity extends AppCompatActivity {
         mPlayer.stop();
     }
 
-    private void setFilters() {
-        final Button btnAllFilter = (Button) findViewById(R.id.btnAll);
-        final Button btnNew = (Button) findViewById(R.id.btnNew);
-        final Button btnDeliveryWating = (Button) findViewById(R.id.btnDeliveryWating);
-        final Button btnPenalty = (Button) findViewById(R.id.btnPenalty);
-        final Button btnRejected = (Button) findViewById(R.id.btnRejected);
-        final Button btnCustomerRejected = (Button) findViewById(R.id.btnCustomerRejected);
-        final Button btnDelivered = (Button) findViewById(R.id.btnDelivered);
-
-        btnAllFilter.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                mAdapter.filter("");
-                mAdapter.notifyDataSetChanged();
-                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
-                btnAllFilter.setBackgroundResource(R.color.colorPrimaryDark);
-            }
-        });
-        btnNew.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mAdapter.filter("btnNew");
-                mAdapter.notifyDataSetChanged();
-                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
-                btnNew.setBackgroundResource(R.color.colorPrimaryDark);
-
-                // Perform action on click
-            }
-        });
-        btnDeliveryWating.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                mAdapter.filter("btnDeliveryWating");
-                mAdapter.notifyDataSetChanged();
-                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
-
-                btnDeliveryWating.setBackgroundResource(R.color.colorPrimaryDark);
-
-            }
-        });
-        btnPenalty.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                mAdapter.filter("btnPenalty");
-                mAdapter.notifyDataSetChanged();
-                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
-
-                btnPenalty.setBackgroundResource(R.color.colorPrimaryDark);
-
-            }
-        });
-        btnRejected.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                mAdapter.filter("btnRejected");
-                mAdapter.notifyDataSetChanged();
-                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
-
-                btnRejected.setBackgroundResource(R.color.colorPrimaryDark);
-
-            }
-        });
-        btnDelivered.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                mAdapter.filter("btnDelivered");
-                mAdapter.notifyDataSetChanged();
-                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
-
-                btnDelivered.setBackgroundResource(R.color.colorPrimaryDark);
-
-            }
-        });
-        btnCustomerRejected.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                mAdapter.filter("btnCustomerRejected");
-                mAdapter.notifyDataSetChanged();
-                btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
-
-                btnCustomerRejected.setBackgroundResource(R.color.colorPrimaryDark);
-
-            }
-        });
-
-    }
 
     private void btnBackColorReset(Button btnAllFilter, Button btnDelivered, Button btnNew, Button btnDeliveryWating, Button btnPenalty, Button btnRejected, Button btnCustomerRejected) {
         btnAllFilter.setBackgroundResource(R.color.half_red);
@@ -319,92 +405,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //Retrieve
-    private void retrieveData() {
 
-        fire.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                if (dataSnapshot != null && dataSnapshot.getValue() != null) {
-                    try {
-                        Order cartDetails = dataSnapshot.getValue(Order.class);
-                        cartDetails.setOrderNo(dataSnapshot.getKey());
-                        cartDetails.setCost(cartDetails.order_cost);
-                        cartDetails.setOrderTime(cartDetails.order_date);
-                        cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
-
-                        orderList.add(cartDetails);
-                        recyclerView.scrollToPosition(orderList.size() - 1);
-                        mAdapter.notifyItemInserted(orderList.size() - 1);
-                        mAdapter.filter("");
-
-                        if (cartDetails.status_order.equals("0")) {
-                            Intent myService = new Intent(getBaseContext(), ServiceOrderControl.class);
-                            myService.putExtra("ServiceOrderControl.orderId", dataSnapshot.getKey());
-                            myService.putExtra("ServiceOrderControl.order_date", cartDetails.order_date);
-
-                            startService(myService);
-                            newOrderAlert();
-
-
-                        }
-
-                    } catch (Exception ex) {
-                        Log.d("AmirHomeLog", ex.getMessage());
-                    }
-                }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                int pos = -1;
-                for (int i = 0; i < orderList.size(); i++) {
-                    orderList.get(i).getOrderNo();
-                    if (dataSnapshot.getKey().equals(orderList.get(i).getOrderNo())) {
-                        pos = i;
-                        break;
-                    }
-                }
-                if (pos >= 0) {
-
-                    orderList.remove(pos);
-                    mAdapter.notifyItemRemoved(pos);
-                    mAdapter.notifyItemRangeChanged(pos, orderList.size());
-
-                    Order cartDetails = dataSnapshot.getValue(Order.class);
-                    cartDetails.setOrderNo(dataSnapshot.getKey());
-                    cartDetails.setCost(cartDetails.order_cost);
-                    cartDetails.setOrderTime(cartDetails.order_date);
-                    cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
-
-                    orderList.add(pos, cartDetails);
-                    mAdapter.notifyItemInserted(pos);
-                    mAdapter.notifyItemRangeChanged(pos, orderList.size());
-                    mAdapter.filter("");
-                }
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
-
-    }
-
-
-    private void detailOrder(String id) {
+    public void detailOrder(String id) {
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra("id", id);
         startActivity(intent);
@@ -425,4 +427,42 @@ public class MainActivity extends AppCompatActivity {
         String deviceid = mTelephonyManager.getDeviceId();
         return deviceid;
     }
+
+    //ADD PLAYERS TO ARRAYLIST
+/*    private ArrayList<Player> getPlayers()
+    {
+        ArrayList<Player> players=new ArrayList<>();
+        Player p=new Player();
+        p.setName("Ander Herera");
+        p.setPos("Midfielder");
+        players.add(p);
+
+        p=new Player();
+        p.setName("David De Geaa");
+        p.setPos("Goalkeeper");
+        players.add(p);
+
+        p=new Player();
+        p.setName("Michael Carrick");
+        p.setPos("Midfielder");
+        players.add(p);
+
+        p=new Player();
+        p.setName("Juan Mata");
+        p.setPos("Playmaker");
+        players.add(p);
+
+        p=new Player();
+        p.setName("Diego Costa");
+        p.setPos("Striker");
+        players.add(p);
+
+        p=new Player();
+        p.setName("Oscar");
+        p.setPos("Playmaker");
+        players.add(p);
+
+
+        return players;
+    }*/
 }
