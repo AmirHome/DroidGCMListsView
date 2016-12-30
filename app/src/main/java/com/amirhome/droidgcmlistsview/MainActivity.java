@@ -20,7 +20,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 
 import com.firebase.client.ChildEventListener;
@@ -33,11 +32,10 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-//    final List<Order> orderList = new ArrayList<>();
+    //    final List<Order> orderList = new ArrayList<>();
 //    private RecyclerView recyclerView;
 //    private OrdersAdapter mAdapter;
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private Dialog dialog;
 
     private Player p;
-    ArrayList<Player> players=new ArrayList<>();
+    ArrayList<Player> players = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,29 +69,20 @@ public class MainActivity extends AppCompatActivity {
         this.setImeiCode();
 
 
-//init firebase
+        //init firebase
         Firebase.setAndroidContext(this);
         fire = new Firebase(DB_URL + rCode);
 
-        RecyclerView rv= (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
         //SET ITS PROPETRIES
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setItemAnimator(new DefaultItemAnimator());
 
         //ADAPTER
-        final MyAdapter adapter=new MyAdapter(this,players);
+        final MyAdapter adapter = new MyAdapter(this, players);
         rv.setAdapter(adapter);
 
-//        rv.OnClickListener(new ItemClickListener()
-//        {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapter, View v, int position,
-//                                    long arg3)
-//            {
-//                //do your work here
-//            }
-//        });
-// get Data
+        // get Data
         fire.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -101,17 +90,17 @@ public class MainActivity extends AppCompatActivity {
                 RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
                 if (dataSnapshot != null && dataSnapshot.getValue() != null) {
                     try {
-                        p=new Player();
+                        p = new Player();
                         p.setOrder_no(dataSnapshot.getKey());
                         p.setStatus(dataSnapshot.child("status_order").getValue().toString(), dataSnapshot.child("status_delivery").getValue().toString());
                         p.setOrder_cost(dataSnapshot.child("order_cost").getValue().toString());
                         p.setOrder_date(dataSnapshot.child("order_date").getValue().toString());
-                        players.add(p);
+                        players.add(0,p);
                         rv.setAdapter(adapter);
                         adapter.getFilter().filter("");
 
-                        rv.scrollToPosition(players.size() - 1);
-                        adapter.notifyItemInserted(players.size() - 1);
+//                        rv.scrollToPosition(players.size() - 1);
+//                        adapter.notifyItemInserted(players.size() - 1);
 
                         if (dataSnapshot.child("status_order").getValue().toString().equals("0")) {
                             Intent myService = new Intent(getBaseContext(), ServiceOrderControl.class);
@@ -133,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
-//                Find position
+                // Find position
                 int pos = -1;
                 for (int i = 0; i < players.size(); i++) {
 
@@ -142,18 +131,18 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                 }
-//              ReWrite record
+                // ReWrite record
                 if (pos >= 0) {
                     players.remove(pos);
                     adapter.notifyItemRemoved(pos);
                     adapter.notifyItemRangeChanged(pos, players.size());
 
-                    p=new Player();
+                    p = new Player();
                     p.setOrder_no(dataSnapshot.getKey());
                     p.setStatus(dataSnapshot.child("status_order").getValue().toString(), dataSnapshot.child("status_delivery").getValue().toString());
                     p.setOrder_cost(dataSnapshot.child("order_cost").getValue().toString());
                     p.setOrder_date(dataSnapshot.child("order_date").getValue().toString());
-                    players.add(pos,p);
+                    players.add(pos, p);
                     rv.setAdapter(adapter);
                     adapter.getFilter().filter("");
 
@@ -176,14 +165,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-// set filters
+        // set filters
         final Button btnAllFilter = (Button) findViewById(R.id.btnAll);
         final Button btnNew = (Button) findViewById(R.id.btnNew);
-         final Button btnDeliveryWating = (Button) findViewById(R.id.btnDeliveryWating);
-         final Button btnPenalty = (Button) findViewById(R.id.btnPenalty);
-         final Button btnRejected = (Button) findViewById(R.id.btnRejected);
-         final Button btnCustomerRejected = (Button) findViewById(R.id.btnCustomerRejected);
-         final Button btnDelivered = (Button) findViewById(R.id.btnDelivered);
+        final Button btnDeliveryWating = (Button) findViewById(R.id.btnDeliveryWating);
+        final Button btnPenalty = (Button) findViewById(R.id.btnPenalty);
+        final Button btnRejected = (Button) findViewById(R.id.btnRejected);
+        final Button btnCustomerRejected = (Button) findViewById(R.id.btnCustomerRejected);
+        final Button btnDelivered = (Button) findViewById(R.id.btnDelivered);
 
         btnAllFilter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -217,9 +206,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Perform action on click
                 adapter.getFilter().filter("btnPenalty");
-//                mAdapter.notifyDataSetChanged();
                 btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
-
                 btnPenalty.setBackgroundResource(R.color.colorPrimaryDark);
 
             }
@@ -229,7 +216,6 @@ public class MainActivity extends AppCompatActivity {
                 // Perform action on click
                 adapter.getFilter().filter("btnRejected");
                 btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
-
                 btnRejected.setBackgroundResource(R.color.colorPrimaryDark);
 
             }
@@ -239,7 +225,6 @@ public class MainActivity extends AppCompatActivity {
                 // Perform action on click
                 adapter.getFilter().filter("btnDelivered");
                 btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
-
                 btnDelivered.setBackgroundResource(R.color.colorPrimaryDark);
 
             }
@@ -249,16 +234,13 @@ public class MainActivity extends AppCompatActivity {
                 // Perform action on click
                 adapter.getFilter().filter("btnCustomerRejected");
                 btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
-
                 btnCustomerRejected.setBackgroundResource(R.color.colorPrimaryDark);
 
             }
         });
 
 
-
-
-// float button
+        // float button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -317,7 +299,6 @@ public class MainActivity extends AppCompatActivity {
         imeinumber.setTitle(this.rCode);
 
         MenuItem ipnumber = menu.findItem(R.id.ipnumber);
-//        getLocalIpAddress()
         ipnumber.setTitle(getLocalIpAddress());
 
         MenuItem version = menu.findItem(R.id.version);
@@ -376,7 +357,7 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builderInner = new AlertDialog.Builder(MainActivity.this);
             builderInner.setIcon(R.drawable.logo);
             builderInner.setMessage("New order come now..");
-            builderInner.setTitle("Please click OK and go to the list. Count: "+ countNewOrder);
+            builderInner.setTitle("Please click OK and go to the list. Count: " + countNewOrder);
             builderInner.setCancelable(false);
             builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
@@ -389,10 +370,8 @@ public class MainActivity extends AppCompatActivity {
             dialog = builderInner.create();
             dialog.show();
             startAlarm();
-        }
-        else
-        {
-            dialog.setTitle("Please click OK and go to the list. Count: "+ countNewOrder);
+        } else {
+            dialog.setTitle("Please click OK and go to the list. Count: " + countNewOrder);
         }
     }
 
