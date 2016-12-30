@@ -37,12 +37,11 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-    final List<Order> orderList = new ArrayList<>();
-    private RecyclerView recyclerView;
-    private OrdersAdapter mAdapter;
+//    final List<Order> orderList = new ArrayList<>();
+//    private RecyclerView recyclerView;
+//    private OrdersAdapter mAdapter;
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
     static MediaPlayer mPlayer;
-
     static String rCode;
 
     private static final int PERMISSIONS_REQUEST_READ_PHONE_STATE = 777;
@@ -112,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                         adapter.getFilter().filter("");
 
                         rv.scrollToPosition(players.size() - 1);
-                        adapter.notifyItemInserted(orderList.size() - 1);
+                        adapter.notifyItemInserted(players.size() - 1);
 
                         if (dataSnapshot.child("status_order").getValue().toString().equals("0")) {
                             Intent myService = new Intent(getBaseContext(), ServiceOrderControl.class);
@@ -133,30 +132,31 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
+//                Find position
                 int pos = -1;
-                for (int i = 0; i < orderList.size(); i++) {
-                    orderList.get(i).getOrderNo();
-                    if (dataSnapshot.getKey().equals(orderList.get(i).getOrderNo())) {
+                for (int i = 0; i < players.size(); i++) {
+
+                    if (dataSnapshot.getKey().equals(players.get(i).getOrder_no())) {
                         pos = i;
                         break;
                     }
                 }
+//              ReWrite record
                 if (pos >= 0) {
+                    players.remove(pos);
+                    adapter.notifyItemRemoved(pos);
+                    adapter.notifyItemRangeChanged(pos, players.size());
 
-                    orderList.remove(pos);
-                    mAdapter.notifyItemRemoved(pos);
-                    mAdapter.notifyItemRangeChanged(pos, orderList.size());
+                    p=new Player();
+                    p.setOrder_no(dataSnapshot.getKey());
+                    p.setStatus(dataSnapshot.child("status_order").getValue().toString(), dataSnapshot.child("status_delivery").getValue().toString());
+                    p.setOrder_cost(dataSnapshot.child("order_cost").getValue().toString());
+                    p.setOrder_date(dataSnapshot.child("order_date").getValue().toString());
+                    players.add(pos,p);
+                    rv.setAdapter(adapter);
+                    adapter.getFilter().filter("");
 
-                    Order cartDetails = dataSnapshot.getValue(Order.class);
-                    cartDetails.setOrderNo(dataSnapshot.getKey());
-                    cartDetails.setCost(cartDetails.order_cost);
-                    cartDetails.setOrderTime(cartDetails.order_date);
-                    cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
-
-                    orderList.add(pos, cartDetails);
-                    mAdapter.notifyItemInserted(pos);
-                    mAdapter.notifyItemRangeChanged(pos, orderList.size());
-                    mAdapter.filter("");
                 }
             }
 
