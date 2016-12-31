@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                         p.setStatus(dataSnapshot.child("status_order").getValue().toString(), dataSnapshot.child("status_delivery").getValue().toString());
                         p.setOrder_cost(dataSnapshot.child("order_cost").getValue().toString());
                         p.setOrder_date(dataSnapshot.child("order_date").getValue().toString());
-                        players.add(0,p);
+                        players.add(0, p);
                         rv.setAdapter(adapter);
                         adapter.notifyItemInserted(0);
                         rv.smoothScrollToPosition(0);
@@ -316,6 +316,12 @@ public class MainActivity extends AppCompatActivity {
 
         MenuItem restourantnNo = menu.findItem(R.id.restourantn_no);
         restourantnNo.setTitle(restourantn_no);
+
+        MenuItem openStatus = menu.findItem(R.id.open_status);
+        if (open_status.equals("Open"))
+            openStatus.setIcon(R.drawable.ic_action_name2);
+        else
+            openStatus.setIcon(R.drawable.ic_action_name);
         return true;
     }
 
