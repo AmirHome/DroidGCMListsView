@@ -9,8 +9,6 @@ import android.widget.TextView;
 public class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     //OUR VIEWS
-//    ImageView img;
-//    TextView nameTxt,posTxt;
     ItemClickListener itemClickListener;
     TextView order_no, time, cost, status;
 
@@ -18,9 +16,6 @@ public class MyHolder extends RecyclerView.ViewHolder implements View.OnClickLis
     public MyHolder(View itemView) {
         super(itemView);
 
-//        this.img= (ImageView) itemView.findViewById(R.id.playerImage);
-//        this.nameTxt= (TextView) itemView.findViewById(R.id.nameTxt);
-//        this.posTxt= (TextView) itemView.findViewById(R.id.posTxt);
         this.order_no = (TextView) itemView.findViewById(R.id.order_no);
         this.time = (TextView) itemView.findViewById(R.id.time);
         this.cost = (TextView) itemView.findViewById(R.id.cost);

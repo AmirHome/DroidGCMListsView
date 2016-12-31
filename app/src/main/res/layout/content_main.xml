@@ -41,21 +41,21 @@
 
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/tvRestaurantTitle"
                     android:layout_width="fill_parent"
                     android:layout_height="100dp"
                     android:layout_alignParentTop="true"
 
                     android:layout_weight="0.8"
                     android:background="@color/half_red"
-                    android:text="" />
+                    android:text="Restaurant Title" />
 
                 <Button
                     android:id="@+id/btnAll"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/textView4"
+                    android:layout_below="@+id/tvRestaurantTitle"
                     android:layout_gravity="center"
                     android:layout_marginBottom="2dp"
                     android:layout_weight="0.8"

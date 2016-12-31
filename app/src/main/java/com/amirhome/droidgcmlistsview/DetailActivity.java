@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -37,19 +36,14 @@ public class DetailActivity extends AppCompatActivity {
     public static final String TESLIM_BEKLIYOR = "Teslim Bekliyor";
     public static final String CONST_REJECT_AUTO = "RejectAuto";
     public static final String CONST_REJECT = "Reject";
-    public static final String URL_EAT2DONATE_API_SYNC_CART_DB = "http://192.168.1.109/eat2donate/api/v1/sync-cart-db/";
-    /*test*/
+    public static final String BASE_URL_API_SYNC = "http://192.168.0.16/eat2donate/api/v1/";
     public int btnID;
     RadioGroup rg_restaurant;
     RadioGroup rg_customer;
     Button btnAccept;
     Button btnReject;
 
-    /*test end.*/
-
     Firebase fire;
-    Spinner spinner;
-    List<String> listStatus;
 
     final List<Order> dOrderList = new ArrayList<>();
     private RecyclerView dRecyclerView;
@@ -71,13 +65,8 @@ public class DetailActivity extends AppCompatActivity {
 
         this.retrieveData();
 
-
-        /*test */
         btnAccept = (Button) findViewById(R.id.btnAccept);
         btnReject = (Button) findViewById(R.id.btnReject);
-
-        TextView tvStatusDelivery = (TextView) findViewById(R.id.tvStatusDelivery);
-        TextView tvStatusOrder = (TextView) findViewById(R.id.tvStatusOrder);
 
         // if button is clicked, close the custom dialog
         btnAccept.setOnClickListener(new Button.OnClickListener() {
@@ -96,9 +85,6 @@ public class DetailActivity extends AppCompatActivity {
                 showRadioButtonDialog();
             }
         });
-
-
-        /*test end.*/
 
     }
 
@@ -154,9 +140,59 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
-    static public void httpRequest(String param1) {
+    static public void httpRequestSyncRestaurant(String param1) {
 
-        String request_url = URL_EAT2DONATE_API_SYNC_CART_DB + MainActivity.rCode;
+        String request_url = BASE_URL_API_SYNC + "sync-restaurant-db/" + MainActivity.rCode;
+        JSONObject parameters = new JSONObject();
+
+        try {
+            parameters.put("token", param1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, request_url, parameters,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            MainActivity.restourantn_no = response.getJSONObject("data").getString("id");
+                            MainActivity.restourantn_title = response.getJSONObject("data").getString("title");
+                            MainActivity.open_status = response.getJSONObject("data").getString("open_status");
+                            MainActivity.service_status = response.getJSONObject("data").getString("service_status");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("AmirHomeLog", error.toString());
+            }
+        }) {
+
+            @Override
+            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                int mStatusCode = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                4000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        App.getInstance().addToRequestQueue(request);
+
+    }
+
+    static public void httpRequestSyncCart(String param1) {
+
+        String request_url = BASE_URL_API_SYNC + "sync-cart-db/" + MainActivity.rCode;
 
         JSONObject parameters = new JSONObject();
 
@@ -172,7 +208,7 @@ public class DetailActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             String cart_id = response.getString("cart_id");
-                            Log.d("AmirHomeLog", "onResponse " + cart_id);
+//                            Log.d("AmirHomeLog", "onResponse " + cart_id);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -185,12 +221,6 @@ public class DetailActivity extends AppCompatActivity {
                 Log.d("AmirHomeLog", error.toString());
             }
         }) {
-/*            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Authorization", "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQ3LCJpc3MiOiJodHRwOlwvXC9lYXQyZG9uYXRlMy50a1wvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTQ4MjE2MDQwMywiZXhwIjoxNDgzMDI0NDAzLCJuYmYiOjE0ODIxNjA0MDMsImp0aSI6ImUyNTA2MjAzZGU0NzI3MTI0ZTE3MDk4NzRiMzMyYTc5In0.rORWETjYea5FvmP50tHvs-QN_ElLlwGplmezieB6f30");
-                return params;
-            }*/
 
             @Override
             protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
@@ -265,8 +295,6 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
-
-    /*test*/
     private void showRadioButtonDialog() {
         final Dialog dialog = new Dialog(DetailActivity.this);
         dialog.setContentView(R.layout.detail_dialog);
@@ -297,13 +325,6 @@ public class DetailActivity extends AppCompatActivity {
                 TextView tvStatusDelivery = (TextView) findViewById(R.id.tvStatusDelivery);
                 TextView tvStatusOrder = (TextView) findViewById(R.id.tvStatusOrder);
 
-                /*if (R.id.btnReject == btnID && tvStatusOrder.getText().equals(ONAYLI_BEKLIYOR)) {
-                    fire.child("status_order").setValue("Reject");
-                }else
-                if (R.id.btnAccept == btnID && tvStatusDelivery.getText().equals(TESLIM_BEKLIYOR)) {
-                    fire.child("status_delivery").setValue("Delivered");
-                }*/
-
                 switch (selectedRadioButtonIdR) {
                     case R.id.Accept15:
                         fire.child("status_order").setValue("Accept15");
@@ -319,8 +340,9 @@ public class DetailActivity extends AppCompatActivity {
                         break;
                     default:
                         if (R.id.btnReject == btnID && tvStatusOrder.getText().equals(ONAYLI_BEKLIYOR)) {
-                            fire.child("status_order").setValue("Reject");}
-                            break;
+                            fire.child("status_order").setValue("Reject");
+                        }
+                        break;
                 }
                 switch (selectedRadioButtonIdC) {
                     case R.id.Reject_reason1:
@@ -339,7 +361,7 @@ public class DetailActivity extends AppCompatActivity {
                         break;
                 }
                 dialog.dismiss();
-                httpRequest(fire.getKey());
+                httpRequestSyncCart(fire.getKey());
 
             }
         });
@@ -381,9 +403,5 @@ public class DetailActivity extends AppCompatActivity {
         dialog.show();
 
     }
-
-
-    /*test end.*/
-
 }
 

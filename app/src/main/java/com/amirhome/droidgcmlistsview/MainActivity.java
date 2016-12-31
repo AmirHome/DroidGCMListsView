@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -39,10 +40,16 @@ public class MainActivity extends AppCompatActivity {
 //    private RecyclerView recyclerView;
 //    private OrdersAdapter mAdapter;
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
+    public static final String APP_VERSION = "0.0.3.09";
     static MediaPlayer mPlayer;
     static String rCode;
 
     private static final int PERMISSIONS_REQUEST_READ_PHONE_STATE = 777;
+    public static String restourantn_no;
+    public static String restourantn_title;
+    public static String service_status;
+    public static String open_status;
+
     private TelephonyManager mTelephonyManager;
 
     Firebase fire;
@@ -68,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
         //get and set imei code = restaurant code
         this.setImeiCode();
 
+        getInfo();
+
+        TextView tvRestaurantTitle = (TextView) findViewById(R.id.tvRestaurantTitle);
+        tvRestaurantTitle.setText(restourantn_title);
 
         //init firebase
         Firebase.setAndroidContext(this);
@@ -97,17 +108,18 @@ public class MainActivity extends AppCompatActivity {
                         p.setOrder_date(dataSnapshot.child("order_date").getValue().toString());
                         players.add(0,p);
                         rv.setAdapter(adapter);
-                        adapter.getFilter().filter("");
+                        adapter.notifyItemInserted(0);
+                        rv.smoothScrollToPosition(0);
 
-//                        rv.scrollToPosition(players.size() - 1);
-//                        adapter.notifyItemInserted(players.size() - 1);
+                        adapter.getFilter().filter("");
 
                         if (dataSnapshot.child("status_order").getValue().toString().equals("0")) {
                             Intent myService = new Intent(getBaseContext(), ServiceOrderControl.class);
                             myService.putExtra("ServiceOrderControl.orderId", p.getOrder_no());
                             myService.putExtra("ServiceOrderControl.order_date", p.getOrder_date());
-
+//                            Run Service
                             startService(myService);
+//                            Open Dialog
                             newOrderAlert();
 
 
@@ -246,12 +258,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 /* test */
-//                p=new Player();
-//                p.setName("Ander Herera");
-//                p.setPos("Midfielder");
-//                players.add(p);
-//                final MyAdapter adapter=new MyAdapter(MainActivity.this,players);
-                //rv.setAdapter(adapter);
+//                btnAllFilter.callOnClick();
+                btnAllFilter.setPressed(true);
+                btnAllFilter.performClick();
+                btnAllFilter.invalidate();
 /* test end. */
 //                String msg = "Can you help me please..";
 //                Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
@@ -302,11 +312,15 @@ public class MainActivity extends AppCompatActivity {
         ipnumber.setTitle(getLocalIpAddress());
 
         MenuItem version = menu.findItem(R.id.version);
-        version.setTitle("0.0.2.09");
+        version.setTitle(APP_VERSION);
 
-        MenuItem restourantn_no = menu.findItem(R.id.restourantn_no);
-        restourantn_no.setTitle("2");
+        MenuItem restourantnNo = menu.findItem(R.id.restourantn_no);
+        restourantnNo.setTitle(restourantn_no);
         return true;
+    }
+
+    private void getInfo() {
+        DetailActivity.httpRequestSyncRestaurant("test");
     }
 
     public String getLocalIpAddress() {
@@ -336,13 +350,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("AmirHomeLog", "service_status");
                 return true;
 
-            case R.id.open_status:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                Log.d("AmirHomeLog", "open_status");
-
-                return true;
-
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
@@ -364,6 +371,10 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     stopAlarm();
                     countNewOrder = 0;
+
+                    Button btnNew = (Button) findViewById(R.id.btnNew);
+                    btnNew.callOnClick();
+
                     dialog.dismiss();
                 }
             });
@@ -376,11 +387,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void detailOrder(String id) {
-        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-        intent.putExtra("id", id);
-        startActivity(intent);
-    }
+//    public void detailOrder(String id) {
+//        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+//        intent.putExtra("id", id);
+//        startActivity(intent);
+//    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,

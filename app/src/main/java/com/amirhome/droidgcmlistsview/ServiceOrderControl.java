@@ -114,7 +114,7 @@ public class ServiceOrderControl extends Service {
                     // Order is reject
                     fire.child("status_order").setValue("RejectAuto");
 
-                    DetailActivity.httpRequest(fire.getKey());
+                    DetailActivity.httpRequestSyncCart(fire.getKey());
                     res = true;
                 } else {
                     res = false;

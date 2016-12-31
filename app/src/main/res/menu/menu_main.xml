@@ -18,34 +18,21 @@
 
     <item
         android:id="@+id/restourantn_no"
-        android:orderInCategory="80"
         android:title="restourant no"
         app:showAsAction="always" /><!--restourant number-->
 
     <item
         android:id="@+id/open_status"
-
         android:icon="@drawable/ic_action_name2"
-        android:orderInCategory="90"
-        android:title=""
+        android:title="open_status"
         app:showAsAction="always"
-
         /><!--system button-->
 
     <item
         android:id="@+id/service_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:checked="true"
         android:icon="@drawable/ic_action_name"
-        android:orderInCategory="100"
-        android:textOff="Off"
-        android:textOn="On"
-
-        android:textStyle="bold|italic"
-        android:title="switch"
-
-        app:showAsAction="always" /><!--toogle button on off -->
+        android:title=""
+        app:showAsAction="always" />
+    <!--toogle button on off -->
 
 </menu>
