@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
+                adapter.getFilter().filter("");
 
             }
 
@@ -199,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
         btnNew.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //FILTER AS YOU TYPE
-                adapter.getFilter().filter("Reject");
+                adapter.getFilter().filter("btnNew");
                 btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
                 btnNew.setBackgroundResource(R.color.colorPrimaryDark);
             }
@@ -318,7 +319,8 @@ public class MainActivity extends AppCompatActivity {
         restourantnNo.setTitle(restourantn_no);
 
         MenuItem openStatus = menu.findItem(R.id.open_status);
-        if (open_status.equals("Open"))
+//        Log.d("AmirHomeLog", String.valueOf(this.open_status.equals("Open")));
+        if ("Open".equals(this.open_status))
             openStatus.setIcon(R.drawable.ic_action_name2);
         else
             openStatus.setIcon(R.drawable.ic_action_name);
@@ -326,7 +328,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getInfo() {
-        DetailActivity.httpRequestSyncRestaurant("test");
+        DetailActivity.httpRequestSyncRestaurant("token");
     }
 
     public String getLocalIpAddress() {

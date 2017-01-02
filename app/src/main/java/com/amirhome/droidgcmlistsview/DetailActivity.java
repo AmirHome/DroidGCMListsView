@@ -36,7 +36,7 @@ public class DetailActivity extends AppCompatActivity {
     public static final String TESLIM_BEKLIYOR = "Teslim Bekliyor";
     public static final String CONST_REJECT_AUTO = "RejectAuto";
     public static final String CONST_REJECT = "Reject";
-    public static final String BASE_URL_API_SYNC = "http://192.168.0.16/eat2donate/api/v1/";
+    public static final String BASE_URL_API_SYNC = "http://192.168.1.110/eat2donate/api/v1/";
     public int btnID;
     RadioGroup rg_restaurant;
     RadioGroup rg_customer;
