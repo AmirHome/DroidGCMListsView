@@ -140,11 +140,10 @@ public class ServiceOrderControl extends Service {
 
             android.app.Notification notif = new Notification.Builder(this)
                     .setSmallIcon(R.drawable.donation_white)
-                    .setContentTitle("Order #"+ id+ " is waiting..")
+                    .setContentTitle("Order #" + id + " is waiting..")
                     .setContentText("New order come now..")
                     .setSound(uri)
-                  .build();
-
+                    .build();
 
 
             notificationManager.notify(notifyID++, notif);
@@ -152,7 +151,6 @@ public class ServiceOrderControl extends Service {
 //            Log.d("AmirHomeLog", e.toString());
         }
     }
-
 
 
     @NonNull

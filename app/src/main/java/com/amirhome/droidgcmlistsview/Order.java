@@ -33,39 +33,39 @@ public class Order {
 
     public void setFood(DataSnapshot food) {
 
-            StringBuilder sb = new StringBuilder();
-            for (DataSnapshot menu_radios : food.child("menu_radios").getChildren()) {
-                if (menu_radios.getKey() != null) sb.append(menu_radios.getKey() + " ");
+        StringBuilder sb = new StringBuilder();
+        for (DataSnapshot menu_radios : food.child("menu_radios").getChildren()) {
+            if (menu_radios.getKey() != null) sb.append(menu_radios.getKey() + " ");
 
-                Map<String, String> td = (HashMap<String, String>) menu_radios.getValue();
-                if (menu_radios.getValue() != null) sb.append(" " + td.keySet().toArray()[0]);
-
-            }
-            this.menu_radios = sb.toString();
-
-            sb = new StringBuilder();
-            for (DataSnapshot menu_options : food.child("menu_options").getChildren()) {
-                if (menu_options.getKey() != null) sb.append(menu_options.getKey() + " ");
-
-                Map<String, Object> td = (HashMap<String, Object>) menu_options.getValue();
-                for (Object menu_options_items : td.keySet().toArray()) {
-                    if (menu_options.getKey() != null) sb.append(menu_options_items + " ");
-//                    Log.d("AmirHomeLog", "getChildrenCount " + menu_options_items);
-                }
-            }
-            this.menu_options = sb.toString();
-
-            sb = new StringBuilder();
-            for (DataSnapshot menu_contents : food.child("menu_contents").getChildren()) {
-                if (menu_contents.getValue() != null) sb.append(" " + menu_contents.getValue());
-            }
-            this.menu_contents = sb.toString();
-
-            this.menu_title = food.child("menu_count").getValue() + " x " + food.child("menu_title").getValue() + "   { " + food.child("menu_size").getValue() + " }";
-
-            this.menu_description = food.child("menu_description").getValue().toString();
+            Map<String, String> td = (HashMap<String, String>) menu_radios.getValue();
+            if (menu_radios.getValue() != null) sb.append(" " + td.keySet().toArray()[0]);
 
         }
+        this.menu_radios = sb.toString();
+
+        sb = new StringBuilder();
+        for (DataSnapshot menu_options : food.child("menu_options").getChildren()) {
+            if (menu_options.getKey() != null) sb.append(menu_options.getKey() + " ");
+
+            Map<String, Object> td = (HashMap<String, Object>) menu_options.getValue();
+            for (Object menu_options_items : td.keySet().toArray()) {
+                if (menu_options.getKey() != null) sb.append(menu_options_items + " ");
+//                    Log.d("AmirHomeLog", "getChildrenCount " + menu_options_items);
+            }
+        }
+        this.menu_options = sb.toString();
+
+        sb = new StringBuilder();
+        for (DataSnapshot menu_contents : food.child("menu_contents").getChildren()) {
+            if (menu_contents.getValue() != null) sb.append(" " + menu_contents.getValue());
+        }
+        this.menu_contents = sb.toString();
+
+        this.menu_title = food.child("menu_count").getValue() + " x " + food.child("menu_title").getValue() + "   { " + food.child("menu_size").getValue() + " }";
+
+        this.menu_description = food.child("menu_description").getValue().toString();
+
+    }
 
 //    }
 

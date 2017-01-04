@@ -17,6 +17,7 @@ import java.util.List;
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHolder> {
 
     private List<Order> oaOrderList, oaFilterList;
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView order_no, time, cost, status;
 
@@ -60,6 +61,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
         return (null != oaFilterList ? oaFilterList.size() : 0);
 //        return oaOrderList.size();
     }
+
     // Do Search...
     public void filter(final String text) {
 
@@ -77,32 +79,32 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
                 } else {
                     // Iterate in the original List and add it to filter list...
                     for (Order item : oaOrderList) {
-                        switch (text){
+                        switch (text) {
                             case "btnNew":
                                 if (item.status.toLowerCase().equals(DetailActivity.ONAYLI_BEKLIYOR.toLowerCase()))
                                     oaFilterList.add(item);
                                 break;
 
-                                case "btnDeliveryWating":
-                                    if (item.status.toLowerCase().equals(DetailActivity.TESLIM_BEKLIYOR.toLowerCase()))
-                                        oaFilterList.add(item);
-                                    break;
-                                case "btnPenalty":
-                                    if (item.status.toLowerCase().contains("Reject".toLowerCase()))
-                                        oaFilterList.add(item);
-                                    break;
-                                case "btnRejected":
-                                    if (item.status.toLowerCase().equals("Reject".toLowerCase()))
-                                        oaFilterList.add(item);
-                                    break;
-                                 case "btnDelivered":
-                                    if (item.status.toLowerCase().equals("Delivered".toLowerCase()))
-                                        oaFilterList.add(item);
-                                    break;
-                                 case "btnCustomerRejected":
-                                    if (item.status.toLowerCase().contains("Reject_".toLowerCase()))
-                                        oaFilterList.add(item);
-                                    break;
+                            case "btnDeliveryWating":
+                                if (item.status.toLowerCase().equals(DetailActivity.TESLIM_BEKLIYOR.toLowerCase()))
+                                    oaFilterList.add(item);
+                                break;
+                            case "btnPenalty":
+                                if (item.status.toLowerCase().contains("Reject".toLowerCase()))
+                                    oaFilterList.add(item);
+                                break;
+                            case "btnRejected":
+                                if (item.status.toLowerCase().equals("Reject".toLowerCase()))
+                                    oaFilterList.add(item);
+                                break;
+                            case "btnDelivered":
+                                if (item.status.toLowerCase().equals("Delivered".toLowerCase()))
+                                    oaFilterList.add(item);
+                                break;
+                            case "btnCustomerRejected":
+                                if (item.status.toLowerCase().contains("Reject_".toLowerCase()))
+                                    oaFilterList.add(item);
+                                break;
                         }
                       /*  if (item.status.toLowerCase().equals(text.toLowerCase()) ) {
                             // Adding Matched items

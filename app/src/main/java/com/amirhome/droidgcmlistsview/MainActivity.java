@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -36,11 +37,9 @@ import java.util.Enumeration;
 
 
 public class MainActivity extends AppCompatActivity {
-    //    final List<Order> orderList = new ArrayList<>();
-//    private RecyclerView recyclerView;
-//    private OrdersAdapter mAdapter;
+
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
-    public static final String APP_VERSION = "0.0.3.09";
+    public static final String APP_VERSION = "0.0.3.11";
     static MediaPlayer mPlayer;
     static String rCode;
 
@@ -164,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 adapter.getFilter().filter("");
+                Log.d("AmirHomeLog", "onChildRemoved");
 
             }
 
@@ -314,16 +314,28 @@ public class MainActivity extends AppCompatActivity {
 
         MenuItem version = menu.findItem(R.id.version);
         version.setTitle(APP_VERSION);
+        return true;
+    }
+
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
 
         MenuItem restourantnNo = menu.findItem(R.id.restourantn_no);
-        restourantnNo.setTitle(restourantn_no);
+        restourantnNo.setTitle(this.restourantn_no);
 
         MenuItem openStatus = menu.findItem(R.id.open_status);
-//        Log.d("AmirHomeLog", String.valueOf(this.open_status.equals("Open")));
         if ("Open".equals(this.open_status))
             openStatus.setIcon(R.drawable.ic_action_name2);
         else
             openStatus.setIcon(R.drawable.ic_action_name);
+
+
+        if (null == this.restourantn_no) {
+            getInfo();
+            VersionHelper.refreshActionBarMenu(this);
+        }
         return true;
     }
 

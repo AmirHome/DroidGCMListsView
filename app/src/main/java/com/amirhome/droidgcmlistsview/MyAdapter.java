@@ -14,7 +14,7 @@ import android.widget.Filterable;
 import java.util.ArrayList;
 
 /**
- * Created by o9125 on 12/29/2016.
+ * Created by AmirHome.com on 12/29/2016.
  */
 public class MyAdapter extends RecyclerView.Adapter<MyHolder> implements Filterable {
 

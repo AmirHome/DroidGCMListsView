@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 /**
- * Created by o9125 on 12/29/2016.
+ * Created by AmirHome.com on 12/29/2016.
  */
 public class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
