@@ -162,9 +162,25 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                adapter.getFilter().filter("");
-                Log.d("AmirHomeLog", "onChildRemoved");
+                RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
+                // Find position
+                int pos = -1;
+                for (int i = 0; i < players.size(); i++) {
 
+                    if (dataSnapshot.getKey().equals(players.get(i).getOrder_no())) {
+                        pos = i;
+                        break;
+                    }
+                }
+                // ReWrite record
+                if (pos >= 0) {
+                    players.remove(pos);
+                    adapter.notifyItemRemoved(pos);
+                    adapter.notifyItemRangeChanged(pos, players.size());
+                    rv.setAdapter(adapter);
+                    adapter.getFilter().filter("");
+
+                }
             }
 
             @Override

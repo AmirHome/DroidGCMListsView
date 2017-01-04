@@ -104,31 +104,36 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
-                int size = dOrderList.size();
-                if (size > 0) {
-                    for (int i = 0; i < size; i++) {
-                        dOrderList.remove(0);
+//                Log.d("AmirHomeLog", "onDataChange " + dataSnapshot.getKey());
+                try {
+                    int size = dOrderList.size();
+                    if (size > 0) {
+                        for (int i = 0; i < size; i++) {
+                            dOrderList.remove(0);
+                        }
+                        dAdapter.notifyItemRangeRemoved(0, size);
                     }
-                    dAdapter.notifyItemRangeRemoved(0, size);
+
+                    for (DataSnapshot food : dataSnapshot.child("foods").getChildren()) {
+
+                        Order cartDetails = dataSnapshot.getValue(Order.class);
+                        cartDetails.setOrderNo(dataSnapshot.getKey());
+                        cartDetails.setCost(cartDetails.order_cost);
+                        cartDetails.setOrderTime(cartDetails.order_date);
+                        cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
+
+                        cartDetails.setFood(food);
+                        dOrderList.add(cartDetails);
+                        dRecyclerView.scrollToPosition(dOrderList.size() - 1);
+                        dAdapter.notifyItemInserted(dOrderList.size() - 1);
+
+                    }
+
+                    getUpdates(dataSnapshot);
+                } catch (Exception ex) {
+                    Log.d("AmirHomeLog", ex.getMessage());
                 }
 
-                for (DataSnapshot food : dataSnapshot.child("foods").getChildren()) {
-
-                    Order cartDetails = dataSnapshot.getValue(Order.class);
-                    cartDetails.setOrderNo(dataSnapshot.getKey());
-                    cartDetails.setCost(cartDetails.order_cost);
-                    cartDetails.setOrderTime(cartDetails.order_date);
-                    cartDetails.setStatus(cartDetails.status_order, cartDetails.status_delivery);
-
-                    cartDetails.setFood(food);
-                    dOrderList.add(cartDetails);
-                    dRecyclerView.scrollToPosition(dOrderList.size() - 1);
-                    dAdapter.notifyItemInserted(dOrderList.size() - 1);
-
-                }
-
-                getUpdates(dataSnapshot);
             }
 
             @Override
