@@ -40,7 +40,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="320dp"
-        android:text="time" />
+        android:text="time"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/cost"
@@ -49,7 +50,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="220dp"
-        android:text="cost" />
+        android:text="cost"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/status"
@@ -58,6 +60,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="status"
+        android:textStyle="bold"
         android:textColor="@color/year"
         android:layout_marginRight="50dp" />
 
