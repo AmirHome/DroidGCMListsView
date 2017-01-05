@@ -32,11 +32,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
-    public static final String ONAYLI_BEKLIYOR = "Onayli Bekliyor";
-    public static final String TESLIM_BEKLIYOR = "Teslim Bekliyor";
+    public static final String ONAYLI_BEKLIYOR = "waiting for accept";
+    public static final String TESLIM_BEKLIYOR = "waiting for delivery";
     public static final String CONST_REJECT_AUTO = "RejectAuto";
     public static final String CONST_REJECT = "Reject";
-    public static final String BASE_URL_API_SYNC = "http://192.168.1.110/eat2donate/api/v1/";
+    public static final String BASE_URL_API_SYNC = "http://212.156.175.3:8000/eat2donate/api/v1/";
     public int btnID;
     RadioGroup rg_restaurant;
     RadioGroup rg_customer;

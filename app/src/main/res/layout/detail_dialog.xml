@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:text="Android custom dialog example!"
+        android:text="Android dialog Beispiel!"
         android:padding="25dp"
 
         android:layout_alignParentTop="true"
@@ -31,18 +31,27 @@
         android:layout_below="@+id/image"
         android:layout_alignParentStart="true"
 
-        android:padding="25dp" >
+        android:paddingTop="60dp" >
         <RadioButton
-            android:text="Reject_reason1"
+            android:text="abgelehnt_Grund 1"
             android:id="@+id/Reject_reason1"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="40dp"
             />
         <RadioButton
-            android:text="Reject_reason2"
+            android:text="abgelehnt_Grund 2"
             android:id="@+id/Reject_reason2"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="40dp"
             />
         <RadioButton
-            android:text="Reject_reason3"
+            android:text="abgelehnt_Grund 3"
             android:id="@+id/Reject_reason3"
+
+            android:layout_gravity="center_horizontal"
+            android:textSize="40dp"
             />
 
 
@@ -55,22 +64,34 @@
         android:layout_below="@+id/image"
         android:layout_alignParentStart="true"
 
-        android:padding="25dp" >
+        android:paddingTop="20dp">
         <RadioButton
-            android:text="Accept15"
+            android:text="akzeptieren 15"
             android:id="@+id/Accept15"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="40dp"
             />
         <RadioButton
-            android:text="Accept30"
+            android:text="akzeptieren 30"
             android:id="@+id/Accept30"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="40dp"
             />
         <RadioButton
-            android:text="Accept45"
+            android:text="akzeptieren 45"
             android:id="@+id/Accept45"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="40dp"
             />
         <RadioButton
-            android:text="Accept60"
+            android:text="akzeptieren 60"
             android:id="@+id/Accept60"
+
+           android:layout_gravity="center_horizontal"
+            android:textSize="40dp"
             />
 
 
@@ -80,28 +101,39 @@
     android:id="@+id/textWarning"
     android:layout_width="fill_parent"
     android:layout_below="@+id/image"
-    android:layout_centerHorizontal="true"
+   android:gravity="center"
+    android:textSize="30dp"
 
 
-    android:text="asdfasdf asdf asdf asdf asdfkasdf asdfa?"
-    android:layout_height="350dp" />
+    android:text="Weet je het zeker?"
+    android:layout_height="300dp" />
+    <LinearLayout
+        android:id="@+id/ln22"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/radio_group_restaurant"
+        android:layout_alignParentEnd="true"
+
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:weightSum="0.6">
 
     <Button
         android:id="@+id/dialogButtonOK"
-        android:layout_width="100dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:text=" Ok "
         android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_below="@+id/radio_group_restaurant"
+        android:layout_marginRight="20dp"
+
         />
     <Button
         android:id="@+id/dialogButtonCancel"
-        android:layout_width="100dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:text=" Cancle "
+        android:text=" Abbrechen "
         android:layout_marginRight="5dp"
-        android:layout_below="@+id/radio_group_restaurant"
-        android:layout_alignParentEnd="true"
+
         android:layout_marginTop="5dp" />
+    </LinearLayout>
 </RelativeLayout>
