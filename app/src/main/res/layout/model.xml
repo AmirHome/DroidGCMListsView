@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/lable"
-        android:text="Bestell-ID"
+        android:text="order_no"
         android:textColor="@color/title"
         android:textSize="16dp"
         android:textStyle="bold" />
@@ -40,8 +40,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="320dp"
-        android:text="Bestellzeit"
-        android:textStyle="bold"/>
+        android:text="time" />
 
     <TextView
         android:id="@+id/cost"
@@ -50,8 +49,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="220dp"
-        android:text="Endsumme"
-        android:textStyle="bold"/>
+        android:text="cost" />
 
     <TextView
         android:id="@+id/status"
@@ -59,8 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="Bestellstatus"
-        android:textStyle="bold"
+        android:text="status"
         android:textColor="@color/year"
         android:layout_marginRight="50dp" />
 

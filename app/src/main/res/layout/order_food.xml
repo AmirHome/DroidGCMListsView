@@ -19,7 +19,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginRight="10dp"
-        android:text="Menü Titel"
+        android:text="menu_title"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold" />
@@ -33,14 +33,14 @@
         android:gravity="center_vertical"
         android:layout_below="@+id/menu_options"
 
-        android:text="menü Beschreibung"
+        android:text="caption_menu_description"
         android:textColor="@color/colorPrimary"
  />
     <TextView
         android:id="@+id/menu_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="menü Beschreibung"
+        android:text="menu_description"
         android:textColor="@color/title"
         android:textSize="16dp"
 
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/menu_description"
 
-        android:text="Bestell-ID"
+        android:text="order_no"
         android:textColor="@color/title"
         android:textSize="16dp"
         android:textStyle="bold"
@@ -70,7 +70,7 @@
 
         android:layout_alignParentStart="true"
         android:layout_marginRight="320dp"
-        android:text="Bestellzeit"
+        android:text="time"
         android:visibility="gone" />
 
     <TextView
@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/menu_description"
         android:layout_marginRight="50dp"
-        android:text="Endsumme"
+        android:text="cost"
         android:visibility="gone" />
 
     <TextView
@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/menu_description"
 
-        android:text="Bestellstatus"
+        android:text="status"
         android:textColor="@color/year"
         android:visibility="gone" />
 
@@ -100,7 +100,7 @@
         android:layout_below="@+id/menu_title"
         android:background="@drawable/textleftcorner"
         android:gravity="center_vertical"
-        android:paddingLeft="2dp"
+        android:paddingLeft="5dp"
         android:paddingRight="2dp"
         android:text="Wahl"
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -144,7 +144,7 @@
 
         android:layout_marginLeft="5dp"
         android:gravity="center_vertical"
-        android:text="menü Inhalt"
+        android:text="menu_contents"
 
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_alignBaseline="@+id/caption_menu_contents"
@@ -174,7 +174,7 @@
 
             android:layout_marginLeft="5dp"
             android:gravity="center_vertical"
-            android:text="menü inhalts"
+            android:text="menu_contents"
 
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_alignBaseline="@+id/caption_menu_options"
