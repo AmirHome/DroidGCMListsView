@@ -9,7 +9,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
@@ -17,13 +16,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 public class ServiceOrderControl extends Service {
-    public static final int DelayedMili = 18000;// 3 x 60 x 1000 = 180000
-    public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     Firebase fire;
     String orderId;
     String orderDate;
@@ -75,7 +68,10 @@ public class ServiceOrderControl extends Service {
 
                     //TODO: service status is off
                     //TODO: set penalty
-//                    setNotification();
+                    DetailActivity.httpRequestSyncCart(orderId);
+                    stopService(new Intent(getBaseContext(), ServiceOrderControl.class));
+
+//                    setNotification(orderId);
                 }
 
                 //        Cart c = new Cart();
@@ -91,10 +87,11 @@ public class ServiceOrderControl extends Service {
 //        handler.postDelayed(r, 1000);
 
         // Control orderDate
-        String diff = getDiff(orderDate);
+//        String diff = getDiff(orderDate);
+        String diff = MainActivity.getDiff(orderDate);
 
-        if (Integer.parseInt(diff) < DelayedMili) {
-            handler.postDelayed(r, DelayedMili - Integer.parseInt(diff));
+        if (Integer.parseInt(diff) < MainActivity.DelayedMili) {
+            handler.postDelayed(r, MainActivity.DelayedMili - Integer.parseInt(diff));
         } else {
             handler.postDelayed(r, 1000);
         }
@@ -114,7 +111,7 @@ public class ServiceOrderControl extends Service {
                     // Order is reject
                     fire.child("status_order").setValue("RejectAuto");
 
-                    DetailActivity.httpRequestSyncCart(fire.getKey());
+//                    DetailActivity.httpRequestSyncCart(fire.getKey());
                     res = true;
                 } else {
                     res = false;
@@ -145,7 +142,6 @@ public class ServiceOrderControl extends Service {
                     .setSound(uri)
                     .build();
 
-
             notificationManager.notify(notifyID++, notif);
         } catch (Exception e) {
 //            Log.d("AmirHomeLog", e.toString());
@@ -153,7 +149,7 @@ public class ServiceOrderControl extends Service {
     }
 
 
-    @NonNull
+/*    @NonNull
     private String getDiff(String dateStop) {
         // SimpleDateFormat Class
         SimpleDateFormat sdfDateTime = new SimpleDateFormat(DateTimeFormat, Locale.US);
@@ -171,6 +167,6 @@ public class ServiceOrderControl extends Service {
         }
 
         return String.valueOf(d2.getTime() - d1.getTime());
-    }
+    }*/
 }
 

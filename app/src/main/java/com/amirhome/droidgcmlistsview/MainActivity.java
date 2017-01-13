@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -32,14 +33,20 @@ import com.firebase.client.FirebaseError;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
 
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
     public static final String APP_VERSION = "0.0.3.12";
+    public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
+    public static final int DelayedMili = 180000;// 3 x 60 x 1000 = 180000
+
     static MediaPlayer mPlayer;
     static String rCode;
 
@@ -48,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     public static String restourantn_title;
     public static String service_status;
     public static String open_status;
+    public  String currentFilter = "";
 
     private TelephonyManager mTelephonyManager;
 
@@ -104,21 +112,30 @@ public class MainActivity extends AppCompatActivity {
                         p.setOrder_date(dataSnapshot.child("order_date").getValue().toString());
                         players.add(0, p);
                         rv.setAdapter(adapter);
-                        adapter.notifyItemInserted(0);
-                        rv.smoothScrollToPosition(0);
 
-                        adapter.getFilter().filter("");
+//                        adapter.getFilter().filter("");
 
                         if (dataSnapshot.child("status_order").getValue().toString().equals("0")) {
-                            Intent myService = new Intent(getBaseContext(), ServiceOrderControl.class);
-                            myService.putExtra("ServiceOrderControl.orderId", p.getOrder_no());
-                            myService.putExtra("ServiceOrderControl.order_date", p.getOrder_date());
+
+
+                            String diff = getDiff(p.getOrder_date());
+
+                            if (Integer.parseInt(diff) < MainActivity.DelayedMili) {
 //                            Run Service
-                            startService(myService);
+                                Intent myService = new Intent(getBaseContext(), ServiceOrderControl.class);
+                                myService.putExtra("ServiceOrderControl.orderId", p.getOrder_no());
+                                myService.putExtra("ServiceOrderControl.order_date", p.getOrder_date());
+                                startService(myService);
 //                            Open Dialog
-                            newOrderAlert();
+                                newOrderAlert();
+                            } else {
+                                // Order is reject
+                                dataSnapshot.getRef().child("status_order").setValue("RejectAuto");
+                                DetailActivity.httpRequestSyncCart(p.getOrder_no());
 
+                            }
 
+//                            Log.d("AmirHomeLog", "equals(0) " + p.getOrder_no());
                         }
 
                     } catch (Exception ex) {
@@ -129,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//                Log.d("AmirHomeLog", "onChildChanged");
                 RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
                 // Find position
                 int pos = -1;
@@ -152,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                     p.setOrder_date(dataSnapshot.child("order_date").getValue().toString());
                     players.add(pos, p);
                     rv.setAdapter(adapter);
-                    adapter.getFilter().filter("");
+                    adapter.getFilter().filter(currentFilter);
 
                 }
             }
@@ -175,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                     adapter.notifyItemRemoved(pos);
                     adapter.notifyItemRangeChanged(pos, players.size());
                     rv.setAdapter(adapter);
-//                    adapter.getFilter().filter("");
+                    adapter.getFilter().filter(currentFilter);
 
                 }
             }
@@ -203,7 +221,8 @@ public class MainActivity extends AppCompatActivity {
         btnAllFilter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //FILTER AS YOU TYPE
-                adapter.getFilter().filter("");
+                currentFilter = "";
+                adapter.getFilter().filter(currentFilter);
                 btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
                 btnAllFilter.setBackgroundResource(R.color.colorPrimaryDark);
 
@@ -213,7 +232,8 @@ public class MainActivity extends AppCompatActivity {
         btnNew.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //FILTER AS YOU TYPE
-                adapter.getFilter().filter("btnNew");
+                currentFilter = "btnNew";
+                adapter.getFilter().filter(currentFilter);
                 btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
                 btnNew.setBackgroundResource(R.color.colorPrimaryDark);
             }
@@ -221,7 +241,8 @@ public class MainActivity extends AppCompatActivity {
         btnDeliveryWating.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                adapter.getFilter().filter("btnDeliveryWating");
+                currentFilter = "btnDeliveryWating";
+                adapter.getFilter().filter(currentFilter);
                 btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
 
                 btnDeliveryWating.setBackgroundResource(R.color.colorPrimaryDark);
@@ -231,7 +252,8 @@ public class MainActivity extends AppCompatActivity {
         btnPenalty.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                adapter.getFilter().filter("btnPenalty");
+                currentFilter = "btnPenalty";
+                adapter.getFilter().filter(currentFilter);
                 btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
                 btnPenalty.setBackgroundResource(R.color.colorPrimaryDark);
 
@@ -240,7 +262,8 @@ public class MainActivity extends AppCompatActivity {
         btnRejected.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                adapter.getFilter().filter("btnRejected");
+                currentFilter = "btnRejected";
+                adapter.getFilter().filter(currentFilter);
                 btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
                 btnRejected.setBackgroundResource(R.color.colorPrimaryDark);
 
@@ -249,7 +272,8 @@ public class MainActivity extends AppCompatActivity {
         btnDelivered.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                adapter.getFilter().filter("btnDelivered");
+                currentFilter = "btnDelivered";
+                adapter.getFilter().filter(currentFilter);
                 btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
                 btnDelivered.setBackgroundResource(R.color.colorPrimaryDark);
 
@@ -258,7 +282,8 @@ public class MainActivity extends AppCompatActivity {
         btnCustomerRejected.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                adapter.getFilter().filter("btnCustomerRejected");
+                currentFilter = "btnCustomerRejected";
+                adapter.getFilter().filter(currentFilter);
                 btnBackColorReset(btnAllFilter, btnDelivered, btnNew, btnDeliveryWating, btnPenalty, btnRejected, btnCustomerRejected);
                 btnCustomerRejected.setBackgroundResource(R.color.colorPrimaryDark);
 
@@ -445,4 +470,23 @@ public class MainActivity extends AppCompatActivity {
         return deviceid;
     }
 
+    @NonNull
+    public static String getDiff(String dateStop) {
+        // SimpleDateFormat Class
+        SimpleDateFormat sdfDateTime = new SimpleDateFormat(DateTimeFormat, Locale.US);
+        String currentTime = sdfDateTime.format(new Date(System.currentTimeMillis()));
+
+        SimpleDateFormat format = new SimpleDateFormat(DateTimeFormat);
+
+        Date d1 = null;
+        Date d2 = null;
+        try {
+            d1 = format.parse(dateStop);
+            d2 = format.parse(currentTime);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return String.valueOf(d2.getTime() - d1.getTime());
+    }
 }
