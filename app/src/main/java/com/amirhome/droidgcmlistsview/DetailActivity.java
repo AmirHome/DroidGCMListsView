@@ -248,6 +248,9 @@ public class DetailActivity extends AppCompatActivity {
         TextView strCustomer = (TextView) findViewById(R.id.tvCustomer);
         strCustomer.setText((String) ds.child("customer").getValue());
 
+        TextView strTelephone = (TextView) findViewById(R.id.tvtelephone);
+        strTelephone.setText((String) ds.child("phone").getValue());
+
         TextView tvDeliveryDate = (TextView) findViewById(R.id.tvDeliveryDate);
         tvDeliveryDate.setText((String) ds.child("delivery_date").getValue());
 

@@ -16,7 +16,32 @@ public class Order {
 
     public String order_no, time, cost, status, foodTitle;
     public String menu_count, menu_title, menu_size, menu_description, menu_radios, menu_options, menu_contents;
-    public String address, customer, delivery_date, description, order_cost, order_date, status_delivery, status_order;
+    public String address;
+    public String phone;
+    public String customer;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
+    }
+
+    public String delivery_date;
+    public String description;
+    public String order_cost;
+    public String order_date;
+    public String status_delivery;
+    public String status_order;
 
     public Order() {
 
@@ -50,7 +75,7 @@ public class Order {
             Map<String, Object> td = (HashMap<String, Object>) menu_options.getValue();
             for (Object menu_options_items : td.keySet().toArray()) {
                 if (menu_options.getKey() != null) sb.append(menu_options_items + " ");
-//                    Log.d("AmirHomeLog", "getChildrenCount " + menu_options_items);
+            // Log.d("AmirHomeLog", "getChildrenCount " + menu_options_items);
             }
         }
         this.menu_options = sb.toString();
@@ -67,12 +92,9 @@ public class Order {
 
     }
 
-//    }
-
     public String getMenuTitle() {
         return menu_title;
     }
-
 
     public String getMenuOptions() {
         return menu_options;
@@ -89,7 +111,6 @@ public class Order {
     public String getMenuDescription() {
         return menu_description;
     }
-
 
     public String getStatus() {
         return status;

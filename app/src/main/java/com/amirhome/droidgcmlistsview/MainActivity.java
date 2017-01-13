@@ -39,7 +39,7 @@ import java.util.Enumeration;
 public class MainActivity extends AppCompatActivity {
 
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
-    public static final String APP_VERSION = "0.0.3.11";
+    public static final String APP_VERSION = "0.0.3.12";
     static MediaPlayer mPlayer;
     static String rCode;
 
@@ -75,9 +75,6 @@ public class MainActivity extends AppCompatActivity {
         this.setImeiCode();
 
         getInfo();
-
-        TextView tvRestaurantTitle = (TextView) findViewById(R.id.tvRestaurantTitle);
-        tvRestaurantTitle.setText(restourantn_title);
 
         //init firebase
         Firebase.setAndroidContext(this);
@@ -178,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
                     adapter.notifyItemRemoved(pos);
                     adapter.notifyItemRangeChanged(pos, players.size());
                     rv.setAdapter(adapter);
-                    adapter.getFilter().filter("");
+//                    adapter.getFilter().filter("");
 
                 }
             }
@@ -337,6 +334,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+
+        TextView tvRestaurantTitle = (TextView) findViewById(R.id.tvRestaurantTitle);
+        tvRestaurantTitle.setText(restourantn_title);
 
         MenuItem restourantnNo = menu.findItem(R.id.restourantn_no);
         restourantnNo.setTitle(this.restourantn_no);
