@@ -31,11 +31,31 @@ public class Player {
             if (status_order.equals(DetailActivity.CONST_REJECT) || status_order.equals(DetailActivity.CONST_REJECT_AUTO)) {
                 this.status = status_order;
             } else {
-                if (status_delivery.equals("0")) {
-//                    this.status = status_order;
-                    this.status = DetailActivity.TESLIM_BEKLIYOR;
-                } else {
-                    this.status = status_delivery;
+                switch (status_delivery) {
+                    case "0":
+                        this.status = DetailActivity.TESLIM_BEKLIYOR;
+                        break;
+                    case "Reject_reason1":
+                        this.status = DetailActivity.REJECT_REASON1;
+                        break;
+                    case "Reject_reason2":
+                        this.status = DetailActivity.REJECT_REASON2;
+                        break;
+                    case "Reject_reason3":
+                        this.status = DetailActivity.REJECT_REASON3;
+                        break;
+                    case "Reject_reason4":
+                        this.status = DetailActivity.REJECT_REASON4;
+                        break;
+                    case "Reject_reason5":
+                        this.status = DetailActivity.REJECT_REASON5;
+                        break;
+                    case "Reject_reason6":
+                        this.status = DetailActivity.REJECT_REASON6;
+                        break;
+                    case "Reject_reason7":
+                        this.status = DetailActivity.REJECT_REASON7;
+                        break;
                 }
             }
         }

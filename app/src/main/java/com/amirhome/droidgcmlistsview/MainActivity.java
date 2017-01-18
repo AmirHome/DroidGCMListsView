@@ -43,7 +43,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
-    public static final String APP_VERSION = "0.0.3.12";
+    public static final String APP_VERSION = "0.0.3.17";
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     public static final int DelayedMili = 180000;// 3 x 60 x 1000 = 180000
 
@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         //init firebase
         Firebase.setAndroidContext(this);
         fire = new Firebase(DB_URL + rCode);
+
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
         //SET ITS PROPETRIES
@@ -352,6 +353,9 @@ public class MainActivity extends AppCompatActivity {
 
         MenuItem version = menu.findItem(R.id.version);
         version.setTitle(APP_VERSION);
+
+        TextView tvDomainTitle = (TextView) findViewById(R.id.tvDomainTitle);
+        tvDomainTitle.setText(DetailActivity.BASE_URL_API_SYNC);
         return true;
     }
 
@@ -368,9 +372,9 @@ public class MainActivity extends AppCompatActivity {
 
         MenuItem openStatus = menu.findItem(R.id.open_status);
         if ("Open".equals(this.open_status))
-            openStatus.setIcon(R.drawable.ic_action_name2);
+            openStatus.setIcon(R.drawable.ic_active);
         else
-            openStatus.setIcon(R.drawable.ic_action_name);
+            openStatus.setIcon(R.drawable.ic_deactive);
 
 
         if (null == this.restourantn_no) {

@@ -1,0 +1,33 @@
+{
+  "project_info": {
+    "project_number": "482115745044",
+    "firebase_url": "https://eat2donatemap.firebaseio.com",
+    "project_id": "eat2donatemap",
+    "storage_bucket": "eat2donatemap.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482115745044:android:57ceeb24b835004e",
+        "android_client_info": {
+          "package_name": "com.eat2donate.android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

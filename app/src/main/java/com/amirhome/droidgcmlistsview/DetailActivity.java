@@ -34,11 +34,20 @@ import java.util.List;
 public class DetailActivity extends AppCompatActivity {
     public static final String ONAYLI_BEKLIYOR = "waiting for accept";
     public static final String TESLIM_BEKLIYOR = "waiting for delivery";
+    public static final String REJECT_REASON1 = "Produkt ausverkauft";
+    public static final String REJECT_REASON2 = "Produkt nicht hygienisch";
+    public static final String REJECT_REASON3 = "Bestellung nicht vollständig";
+    public static final String REJECT_REASON4 = "Lieferung zu spät";
+    public static final String REJECT_REASON5 = "Lieferung wurde nicht geliefert";
+    public static final String REJECT_REASON6 = "Person oder Adresse nicht gefunden";
+    public static final String REJECT_REASON7 = "Keine Zahlung erhalten";
+
     public static final String CONST_REJECT_AUTO = "RejectAuto";
     public static final String CONST_REJECT = "Reject";
-    public static final String BASE_URL_API_SYNC = "http://212.156.175.3:8000/eat2donate/api/v1/";
+
+    //    public static final String BASE_URL_API_SYNC = "192.168.1.110/eat2donate/api/v1/";
 //    public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.at/api/v1/";
-//    public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.ga/api/v1/";
+    public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.ga/api/v1/";
     public int btnID;
     RadioGroup rg_restaurant;
     RadioGroup rg_customer;
@@ -278,13 +287,44 @@ public class DetailActivity extends AppCompatActivity {
                 tvStatusDelivery.setText("");
             }
         } else {
-            if (ds.child("status_delivery").getValue().equals("0")) {
-                tvStatusDelivery.setText(TESLIM_BEKLIYOR);
-                btnAccept.setEnabled(true);
-                btnReject.setEnabled(true);
-            } else {
-                tvStatusDelivery.setText((String) ds.child("status_delivery").getValue());
+            switch ((String) ds.child("status_delivery").getValue()) {
+                case "0":
+                    tvStatusDelivery.setText(TESLIM_BEKLIYOR);
+                    btnAccept.setEnabled(true);
+                    btnReject.setEnabled(true);
+                    break;
+                case "Reject_reason1":
+                    tvStatusDelivery.setText(DetailActivity.REJECT_REASON1);
+                    break;
+
+                case "Reject_reason2":
+                    tvStatusDelivery.setText(DetailActivity.REJECT_REASON2);
+                    break;
+                case "Reject_reason3":
+                    tvStatusDelivery.setText(DetailActivity.REJECT_REASON3);
+                    break;
+                case "Reject_reason4":
+                    tvStatusDelivery.setText(DetailActivity.REJECT_REASON4);
+                    break;
+                case "Reject_reason5":
+                    tvStatusDelivery.setText(DetailActivity.REJECT_REASON5);
+                    break;
+                case "Reject_reason6":
+                    tvStatusDelivery.setText(DetailActivity.REJECT_REASON6);
+                    break;
+                case "Reject_reason7":
+                    tvStatusDelivery.setText(DetailActivity.REJECT_REASON7);
+                    break;
             }
+
+//            if (ds.child("status_delivery").getValue().equals("0")) {
+//                tvStatusDelivery.setText(TESLIM_BEKLIYOR);
+//                btnAccept.setEnabled(true);
+//                btnReject.setEnabled(true);
+//            } else {
+//
+//                tvStatusDelivery.setText((String) ds.child("status_delivery").getValue());
+//            }
         }
 
 
@@ -363,6 +403,18 @@ public class DetailActivity extends AppCompatActivity {
                         break;
                     case R.id.Reject_reason3:
                         fire.child("status_delivery").setValue("Reject_reason3");
+                        break;
+                    case R.id.Reject_reason4:
+                        fire.child("status_delivery").setValue("Reject_reason4");
+                        break;
+                    case R.id.Reject_reason5:
+                        fire.child("status_delivery").setValue("Reject_reason5");
+                        break;
+                    case R.id.Reject_reason6:
+                        fire.child("status_delivery").setValue("Reject_reason6");
+                        break;
+                    case R.id.Reject_reason7:
+                        fire.child("status_delivery").setValue("Reject_reason7");
                         break;
                     default:
                         if (R.id.btnAccept == btnID && tvStatusDelivery.getText().equals(TESLIM_BEKLIYOR) && !tvStatusOrder.getText().equals(ONAYLI_BEKLIYOR)) {

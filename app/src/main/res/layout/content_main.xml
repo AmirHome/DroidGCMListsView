@@ -39,23 +39,32 @@
 
                 android:orientation="vertical">
 
-
                 <TextView
                     android:id="@+id/tvRestaurantTitle"
                     android:layout_width="fill_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="50dp"
                     android:layout_alignParentTop="true"
 
                     android:layout_weight="0.8"
                     android:background="@color/half_red"
                     android:text="Restaurant Title" />
 
+                <TextView
+                    android:id="@+id/tvDomainTitle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/tvRestaurantTitle"
+
+                    android:layout_weight="0.8"
+                    android:background="@color/half_red"
+                    android:text="Domain Title" />
+
                 <Button
                     android:id="@+id/btnAll"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/tvRestaurantTitle"
+                    android:layout_below="@+id/tvDomainTitle"
                     android:layout_gravity="center"
                     android:layout_marginBottom="2dp"
                     android:layout_weight="0.8"
