@@ -25,14 +25,11 @@
         android:id="@+id/open_status"
         android:icon="@drawable/ic_action_name2"
         android:title="open_status"
-        app:showAsAction="always"
-        /><!--system button-->
+        app:showAsAction="always" />
 
     <item
-        android:id="@+id/service_status"
-        android:icon="@drawable/ic_action_name"
-        android:title=""
-        app:showAsAction="always" />
-    <!--toogle button on off -->
-
+        android:id="@+id/ms_service_status"
+        android:actionLayout="@layout/switch_layout"
+        app:showAsAction="always"
+        android:title="" />
 </menu>

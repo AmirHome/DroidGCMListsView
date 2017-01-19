@@ -159,6 +159,55 @@ public class DetailActivity extends AppCompatActivity {
 
 
     }
+    static public void httpRequestRestaurantServiceDeactive(String param1) {
+
+        String request_url = BASE_URL_API_SYNC + "sync-restaurant-db/" + MainActivity.rCode;
+        JSONObject parameters = new JSONObject();
+
+        try {
+            parameters.put("token", param1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, request_url, parameters,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            MainActivity.restourantn_no = response.getJSONObject("data").getString("id");
+                            MainActivity.restourantn_title = response.getJSONObject("data").getString("title");
+                            MainActivity.open_status = response.getJSONObject("data").getString("open_status");
+                            MainActivity.service_status = response.getJSONObject("data").getString("service_status");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("AmirHomeLog", error.toString());
+            }
+        }) {
+
+            @Override
+            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                int mStatusCode = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                4000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        App.getInstance().addToRequestQueue(request);
+
+    }
 
     static public void httpRequestSyncRestaurant(String param1) {
 

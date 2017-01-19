@@ -5,9 +5,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -23,7 +23,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -345,6 +348,31 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem itemSwitch  = menu.findItem(R.id.ms_service_status);
+        itemSwitch.setActionView(R.layout.switch_layout);
+
+        final Switch swServiceStatus = (Switch) menu.findItem(R.id.ms_service_status).getActionView().findViewById(R.id.switchForActionBar);
+
+        if ("Active".equals(this.service_status))
+            swServiceStatus.setChecked(true);
+        else
+            swServiceStatus.setChecked(false);
+
+        swServiceStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    setServiceStatus("active");
+                    Toast.makeText(MainActivity.this, "Send Request For Active", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    setServiceStatus("deactive");
+                    Toast.makeText(MainActivity.this, "Send Request for Deactivate", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
         MenuItem imeinumber = menu.findItem(R.id.imeinumber);
         imeinumber.setTitle(this.rCode);
 
@@ -377,6 +405,8 @@ public class MainActivity extends AppCompatActivity {
             openStatus.setIcon(R.drawable.ic_deactive);
 
 
+
+
         if (null == this.restourantn_no) {
             getInfo();
             VersionHelper.refreshActionBarMenu(this);
@@ -385,7 +415,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getInfo() {
-        DetailActivity.httpRequestSyncRestaurant("token");
+        DetailActivity.httpRequestSyncRestaurant("info");
+    }
+
+    public void  setServiceStatus(String Status){
+        DetailActivity.httpRequestRestaurantServiceDeactive(Status);
     }
 
     public String getLocalIpAddress() {
@@ -410,11 +444,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.service_status:
-                // User chose the "Settings" item, show the app settings UI...
-                Log.d("AmirHomeLog", "service_status");
-                return true;
+//            case R.id.mi_service_status:
+//                Log.d("AmirHomeLog", "service_status");
+//                Toast.makeText(this, "Click service_status", Toast.LENGTH_LONG).show();
+//                return true;
 
+            case R.id.open_status:
+                Toast.makeText(this, this.open_status, Toast.LENGTH_LONG).show();
+                return true;
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
