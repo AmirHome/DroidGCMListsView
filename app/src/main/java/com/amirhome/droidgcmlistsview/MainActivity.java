@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String APP_VERSION = "0.0.3.18";
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     public static final int DelayedMili = 180000;// 3 x 60 x 1000 = 180000
+    public static Switch swServiceStatus;
 
     static MediaPlayer mPlayer;
     static String rCode;
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setLogo(R.drawable.logo);
+        getSupportActionBar().setTitle("");
 
         //get and set imei code = restaurant code
         this.setImeiCode();
@@ -352,7 +354,7 @@ public class MainActivity extends AppCompatActivity {
         MenuItem itemSwitch  = menu.findItem(R.id.ms_service_status);
         itemSwitch.setActionView(R.layout.switch_layout);
 
-        final Switch swServiceStatus = (Switch) menu.findItem(R.id.ms_service_status).getActionView().findViewById(R.id.switchForActionBar);
+        swServiceStatus = (Switch) menu.findItem(R.id.ms_service_status).getActionView().findViewById(R.id.switchForActionBar);
 
         if ("Active".equals(this.service_status))
             swServiceStatus.setChecked(true);
@@ -418,7 +420,7 @@ public class MainActivity extends AppCompatActivity {
         DetailActivity.httpRequestSyncRestaurant("info");
     }
 
-    public void  setServiceStatus(String Status){
+    public static void  setServiceStatus(String Status){
         DetailActivity.httpRequestRestaurantServiceDeactive(Status);
     }
 

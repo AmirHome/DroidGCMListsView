@@ -9,6 +9,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
@@ -69,6 +70,11 @@ public class ServiceOrderControl extends Service {
                     //TODO: service status is off
                     //TODO: set penalty
                     DetailActivity.httpRequestSyncCart(orderId);
+                    MainActivity.setServiceStatus("deactive");
+                    MainActivity.swServiceStatus.setChecked(false);
+
+                    Log.d("AmirHomeLog", "StatusReject");
+
                     stopService(new Intent(getBaseContext(), ServiceOrderControl.class));
 
 //                    setNotification(orderId);
