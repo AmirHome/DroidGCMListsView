@@ -66,10 +66,14 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
         TextView strOrderNo = (TextView) findViewById(R.id.tvOrderNo);
         strOrderNo.setText("Order:  " + id);
+
+        setTitle("Order:  " + id);
+//        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         Firebase.setAndroidContext(this);
         fire = new Firebase(MainActivity.DB_URL + MainActivity.rCode + "/" + id);
