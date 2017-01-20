@@ -44,17 +44,26 @@
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:layout_alignParentTop="true"
-
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:paddingTop="12dp"
+                    android:fontFamily="sans-serif"
+                    android:textStyle="bold|italic"
+                    android:textColor="@color/title"
                     android:layout_weight="0.8"
                     android:background="@color/half_red"
+                    
                     android:text="Restaurant Title" />
 
                 <TextView
+                  android:paddingTop="10dp"
                     android:id="@+id/tvDomainTitle"
+                    android:textSize="10dp"
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:layout_below="@+id/tvRestaurantTitle"
-
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:layout_weight="0.8"
                     android:background="@color/half_red"
                     android:text="Domain Title" />
