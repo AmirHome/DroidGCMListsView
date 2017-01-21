@@ -44,6 +44,7 @@ public class DetailActivity extends AppCompatActivity {
 
     public static final String CONST_REJECT_AUTO = "RejectAuto";
     public static final String CONST_REJECT = "Reject";
+    public static final String CONST_DELIVERD = "Delivered";
 
     //    public static final String BASE_URL_API_SYNC = "192.168.1.110/eat2donate/api/v1/";
 //    public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.at/api/v1/";
@@ -349,7 +350,6 @@ public class DetailActivity extends AppCompatActivity {
                 case "Reject_reason1":
                     tvStatusDelivery.setText(DetailActivity.REJECT_REASON1);
                     break;
-
                 case "Reject_reason2":
                     tvStatusDelivery.setText(DetailActivity.REJECT_REASON2);
                     break;
@@ -367,6 +367,9 @@ public class DetailActivity extends AppCompatActivity {
                     break;
                 case "Reject_reason7":
                     tvStatusDelivery.setText(DetailActivity.REJECT_REASON7);
+                    break;
+                case "Delivered":
+                    tvStatusDelivery.setText(DetailActivity.CONST_DELIVERD);
                     break;
             }
 

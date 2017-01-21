@@ -56,6 +56,9 @@ public class Player {
                     case "Reject_reason7":
                         this.status = DetailActivity.REJECT_REASON7;
                         break;
+                    case "Delivered":
+                        this.status = DetailActivity.CONST_DELIVERD;
+                        break;
                 }
             }
         }
