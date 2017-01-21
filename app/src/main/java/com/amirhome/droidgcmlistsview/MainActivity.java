@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -41,6 +40,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -48,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
     public static final String APP_VERSION = "0.0.3.18";
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
-    public static final int DelayedMili = 180000;// 3 x 60 x 1000 = 180000
+    public static final int DelayedMili = 180000;// 3 x 60 x 1000 = 180000 mis
+    public static final int PERIOD_TIME_CHECKING = 60000;// mis
     public static Switch swServiceStatus;
 
     static MediaPlayer mPlayer;
@@ -87,7 +89,18 @@ public class MainActivity extends AppCompatActivity {
         //get and set imei code = restaurant code
         this.setImeiCode();
 
-        getInfo();
+//        getInfo();
+
+        Timer myTimer = new Timer();
+        myTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                getInfo();
+                invalidateOptionsMenu();
+                Log.d("AmirHomeLog", "getInfo myTimer");
+            }
+        }, 0, PERIOD_TIME_CHECKING);
+
 
         //init firebase
         Firebase.setAndroidContext(this);
@@ -393,6 +406,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        swServiceStatus = (Switch) menu.findItem(R.id.ms_service_status).getActionView().findViewById(R.id.switchForActionBar);
+
+        if ("Active".equals(this.service_status))
+            swServiceStatus.setChecked(true);
+        else
+            swServiceStatus.setChecked(false);
 
         TextView tvRestaurantTitle = (TextView) findViewById(R.id.tvRestaurantTitle);
         tvRestaurantTitle.setText(restourantn_title);
@@ -405,9 +424,6 @@ public class MainActivity extends AppCompatActivity {
             openStatus.setIcon(R.drawable.ic_active);
         else
             openStatus.setIcon(R.drawable.ic_deactive);
-
-
-
 
         if (null == this.restourantn_no) {
             getInfo();
@@ -424,7 +440,7 @@ public class MainActivity extends AppCompatActivity {
         DetailActivity.httpRequestRestaurantServiceDeactive(Status);
     }
 
-    public String getLocalIpAddress() {
+    public static String getLocalIpAddress() {
         StringBuilder IFCONFIG = new StringBuilder();
         try {
             for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
@@ -446,13 +462,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-//            case R.id.mi_service_status:
-//                Log.d("AmirHomeLog", "service_status");
-//                Toast.makeText(this, "Click service_status", Toast.LENGTH_LONG).show();
-//                return true;
 
             case R.id.open_status:
-                Toast.makeText(this, this.open_status, Toast.LENGTH_LONG).show();
+                getInfo();
+                Toast.makeText(this, "Status Refreshing ...", Toast.LENGTH_LONG).show();
+                invalidateOptionsMenu();
                 return true;
             default:
                 // If we got here, the user's action was not recognized.
@@ -532,4 +546,5 @@ public class MainActivity extends AppCompatActivity {
 
         return String.valueOf(d2.getTime() - d1.getTime());
     }
+
 }
