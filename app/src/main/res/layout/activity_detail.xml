@@ -1151,7 +1151,7 @@
                                 android:background="@drawable/rounded_corner"
                                 android:gravity="center_vertical"
 
-                                android:minHeight="70dp"
+                                android:minHeight="40dp"
                                 android:paddingLeft="5dp"
                                 android:paddingRight="5dp"
                                 android:text="descriptionOrder"

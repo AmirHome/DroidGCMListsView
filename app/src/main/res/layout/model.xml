@@ -11,7 +11,7 @@
     android:paddingRight="16dp"
     android:paddingTop="10dp">
 
-    <TextView
+  <!--  <TextView
         android:id="@+id/lable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="320dp"
+        android:layout_marginLeft="120dp"
         android:text="time" />
 
     <TextView
@@ -60,5 +60,154 @@
         android:text="status"
         android:textColor="@color/year"
         android:layout_marginRight="50dp" />
+-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:id="@+id/ln23"
+
+
+        android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_weight="0.2"
+        android:orientation="vertical">
+
+        <!--  <Button
+              android:id="@+id/button2"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/half_red"
+              android:text="Bestell-ID"
+              android:textColor="@color/white" />-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+android:gravity="center"
+
+            android:orientation="horizontal">
+       <TextView
+            android:id="@+id/lable"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+
+            android:text="#"
+            android:textColor="@color/title"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/order_no"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/lable"
+            android:text="order_no"
+            android:textColor="@color/title"
+            android:textSize="16dp"
+            android:textStyle="bold"
+           />
+           </LinearLayout>
+
+
+    </LinearLayout><!--ordernumber vertical-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_weight="0.2"
+        android:orientation="vertical">
+
+        <!--   <Button
+               android:id="@+id/button3"
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:background="@color/half_red"
+               android:text="Datum"
+               android:textColor="@color/white" />-->
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/cost"
+            android:layout_toRightOf="@+id/order_no"
+
+
+
+            android:text="time" />
+
+    </LinearLayout><!--date vertical-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+
+        android:orientation="vertical">
+        <!--
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/half_red"
+                android:text="Endsumme"
+                android:textColor="@color/white" />-->
+
+        <TextView
+            android:id="@+id/cost"
+            android:layout_gravity="center"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/status"
+
+
+            android:text="cost" />
+
+    </LinearLayout><!--cost vertical-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:orientation="vertical">
+
+        <!--   <Button
+               android:id="@+id/button5"
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:background="@color/half_red"
+               android:text="Bestellstatus"
+               android:textColor="@color/white" />-->
+        <TextView
+            android:id="@+id/status"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="status"
+            android:textColor="@color/year"
+            />
+
+    </LinearLayout> <!--status vertical-->
+ </LinearLayout>
 
 </RelativeLayout>
