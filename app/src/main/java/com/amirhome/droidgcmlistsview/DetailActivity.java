@@ -167,6 +167,8 @@ public class DetailActivity extends AppCompatActivity {
 
         try {
             parameters.put("token", param1);
+            parameters.put("restourantn_no", MainActivity.restourantn_no);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -217,6 +219,8 @@ public class DetailActivity extends AppCompatActivity {
 
         try {
             parameters.put("token", param1);
+            parameters.put("restourantn_no", MainActivity.restourantn_no);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -268,6 +272,8 @@ public class DetailActivity extends AppCompatActivity {
 
         try {
             parameters.put("cart_id", param1);
+            parameters.put("restourantn_no", MainActivity.restourantn_no);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

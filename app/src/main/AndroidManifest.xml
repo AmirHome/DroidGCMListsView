@@ -21,9 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DetailActivity"
-            android:parentActivityName="com.amirhome.droidgcmlistsview.MainActivity"
-            android:label="">
+            android:name=".DetailActivity">
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
 
