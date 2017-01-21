@@ -48,7 +48,14 @@ public class CustomFilter extends Filter {
                             filteredPlayers.add(filterList.get(i));
                         break;
                     case "btnPenalty":
-                        if (filterList.get(i).getStatus().toLowerCase().contains("Reject".toLowerCase()))
+                        if (    filterList.get(i).getStatus().toLowerCase().contains("Reject".toLowerCase()) ||
+                                filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.REJECT_REASON1.toLowerCase())   ||
+                                filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.REJECT_REASON2.toLowerCase())   ||
+                                filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.REJECT_REASON3.toLowerCase())   ||
+                                filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.REJECT_REASON4.toLowerCase())   ||
+                                filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.REJECT_REASON5.toLowerCase())   ||
+                                filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.REJECT_REASON6.toLowerCase())
+                        )
                             //ADD PLAYER TO FILTERED PLAYERS
                             filteredPlayers.add(filterList.get(i));
                         break;
@@ -63,7 +70,15 @@ public class CustomFilter extends Filter {
                             filteredPlayers.add(filterList.get(i));
                         break;
                     case "btnCustomerRejected":
-                        if (filterList.get(i).getStatus().toLowerCase().contains("Reject_".toLowerCase()))
+                        if (
+                        filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.REJECT_REASON1.toLowerCase())   ||
+                        filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.REJECT_REASON2.toLowerCase())   ||
+                        filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.REJECT_REASON3.toLowerCase())   ||
+                        filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.REJECT_REASON4.toLowerCase())   ||
+                        filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.REJECT_REASON5.toLowerCase())   ||
+                        filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.REJECT_REASON6.toLowerCase())
+
+                                )
                             //ADD PLAYER TO FILTERED PLAYERS
                             filteredPlayers.add(filterList.get(i));
                         break;
