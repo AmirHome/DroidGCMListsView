@@ -47,7 +47,7 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
-    public static final String APP_VERSION = "0.0.4.06";
+    public static final String APP_VERSION = "0.0.4.08";
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     public static final int DelayedMili = 180000;// 3 x 60 x 1000 = 180000 mis
     public static final int PERIOD_TIME_CHECKING = 60000;// mis
@@ -367,12 +367,13 @@ public class MainActivity extends AppCompatActivity {
         MenuItem itemSwitch  = menu.findItem(R.id.ms_service_status);
         itemSwitch.setActionView(R.layout.switch_layout);
 
+        Log.d("AmirHomeLog","onCreateOptionsMenu");
         swServiceStatus = (Switch) menu.findItem(R.id.ms_service_status).getActionView().findViewById(R.id.switchForActionBar);
 
+        swServiceStatus.setChecked(false);
         if ("Active".equals(this.service_status))
             swServiceStatus.setChecked(true);
-        else
-            swServiceStatus.setChecked(false);
+
 
         swServiceStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -392,13 +393,23 @@ public class MainActivity extends AppCompatActivity {
         imeinumber.setTitle(this.rCode);
 
         MenuItem ipnumber = menu.findItem(R.id.ipnumber);
-        ipnumber.setTitle(getLocalIpAddress());
+        String ipAddress = getLocalIpAddress();
+        if (ipAddress.isEmpty()) {
+            ipnumber.setIcon(R.drawable.disconnected_50);
+            this.service_status= null;
+            this.open_status = null;
+            this.restourantn_no =null;
+        }
+        else {
+            ipnumber.setTitle(getLocalIpAddress());
+        }
 
         MenuItem version = menu.findItem(R.id.version);
         version.setTitle(APP_VERSION);
 
         TextView tvDomainTitle = (TextView) findViewById(R.id.tvDomainTitle);
         tvDomainTitle.setText(DetailActivity.BASE_URL_API_SYNC);
+
         return true;
     }
 
@@ -407,11 +418,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         swServiceStatus = (Switch) menu.findItem(R.id.ms_service_status).getActionView().findViewById(R.id.switchForActionBar);
-
+        swServiceStatus.setChecked(false);
         if ("Active".equals(this.service_status))
             swServiceStatus.setChecked(true);
-        else
-            swServiceStatus.setChecked(false);
 
         TextView tvRestaurantTitle = (TextView) findViewById(R.id.tvRestaurantTitle);
         tvRestaurantTitle.setText(restourantn_title);
@@ -420,10 +429,9 @@ public class MainActivity extends AppCompatActivity {
         restourantnNo.setTitle(this.restourantn_no);
 
         MenuItem openStatus = menu.findItem(R.id.open_status);
+        openStatus.setIcon(R.drawable.ic_deactive);
         if ("Open".equals(this.open_status))
             openStatus.setIcon(R.drawable.ic_active);
-        else
-            openStatus.setIcon(R.drawable.ic_deactive);
 
         if (null == this.restourantn_no) {
             getInfo();
@@ -450,11 +458,10 @@ public class MainActivity extends AppCompatActivity {
                     if (!inetAddress.isLoopbackAddress() && !inetAddress.isLinkLocalAddress() && inetAddress.isSiteLocalAddress()) {
                         IFCONFIG.append(inetAddress.getHostAddress().toString() + "");
                     }
-
                 }
             }
         } catch (SocketException ex) {
-            Log.e("LOG_TAG", ex.toString());
+            Log.e("AmirHomeLog", ex.toString());
         }
         return (IFCONFIG.toString());
     }
