@@ -488,8 +488,8 @@ public class MainActivity extends AppCompatActivity {
         if (1 == countNewOrder) {
             AlertDialog.Builder builderInner = new AlertDialog.Builder(MainActivity.this);
             builderInner.setIcon(R.drawable.logo);
-            builderInner.setMessage("New order come now..");
-            builderInner.setTitle("Please click OK and go to the list. Count: " + countNewOrder);
+            builderInner.setMessage("NEUE BESTELLUNG EINGETROFFEN! ");
+            builderInner.setTitle("" + countNewOrder);
             builderInner.setCancelable(false);
             builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
