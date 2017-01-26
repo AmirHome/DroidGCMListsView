@@ -105,28 +105,28 @@
             android:id="@+id/Accept15"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp"
-            android:text="Accept15"
+            android:text="LIEFERUNG in 15 Min."
             android:textSize="40dp" />
 
         <RadioButton
             android:id="@+id/Accept30"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp"
-            android:text="Accept30"
+            android:text="LIEFERUNG in 30 Min."
             android:textSize="40dp" />
 
         <RadioButton
             android:id="@+id/Accept45"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp"
-            android:text="Accept45"
+            android:text="LIEFERUNG in 45 Min."
             android:textSize="40dp" />
 
         <RadioButton
             android:id="@+id/Accept60"
             android:layout_gravity="center_horizontal"
 
-            android:text="Accept60"
+            android:text="LIEFERUNG in 60 Min."
             android:textSize="40dp" />
 
 
@@ -140,7 +140,7 @@
         android:gravity="center"
 
 
-        android:text="Weet je het zeker?"
+        android:text="Sind Sie Sicher? "
         android:textSize="30dp" />
 
     <LinearLayout

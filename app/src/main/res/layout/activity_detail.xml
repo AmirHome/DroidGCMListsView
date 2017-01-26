@@ -1182,7 +1182,7 @@
                     android:layout_height="60dp"
                     android:layout_centerHorizontal="true"
                     android:singleLine="true"
-                    android:text="Reject"
+                    android:text="ABLEHNEN"
                     /> <!--spinner reject-->
 
 
