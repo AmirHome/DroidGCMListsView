@@ -47,7 +47,7 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
-    public static final String APP_VERSION = "0.0.4.08";
+    public static final String APP_VERSION = "0.0.4.10";
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     public static final int DelayedMili = 180000;// 3 x 60 x 1000 = 180000 mis
     public static final int PERIOD_TIME_CHECKING = 60000;// mis
@@ -370,7 +370,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("AmirHomeLog","onCreateOptionsMenu");
         swServiceStatus = (Switch) menu.findItem(R.id.ms_service_status).getActionView().findViewById(R.id.switchForActionBar);
 
-        swServiceStatus.setChecked(false);
+//        swServiceStatus.setChecked(false);
         if ("Active".equals(this.service_status))
             swServiceStatus.setChecked(true);
 
@@ -418,7 +418,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         swServiceStatus = (Switch) menu.findItem(R.id.ms_service_status).getActionView().findViewById(R.id.switchForActionBar);
-        swServiceStatus.setChecked(false);
+//        swServiceStatus.setChecked(false);
         if ("Active".equals(this.service_status))
             swServiceStatus.setChecked(true);
 
