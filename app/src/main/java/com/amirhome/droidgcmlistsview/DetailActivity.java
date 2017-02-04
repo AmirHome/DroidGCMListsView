@@ -33,7 +33,7 @@ import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
     public static final String ONAYLI_BEKLIYOR = "waiting for accept";
-    public static final String TESLIM_BEKLIYOR = "waiting for delivery";
+    public static final String TESLIM_BEKLIYOR = "Bestellung wird vorbereitet";
     public static final String REJECT_REASON1 = "Produkt ausverkauft";
     public static final String REJECT_REASON2 = "Produkt nicht hygienisch";
     public static final String REJECT_REASON3 = "Bestellung nicht vollständig";

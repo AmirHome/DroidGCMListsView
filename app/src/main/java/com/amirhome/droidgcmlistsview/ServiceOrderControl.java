@@ -21,11 +21,12 @@ public class ServiceOrderControl extends Service {
     Firebase fire;
     String orderId;
     String orderDate;
-    public boolean res;
     int notifyID = 0;
 
     public ServiceOrderControl() {
     }
+
+
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -64,21 +65,21 @@ public class ServiceOrderControl extends Service {
         Runnable r = new Runnable() {
             public void run() {
 
-                res = setStatusReject(orderId);
-                if (res) {
+                setStatusReject(orderId);
+//                if (resultStatusReject) {
 
                     //TODO: service status is off
                     //TODO: set penalty
-                    DetailActivity.httpRequestSyncCart(orderId);
-                    MainActivity.setServiceStatus("deactive");
-                    MainActivity.swServiceStatus.setChecked(false);
-
-                    Log.d("AmirHomeLog", "StatusReject");
-
-                    stopService(new Intent(getBaseContext(), ServiceOrderControl.class));
+//                    MainActivity.setServiceStatus("deactive");
+//                    MainActivity.swServiceStatus.setChecked(false);
+//
+//                    Log.d("AmirHomeLog", "setTimerStatusCtrl deactive");
+//                    DetailActivity.httpRequestSyncCart(orderId);
+//
+//                    stopService(new Intent(getBaseContext(), ServiceOrderControl.class));
 
 //                    setNotification(orderId);
-                }
+//                }
 
                 //        Cart c = new Cart();
                 //        c.setOrderId("test");
@@ -104,23 +105,31 @@ public class ServiceOrderControl extends Service {
 
     }
 
-    private boolean setStatusReject(String orderId) {
+    private void setStatusReject(final String orderId) {
 
         Firebase.setAndroidContext(this);
-
         fire = new Firebase(MainActivity.DB_URL + MainActivity.rCode + "/" + orderId + "/");
+
         fire.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot ds) {
 
                 if (ds.child("status_order").getValue().equals("0")) {
-                    // Order is reject
-                    fire.child("status_order").setValue("RejectAuto");
+                    try {
+                        // Order is reject
+                        fire.child("status_order").setValue("RejectAuto");
 
-//                    DetailActivity.httpRequestSyncCart(fire.getKey());
-                    res = true;
-                } else {
-                    res = false;
+                        //service status is off
+                        MainActivity.setServiceStatus("deactive");
+                        MainActivity.swServiceStatus.setChecked(false);
+                        DetailActivity.httpRequestSyncCart(orderId);
+
+                        // Service Stoped
+                        stopService(new Intent(getBaseContext(), ServiceOrderControl.class));
+                        // setNotification(orderId);
+                    } catch (Exception e) {
+                        Log.d("AmirHomeLog", "Order is reject or service status is off or Service Stoped " + e);
+                    }
                 }
             }
 
@@ -128,8 +137,6 @@ public class ServiceOrderControl extends Service {
             public void onCancelled(FirebaseError firebaseError) {
             }
         });
-
-        return res;
     }
 
     public void setNotification(String id) {
@@ -153,26 +160,5 @@ public class ServiceOrderControl extends Service {
 //            Log.d("AmirHomeLog", e.toString());
         }
     }
-
-
-/*    @NonNull
-    private String getDiff(String dateStop) {
-        // SimpleDateFormat Class
-        SimpleDateFormat sdfDateTime = new SimpleDateFormat(DateTimeFormat, Locale.US);
-        String currentTime = sdfDateTime.format(new Date(System.currentTimeMillis()));
-
-        SimpleDateFormat format = new SimpleDateFormat(DateTimeFormat);
-
-        Date d1 = null;
-        Date d2 = null;
-        try {
-            d1 = format.parse(dateStop);
-            d2 = format.parse(currentTime);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return String.valueOf(d2.getTime() - d1.getTime());
-    }*/
 }
 

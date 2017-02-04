@@ -47,7 +47,8 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
-    public static final String APP_VERSION = "0.0.4.10";
+//    final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/";
+    public static final String APP_VERSION = "0.0.4.14";
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     public static final int DelayedMili = 180000;// 3 x 60 x 1000 = 180000 mis
     public static final int PERIOD_TIME_CHECKING = 60000;// mis
@@ -136,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
 
                         if (dataSnapshot.child("status_order").getValue().toString().equals("0")) {
 
-
                             String diff = getDiff(p.getOrder_date());
 
                             if (Integer.parseInt(diff) < MainActivity.DelayedMili) {
@@ -151,7 +151,8 @@ public class MainActivity extends AppCompatActivity {
                                 // Order is reject
                                 dataSnapshot.getRef().child("status_order").setValue("RejectAuto");
                                 DetailActivity.httpRequestSyncCart(p.getOrder_no());
-
+//                                MainActivity.setServiceStatus("deactive");
+//                                MainActivity.swServiceStatus.setChecked(false);
                             }
 
 //                            Log.d("AmirHomeLog", "equals(0) " + p.getOrder_no());
@@ -489,7 +490,7 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builderInner = new AlertDialog.Builder(MainActivity.this);
             builderInner.setIcon(R.drawable.logo);
             builderInner.setMessage("NEUE BESTELLUNG EINGETROFFEN! ");
-            builderInner.setTitle("" + countNewOrder);
+            builderInner.setTitle("# " + countNewOrder);
             builderInner.setCancelable(false);
             builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
@@ -507,7 +508,7 @@ public class MainActivity extends AppCompatActivity {
             dialog.show();
             startAlarm();
         } else {
-            dialog.setTitle("Please click OK and go to the list. Count: " + countNewOrder);
+            dialog.setTitle("# " + countNewOrder);
         }
     }
 
