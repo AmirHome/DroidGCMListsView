@@ -31,6 +31,7 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
 //    final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/";
-    public static final String APP_VERSION = "0.0.4.14";
+    public static final String APP_VERSION = "0.0.4.15";
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     public static final int DelayedMili = 180000;// 3 x 60 x 1000 = 180000 mis
     public static final int PERIOD_TIME_CHECKING = 60000;// mis
@@ -66,7 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TelephonyManager mTelephonyManager;
 
-    Firebase fire;
+//    Firebase fireMain;
+    Query fire;
     /* Dailog */
     private int countNewOrder = 0;
     private Dialog dialog;
@@ -105,8 +107,10 @@ public class MainActivity extends AppCompatActivity {
 
         //init firebase
         Firebase.setAndroidContext(this);
-        fire = new Firebase(DB_URL + rCode);
+        Firebase fireMain = new Firebase(DB_URL );
+        Query fire = fireMain.child(rCode).orderByChild("/order_date");
 
+//        fire.child("users").orderByChild('gamedata/highscore');
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
         //SET ITS PROPETRIES
@@ -121,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
         fire.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                            Log.d("AmirHomeLog", "onChildAdded " + s);
+
 
                 RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
                 if (dataSnapshot != null && dataSnapshot.getValue() != null) {
@@ -368,7 +374,7 @@ public class MainActivity extends AppCompatActivity {
         MenuItem itemSwitch  = menu.findItem(R.id.ms_service_status);
         itemSwitch.setActionView(R.layout.switch_layout);
 
-        Log.d("AmirHomeLog","onCreateOptionsMenu");
+//        Log.d("AmirHomeLog","onCreateOptionsMenu");
         swServiceStatus = (Switch) menu.findItem(R.id.ms_service_status).getActionView().findViewById(R.id.switchForActionBar);
 
 //        swServiceStatus.setChecked(false);
