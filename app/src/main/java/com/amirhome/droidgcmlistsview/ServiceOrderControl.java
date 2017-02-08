@@ -128,7 +128,7 @@ public class ServiceOrderControl extends Service {
                         stopService(new Intent(getBaseContext(), ServiceOrderControl.class));
                         // setNotification(orderId);
                     } catch (Exception e) {
-                        Log.d("AmirHomeLog", "Order is reject or service status is off or Service Stoped " + e);
+                        Log.e("AmirHomeLog", "Order is reject or service status is off or Service Stoped " + e);
                     }
                 }
             }

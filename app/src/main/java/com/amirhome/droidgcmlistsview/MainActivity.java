@@ -1,15 +1,16 @@
 package com.amirhome.droidgcmlistsview;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -48,8 +49,8 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
-//    final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/";
-    public static final String APP_VERSION = "0.0.4.15";
+    //    final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/";
+    public static final String APP_VERSION = "0.0.4.16";
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     public static final int DelayedMili = 180000;// 3 x 60 x 1000 = 180000 mis
     public static final int PERIOD_TIME_CHECKING = 60000;// mis
@@ -63,11 +64,11 @@ public class MainActivity extends AppCompatActivity {
     public static String restourantn_title;
     public static String service_status;
     public static String open_status;
-    public  String currentFilter = "";
+    public String currentFilter = "";
 
     private TelephonyManager mTelephonyManager;
 
-//    Firebase fireMain;
+    //    Firebase fireMain;
     Query fire;
     /* Dailog */
     private int countNewOrder = 0;
@@ -92,25 +93,40 @@ public class MainActivity extends AppCompatActivity {
         //get and set imei code = restaurant code
         this.setImeiCode();
 
-//        getInfo();
+//        afterPermission();
 
+        // float button
+/*        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            *//* test *//*
+            //                btnAllFilter.callOnClick();
+            //                btnAllFilter.setPressed(true);
+            //                btnAllFilter.performClick();
+            //                btnAllFilter.invalidate();
+            *//* test end. *//*
+            //                String msg = "Can you help me please..";
+            //                Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            }
+        });*/
+    }
+
+    private void afterPermission() {
         Timer myTimer = new Timer();
         myTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 getInfo();
                 invalidateOptionsMenu();
-//                Log.d("AmirHomeLog", "getInfo myTimer");
             }
         }, 0, PERIOD_TIME_CHECKING);
 
-
         //init firebase
         Firebase.setAndroidContext(this);
-        Firebase fireMain = new Firebase(DB_URL );
-        Query fire = fireMain.child(rCode).orderByChild("/order_date");
-
-//        fire.child("users").orderByChild('gamedata/highscore');
+        Firebase fireMain = new Firebase(DB_URL + rCode);
+        fire = fireMain.orderByChild("/order_date");
+//        Firebase fire = new Firebase(DB_URL+rCode );
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
         //SET ITS PROPETRIES
@@ -125,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         fire.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                            Log.d("AmirHomeLog", "onChildAdded " + s);
+//                            Log.d("AmirHomeLog", "onChildAdded " + s);
 
 
                 RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
@@ -165,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                     } catch (Exception ex) {
-                        Log.d("AmirHomeLog", ex.getMessage());
+                        Log.e("AmirHomeLog", ex.getMessage());
                     }
                 }
             }
@@ -315,23 +331,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
-        // float button
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-/* test */
-//                btnAllFilter.callOnClick();
-                btnAllFilter.setPressed(true);
-                btnAllFilter.performClick();
-                btnAllFilter.invalidate();
-/* test end. */
-//                String msg = "Can you help me please..";
-//                Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            }
-        });
     }
 
     public void startAlarm() {
@@ -356,13 +355,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @TargetApi(Build.VERSION_CODES.M)
     private void setImeiCode() {
         if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
                     PERMISSIONS_REQUEST_READ_PHONE_STATE);
+
+
         } else {
             this.rCode = this.getDeviceImei();
+            this.afterPermission();
         }
     }
 
@@ -371,7 +374,7 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        MenuItem itemSwitch  = menu.findItem(R.id.ms_service_status);
+        MenuItem itemSwitch = menu.findItem(R.id.ms_service_status);
         itemSwitch.setActionView(R.layout.switch_layout);
 
 //        Log.d("AmirHomeLog","onCreateOptionsMenu");
@@ -385,11 +388,10 @@ public class MainActivity extends AppCompatActivity {
         swServiceStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     setServiceStatus("active");
                     Toast.makeText(MainActivity.this, "Send Request For Active", Toast.LENGTH_LONG).show();
-                }
-                else{
+                } else {
                     setServiceStatus("deactive");
                     Toast.makeText(MainActivity.this, "Send Request for Deactivate", Toast.LENGTH_LONG).show();
                 }
@@ -403,11 +405,10 @@ public class MainActivity extends AppCompatActivity {
         String ipAddress = getLocalIpAddress();
         if (ipAddress.isEmpty()) {
             ipnumber.setIcon(R.drawable.disconnected_50);
-            this.service_status= null;
+            this.service_status = null;
             this.open_status = null;
-            this.restourantn_no =null;
-        }
-        else {
+            this.restourantn_no = null;
+        } else {
             ipnumber.setTitle(getLocalIpAddress());
         }
 
@@ -441,7 +442,9 @@ public class MainActivity extends AppCompatActivity {
             openStatus.setIcon(R.drawable.ic_active);
 
         if (null == this.restourantn_no) {
-            getInfo();
+            if (null != this.rCode) {
+                getInfo();
+            }
             VersionHelper.refreshActionBarMenu(this);
         }
         return true;
@@ -451,7 +454,7 @@ public class MainActivity extends AppCompatActivity {
         DetailActivity.httpRequestSyncRestaurant("info");
     }
 
-    public static void  setServiceStatus(String Status){
+    public static void setServiceStatus(String Status) {
         DetailActivity.httpRequestRestaurantServiceDeactive(Status);
     }
 
@@ -478,9 +481,15 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.open_status:
-                getInfo();
-                Toast.makeText(this, "Status Refreshing ...", Toast.LENGTH_LONG).show();
-                invalidateOptionsMenu();
+                if (null != this.rCode) {
+                    getInfo();
+                    Toast.makeText(this, "Status Refreshing ...", Toast.LENGTH_LONG).show();
+                    invalidateOptionsMenu();
+                }else{
+                    Toast.makeText(this, "Don't Have imei ...", Toast.LENGTH_LONG).show();
+
+                }
+
                 return true;
             default:
                 // If we got here, the user's action was not recognized.
@@ -519,20 +528,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    public void detailOrder(String id) {
+    //    public void detailOrder(String id) {
 //        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
 //        intent.putExtra("id", id);
 //        startActivity(intent);
 //    }
-
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                           int[] grantResults) {
-        if (requestCode == PERMISSIONS_REQUEST_READ_PHONE_STATE
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            this.getDeviceImei();
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_READ_PHONE_STATE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    this.rCode = this.getDeviceImei();
+                    this.afterPermission();
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
         }
     }
+
 
     private String getDeviceImei() {
 

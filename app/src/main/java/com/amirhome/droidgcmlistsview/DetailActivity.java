@@ -63,10 +63,8 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
@@ -147,7 +145,7 @@ public class DetailActivity extends AppCompatActivity {
 
                     getUpdates(dataSnapshot);
                 } catch (Exception ex) {
-                    Log.d("AmirHomeLog", ex.getMessage());
+                    Log.e("AmirHomeLog", ex.getMessage());
                 }
 
             }
@@ -192,7 +190,7 @@ public class DetailActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("AmirHomeLog", error.toString());
+                Log.e("AmirHomeLog", error.toString());
             }
         }) {
 
@@ -244,7 +242,7 @@ public class DetailActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("AmirHomeLog", error.toString());
+                Log.e("AmirHomeLog", error.toString());
             }
         }) {
 
@@ -294,7 +292,7 @@ public class DetailActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("AmirHomeLog", error.toString());
+                Log.e("AmirHomeLog", error.toString());
             }
         }) {
 
