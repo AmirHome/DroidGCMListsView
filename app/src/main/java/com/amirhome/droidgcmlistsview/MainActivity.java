@@ -49,11 +49,11 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
-    //    final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/";
-    public static final String APP_VERSION = "0.0.4.16";
+//        final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/";
+    public static final String APP_VERSION = "0.0.4.17";
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     public static final int DelayedMili = 180000;// 3 x 60 x 1000 = 180000 mis
-    public static final int PERIOD_TIME_CHECKING = 60000;// mis
+    public static final int PERIOD_TIME_CHECKING = 60000;// mis Refresh Menu Information
     public static Switch swServiceStatus;
 
     static MediaPlayer mPlayer;
@@ -93,19 +93,14 @@ public class MainActivity extends AppCompatActivity {
         //get and set imei code = restaurant code
         this.setImeiCode();
 
-//        afterPermission();
 
         // float button
 /*        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            *//* test *//*
-            //                btnAllFilter.callOnClick();
-            //                btnAllFilter.setPressed(true);
-            //                btnAllFilter.performClick();
-            //                btnAllFilter.invalidate();
-            *//* test end. *//*
+                startAlarm();
+
             //                String msg = "Can you help me please..";
             //                Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
@@ -334,7 +329,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startAlarm() {
-        mPlayer = MediaPlayer.create(MainActivity.this, R.raw.bleepsoundbible);
+        mPlayer = MediaPlayer.create(MainActivity.this, R.raw.alarm_reload);
         mPlayer.setLooping(true);
         mPlayer.start();
     }
