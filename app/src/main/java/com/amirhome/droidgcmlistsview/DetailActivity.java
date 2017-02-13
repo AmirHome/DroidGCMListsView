@@ -34,7 +34,7 @@ import java.util.List;
 public class DetailActivity extends AppCompatActivity {
     public static final String ONAYLI_BEKLIYOR = "waiting for accept";
     public static final String TESLIM_BEKLIYOR = "Bestellung wird vorbereitet";
-    public static final String REJECT_REASON1 = "Produkt ausverkauft";
+    public static final String REJECT_REASON1 = "Falsches Produkt geliefert";
     public static final String REJECT_REASON2 = "Produkt nicht hygienisch";
     public static final String REJECT_REASON3 = "Bestellung nicht vollständig";
     public static final String REJECT_REASON4 = "Lieferung zu spät";
@@ -379,15 +379,6 @@ public class DetailActivity extends AppCompatActivity {
                     tvStatusDelivery.setText(DetailActivity.CONST_DELIVERD);
                     break;
             }
-
-//            if (ds.child("status_delivery").getValue().equals("0")) {
-//                tvStatusDelivery.setText(TESLIM_BEKLIYOR);
-//                btnAccept.setEnabled(true);
-//                btnReject.setEnabled(true);
-//            } else {
-//
-//                tvStatusDelivery.setText((String) ds.child("status_delivery").getValue());
-//            }
         }
 
 

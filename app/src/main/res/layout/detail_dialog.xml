@@ -39,7 +39,7 @@
             android:id="@+id/Reject_reason1"
             android:layout_gravity="left"
             android:layout_marginBottom="10dp"
-            android:text="Produkt ausverkauft"
+            android:text="Falsches Produkt geliefert"
             android:textSize="25dp" />
 
         <RadioButton
