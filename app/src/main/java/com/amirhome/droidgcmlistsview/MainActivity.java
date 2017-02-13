@@ -507,7 +507,7 @@ public class MainActivity extends AppCompatActivity {
         countNewOrder++;
         if (1 == countNewOrder) {
             AlertDialog.Builder builderInner = new AlertDialog.Builder(MainActivity.this);
-            builderInner.setIcon(R.drawable.logo);
+//            builderInner.setIcon(R.drawable.logo);
             builderInner.setMessage("NEUE BESTELLUNG EINGETROFFEN! ");
             builderInner.setTitle("# " + countNewOrder);
             builderInner.setCancelable(false);
