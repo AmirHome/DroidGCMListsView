@@ -333,6 +333,8 @@ public class DetailActivity extends AppCompatActivity {
             tvStatusOrder.setText(ONAYLI_BEKLIYOR);
             btnAccept.setEnabled(true);
             btnReject.setEnabled(true);
+            btnAccept.setText("akzeptieren");
+            btnReject.setText("ABLEHNEN");
         } else {
             tvStatusOrder.setText((String) ds.child("status_order").getValue());
         }
@@ -349,6 +351,8 @@ public class DetailActivity extends AppCompatActivity {
                     tvStatusDelivery.setText(TESLIM_BEKLIYOR);
                     btnAccept.setEnabled(true);
                     btnReject.setEnabled(true);
+                    btnAccept.setText("GELIEFERT");
+                    btnReject.setText("ABGELEHNT DURCH KUNDEN");
                     break;
                 case "Reject_reason1":
                     tvStatusDelivery.setText(DetailActivity.REJECT_REASON1);
