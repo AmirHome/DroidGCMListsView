@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -48,15 +47,14 @@ public class ServiceOrderControl extends Service {
 
         // Set Timer if status == 0
         setTimerStatusCtrl(orderId, orderDate);
-
-        Toast.makeText(this, "Service Started" + Integer.toString(startId) + " " + orderId, Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Service Started" + Integer.toString(startId) + " " + orderId, Toast.LENGTH_LONG).show();
         return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Toast.makeText(this, "Service Stopped", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Service Stopped", Toast.LENGTH_LONG).show();
     }
 
     private void setTimerStatusCtrl(final String orderId, final String orderDate) {
