@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -42,14 +43,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    //        final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/";
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
-//        final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/";
+
     public static final String APP_VERSION = "0.0.4.18";
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     public static final int DelayedMili = 180000;// 3 x 60 x 1000 = 180000 mis
@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
     /* Dailog */
     private int countNewOrder = 0;
     private Dialog dialog;
+
+    private Handler handler = new Handler();
 
     private Player p;
     ArrayList<Player> players = new ArrayList<>();
@@ -108,14 +110,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void afterPermission() {
-        Timer myTimer = new Timer();
-        myTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                getInfo();
-                invalidateOptionsMenu();
-            }
-        }, 0, PERIOD_TIME_CHECKING);
+
+        handler.postDelayed(runnable, PERIOD_TIME_CHECKING);
 
         //init firebase
         Firebase.setAndroidContext(this);
@@ -328,6 +324,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+      /* do what you need to do */
+            getInfo();
+            invalidateOptionsMenu();
+//            Log.d("AmirHomeLog","runnable");
+      /* and here comes the "trick" */
+            handler.postDelayed(this, PERIOD_TIME_CHECKING);
+        }
+    };
     public void startAlarm() {
         mPlayer = MediaPlayer.create(MainActivity.this, R.raw.alarm_reload);
         mPlayer.setLooping(true);
@@ -447,6 +454,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void getInfo() {
         DetailActivity.httpRequestSyncRestaurant("info");
+//        Log.d("AmirHomeLog","getInfo");
+
     }
 
     public static void setServiceStatus(String Status) {
