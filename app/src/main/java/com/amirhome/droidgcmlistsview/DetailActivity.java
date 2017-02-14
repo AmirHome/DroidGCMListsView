@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
-    public static final String ONAYLI_BEKLIYOR = "waiting for accept";
+    public static final String ONAYLI_BEKLIYOR = "Warten auf Akzeptieren";
     public static final String TESLIM_BEKLIYOR = "Bestellung wird vorbereitet";
     public static final String REJECT_REASON1 = "Falsches Produkt geliefert";
     public static final String REJECT_REASON2 = "Produkt nicht hygienisch";
@@ -43,7 +43,7 @@ public class DetailActivity extends AppCompatActivity {
     public static final String REJECT_REASON7 = "Keine Zahlung erhalten";
 
     public static final String CONST_REJECT_AUTO = "AutoAbgelehnt";
-    public static final String CONST_REJECT = "Reject";
+    public static final String CONST_REJECT = "Abgelehnt";
     public static final String CONST_DELIVERD = "Zugestellt";
 
     //    public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.at/api/v1/";
@@ -380,10 +380,16 @@ public class DetailActivity extends AppCompatActivity {
             btnAccept.setEnabled(true);
             btnReject.setEnabled(true);
         } else {
-            if (ds.child("status_order").getValue().equals("RejectAuto")) {
-                tvStatusOrder.setText(CONST_REJECT_AUTO);
-            } else {
-                tvStatusOrder.setText((String) ds.child("status_order").getValue());
+            switch (status_order) {
+                case "RejectAuto":
+                    tvStatusOrder.setText(CONST_REJECT_AUTO);
+                    break;
+                case "Reject":
+                    tvStatusOrder.setText(CONST_REJECT);
+                    break;
+                default:
+                    tvStatusOrder.setText((String) ds.child("status_order").getValue());
+                    break;
             }
         }
 

@@ -48,7 +48,7 @@ public class CustomFilter extends Filter {
                             filteredPlayers.add(filterList.get(i));
                         break;
                     case "btnPenalty":
-                        if (    filterList.get(i).getStatus().toLowerCase().equals("Reject".toLowerCase()) ||
+                        if (    filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.CONST_REJECT.toLowerCase()) ||
                                 filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.CONST_REJECT_AUTO.toLowerCase())   ||
                                 filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.REJECT_REASON1.toLowerCase())   ||
                                 filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.REJECT_REASON2.toLowerCase())   ||
@@ -61,7 +61,7 @@ public class CustomFilter extends Filter {
                             filteredPlayers.add(filterList.get(i));
                         break;
                     case "btnRejected":
-                        if (filterList.get(i).getStatus().toLowerCase().equals("Reject".toLowerCase()))
+                        if (filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.CONST_REJECT.toLowerCase()))
                             //ADD PLAYER TO FILTERED PLAYERS
                             filteredPlayers.add(filterList.get(i));
                         break;
