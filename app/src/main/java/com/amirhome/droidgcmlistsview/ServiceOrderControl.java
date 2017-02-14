@@ -26,7 +26,6 @@ public class ServiceOrderControl extends Service {
     }
 
 
-
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
@@ -35,26 +34,21 @@ public class ServiceOrderControl extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
-        Firebase.setAndroidContext(this);
         orderId = intent.getStringExtra("ServiceOrderControl.orderId");
         orderDate = intent.getStringExtra("ServiceOrderControl.order_date");
 
         // The new order came
         setNotification(orderId);
 
-        /* Open Dailog */
-
         // Set Timer if status == 0
         setTimerStatusCtrl(orderId, orderDate);
-//        Toast.makeText(this, "Service Started" + Integer.toString(startId) + " " + orderId, Toast.LENGTH_LONG).show();
+
         return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        Toast.makeText(this, "Service Stopped", Toast.LENGTH_LONG).show();
     }
 
     private void setTimerStatusCtrl(final String orderId, final String orderDate) {
@@ -62,37 +56,11 @@ public class ServiceOrderControl extends Service {
         Handler handler = new Handler();
         Runnable r = new Runnable() {
             public void run() {
-
                 setStatusReject(orderId);
-//                if (resultStatusReject) {
-
-                    //TODO: service status is off
-                    //TODO: set penalty
-//                    MainActivity.setServiceStatus("deactive");
-//                    MainActivity.swServiceStatus.setChecked(false);
-//
-//                    Log.d("AmirHomeLog", "setTimerStatusCtrl deactive");
-//                    DetailActivity.httpRequestSyncCart(orderId);
-//
-//                    stopService(new Intent(getBaseContext(), ServiceOrderControl.class));
-
-//                    setNotification(orderId);
-//                }
-
-                //        Cart c = new Cart();
-                //        c.setOrderId("test");
-                //        c.setStatusOrder("0");
-                //stopService(new Intent(getBaseContext(), ServiceOrderControl.class));
-                //handler.postDelayed(this, 1000);
-
-
             }
         };
 
-//        handler.postDelayed(r, 1000);
-
         // Control orderDate
-//        String diff = getDiff(orderDate);
         String diff = MainActivity.getDiff(orderDate);
 
         if (Integer.parseInt(diff) < MainActivity.DelayedMili) {
@@ -124,6 +92,7 @@ public class ServiceOrderControl extends Service {
 
                         // Service Stoped
                         stopService(new Intent(getBaseContext(), ServiceOrderControl.class));
+
                         // setNotification(orderId);
                     } catch (Exception e) {
                         Log.e("AmirHomeLog", "Order is reject or service status is off or Service Stoped " + e);

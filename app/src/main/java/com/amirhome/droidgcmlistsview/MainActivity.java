@@ -158,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
                                 myService.putExtra("ServiceOrderControl.orderId", p.getOrder_no());
                                 myService.putExtra("ServiceOrderControl.order_date", p.getOrder_date());
                                 startService(myService);
+                                
 //                            Open Dialog
                                 newOrderAlert();
                             } else {
@@ -335,6 +336,7 @@ public class MainActivity extends AppCompatActivity {
             handler.postDelayed(this, PERIOD_TIME_CHECKING);
         }
     };
+
     public void startAlarm() {
         mPlayer = MediaPlayer.create(MainActivity.this, R.raw.alarm_reload);
         mPlayer.setLooping(true);
@@ -489,7 +491,7 @@ public class MainActivity extends AppCompatActivity {
                     getInfo();
                     Toast.makeText(this, "Status Refreshing ...", Toast.LENGTH_LONG).show();
                     invalidateOptionsMenu();
-                }else{
+                } else {
                     Toast.makeText(this, "Don't Have imei ...", Toast.LENGTH_LONG).show();
 
                 }
