@@ -34,14 +34,18 @@ public class ServiceOrderControl extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        orderId = intent.getStringExtra("ServiceOrderControl.orderId");
-        orderDate = intent.getStringExtra("ServiceOrderControl.order_date");
+        try {
+            orderId = intent.getStringExtra("ServiceOrderControl.orderId");
+            orderDate = intent.getStringExtra("ServiceOrderControl.order_date");
 
-        // The new order came
-        setNotification(orderId);
+            // The new order came
+            setNotification(orderId);
 
-        // Set Timer if status == 0
-        setTimerStatusCtrl(orderId, orderDate);
+            // Set Timer if status == 0
+            setTimerStatusCtrl(orderId, orderDate);
+        } catch (Exception e) {
+            Log.e("AmirHomeLog", "Order is reject or service status is off or Service Stoped " + e);
+        }
 
         return START_STICKY;
     }

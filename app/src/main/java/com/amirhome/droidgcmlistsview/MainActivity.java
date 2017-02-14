@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void afterPermission() {
 
-        handler.postDelayed(runnable, PERIOD_TIME_CHECKING);
+        handler.postDelayed(runnable, 100);
 
         //init firebase
         Firebase.setAndroidContext(this);
@@ -331,7 +331,6 @@ public class MainActivity extends AppCompatActivity {
       /* do what you need to do */
             getInfo();
             invalidateOptionsMenu();
-//            Log.d("AmirHomeLog","runnable");
       /* and here comes the "trick" */
             handler.postDelayed(this, PERIOD_TIME_CHECKING);
         }
@@ -457,7 +456,6 @@ public class MainActivity extends AppCompatActivity {
     private void getInfo() {
         DetailActivity.httpRequestSyncRestaurant("info");
 //        Log.d("AmirHomeLog","getInfo");
-
     }
 
     public static void setServiceStatus(String Status) {
