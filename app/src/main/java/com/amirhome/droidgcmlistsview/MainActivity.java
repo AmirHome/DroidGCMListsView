@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                                 myService.putExtra("ServiceOrderControl.orderId", p.getOrder_no());
                                 myService.putExtra("ServiceOrderControl.order_date", p.getOrder_date());
                                 startService(myService);
-                                
+
 //                            Open Dialog
                                 newOrderAlert();
                             } else {
