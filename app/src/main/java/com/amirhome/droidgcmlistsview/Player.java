@@ -28,8 +28,15 @@ public class Player {
         if (status_order.equals("0")) {
             this.status = DetailActivity.ONAYLI_BEKLIYOR;
         } else {
-            if (status_order.equals(DetailActivity.CONST_REJECT) || status_order.equals(DetailActivity.CONST_REJECT_AUTO)) {
-                this.status = status_order;
+            if (status_order.equals("Reject") || status_order.equals("RejectAuto")) {
+                switch (status_order) {
+                    case "RejectAuto":
+                        this.status = DetailActivity.CONST_REJECT_AUTO;
+                        break;
+                    case "Reject":
+                        this.status = DetailActivity.CONST_REJECT;
+                        break;
+                }
             } else {
                 switch (status_delivery) {
                     case "0":

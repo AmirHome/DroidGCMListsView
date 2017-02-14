@@ -42,7 +42,7 @@ public class DetailActivity extends AppCompatActivity {
     public static final String REJECT_REASON6 = "Person oder Adresse nicht gefunden";
     public static final String REJECT_REASON7 = "Keine Zahlung erhalten";
 
-    public static final String CONST_REJECT_AUTO = "RejectAuto";
+    public static final String CONST_REJECT_AUTO = "AutoAbgelehnt";
     public static final String CONST_REJECT = "Reject";
     public static final String CONST_DELIVERD = "Zugestellt";
 
@@ -380,7 +380,11 @@ public class DetailActivity extends AppCompatActivity {
             btnAccept.setEnabled(true);
             btnReject.setEnabled(true);
         } else {
-            tvStatusOrder.setText((String) ds.child("status_order").getValue());
+            if (ds.child("status_order").getValue().equals("RejectAuto")) {
+                tvStatusOrder.setText(CONST_REJECT_AUTO);
+            } else {
+                tvStatusOrder.setText((String) ds.child("status_order").getValue());
+            }
         }
 
 
