@@ -394,10 +394,10 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     setServiceStatus("active");
-                    Toast.makeText(MainActivity.this, "Send Request For Active", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, R.string.send_request_active, Toast.LENGTH_LONG).show();
                 } else {
                     setServiceStatus("deactive");
-                    Toast.makeText(MainActivity.this, "Send Request for Deactivate", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, R.string.send_request_deactive, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -489,7 +489,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.open_status:
                 if (null != this.rCode) {
                     getInfo();
-                    Toast.makeText(this, "Status Refreshing ...", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, R.string.status_refreshing, Toast.LENGTH_LONG).show();
                     invalidateOptionsMenu();
                 } else {
                     Toast.makeText(this, "Don't Have imei ...", Toast.LENGTH_LONG).show();

@@ -4,4 +4,7 @@
     <string name="notificationtitle">Note Title</string>
     <string name="notificationtext">Note Text</string>
     <string name="notificationticker">Notification Ticker</string>
+    <string name="status_refreshing">Status aktualisieren ...</string>
+    <string name="send_request_active">Anfrage für das Öffnen des Restaurants gesendet</string>
+    <string name="send_request_deactive">Anfrage für das Schließen des Restaurants gesendet</string>
 </resources>
