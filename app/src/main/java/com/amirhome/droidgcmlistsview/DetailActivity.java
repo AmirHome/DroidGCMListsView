@@ -44,7 +44,7 @@ public class DetailActivity extends AppCompatActivity {
 
     public static final String CONST_REJECT_AUTO = "RejectAuto";
     public static final String CONST_REJECT = "Reject";
-    public static final String CONST_DELIVERD = "Delivered";
+    public static final String CONST_DELIVERD = "Zugestellt";
 
     //    public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.at/api/v1/";
     public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.ga/api/v1/";
@@ -334,45 +334,43 @@ public class DetailActivity extends AppCompatActivity {
         TextView tvStatusDelivery = (TextView) findViewById(R.id.tvStatusDelivery);
         String status_order = (String) ds.child("status_order").getValue();
 
-        if (ds.child("status_delivery").getValue().equals("0")) {
-            if (status_order.equals("0") || status_order.equals("Reject") || status_order.equals("RejectAuto")) {
-                btnAccept.setText("akzeptieren");
-                btnReject.setText("ABLEHNEN");
-                tvStatusDelivery.setText("");
-            } else {
-                btnAccept.setText("GELIEFERT");
-                btnReject.setText("ABGELEHNT DURCH KUNDEN");
-                switch ((String) ds.child("status_delivery").getValue()) {
-                    case "0":
-                        tvStatusDelivery.setText(TESLIM_BEKLIYOR);
-                        btnAccept.setEnabled(true);
-                        btnReject.setEnabled(true);
-                        break;
-                    case "Reject_reason1":
-                        tvStatusDelivery.setText(DetailActivity.REJECT_REASON1);
-                        break;
-                    case "Reject_reason2":
-                        tvStatusDelivery.setText(DetailActivity.REJECT_REASON2);
-                        break;
-                    case "Reject_reason3":
-                        tvStatusDelivery.setText(DetailActivity.REJECT_REASON3);
-                        break;
-                    case "Reject_reason4":
-                        tvStatusDelivery.setText(DetailActivity.REJECT_REASON4);
-                        break;
-                    case "Reject_reason5":
-                        tvStatusDelivery.setText(DetailActivity.REJECT_REASON5);
-                        break;
-                    case "Reject_reason6":
-                        tvStatusDelivery.setText(DetailActivity.REJECT_REASON6);
-                        break;
-                    case "Reject_reason7":
-                        tvStatusDelivery.setText(DetailActivity.REJECT_REASON7);
-                        break;
-                    case "Delivered":
-                        tvStatusDelivery.setText(DetailActivity.CONST_DELIVERD);
-                        break;
-                }
+        if (status_order.equals("0") || status_order.equals("Reject") || status_order.equals("RejectAuto")) {
+            btnAccept.setText("akzeptieren");
+            btnReject.setText("ABLEHNEN");
+            tvStatusDelivery.setText("");
+        } else {
+            btnAccept.setText("GELIEFERT");
+            btnReject.setText("ABGELEHNT DURCH KUNDEN");
+            switch ((String) ds.child("status_delivery").getValue()) {
+                case "0":
+                    tvStatusDelivery.setText(TESLIM_BEKLIYOR);
+                    btnAccept.setEnabled(true);
+                    btnReject.setEnabled(true);
+                    break;
+                case "Reject_reason1":
+                    tvStatusDelivery.setText(DetailActivity.REJECT_REASON1);
+                    break;
+                case "Reject_reason2":
+                    tvStatusDelivery.setText(DetailActivity.REJECT_REASON2);
+                    break;
+                case "Reject_reason3":
+                    tvStatusDelivery.setText(DetailActivity.REJECT_REASON3);
+                    break;
+                case "Reject_reason4":
+                    tvStatusDelivery.setText(DetailActivity.REJECT_REASON4);
+                    break;
+                case "Reject_reason5":
+                    tvStatusDelivery.setText(DetailActivity.REJECT_REASON5);
+                    break;
+                case "Reject_reason6":
+                    tvStatusDelivery.setText(DetailActivity.REJECT_REASON6);
+                    break;
+                case "Reject_reason7":
+                    tvStatusDelivery.setText(DetailActivity.REJECT_REASON7);
+                    break;
+                case "Delivered":
+                    tvStatusDelivery.setText(DetailActivity.CONST_DELIVERD);
+                    break;
             }
         }
 

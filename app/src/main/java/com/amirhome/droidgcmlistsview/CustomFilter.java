@@ -65,7 +65,7 @@ public class CustomFilter extends Filter {
                             filteredPlayers.add(filterList.get(i));
                         break;
                     case "btnDelivered":
-                        if (filterList.get(i).getStatus().toLowerCase().equals("Delivered".toLowerCase()))
+                        if (filterList.get(i).getStatus().toLowerCase().equals(DetailActivity.CONST_DELIVERD.toLowerCase()))
                             //ADD PLAYER TO FILTERED PLAYERS
                             filteredPlayers.add(filterList.get(i));
                         break;
