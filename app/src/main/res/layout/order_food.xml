@@ -100,8 +100,6 @@
         android:layout_below="@+id/menu_title"
         android:background="@drawable/textleftcorner"
         android:gravity="center_vertical"
-        android:paddingLeft="5dp"
-        android:paddingRight="2dp"
         android:text="Wahl"
         android:textAppearance="?android:attr/textAppearanceSmall"
 
@@ -147,7 +145,7 @@
         android:text="menu_contents"
 
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_below="@id/caption_menu_contents"/>
+        android:layout_below="@id/caption_menu_contents" />
       <!--  android:layout_alignBaseline="@+id/caption_menu_contents"
         android:layout_alignBottom="@+id/caption_menu_contents"
         android:layout_toEndOf="@+id/caption_menu_contents"-->
@@ -179,8 +177,7 @@
             android:text="menu_contents"
 
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_below="@id/caption_menu_options"
-         /><!--notwantedconted-->
+            android:layout_below="@id/caption_menu_options" /><!--notwantedconted-->
 <!--    android:layout_alignBaseline="@+id/caption_menu_options"
     android:layout_alignBottom="@+id/menu_contents"
     android:layout_toEndOf="@+id/caption_menu_options"-->

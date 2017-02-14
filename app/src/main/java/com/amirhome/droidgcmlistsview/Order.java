@@ -70,11 +70,11 @@ public class Order {
 
         sb = new StringBuilder();
         for (DataSnapshot menu_options : food.child("menu_options").getChildren()) {
-            if (menu_options.getKey() != null) sb.append(menu_options.getKey() + " ");
+            if (menu_options.getKey() != null) sb.append(menu_options.getKey() + ": ");
 
             Map<String, Object> td = (HashMap<String, Object>) menu_options.getValue();
             for (Object menu_options_items : td.keySet().toArray()) {
-                if (menu_options.getKey() != null) sb.append(menu_options_items + " ");
+                if (menu_options.getKey() != null) sb.append(menu_options_items + ", ");
             // Log.d("AmirHomeLog", "getChildrenCount " + menu_options_items);
             }
         }
