@@ -46,7 +46,7 @@ public class DetailActivity extends AppCompatActivity {
     public static final String CONST_REJECT = "Abgelehnt";
     public static final String CONST_DELIVERD = "Zugestellt";
 
-    //    public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.at/api/v1/";
+//        public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.at/api/v1/";
     public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.ga/api/v1/";
     public int btnID;
     RadioGroup rg_restaurant;
