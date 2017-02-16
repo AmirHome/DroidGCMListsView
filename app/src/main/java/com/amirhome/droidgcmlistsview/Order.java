@@ -60,10 +60,10 @@ public class Order {
 
         StringBuilder sb = new StringBuilder();
         for (DataSnapshot menu_radios : food.child("menu_radios").getChildren()) {
-            if (menu_radios.getKey() != null) sb.append(menu_radios.getKey() + " ");
+            if (menu_radios.getKey() != null) sb.append(menu_radios.getKey() + ": ");
 
             Map<String, String> td = (HashMap<String, String>) menu_radios.getValue();
-            if (menu_radios.getValue() != null) sb.append(" " + td.keySet().toArray()[0]);
+            if (menu_radios.getValue() != null) sb.append( td.keySet().toArray()[0]+", " );
 
         }
         this.menu_radios = sb.toString();
@@ -82,7 +82,7 @@ public class Order {
 
         sb = new StringBuilder();
         for (DataSnapshot menu_contents : food.child("menu_contents").getChildren()) {
-            if (menu_contents.getValue() != null) sb.append(" " + menu_contents.getValue());
+            if (menu_contents.getValue() != null) sb.append(menu_contents.getValue()+", ");
         }
         this.menu_contents = sb.toString();
 

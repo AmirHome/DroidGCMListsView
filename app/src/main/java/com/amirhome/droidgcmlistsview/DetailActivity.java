@@ -46,8 +46,8 @@ public class DetailActivity extends AppCompatActivity {
     public static final String CONST_REJECT = "Abgelehnt";
     public static final String CONST_DELIVERD = "Zugestellt";
 
-    //        public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.at/api/v1/";
-    public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.ga/api/v1/";
+            public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.at/api/v1/";
+//    public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.ga/api/v1/";
     public int btnID;
     RadioGroup rg_restaurant;
     RadioGroup rg_customer;
@@ -374,6 +374,18 @@ public class DetailActivity extends AppCompatActivity {
                     break;
                 case "Reject":
                     tvStatusOrder.setText(CONST_REJECT);
+                    break;
+                case "Accept15":
+                    tvStatusOrder.setText("Lieferung in 15 olarak degistrilmeli");
+                    break;
+                case "Accept30":
+                    tvStatusOrder.setText("Lieferung in 30 olarak degistrilmeli");
+                    break;
+                case "Accept45":
+                    tvStatusOrder.setText("Lieferung in 45 olarak degistrilmeli");
+                    break;
+                case "Accept60":
+                    tvStatusOrder.setText("Lieferung in 60 olarak degistrilmeli");
                     break;
                 default:
                     tvStatusOrder.setText((String) ds.child("status_order").getValue());
