@@ -29,11 +29,15 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -47,10 +51,10 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-//            final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/";
+    //            final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/";
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
 
-    public static final String APP_VERSION = "0.0.5.13";
+    public static final String APP_VERSION = "0.0.5.14";
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     public static final int DelayedMili = 180000;// 3 x 60 x 1000 = 180000 mis
     public static final int PERIOD_TIME_CHECKING = 60000;// mis Refresh Menu Information
@@ -132,8 +136,6 @@ public class MainActivity extends AppCompatActivity {
         fire.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                            Log.d("AmirHomeLog", "onChildAdded " + s);
-
 
                 RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
                 if (dataSnapshot != null && dataSnapshot.getValue() != null) {
@@ -145,8 +147,6 @@ public class MainActivity extends AppCompatActivity {
                         p.setOrder_date(dataSnapshot.child("order_date").getValue().toString());
                         players.add(0, p);
                         rv.setAdapter(adapter);
-
-//                        adapter.getFilter().filter("");
 
                         if (dataSnapshot.child("status_order").getValue().toString().equals("0")) {
 
@@ -165,11 +165,7 @@ public class MainActivity extends AppCompatActivity {
                                 // Order is reject
                                 dataSnapshot.getRef().child("status_order").setValue("RejectAuto");
                                 DetailActivity.httpRequestSyncCart(p.getOrder_no());
-//                                MainActivity.setServiceStatus("deactive");
-//                                MainActivity.swServiceStatus.setChecked(false);
                             }
-
-//                            Log.d("AmirHomeLog", "equals(0) " + p.getOrder_no());
                         }
 
                     } catch (Exception ex) {
@@ -364,8 +360,6 @@ public class MainActivity extends AppCompatActivity {
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
                     PERMISSIONS_REQUEST_READ_PHONE_STATE);
-
-
         } else {
             this.rCode = this.getDeviceImei();
             this.afterPermission();
@@ -444,27 +438,53 @@ public class MainActivity extends AppCompatActivity {
         if ("Open".equals(this.open_status))
             openStatus.setIcon(R.drawable.ic_active);
 
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // Do something after 5s = 5000ms
-                if (null == restourantn_no) {
-                    if (null != rCode) {
-                        getInfo();
-                    }
-                    VersionHelper.refreshActionBarMenu(MainActivity.this);
-                }
-            }
-        }, 5000);
-
-
         return true;
     }
 
     private void getInfo() {
-        DetailActivity.httpRequestSyncRestaurant("info");
-//        Log.d("AmirHomeLog","getInfo");
+        DetailActivity.httpRequestSyncRestaurant("info", new VolleyCallback() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Refresh Action Menu
+                VersionHelper.refreshActionBarMenu(MainActivity.this);
+
+                //Do something after 5s = 5000ms
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getInfo();
+                    }
+                }, 5000);
+                Log.e("AmirHomeLog", "onErrorResponse " + error.toString());
+            }
+
+            @Override
+            public void onSuccessResponse(JSONObject result) {
+                try {
+                    MainActivity.restourantn_no = result.getJSONObject("data").getString("id");
+                    MainActivity.restourantn_title = result.getJSONObject("data").getString("title");
+                    MainActivity.open_status = result.getJSONObject("data").getString("open_status");
+                    MainActivity.service_status = result.getJSONObject("data").getString("service_status");
+
+                    // Refresh Action Menu
+                    VersionHelper.refreshActionBarMenu(MainActivity.this);
+                } catch (JSONException e) {
+                    // Refresh Action Menu
+                    VersionHelper.refreshActionBarMenu(MainActivity.this);
+
+                    //Do something after 5s = 5000ms
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            getInfo();
+                        }
+                    }, 5000);
+
+                    Log.e("AmirHomeLog", "catch " + e.getMessage());
+                }
+//                    invalidateOptionsMenu();
+            }
+        });
     }
 
     public static void setServiceStatus(String Status) {

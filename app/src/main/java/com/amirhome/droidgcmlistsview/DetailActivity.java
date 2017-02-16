@@ -46,7 +46,7 @@ public class DetailActivity extends AppCompatActivity {
     public static final String CONST_REJECT = "Abgelehnt";
     public static final String CONST_DELIVERD = "Zugestellt";
 
-//        public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.at/api/v1/";
+    //        public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.at/api/v1/";
     public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.ga/api/v1/";
     public int btnID;
     RadioGroup rg_restaurant;
@@ -116,8 +116,6 @@ public class DetailActivity extends AppCompatActivity {
         fire.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-//                Log.d("AmirHomeLog", "onDataChange " + dataSnapshot.getKey());
                 try {
                     int size = dOrderList.size();
                     if (size > 0) {
@@ -154,8 +152,6 @@ public class DetailActivity extends AppCompatActivity {
                 Log.e("DetailActivity", "onCancelled", firebaseError.toException());
             }
         });
-
-
     }
 
     static public void httpRequestRestaurantServiceDeactive(String param1) {
@@ -210,7 +206,7 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
-    static public void httpRequestSyncRestaurant(String param1) {
+    static public void httpRequestSyncRestaurant(final String param1, final VolleyCallback callback) {
 
         String request_url = BASE_URL_API_SYNC + "sync-restaurant-db/" + MainActivity.rCode;
         JSONObject parameters = new JSONObject();
@@ -227,22 +223,14 @@ public class DetailActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        try {
-                            MainActivity.restourantn_no = response.getJSONObject("data").getString("id");
-                            MainActivity.restourantn_title = response.getJSONObject("data").getString("title");
-                            MainActivity.open_status = response.getJSONObject("data").getString("open_status");
-                            MainActivity.service_status = response.getJSONObject("data").getString("service_status");
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        callback.onSuccessResponse(response);
                     }
 
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("AmirHomeLog", error.toString());
+                callback.onErrorResponse(error);
             }
         }) {
 
