@@ -33,6 +33,9 @@
             android:enabled="true"
             android:exported="true"
             />
+        <service
+            android:name=".ServiceILive"
+            android:exported="true"/>
     </application>
 
 </manifest>
