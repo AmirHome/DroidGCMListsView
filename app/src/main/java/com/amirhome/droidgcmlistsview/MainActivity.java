@@ -29,15 +29,11 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.VolleyError;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -51,13 +47,13 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-                final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/";
-//    final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
+//                final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/";
+    final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
 
     public static final String APP_VERSION = "0.0.5.15";
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     public static final int DelayedMili = 180000;// 3 x 60 x 1000 = 180000 mis
-    public static final int PERIOD_TIME_CHECKING = 60000;// mis Refresh Menu Information
+    public static final int PERIOD_TIME_CHECKING = 29000;// mis Refresh Menu Information
     public static Switch swServiceStatus;
 
     static MediaPlayer mPlayer;
@@ -70,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
     public static String open_status;
     public String currentFilter = "";
 
+    public static boolean isChangedStat = false;
+    static Intent mServiceIntent;
+
     private TelephonyManager mTelephonyManager;
 
     //    Firebase fireMain;
@@ -78,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     private int countNewOrder = 0;
     private Dialog dialog;
 
-    private Handler handler = new Handler();
+    public static Handler mHandler = new Handler();
 
     private Player p;
     ArrayList<Player> players = new ArrayList<>();
@@ -113,9 +112,14 @@ public class MainActivity extends AppCompatActivity {
         });*/
     }
 
+
     private void afterPermission() {
 
-        handler.postDelayed(runnable, 100);
+        mHandler.postDelayed(mRunnableRefreshActionBarMenu, 100);
+
+        // Starts the IntentService
+        mServiceIntent = new Intent(getBaseContext(), ServiceILive.class);
+        getBaseContext().startService(mServiceIntent);
 
         //init firebase
         Firebase.setAndroidContext(this);
@@ -321,14 +325,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private Runnable runnable = new Runnable() {
+    public  Runnable mRunnableRefreshActionBarMenu = new Runnable() {
         @Override
         public void run() {
       /* do what you need to do */
-            getInfo();
-            invalidateOptionsMenu();
+            if ( isChangedStat ){
+                VersionHelper.refreshActionBarMenu(MainActivity.this);
+                isChangedStat = false;
+            }
+//            invalidateOptionsMenu();
+
       /* and here comes the "trick" */
-            handler.postDelayed(this, PERIOD_TIME_CHECKING);
+            mHandler.postDelayed(this, 100);
         }
     };
 
@@ -441,52 +449,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void getInfo() {
-        DetailActivity.httpRequestSyncRestaurant("info", new VolleyCallback() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // Refresh Action Menu
-                VersionHelper.refreshActionBarMenu(MainActivity.this);
-
-                //Do something after 5s = 5000ms
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        getInfo();
-                    }
-                }, 5000);
-                Log.e("AmirHomeLog", "onErrorResponse " + error.toString());
-            }
-
-            @Override
-            public void onSuccessResponse(JSONObject result) {
-                try {
-                    MainActivity.restourantn_no = result.getJSONObject("data").getString("id");
-                    MainActivity.restourantn_title = result.getJSONObject("data").getString("title");
-                    MainActivity.open_status = result.getJSONObject("data").getString("open_status");
-                    MainActivity.service_status = result.getJSONObject("data").getString("service_status");
-
-                    // Refresh Action Menu
-                    VersionHelper.refreshActionBarMenu(MainActivity.this);
-                } catch (JSONException e) {
-                    // Refresh Action Menu
-                    VersionHelper.refreshActionBarMenu(MainActivity.this);
-
-                    //Do something after 5s = 5000ms
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            getInfo();
-                        }
-                    }, 5000);
-
-                    Log.e("AmirHomeLog", "catch " + e.getMessage());
-                }
-//                    invalidateOptionsMenu();
-            }
-        });
-    }
-
     public static void setServiceStatus(String Status) {
         DetailActivity.httpRequestRestaurantServiceDeactive(Status);
     }
@@ -515,7 +477,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.open_status:
                 if (null != this.rCode) {
-                    getInfo();
+                    //getInfo();
                     Toast.makeText(this, R.string.status_refreshing, Toast.LENGTH_LONG).show();
                     invalidateOptionsMenu();
                 } else {
