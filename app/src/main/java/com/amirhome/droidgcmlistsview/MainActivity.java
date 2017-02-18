@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
     public String currentFilter = "";
 
     public static boolean isChangedStat = false;
-    static Intent mServiceIntent;
 
     private TelephonyManager mTelephonyManager;
 
@@ -115,20 +114,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void afterPermission() {
 
-        mHandler.postDelayed(mRunnableRefreshActionBarMenu, 100);
-
-        // Starts the IntentService
-        mServiceIntent = new Intent(getBaseContext(), ServiceILive.class);
+        // Starts the Service Live Control
+        Intent mServiceIntent = new Intent(getBaseContext(), ServiceILive.class);
         getBaseContext().startService(mServiceIntent);
+
+        // Refresh Action Menu
+        mHandler.postDelayed(mRunnableRefreshActionBarMenu, 100);
 
         //init firebase
         Firebase.setAndroidContext(this);
         Firebase fireMain = new Firebase(DB_URL + rCode);
         fire = fireMain.orderByChild("/order_date");
-//        Firebase fire = new Firebase(DB_URL+rCode );
 
-        RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
         //SET ITS PROPETRIES
+        RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setItemAnimator(new DefaultItemAnimator());
 
