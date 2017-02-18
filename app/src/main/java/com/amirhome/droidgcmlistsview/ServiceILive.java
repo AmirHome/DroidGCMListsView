@@ -5,35 +5,73 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Created by AmirHome.com o9125 on 2/17/2017.
  */
 public class ServiceILive extends Service {
+    // constant
+    public static final long NOTIFY_INTERVAL = 10 * 1000; // 10 seconds
 
-    public ServiceILive() {
-    }
+    // run on another Thread to avoid crash
+    private Handler mHandler = new Handler();
+    // timer handling
+    private Timer mTimer = null;
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
+        return null;
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        // cancel if already existed
+        if(mTimer != null) {
+            mTimer.cancel();
+        } else {
+            // recreate new
+            mTimer = new Timer();
+        }
+        // schedule task
+        mTimer.scheduleAtFixedRate(new TimeDisplayTimerTask(), 0, MainActivity.PERIOD_TIME_CHECKING);
 
-    @Override
-    public int onStartCommand(final Intent intent, int flags, int startId) {
-        getInfo();
+        final Handler handler = new Handler();
+        Runnable r = new Runnable() {
+            public void run() {
+                getInfo();
+                handler.postDelayed(r,  MainActivity.PERIOD_TIME_CHECKING);
+            }
+        };
+        handler.postDelayed(r,  100);
         return START_STICKY;
+    }
+
+    class TimeDisplayTimerTask extends TimerTask {
+
+        @Override
+        public void run() {
+            // run on another thread
+            mHandler.post(new Runnable() {
+
+                @Override
+                public void run() {
+                    // display toast
+                    Toast.makeText(getApplicationContext(), "amir",
+                            Toast.LENGTH_SHORT).show();
+//                    getInfo();
+                }
+
+            });
+        }
     }
 
     public void getInfo() {
@@ -49,7 +87,7 @@ public class ServiceILive extends Service {
                     // Refresh Action Menu
                     MainActivity.isChangedStat = true;
 
-                    // Create the Handler object (on the main thread by default)
+/*                    // Create the Handler object (on the main thread by default)
                     Handler handler = new Handler();
                     Runnable r = new Runnable() {
                         public void run() {
@@ -57,7 +95,8 @@ public class ServiceILive extends Service {
                             Log.d("AmirHomeLog", "20000 onSuccessResponse" );
                         }
                     };
-                    handler.postDelayed(r, MainActivity.PERIOD_TIME_CHECKING);
+                    handler.postDelayed(r, MainActivity.PERIOD_TIME_CHECKING);*/
+                    Log.d("AmirHomeLog", "20000 onSuccessResponse" );
 
                 } catch (JSONException e) {
                     MainActivity.restourantn_no = "";
