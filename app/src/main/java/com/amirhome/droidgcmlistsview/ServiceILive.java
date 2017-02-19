@@ -19,13 +19,18 @@ public class ServiceILive extends GcmTaskService {
 
     @Override
     public int onRunTask(TaskParams taskParams) {
+        if (taskParams.getTag().equals("LocationSchedulerService:first_boot")) {
+            Log.d("AmirHomeLog", "first_boot");
+        }
+        MainActivity.isRepeat = false;
         getInfo();
         return GcmNetworkManager.RESULT_SUCCESS;
     }
 
     @Override
-    public int onStartCommand (Intent intent, int flags, int startId) {
-        Log.d("AmirHomeLog","onStartCommand");
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d("AmirHomeLog", "onStartCommand");
+        MainActivity.isRepeat = false;
         getInfo();
         return super.onStartCommand(intent, flags, startId);
     }
@@ -42,7 +47,8 @@ public class ServiceILive extends GcmTaskService {
 
                     // Refresh Action Menu
                     MainActivity.isChangedStat = true;
-//                    Log.d("AmirHomeLog", "20000 onSuccessResponse");
+                    MainActivity.isRepeat = false;
+                    Log.d("AmirHomeLog", "20000 onSuccessResponse");
 
                 } catch (JSONException e) {
                     MainActivity.restourantn_no = "";
@@ -53,14 +59,17 @@ public class ServiceILive extends GcmTaskService {
                     // Refresh Action Menu
                     MainActivity.isChangedStat = true;
 
-                    //Do something after 7s = 7000ms
-                    Handler handler = new Handler();
-                    Runnable r = new Runnable() {
-                        public void run() {
-                            getInfo();
-                            Log.d("AmirHomeLog", "7000 catch");
-                        }
-                    };
+                    if (MainActivity.isRepeat) {
+                        //Do something after 7s = 7000ms
+                        Handler handler = new Handler();
+                        Runnable r = new Runnable() {
+                            public void run() {
+//                                getInfo();
+                                MainActivity.isRepeat = true;
+                                Log.d("AmirHomeLog", "7000 catch");
+                            }
+                        };
+                    }
 //                    handler.postDelayed(r, 7000);
                     Log.e("AmirHomeLog", "catch " + e.getMessage());
                 }
@@ -75,15 +84,17 @@ public class ServiceILive extends GcmTaskService {
 
                 // Refresh Action Menu
                 MainActivity.isChangedStat = true;
-
-                //Do something after 6s = 6000ms
-                Handler handler = new Handler();
-                Runnable r = new Runnable() {
-                    public void run() {
-                        getInfo();
-                        Log.d("AmirHomeLog", "6000 onErrorResponse");
-                    }
-                };
+                if (MainActivity.isRepeat) {
+                    //Do something after 6s = 6000ms
+                    Handler handler = new Handler();
+                    Runnable r = new Runnable() {
+                        public void run() {
+//                            getInfo();
+                            MainActivity.isRepeat = true;
+                            Log.d("AmirHomeLog", "6000 onErrorResponse");
+                        }
+                    };
+                }
 //                handler.postDelayed(r, 6000);
                 Log.e("AmirHomeLog", "onErrorResponse " + error.toString());
             }

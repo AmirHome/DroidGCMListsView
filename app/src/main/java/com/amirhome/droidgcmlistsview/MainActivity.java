@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
     public String currentFilter = "";
 
     public static boolean isChangedStat = false;
+    public static boolean isRepeat = false;
+    public static int service_first_boot = 0;
 
     private GcmNetworkManager mGcmNetworkManager;
 
@@ -119,23 +121,25 @@ public class MainActivity extends AppCompatActivity {
     private void afterPermission() {
 
         // Starts the Service Live Control
-
         long flexSecs = 15L; // the task can run as early as -15 seconds from the scheduled time
 
         String tag = "myScan|1";
+        if (service_first_boot == 0) {
+            service_first_boot = 1;
+            PeriodicTask periodic = new PeriodicTask.Builder()
+                    .setService(ServiceILive.class)
+                    .setPeriod(PERIOD_TIME_CHECKING)
+                    .setFlex(15L)
+                    .setTag(tag)
+                    .setPersisted(false)
+                    .setRequiredNetwork(com.google.android.gms.gcm.Task.NETWORK_STATE_ANY)
+                    .setRequiresCharging(false)
+                    .setUpdateCurrent(true)
+                    .build();
 
-        PeriodicTask periodic = new PeriodicTask.Builder()
-                .setService(ServiceILive.class)
-                .setPeriod(PERIOD_TIME_CHECKING)
-                .setFlex(15L)
-                .setTag(tag)
-                .setPersisted(false)
-                .setRequiredNetwork(com.google.android.gms.gcm.Task.NETWORK_STATE_ANY)
-                .setRequiresCharging(false)
-                .setUpdateCurrent(true)
-                .build();
-
-        GcmNetworkManager.getInstance(this).schedule(periodic);
+            GcmNetworkManager.getInstance(this).schedule(periodic);
+            Log.d("AmirHomeLog", "Started the Service Live");
+        }
 
         // Refresh Action Menu
         mHandler.postDelayed(mRunnableRefreshActionBarMenu, 100);
