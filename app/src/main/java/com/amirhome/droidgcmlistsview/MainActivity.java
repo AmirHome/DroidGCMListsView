@@ -34,6 +34,8 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
+import com.google.android.gms.gcm.GcmNetworkManager;
+import com.google.android.gms.gcm.PeriodicTask;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -67,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
     public String currentFilter = "";
 
     public static boolean isChangedStat = false;
+
+    private GcmNetworkManager mGcmNetworkManager;
 
     private TelephonyManager mTelephonyManager;
 
@@ -115,8 +119,24 @@ public class MainActivity extends AppCompatActivity {
     private void afterPermission() {
 
         // Starts the Service Live Control
-        Intent mServiceIntent = new Intent(getBaseContext(), ServiceILive.class);
-        getBaseContext().startService(mServiceIntent);
+
+        long periodSecs = 30L; // the task should be executed every 30 seconds
+        long flexSecs = 15L; // the task can run as early as -15 seconds from the scheduled time
+
+        String tag = "myScan|1";
+
+        PeriodicTask periodic = new PeriodicTask.Builder()
+                .setService(ServiceILive.class)
+                .setPeriod(periodSecs)
+                .setFlex(flexSecs)
+                .setTag(tag)
+                .setPersisted(false)
+                .setRequiredNetwork(com.google.android.gms.gcm.Task.NETWORK_STATE_ANY)
+                .setRequiresCharging(false)
+                .setUpdateCurrent(true)
+                .build();
+
+        GcmNetworkManager.getInstance(this).schedule(periodic);
 
         // Refresh Action Menu
         mHandler.postDelayed(mRunnableRefreshActionBarMenu, 100);
