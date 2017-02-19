@@ -25,7 +25,7 @@ public class ServiceILive extends GcmTaskService {
 
     @Override
     public int onStartCommand (Intent intent, int flags, int startId) {
-//        Log.d("AmirHomeLog","onStartCommand");
+        Log.d("AmirHomeLog","onStartCommand");
         getInfo();
         return super.onStartCommand(intent, flags, startId);
     }
@@ -61,7 +61,7 @@ public class ServiceILive extends GcmTaskService {
                             Log.d("AmirHomeLog", "7000 catch");
                         }
                     };
-                    handler.postDelayed(r, 7000);
+//                    handler.postDelayed(r, 7000);
                     Log.e("AmirHomeLog", "catch " + e.getMessage());
                 }
             }
@@ -84,7 +84,7 @@ public class ServiceILive extends GcmTaskService {
                         Log.d("AmirHomeLog", "6000 onErrorResponse");
                     }
                 };
-                handler.postDelayed(r, 6000);
+//                handler.postDelayed(r, 6000);
                 Log.e("AmirHomeLog", "onErrorResponse " + error.toString());
             }
         });
