@@ -49,13 +49,13 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-//                final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/";
+    //                final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/";
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
-
     public static final String APP_VERSION = "0.0.5.15";
+
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     public static final int DelayedMili = 180000;// 3 x 60 x 1000 = 180000 mis
-    public static final int PERIOD_TIME_CHECKING = 29000;// mis Refresh Menu Information
+    public static final long PERIOD_TIME_CHECKING = 29L;// the task should be executed every 30 seconds
     public static Switch swServiceStatus;
 
     static MediaPlayer mPlayer;
@@ -120,15 +120,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Starts the Service Live Control
 
-        long periodSecs = 30L; // the task should be executed every 30 seconds
         long flexSecs = 15L; // the task can run as early as -15 seconds from the scheduled time
 
         String tag = "myScan|1";
 
         PeriodicTask periodic = new PeriodicTask.Builder()
                 .setService(ServiceILive.class)
-                .setPeriod(periodSecs)
-                .setFlex(flexSecs)
+                .setPeriod(PERIOD_TIME_CHECKING)
+                .setFlex(15L)
                 .setTag(tag)
                 .setPersisted(false)
                 .setRequiredNetwork(com.google.android.gms.gcm.Task.NETWORK_STATE_ANY)
