@@ -25,29 +25,6 @@ public class ServiceILive extends GcmTaskService {
         return GcmNetworkManager.RESULT_SUCCESS;
     }
 
-    private void test() {
-        Log.d("AmirHomeLog", "test");
-
-        if (MainActivity.isRepeat) {
-            Log.d("AmirHomeLog", "isRepeat");
-
-            MainActivity.isRepeat = false;
-            //Do something after 6s = 6000ms
-            final Handler handler = new Handler();
-            for (int i=1; i<4; i++){
-                final int finalI = i;
-                Runnable r = new Runnable() {
-                    public void run() {
-//                            getInfo();
-                        test();
-                        handler.postDelayed(this, finalI * 6000);
-                        Log.d("AmirHomeLog", "6000 onErrorResponse");
-                    }
-                };
-            }
-        }
-    }
-
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d("AmirHomeLog", "onStartCommand");
