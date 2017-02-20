@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static boolean isChangedStat = false;
     public static boolean isRepeat = false;
-    public static int service_first_boot = 0;
+    public static boolean service_first_boot = true;
 
     private GcmNetworkManager mGcmNetworkManager;
 
@@ -121,11 +121,10 @@ public class MainActivity extends AppCompatActivity {
     private void afterPermission() {
 
         // Starts the Service Live Control
-        long flexSecs = 15L; // the task can run as early as -15 seconds from the scheduled time
-
-        String tag = "myScan|1";
-        if (service_first_boot == 0) {
-            service_first_boot = 1;
+        if (service_first_boot) {
+            Log.d("AmirHomeLog", "Started the Service Live");
+            service_first_boot = false;
+            String tag = "myScan|1";
             PeriodicTask periodic = new PeriodicTask.Builder()
                     .setService(ServiceILive.class)
                     .setPeriod(PERIOD_TIME_CHECKING)
@@ -138,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
                     .build();
 
             GcmNetworkManager.getInstance(this).schedule(periodic);
-            Log.d("AmirHomeLog", "Started the Service Live");
         }
 
         // Refresh Action Menu
