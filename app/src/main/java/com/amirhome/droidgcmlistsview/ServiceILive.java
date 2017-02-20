@@ -20,17 +20,19 @@ public class ServiceILive extends GcmTaskService {
     @Override
     public int onRunTask(TaskParams taskParams) {
         Log.d("AmirHomeLog", "onRunTask");
-/*        MainActivity.isRepeat = true;
-        getInfo();*/
+        MainActivity.isRepeat = true;
+        getInfo();
         return GcmNetworkManager.RESULT_SUCCESS;
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d("AmirHomeLog", "onStartCommand");
-        MainActivity.isRepeat = true;
-        getInfo();
-//        return GcmTaskService.START_STICKY_COMPATIBILITY;
+        if (MainActivity.service_first_boot){
+            MainActivity.service_first_boot = false;
+            MainActivity.isRepeat = true;
+            getInfo();
+        }
         return super.onStartCommand(intent, flags, startId);
     }
 
