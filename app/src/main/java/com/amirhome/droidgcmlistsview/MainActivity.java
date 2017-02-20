@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Starts the Service Live Control
         if (service_first_boot) {
-            Log.d("AmirHomeLog", "Started the Service Live");
+//            Log.d("AmirHomeLog", "Started the Service Live");
             service_first_boot = false;
             String tag = "myScan|1";
             PeriodicTask periodic = new PeriodicTask.Builder()
