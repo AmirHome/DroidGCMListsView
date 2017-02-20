@@ -19,18 +19,39 @@ public class ServiceILive extends GcmTaskService {
 
     @Override
     public int onRunTask(TaskParams taskParams) {
-        if (taskParams.getTag().equals("LocationSchedulerService:first_boot")) {
-            Log.d("AmirHomeLog", "first_boot");
-        }
-        MainActivity.isRepeat = false;
+        Log.d("AmirHomeLog", "onRunTask");
+        MainActivity.isRepeat = true;
         getInfo();
         return GcmNetworkManager.RESULT_SUCCESS;
+    }
+
+    private void test() {
+        Log.d("AmirHomeLog", "test");
+
+        if (MainActivity.isRepeat) {
+            Log.d("AmirHomeLog", "isRepeat");
+
+            MainActivity.isRepeat = false;
+            //Do something after 6s = 6000ms
+            final Handler handler = new Handler();
+            for (int i=1; i<4; i++){
+                final int finalI = i;
+                Runnable r = new Runnable() {
+                    public void run() {
+//                            getInfo();
+                        test();
+                        handler.postDelayed(this, finalI * 6000);
+                        Log.d("AmirHomeLog", "6000 onErrorResponse");
+                    }
+                };
+            }
+        }
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d("AmirHomeLog", "onStartCommand");
-        MainActivity.isRepeat = false;
+        MainActivity.isRepeat = true;
         getInfo();
         return super.onStartCommand(intent, flags, startId);
     }
@@ -47,7 +68,7 @@ public class ServiceILive extends GcmTaskService {
 
                     // Refresh Action Menu
                     MainActivity.isChangedStat = true;
-                    MainActivity.isRepeat = false;
+                    MainActivity.isRepeat = true;
                     Log.d("AmirHomeLog", "20000 onSuccessResponse");
 
                 } catch (JSONException e) {
@@ -60,17 +81,20 @@ public class ServiceILive extends GcmTaskService {
                     MainActivity.isChangedStat = true;
 
                     if (MainActivity.isRepeat) {
+                        MainActivity.isRepeat = false;
                         //Do something after 7s = 7000ms
                         Handler handler = new Handler();
                         Runnable r = new Runnable() {
                             public void run() {
-//                                getInfo();
-                                MainActivity.isRepeat = true;
+                                getInfo();
                                 Log.d("AmirHomeLog", "7000 catch");
                             }
                         };
+                        for (int i=1; i<3; i++) {
+                            final int finalRepeat = i;
+                            handler.postDelayed(r, 7000 * finalRepeat);
+                        }
                     }
-//                    handler.postDelayed(r, 7000);
                     Log.e("AmirHomeLog", "catch " + e.getMessage());
                 }
             }
@@ -84,16 +108,21 @@ public class ServiceILive extends GcmTaskService {
 
                 // Refresh Action Menu
                 MainActivity.isChangedStat = true;
+
                 if (MainActivity.isRepeat) {
+                    MainActivity.isRepeat = false;
                     //Do something after 6s = 6000ms
                     Handler handler = new Handler();
                     Runnable r = new Runnable() {
                         public void run() {
-//                            getInfo();
-                            MainActivity.isRepeat = true;
-                            Log.d("AmirHomeLog", "6000 onErrorResponse");
+                            getInfo();
+                            Log.d("AmirHomeLog", "7000 onErrorResponse");
                         }
                     };
+                    for (int i=1; i<3; i++) {
+                        final int finalRepeat = i;
+                        handler.postDelayed(r, 7000 * finalRepeat);
+                    }
                 }
 //                handler.postDelayed(r, 6000);
                 Log.e("AmirHomeLog", "onErrorResponse " + error.toString());
