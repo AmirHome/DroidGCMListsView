@@ -9,7 +9,7 @@
         android:name=".App"
         android:allowBackup="true"
         android:icon="@drawable/donation_normal"
-        android:label="Eat2Donat Restaurant Tablet"
+        android:label="eat2donate Restaurant App"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
