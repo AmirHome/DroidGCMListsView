@@ -28,8 +28,11 @@ import com.firebase.client.ValueEventListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity {
     public static final String ONAYLI_BEKLIYOR = "Warten auf Akzeptieren";
@@ -310,6 +313,9 @@ public class DetailActivity extends AppCompatActivity {
 
         TextView tvDeliveryDate = (TextView) findViewById(R.id.tvDeliveryDate);
         tvDeliveryDate.setText((String) ds.child("delivery_date").getValue());
+        if (tvDeliveryDate.getText().toString().equals("0")){
+            tvDeliveryDate.setText("");
+        }
 
         TextView tvOrderDate = (TextView) findViewById(R.id.tvOrderDate);
         tvOrderDate.setText((String) ds.child("order_date").getValue());
@@ -376,16 +382,16 @@ public class DetailActivity extends AppCompatActivity {
                     tvStatusOrder.setText(CONST_REJECT);
                     break;
                 case "Accept15":
-                    tvStatusOrder.setText("Lieferung in 15 olarak degistrilmeli");
+                    tvStatusOrder.setText("Lieferung in 15 Min.");
                     break;
                 case "Accept30":
-                    tvStatusOrder.setText("Lieferung in 30 olarak degistrilmeli");
+                    tvStatusOrder.setText("Lieferung in 30 Min.");
                     break;
                 case "Accept45":
-                    tvStatusOrder.setText("Lieferung in 45 olarak degistrilmeli");
+                    tvStatusOrder.setText("Lieferung in 45 Min.");
                     break;
                 case "Accept60":
-                    tvStatusOrder.setText("Lieferung in 60 olarak degistrilmeli");
+                    tvStatusOrder.setText("Lieferung in 60 Min.");
                     break;
                 default:
                     tvStatusOrder.setText((String) ds.child("status_order").getValue());
@@ -485,6 +491,9 @@ public class DetailActivity extends AppCompatActivity {
                     default:
                         if (R.id.btnAccept == btnID && tvStatusDelivery.getText().equals(TESLIM_BEKLIYOR) && !tvStatusOrder.getText().equals(ONAYLI_BEKLIYOR)) {
                             fire.child("status_delivery").setValue("Delivered");
+                            SimpleDateFormat sdfDateTime = new SimpleDateFormat(MainActivity.DateTimeFormat, Locale.US);
+                            String currentTime = sdfDateTime.format(new Date(System.currentTimeMillis()));
+                            fire.child("delivery_date").setValue(currentTime);
                         }
                         break;
                 }
