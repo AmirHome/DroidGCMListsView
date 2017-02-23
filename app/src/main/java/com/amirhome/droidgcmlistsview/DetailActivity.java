@@ -49,7 +49,7 @@ public class DetailActivity extends AppCompatActivity {
     public static final String CONST_REJECT = "Abgelehnt";
     public static final String CONST_DELIVERD = "Zugestellt";
 
-//            public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.at/api/v1/";
+    //            public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.at/api/v1/";
     public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.ga/api/v1/";
     public int btnID;
     RadioGroup rg_restaurant;
@@ -313,7 +313,7 @@ public class DetailActivity extends AppCompatActivity {
 
         TextView tvDeliveryDate = (TextView) findViewById(R.id.tvDeliveryDate);
         tvDeliveryDate.setText((String) ds.child("delivery_date").getValue());
-        if (tvDeliveryDate.getText().toString().equals("0")){
+        if (tvDeliveryDate.getText().toString().equals("0")) {
             tvDeliveryDate.setText("");
         }
 
