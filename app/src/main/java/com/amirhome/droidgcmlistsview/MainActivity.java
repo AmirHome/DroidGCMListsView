@@ -49,9 +49,9 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    //                final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/";
+//                    final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/";
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
-    public static final String APP_VERSION = "0.0.7.01";
+    public static final String APP_VERSION = "0.0.7.05";
 
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     public static final int DelayedMili = 180000;// 3 x 60 x 1000 = 180000 mis
