@@ -198,10 +198,80 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/ln3"
+                            android:id="@+id/lnOrderIncome"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_below="@+id/ln4"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/tvOrderIncomeText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textleftcorner"
+                                android:gravity="center_vertical"
+                                android:minWidth="130dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:text="Order Income"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/colorPrimary" /><!--customer-->
+
+                            <TextView
+                                android:id="@+id/tvOrderIncome"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_alignRight="@+id/tvtutartext"
+                                android:layout_marginRight="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textrightcorner"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="15dp"
+                                android:paddingRight="5dp"
+                                android:text="Order Income" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/lnTotalDonate"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/lnOrderIncome"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/tvTotalDonateText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textleftcorner"
+                                android:gravity="center_vertical"
+                                android:minWidth="130dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:text="Total Donate"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/colorPrimary" /><!--customer-->
+
+                            <TextView
+                                android:id="@+id/tvTotalDonate"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_alignRight="@+id/tvtutartext"
+                                android:layout_marginRight="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textrightcorner"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="15dp"
+                                android:paddingRight="5dp"
+                                android:text="Total Donate" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/ln3"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/lnTotalDonate"
                             android:layout_marginBottom="2dp"
                             android:orientation="horizontal">
 
@@ -213,34 +283,28 @@
                                 android:layout_marginTop="0dp"
                                 android:background="@drawable/textleftcorner"
                                 android:gravity="center_vertical"
-
                                 android:minWidth="130dp"
                                 android:paddingLeft="5dp"
                                 android:paddingRight="5dp"
                                 android:text="Endsumme"
+                                android:textStyle="bold"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
-
-                                android:textColor="@color/colorPrimary"
-
-
-                                /><!--customer-->
-
+                                android:textColor="@color/colorPrimary" /><!--customer-->
 
                             <TextView
                                 android:id="@+id/tvOrderCost"
-
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_alignRight="@+id/tvtutartext"
                                 android:layout_marginRight="4dp"
                                 android:layout_marginTop="0dp"
-
+                                android:textStyle="bold"
                                 android:background="@drawable/textrightcorner"
                                 android:gravity="center_vertical"
                                 android:paddingLeft="15dp"
-
                                 android:paddingRight="5dp"
-                                android:text="50$" />
+                                android:text="50$"
+                                android:textSize="19dp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -1097,8 +1161,8 @@
                             android:id="@+id/dRecyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:scrollbars="vertical"
-                            android:background="@drawable/rounded_corner" />
+                            android:background="@drawable/rounded_corner"
+                            android:scrollbars="vertical" />
 
                         <LinearLayout
 
@@ -1168,22 +1232,21 @@
 
                     android:id="@+id/btnReject"
                     android:layout_width="fill_parent"
+                    android:layout_height="60dp"
                     android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="20dp"
+
+
                     android:layout_marginTop="10dp"
                     android:background="@drawable/spinner_corner"
-
-
                     android:paddingLeft="20dp"
-                    android:spinnerMode="dialog"
-                    android:textAlignment="center"
 
-                    android:layout_height="60dp"
-                    android:layout_centerHorizontal="true"
                     android:singleLine="true"
+                    android:spinnerMode="dialog"
                     android:text="ABLEHNEN"
-                    /> <!--spinner reject-->
+                    android:textAlignment="center" /> <!--spinner reject-->
 
 
             </RelativeLayout><!--rightside-->
