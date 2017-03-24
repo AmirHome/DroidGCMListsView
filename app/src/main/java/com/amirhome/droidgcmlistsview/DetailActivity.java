@@ -49,8 +49,10 @@ public class DetailActivity extends AppCompatActivity {
     public static final String CONST_REJECT = "Abgelehnt";
     public static final String CONST_DELIVERD = "Zugestellt";
 
-    //            public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.at/api/v1/";
+//                public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.at/api/v1/";
+//                public static final String BASE_URL_API_SYNC = "https://www.eat2donate.at/api/v1/";
     public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.ga/api/v1/";
+//    public static final String BASE_URL_API_SYNC = "http://test162.eat2donate.at/api/v1/";
     public int btnID;
     RadioGroup rg_restaurant;
     RadioGroup rg_customer;
@@ -71,7 +73,7 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
         TextView strOrderNo = (TextView) findViewById(R.id.tvOrderNo);
-        strOrderNo.setText("Order:  " + id);
+        strOrderNo.setText(id);
 
         setTitle("Order:  " + id);
 //        getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -414,6 +416,12 @@ public class DetailActivity extends AppCompatActivity {
 
         TextView descriptionOrder = (TextView) findViewById(R.id.descriptionOrder);
         descriptionOrder.setText((String) ds.child("description").getValue());
+
+        TextView tvOrderIncome = (TextView) findViewById(R.id.tvOrderIncome);
+        tvOrderIncome.setText((String) ds.child("restaurant_order_income").getValue());
+
+        TextView tvTotalDonate = (TextView) findViewById(R.id.tvTotalDonate);
+        tvTotalDonate.setText((String) ds.child("total_donate").getValue());
 
     }
 
