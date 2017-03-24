@@ -17,7 +17,7 @@ public class Order {
     public String order_no, time, cost, status, foodTitle;
     public String menu_count, menu_title, menu_size, menu_description, menu_radios, menu_options, menu_contents;
     public String address;
-    public String phone;
+    public String phone, total_donate, restaurant_order_income;
     public String customer;
 
     public String getPhone() {
