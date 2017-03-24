@@ -39,7 +39,6 @@ public class ServiceILive extends GcmTaskService {
                     MainActivity.restourantn_title = result.getJSONObject("data").getString("title");
                     MainActivity.open_status = result.getJSONObject("data").getString("open_status");
                     MainActivity.service_status = result.getJSONObject("data").getString("service_status");
-
                     // Refresh Action Menu
                     MainActivity.isChangedStat = true;
                     MainActivity.isRepeat = true;
