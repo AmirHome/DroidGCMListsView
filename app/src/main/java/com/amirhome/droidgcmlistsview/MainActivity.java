@@ -49,9 +49,9 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-//    final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/";
-    final static String DB_URL = "https://eat2donatemap.firebaseio.com/";
-//    final static String DB_URL = "https://eat2donat-test.firebaseio.com/";
+//    final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/"; // beta.eat2donate.at
+    final static String DB_URL = "https://eat2donatemap.firebaseio.com/"; // beta.eat2donate.ga
+//    final static String DB_URL = "https://eat2donat-test.firebaseio.com/"; //test162.eat2donate.at
     public static final String APP_VERSION = "0.0.7.10";
 
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
@@ -350,11 +350,17 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
       /* do what you need to do */
+//            Log.d("AmirHomeLog", "mRunnableRefreshActionBarMenu"+ isChangedStat);
             if ( isChangedStat ){
+//                Log.d("AmirHomeLog", "mRunnableRefreshActionBarMenu if "+ isChangedStat);
+//                VersionHelper.refreshActionBarMenu(MainActivity.this);
                 VersionHelper.refreshActionBarMenu(MainActivity.this);
+                invalidateOptionsMenu();
                 isChangedStat = false;
             }
 //            invalidateOptionsMenu();
+//            isChangedStat = false;
+//            VersionHelper.refreshActionBarMenu(MainActivity.this);
 
       /* and here comes the "trick" */
             mHandler.postDelayed(this, 100);
