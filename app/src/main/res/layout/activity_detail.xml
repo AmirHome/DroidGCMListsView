@@ -215,7 +215,7 @@
                                 android:minWidth="130dp"
                                 android:paddingLeft="5dp"
                                 android:paddingRight="5dp"
-                                android:text="Order Income"
+                                android:text="Summe Produkte"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:textColor="@color/colorPrimary" /><!--customer-->
 
@@ -250,7 +250,7 @@
                                 android:minWidth="130dp"
                                 android:paddingLeft="5dp"
                                 android:paddingRight="5dp"
-                                android:text="Total Donate"
+                                android:text="Spende"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:textColor="@color/colorPrimary" /><!--customer-->
 
@@ -286,7 +286,7 @@
                                 android:minWidth="130dp"
                                 android:paddingLeft="5dp"
                                 android:paddingRight="5dp"
-                                android:text="Endsumme"
+                                android:text="Gesamtsumme"
                                 android:textStyle="bold"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:textColor="@color/colorPrimary" /><!--customer-->
