@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 //    final static String DB_URL = "https://eat2donate-9f194.firebaseio.com/"; // beta.eat2donate.at
     final static String DB_URL = "https://eat2donatemap.firebaseio.com/"; // beta.eat2donate.ga
 //    final static String DB_URL = "https://eat2donat-test.firebaseio.com/"; //test162.eat2donate.at
-    public static final String APP_VERSION = "0.0.7.13";
+    public static final String APP_VERSION = "0.0.7.15";
 
     public static final String DateTimeFormat = "dd.MM.yyyy HH:mm:ss";
     public static final int DelayedMili = 180000;// 3 x 60 x 1000 = 180000 mis
