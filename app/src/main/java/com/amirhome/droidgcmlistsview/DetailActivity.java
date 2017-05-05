@@ -50,7 +50,7 @@ public class DetailActivity extends AppCompatActivity {
     public static final String CONST_DELIVERD = "Zugestellt";
 
 //                public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.at/api/v1/";
-//                public static final String BASE_URL_API_SYNC = "https://www.eat2donate.at/api/v1/";
+//                public static final String BASE_URL_API_SYNC = "https://eat2donate.at/api/v1/";
     public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.ga/api/v1/";
 //    public static final String BASE_URL_API_SYNC = "http://test162.eat2donate.at/api/v1/";
     public int btnID;
