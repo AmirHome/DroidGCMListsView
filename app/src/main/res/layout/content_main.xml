@@ -11,7 +11,6 @@
 
 
     <LinearLayout
-        android:id="@+id/loginButtonLayout"
         android:layout_width="match_parent"
 
 
@@ -23,7 +22,6 @@
         android:weightSum="1.0">
 
         <LinearLayout
-            android:id="@+id/loginButtonLayout1"
             android:layout_width="match_parent"
 
 
@@ -57,16 +55,15 @@
                     android:text="Restaurant Title" />
 
                 <TextView
-                  android:paddingTop="10dp"
                     android:id="@+id/tvDomainTitle"
-                    android:textSize="10dp"
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:layout_below="@+id/tvRestaurantTitle"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:layout_weight="0.8"
                     android:background="@color/half_red"
-                    android:text="Domain Title" />
+                    android:paddingTop="10dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textSize="10dp" />
 
                 <Button
                     android:id="@+id/btnAll"
@@ -172,7 +169,6 @@
                     android:textColor="@color/white" /> <!--reject orders from customer button-->
 
                 <TextView
-                    android:id="@+id/textView9"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -189,7 +185,6 @@
 
 
         <LinearLayout
-            android:id="@+id/loginButtonLayout2"
             android:layout_width="match_parent"
 
 
@@ -199,7 +194,6 @@
 
 
             <LinearLayout
-                android:id="@+id/loginButtonLayouthek2"
                 android:layout_width="match_parent"
 
 
@@ -214,7 +208,6 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/button2"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/half_red"
@@ -232,7 +225,6 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/button3"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/half_red"
@@ -249,7 +241,6 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/button4"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/half_red"
@@ -266,7 +257,6 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/button5"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/half_red"
@@ -278,7 +268,6 @@
 
 
                     <LinearLayout
-                        android:id="@+id/vek3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.2"

@@ -144,7 +144,6 @@
         android:textSize="30dp" />
 
     <LinearLayout
-        android:id="@+id/ln22"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
