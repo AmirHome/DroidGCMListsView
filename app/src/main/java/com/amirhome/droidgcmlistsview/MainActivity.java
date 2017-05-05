@@ -105,8 +105,18 @@ public class MainActivity extends AppCompatActivity {
         this.setImeiCode();
 
 
-        // float button
-/*        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        TextView tvDomainTitle = (TextView) findViewById(R.id.tvDomainTitle);
+        tvDomainTitle.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                // TODO Auto-generated method stub
+                Toast.makeText(MainActivity.this, DetailActivity.BASE_URL_API_SYNC, Toast.LENGTH_LONG).show();
+                return true;
+            }
+        });
+
+/*        // float button
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -447,9 +457,6 @@ public class MainActivity extends AppCompatActivity {
 
         MenuItem version = menu.findItem(R.id.version);
         version.setTitle(APP_VERSION);
-
-        TextView tvDomainTitle = (TextView) findViewById(R.id.tvDomainTitle);
-        tvDomainTitle.setText(DetailActivity.BASE_URL_API_SYNC);
 
         return true;
     }
