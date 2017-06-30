@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DetailActivity">
+            android:name=".DetailActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
 

@@ -43,16 +43,16 @@
                     android:layout_height="50dp"
                     android:layout_alignParentTop="true"
                     android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:paddingTop="12dp"
-                    android:fontFamily="sans-serif"
-                    android:textStyle="bold|italic"
-                    android:textColor="@color/title"
                     android:layout_weight="0.8"
                     android:background="@color/half_red"
-                    
-                    android:text="Restaurant Title" />
+                    android:fontFamily="sans-serif"
+                    android:paddingTop="12dp"
+                    android:text="Restaurant Title"
+                    android:textAlignment="center"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/title"
+
+                    android:textStyle="bold|italic" />
 
                 <TextView
                     android:id="@+id/tvDomainTitle"
@@ -267,20 +267,20 @@
             </LinearLayout><!--titles horizontal-->
 
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.2"
-                        android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:orientation="vertical">
 
-                            <android.support.v7.widget.RecyclerView
-                                android:id="@+id/recycler_view"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:scrollbars="vertical" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical" />
 
 
-                    </LinearLayout>
+            </LinearLayout>
 
             <!--right side -->
 

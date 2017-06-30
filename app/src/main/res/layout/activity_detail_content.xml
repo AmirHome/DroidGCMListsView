@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.amirhome.droidgcmlistsview.DetailActivity"
+    tools:showIn="@layout/activity_detail">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+
+
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5">
+
+                <TextView
+                    android:id="@+id/tvStatusOrder"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/half_red"
+                    android:padding="20dp"
+                    android:paddingBottom="20dp"
+
+                    android:paddingTop="20dp"
+                    android:text="status_order"
+                    android:textAlignment="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/white" />
+                <!--status order-->
+                <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvStatusOrder"
+                    android:layout_marginBottom="70dp">
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/ln6"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/tvStatusOrder"
+                            android:layout_marginBottom="2dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/dateordernotext"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textleftcorner"
+                                android:gravity="center_vertical"
+
+                                android:minWidth="130dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:text="Bestell-ID"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+
+                                android:textColor="@color/colorPrimary"
+
+
+                                />
+                            <!--customer-->
+                            <TextView
+                                android:id="@+id/tvOrderNo"
+
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_alignRight="@+id/dateordernotext"
+                                android:layout_marginRight="4dp"
+                                android:layout_marginTop="0dp"
+
+                                android:background="@drawable/textrightcorner"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="15dp"
+
+                                android:paddingRight="5dp"
+                                android:text="No order" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ln5"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/ln6"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/dateordertext"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textleftcorner"
+                                android:gravity="center_vertical"
+
+                                android:minWidth="130dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:text="Bestellzeit"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+
+                                android:textColor="@color/colorPrimary"
+
+
+                                />
+                            <!--customer-->
+                            <TextView
+                                android:id="@+id/tvOrderDate"
+
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_alignRight="@+id/dateordertext"
+                                android:layout_marginRight="4dp"
+                                android:layout_marginTop="0dp"
+
+                                android:background="@drawable/textrightcorner"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="15dp"
+
+                                android:paddingRight="5dp"
+                                android:text="09/11/2016 18:50" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ln4"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/ln5"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/datetext"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textleftcorner"
+                                android:gravity="center_vertical"
+
+                                android:minWidth="130dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:text="Lieferzeit"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+
+                                android:textColor="@color/colorPrimary"
+
+
+                                />
+                            <!--customer-->
+                            <TextView
+                                android:id="@+id/tvDeliveryDate"
+
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_alignRight="@+id/datetext"
+                                android:layout_marginRight="4dp"
+                                android:layout_marginTop="0dp"
+
+                                android:background="@drawable/textrightcorner"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="15dp"
+
+                                android:paddingRight="5dp"
+                                android:text="09/11/2016 19:20" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lnOrderIncome"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/ln4"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textleftcorner"
+                                android:gravity="center_vertical"
+                                android:minWidth="130dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:text="Summe Produkte"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/colorPrimary" />
+                            <!--customer-->
+                            <TextView
+                                android:id="@+id/tvOrderIncome"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_alignRight="@+id/tvtutartext"
+                                android:layout_marginRight="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textrightcorner"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="15dp"
+                                android:paddingRight="5dp"
+                                android:text="Order Income" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lnTotalDonate"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/lnOrderIncome"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textleftcorner"
+                                android:gravity="center_vertical"
+                                android:minWidth="130dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:text="Spende"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/colorPrimary" />
+                            <!--customer-->
+                            <TextView
+                                android:id="@+id/tvTotalDonate"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_alignRight="@+id/tvtutartext"
+                                android:layout_marginRight="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textrightcorner"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="15dp"
+                                android:paddingRight="5dp"
+                                android:text="Total Donate" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ln3"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/lnTotalDonate"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvtutartext"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textleftcorner"
+                                android:gravity="center_vertical"
+                                android:minWidth="130dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:text="Gesamtsumme"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/colorPrimary"
+                                android:textStyle="bold" />
+                            <!--customer-->
+                            <TextView
+                                android:id="@+id/tvOrderCost"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_alignRight="@+id/tvtutartext"
+                                android:layout_marginRight="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textrightcorner"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="15dp"
+                                android:paddingRight="5dp"
+                                android:text="50$"
+                                android:textSize="19dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ln2"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/ln3"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvPaymenttype"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textleftcorner"
+                                android:gravity="center_vertical"
+
+                                android:minWidth="130dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:text="Zahlungsart"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+
+                                android:textColor="@color/colorPrimary"
+
+
+                                />
+                            <!--customer-->
+                            <TextView
+                                android:id="@+id/tvPaymentType"
+
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_alignRight="@+id/tvPaymenttype"
+                                android:layout_marginRight="4dp"
+                                android:layout_marginTop="0dp"
+
+                                android:background="@drawable/textrightcorner"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="15dp"
+
+                                android:paddingRight="5dp"
+                                android:text="online" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ln1"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/ln2"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/nametext"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textleftcorner"
+                                android:gravity="center_vertical"
+                                android:minWidth="130dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:text="Name"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/colorPrimary"
+
+
+                                />
+
+                            <TextView
+
+                                android:id="@+id/tvCustomer"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_alignRight="@+id/nametext"
+                                android:layout_marginRight="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textrightcorner"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="15dp"
+
+                                android:paddingRight="5dp"
+                                android:text="Erkan As" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lntlphn"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/ln1"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/telephonetext"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textleftcorner"
+                                android:gravity="center_vertical"
+                                android:minWidth="130dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:text="Telefonnummer"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/colorPrimary"
+
+
+                                />
+
+                            <TextView
+
+                                android:id="@+id/tvtelephone"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_alignRight="@+id/telephonetext"
+                                android:layout_marginRight="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textrightcorner"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="15dp"
+
+                                android:paddingRight="5dp"
+                                android:text="05437778676" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ln7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/lntlphn"
+                            android:orientation="horizontal">
+
+                            <TextView
+
+                                android:id="@+id/addresstext"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="4dp"
+
+                                android:layout_marginRight="4dp"
+                                android:layout_marginTop="30dp"
+                                android:background="@drawable/rounded_corner"
+                                android:paddingBottom="5dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:text="Adresse"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/colorPrimary" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/lntlphn"
+
+                            android:orientation="horizontal">
+
+                            <TextView
+
+                                android:id="@+id/tvAddress"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_alignRight="@+id/addresstext"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginRight="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/topright"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/ln7"
+
+                            android:orientation="horizontal">
+
+                            <TextView
+
+                                android:id="@+id/addressnotetext"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginRight="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/bottomleft"
+                                android:gravity="center_vertical"
+                                android:minWidth="130dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:text="Wegbeschreibung"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/colorPrimary" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/lntlphn"
+
+                            android:orientation="horizontal">
+
+                            <TextView
+
+                                android:id="@+id/tvAddressDescription"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_alignRight="@+id/addressnotetext"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginRight="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/bottomright"
+                                android:gravity="center_vertical"
+                                android:paddingBottom="20dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla posuere " />
+                        </LinearLayout>
+                    </LinearLayout>
+                </ScrollView>
+                <!--left csrollview-->
+                <Button
+                    android:id="@+id/btnAccept"
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button_corner"
+                    android:text="akzeptieren"
+                    android:textAlignment="center" />
+                <!--accept button-->
+                <!--address-->
+            </RelativeLayout>
+            <!--left side-->
+        </LinearLayout>
+        <!--left side vertical-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5">
+
+                <TextView
+                    android:id="@+id/tvStatusDelivery"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center_horizontal"
+
+                    android:layout_weight="0.5"
+                    android:background="@color/half_red"
+                    android:padding="20dp"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp"
+                    android:text="Status Delivery"
+                    android:textAlignment="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/white" />
+                <!--status delivery 0-->
+                <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvStatusDelivery"
+
+                    android:layout_marginBottom="70dp">
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical">
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/dRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner"
+                            android:scrollbars="vertical" />
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_marginTop="20dp"
+
+                            android:orientation="horizontal">
+
+                            <TextView
+
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginRight="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/rounded_corner"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:text="Anmerkung"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/colorPrimary"
+
+
+                                />
+                            <!--order caption-->
+                        </LinearLayout>
+                        <!--ordernote caption -->
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+
+
+                            android:layout_height="wrap_content"
+
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/descriptionOrder"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginRight="4dp"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/rounded_corner"
+                                android:gravity="center_vertical"
+
+                                android:minHeight="40dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:text="descriptionOrder"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+
+                                />
+                            <!--order note content-->
+                        </LinearLayout>
+                        <!--note   content-->
+                    </LinearLayout>
+                </ScrollView>
+                <!--rightsidescroll -->
+                <Button
+
+                    android:id="@+id/btnReject"
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="20dp"
+
+
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/spinner_corner"
+                    android:paddingLeft="20dp"
+
+                    android:spinnerMode="dialog"
+                    android:text="ABLEHNEN"
+                    android:textAlignment="center" />
+                <!--spinner reject-->
+            </RelativeLayout>
+            <!--rightside-->
+        </LinearLayout>
+        <!--right side vertical -->
+    </LinearLayout>
+    <!--collapse horizontal-->
+</RelativeLayout>

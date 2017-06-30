@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -49,9 +50,11 @@ public class DetailActivity extends AppCompatActivity {
     public static final String CONST_REJECT = "Abgelehnt";
     public static final String CONST_DELIVERD = "Zugestellt";
 
-//                public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.at/api/v1/";
+    //                public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.at/api/v1/";
 //                public static final String BASE_URL_API_SYNC = "https://eat2donate.at/api/v1/";
-    public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.ga/api/v1/";
+//    public static final String BASE_URL_API_SYNC = "https://www.eat2donate.at/api/v1/";
+
+        public static final String BASE_URL_API_SYNC = "https://beta.eat2donate.ga/api/v1/";
 //    public static final String BASE_URL_API_SYNC = "http://test162.eat2donate.at/api/v1/";
     public int btnID;
     RadioGroup rg_restaurant;
@@ -76,7 +79,13 @@ public class DetailActivity extends AppCompatActivity {
         strOrderNo.setText(id);
 
         setTitle("Order:  " + id);
-//        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+//        toolbar.setLogo(R.drawable.e2d_full_quality);
+        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setDisplayUseLogoEnabled(true);
+//        getSupportActionBar().setLogo(R.drawable.logo);
 
         Firebase.setAndroidContext(this);
         fire = new Firebase(MainActivity.DB_URL + MainActivity.rCode + "/" + id);
