@@ -1,8 +1,17 @@
 package com.amirhome.droidgcmlistsview;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +23,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
@@ -29,13 +39,18 @@ import com.firebase.client.ValueEventListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+import java.util.UUID;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements Runnable{
     public static final String ONAYLI_BEKLIYOR = "Warten auf Akzeptieren";
     public static final String TESLIM_BEKLIYOR = "Bestellung wird vorbereitet";
     public static final String REJECT_REASON1 = "Falsches Produkt geliefert";
@@ -68,6 +83,17 @@ public class DetailActivity extends AppCompatActivity {
     private RecyclerView dRecyclerView;
     private MenuAdapter dAdapter;
 
+    /* Bluetooth Config */
+    BluetoothAdapter mBluetoothAdapter;
+    BluetoothDevice mBluetoothDevice;
+    private BluetoothSocket mBluetoothSocket;
+    private UUID applicationUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private ProgressDialog mBluetoothConnectProgressDialog;
+    protected static final String TAG = "AmirHomeLog";
+
+    private static final int REQUEST_CONNECT_DEVICE = 1;
+    private static final int REQUEST_ENABLE_BT = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,11 +107,7 @@ public class DetailActivity extends AppCompatActivity {
         setTitle("Order:  " + id);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
-//        toolbar.setLogo(R.drawable.e2d_full_quality);
         setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setDisplayUseLogoEnabled(true);
-//        getSupportActionBar().setLogo(R.drawable.logo);
 
         Firebase.setAndroidContext(this);
         fire = new Firebase(MainActivity.DB_URL + MainActivity.rCode + "/" + id);
@@ -113,6 +135,120 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
+        // float button
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabPrint);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String msg = "Can you help me please..";
+                Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+                Thread t = new Thread() {
+                    public void run() {
+                        try {
+                            OutputStream os = mBluetoothSocket
+                                    .getOutputStream();
+                            String BILL = "";
+
+                            BILL = "                   XXXX MART    \n"
+                                    + "                   XX.AA.BB.CC.     \n " +
+                                    "                 NO 25 ABC ABCDE    \n" +
+                                    "                  XXXXX YYYYYY      \n" +
+                                    "                   MMM 590019091      \n";
+                            BILL = BILL
+                                    + "-----------------------------------------------\n";
+
+
+                            BILL = BILL + String.format("%1$-10s %2$10s %3$13s %4$10s", "Item", "Qty", "Rate", "Totel");
+                            BILL = BILL + "\n";
+                            BILL = BILL
+                                    + "-----------------------------------------------";
+                            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-001", "5", "10", "50.00");
+                            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-002", "10", "5", "50.00");
+                            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-003", "20", "10", "200.00");
+                            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-004", "50", "10", "500.00");
+
+                            BILL = BILL
+                                    + "\n-----------------------------------------------";
+                            BILL = BILL + "\n\n ";
+
+                            BILL = BILL + "                   Total Qty:" + "      " + "85" + "\n";
+                            BILL = BILL + "                   Total Value:" + "     " + "700.00" + "\n";
+
+                            BILL = BILL
+                                    + "-----------------------------------------------\n";
+                            BILL = BILL + "\n\n ";
+                            os.write(BILL.getBytes());
+                            //This is printer specific code you can comment ==== > Start
+
+                            // Setting height
+                            int gs = 29;
+                            os.write(intToByteArray(gs));
+                            int h = 104;
+                            os.write(intToByteArray(h));
+                            int n = 162;
+                            os.write(intToByteArray(n));
+
+                            // Setting Width
+                            int gs_width = 29;
+                            os.write(intToByteArray(gs_width));
+                            int w = 119;
+                            os.write(intToByteArray(w));
+                            int n_width = 2;
+                            os.write(intToByteArray(n_width));
+
+
+                        } catch (Exception e) {
+                            Log.e("MainActivity", "Exe ", e);
+                        }
+                    }
+                };
+                t.start();
+            }
+        });
+
+        fab.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View view) {
+                String msg = "Long Can you help me please..";
+                Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+                    mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                    if (mBluetoothAdapter == null) {
+                        Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        Log.d(TAG,"adapter null");
+                    } else {
+                        if (!mBluetoothAdapter.isEnabled()) {
+                            Log.d(TAG,"is not enable");
+                            Intent enableBtIntent = new Intent( BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+
+                        } else {
+                            Set<BluetoothDevice> mPairedDevices = mBluetoothAdapter.getBondedDevices();
+                            Log.d(TAG,"is enable");
+                            if (mPairedDevices.size() > 0) {
+                                Log.d(TAG,"size > 0");
+
+                                for (BluetoothDevice mDevice : mPairedDevices) {
+                                    mBluetoothDevice = mBluetoothAdapter.getRemoteDevice(mDevice.getAddress());
+                                    Log.d(TAG, String.valueOf(mBluetoothDevice));
+                                }
+                                mBluetoothConnectProgressDialog = ProgressDialog.show(DetailActivity.this,
+                                        "Connecting...", mBluetoothDevice.getName() + " : "
+                                                + mBluetoothDevice.getAddress(), true, false);
+                                Thread mBlutoothConnectThread = new Thread(DetailActivity.this);
+                                mBlutoothConnectThread.start();
+                            } else {
+                                String mNoDevices = "None Paired";//getResources().getText(R.string.none_paired).toString();
+
+                            }
+                        }
+                    }
+
+
+                return true;
+            }
+        });
     }
 
     //Retrieve
@@ -556,6 +692,106 @@ public class DetailActivity extends AppCompatActivity {
 
         dialog.show();
 
+    }
+
+    public void onActivityResult(int mRequestCode, int mResultCode,
+                                 Intent mDataIntent) {
+        super.onActivityResult(mRequestCode, mResultCode, mDataIntent);
+Log.d(TAG, "onActivityResult");
+        switch (mRequestCode) {
+            case REQUEST_CONNECT_DEVICE:
+                if (mResultCode == Activity.RESULT_OK) {
+                    Bundle mExtra = mDataIntent.getExtras();
+                    String mDeviceAddress = mExtra.getString("DeviceAddress");
+                    Log.v(TAG, "Coming incoming address " + mDeviceAddress);
+                    mBluetoothDevice = mBluetoothAdapter
+                            .getRemoteDevice(mDeviceAddress);
+                    mBluetoothConnectProgressDialog = ProgressDialog.show(this,
+                            "Connecting...", mBluetoothDevice.getName() + " : "
+                                    + mBluetoothDevice.getAddress(), true, false);
+
+                    Thread mBlutoothConnectThread = new Thread(this);
+                    mBlutoothConnectThread.start();
+                    // pairToDevice(mBluetoothDevice); This method is replaced by
+                    // progress dialog with thread
+                }
+                break;
+
+            case REQUEST_ENABLE_BT:
+                if (mResultCode == Activity.RESULT_OK) {
+                    ListPairedDevices();
+//                    Intent connectIntent = new Intent(MainActivity.this, DeviceListActivity.class);
+//                    startActivityForResult(connectIntent, REQUEST_CONNECT_DEVICE);
+//                    Log.d(TAG,"DeviceListActivity.class");
+                } else {
+                    Toast.makeText(DetailActivity.this, "Message", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+    }
+
+    private void ListPairedDevices() {
+        Set<BluetoothDevice> mPairedDevices = mBluetoothAdapter
+                .getBondedDevices();
+        if (mPairedDevices.size() > 0) {
+            for (BluetoothDevice mDevice : mPairedDevices) {
+                Log.v(TAG, "PairedDevices: " + mDevice.getName() + "  "
+                        + mDevice.getAddress());
+            }
+        }
+    }
+
+
+    public void run() {
+        try {
+            mBluetoothSocket = mBluetoothDevice.createRfcommSocketToServiceRecord(applicationUUID);
+            mBluetoothAdapter.cancelDiscovery();
+            mBluetoothSocket.connect();
+            Log.d(TAG, "connect");
+            mHandler.sendEmptyMessage(0);
+        } catch (IOException eConnectException) {
+            Log.d(TAG, "CouldNotConnectToSocket", eConnectException);
+            closeSocket(mBluetoothSocket);
+            return;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        // TODO Auto-generated method stub
+        super.onDestroy();
+        try {
+            if (mBluetoothSocket != null)
+                mBluetoothSocket.close();
+        } catch (Exception e) {
+            Log.e("Tag", "Exe ", e);
+        }
+    }
+    private void closeSocket(BluetoothSocket nOpenSocket) {
+        try {
+            nOpenSocket.close();
+            Log.d(TAG, "SocketClosed");
+        } catch (IOException ex) {
+            Log.d(TAG, "CouldNotCloseSocket");
+        }
+    }
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            mBluetoothConnectProgressDialog.dismiss();
+            Toast.makeText(DetailActivity.this, "DeviceConnected", Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    public static byte intToByteArray(int value) {
+        byte[] b = ByteBuffer.allocate(4).putInt(value).array();
+
+        for (int k = 0; k < b.length; k++) {
+            System.out.println("Selva  [" + k + "] = " + "0x" + UnicodeFormatter.byteToHex(b[k]));
+        }
+
+        return b[3];
     }
 }
 
