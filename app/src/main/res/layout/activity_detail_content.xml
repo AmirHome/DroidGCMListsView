@@ -215,18 +215,21 @@
                                 android:text="Summe Produkte"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:textColor="@color/colorPrimary" />
-                            <!--customer-->
                             <TextView
-                                android:id="@+id/tvOrderIncome"
-                                android:layout_width="fill_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="fill_parent"
-                                android:layout_alignRight="@+id/tvtutartext"
-                                android:layout_marginRight="4dp"
-                                android:layout_marginTop="0dp"
                                 android:background="@drawable/textrightcorner"
                                 android:gravity="center_vertical"
                                 android:paddingLeft="15dp"
-                                android:paddingRight="5dp"
+                                android:text="€"/>
+                            <TextView
+                                android:id="@+id/tvOrderIncome"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:background="@drawable/textrightcorner"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="1dp"
                                 android:text="Order Income" />
                         </LinearLayout>
 
@@ -251,19 +254,24 @@
                                 android:text="Spende"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:textColor="@color/colorPrimary" />
-                            <!--customer-->
                             <TextView
-                                android:id="@+id/tvTotalDonate"
-                                android:layout_width="fill_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="fill_parent"
-                                android:layout_alignRight="@+id/tvtutartext"
-                                android:layout_marginRight="4dp"
-                                android:layout_marginTop="0dp"
                                 android:background="@drawable/textrightcorner"
                                 android:gravity="center_vertical"
                                 android:paddingLeft="15dp"
-                                android:paddingRight="5dp"
-                                android:text="Total Donate" />
+                                android:textSize="19dp"
+                                android:text="€"/>
+                            <TextView
+                                android:id="@+id/tvTotalDonate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:background="@drawable/textrightcorner"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="1dp"
+                                android:textSize="19dp"
+                                android:text="Total Donate"
+                                />
                         </LinearLayout>
 
                         <LinearLayout
@@ -289,19 +297,23 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:textColor="@color/colorPrimary"
                                 android:textStyle="bold" />
-                            <!--customer-->
                             <TextView
-                                android:id="@+id/tvOrderCost"
-                                android:layout_width="fill_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="fill_parent"
-                                android:layout_alignRight="@+id/tvtutartext"
-                                android:layout_marginRight="4dp"
-                                android:layout_marginTop="0dp"
                                 android:background="@drawable/textrightcorner"
                                 android:gravity="center_vertical"
                                 android:paddingLeft="15dp"
-                                android:paddingRight="5dp"
-                                android:text="50$"
+                                android:text="€"
+                                android:textSize="19dp"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/tvOrderCost"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:background="@drawable/textrightcorner"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="1dp"
+                                android:text="50"
                                 android:textSize="19dp"
                                 android:textStyle="bold" />
                         </LinearLayout>
